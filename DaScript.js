@@ -255,6 +255,7 @@ function chatMe(msg){
 						var sentences = ["[NoBot] @" + un + ", sorry I'm too lazy to show you my commands","[NoBot] @" + un + " Here, I like you: http://pastebin.com/raw.php?i=yHPMbQjT"];
 						var a = Math.floor(Math.random()*sentences.length);
 						API.sendChat(sentences[a]);
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
@@ -263,6 +264,7 @@ function chatMe(msg){
 						var sentences = ["[NoBot] @" + un + " Stahp I'm busy","[NoBot] @" + un + " Test succeeded :white_check_mark:"];
 						var a = Math.floor(Math.random()*sentences.length);
 						API.sendChat(sentences[a]);
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
@@ -285,19 +287,24 @@ function chatMe(msg){
 						}else{
 							API.sendChat("[NoBot] @" + un + ", this command requires staff members only!");
 						}
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "rules":
-						API.sendChat("[NoBot] @" + un + " http://bit.ly/rulesdte");
+						API.sendChat("[NoBot] @" + un + " *yawns* Oke, oke, gimme a sec");
+						setTimeout(function(){API.sendChat("[NoBot] @" + un + " http://bit.ly/rulesdte");}, 350);
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 						
 					case "oplist":
 					case "op":
-						API.sendChat("[NoBot] @" + un + " http://bit.ly/dteoplist");
+						API.sendChat("[NoBot] @" + un + " *yawns* Oke, oke, gimme a sec");
+						setTimeout(function(){API.sendChat("[NoBot] @" + un + " http://bit.ly/dteoplist");}, 350);
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
@@ -305,6 +312,7 @@ function chatMe(msg){
 					case "linkin":
 					case "link":
 						API.sendChat("[NoBot] @" + un + ", was that ever a command? Well it's not anymore.");
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
@@ -313,26 +321,21 @@ function chatMe(msg){
 						if(typeof command[1] === "undefined"){
 							API.sendChat("@"+ API.getDJ().username +", " + un + " congratulated you for your awesome song");
 						}
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-						break;
-	 
-					case "votes":
-						if(API.getUser(uid).role < 2 || API.getUser(uid).role > 1 || Funbot.admins.indexOf(uid) > -1){
-							API.sendChat("[NoBot] Users vote:  :+1: " + API.getRoomScore().positive + " | :-1: " + API.getRoomScore().negative + " | :purple_heart: " + API.getRoomScore().curates);
-							Funbot.misc.ready = false;
-							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-						}
 						break;
 
 					case "version":
 						API.sendChat("[NoBot] @" + un + " " + Funbot.misc.version);
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "source":
 						API.sendChat("[NoBot] @" + un + " DJ - ɴᴇᴏɴ - TFL originally wrote me at github, available here: http://goo.gl/iLRyWJ");
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
@@ -345,12 +348,14 @@ function chatMe(msg){
 						}else{
 							API.sendChat("[NoBot] @" + un + " This command requires bouncer +");
 						}
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "die":
 						if(API.getUser(uid).role > 1 || Funbot.admins.indexOf(uid) > -1 || API.getUser().username == "Beta Tester"){
+							API.moderateDeleteChat(msgid);
 							Funbot.unhook();
 							setTimeout(function(){API.sendChat('[NoBot] Murder is punishable w........ ');}, 700);
 							setTimeout(function(){API.sendChat('/me Voice slowly fades away, as the bot bleeds on the ground');}, 750);
@@ -363,6 +368,7 @@ function chatMe(msg){
 					case "whyauto":
 					case "whywoot":
 						API.sendChat("[NoBot] @" + un + " If you are in this room, it means you'll most probably like the song that's playing. Therefore, you'll woot most of the songs. Autowoot does it for you.");
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
@@ -386,16 +392,12 @@ function chatMe(msg){
 							case 7:n = "sunday";
 								break;
 						}
-						var sentences = ["[NoBot] @" + un + " Kill it with fire.","[NoBot] @" + un + " Someone, call 911, this dude needs help over here","[NoBot] @" + un + " Do I really need to work on a " + n + "??","[NoBot] @" + un + " I think it's time to call a BA."];
+						var sentences = ["[NoBot] @" + un + " Kill it with fire.","[NoBot] @" + un + " Someone, call 911, this dude needs help over here","[NoBot] @" + un + " Do I really need to work on a " + n + "??","[NoBot] @" + un + " I think it's time to call a BA.","[NoBot] Gha, are you sure you need me?"];
 						var a = Math.floor(Math.random()*sentences.length);
 						API.sendChat(sentences[a]);
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-						break;
-
-					case "seacrit":
-					case "secret":
-						API.sendChat("[NoBot] @" + un + " Wooo secret command! :confetti_ball:");
 						break;
 
 					case "author":
@@ -404,6 +406,7 @@ function chatMe(msg){
 						if(Funbot.admins.indexOf(uid) !== -1 || API.getUser(uid).role < 2){
 							API.sendChat("@" + un + " This bot was originally created by: ๖ۣۜĐل - ɴᴇᴏɴ - TFL, and it's copyrighted! Edited by T98 for educational purposes.");
 						}
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
@@ -414,39 +417,30 @@ function chatMe(msg){
 							var randomUser = Math.floor(Math.random() * crowd.length);
 							var randomFortune = Math.floor(Math.random() * Funbot.misc.fortune.length);
 							var randomSentence = Math.floor(Math.random() * 1);
-							switch(randomSentence){
-								case 0:
-									API.sendChat("@" + un + " " + Funbot.misc.fortune[randomFortune]);
-									break;
-								case 1:
-									API.sendChat("@" + un + " " + Funbot.misc.fortune[randomFortune]);
-									break;
-							}
+							if(randomSentence == 0){API.sendChat("@" + un + " " + Funbot.misc.fortune[randomFortune]);}
+							if(randomSentence == 1){API.sendChat("@" + un + " " + Funbot.misc.fortune[randomFortune]);}
 						}else{
 							if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
 							var randomFortune = Math.floor(Math.random() * Funbot.misc.fortune.length);
 							var randomSentence = Math.floor(Math.random() * 1);
-							switch(randomSentence){
-								case 0:
-									API.sendChat("@" + un + " " + Funbot.misc.fortune[randomFortune]);
-									break;
-								case 1:
-									API.sendChat("@" + un + " " + Funbot.misc.fortune[randomFortune]);
-									break;
-							}
+							if(randomSentence == 0){API.sendChat("@" + un + " " + Funbot.misc.fortune[randomFortune]);}
+							if(randomSentence == 1){API.sendChat("@" + un + " " + Funbot.misc.fortune[randomFortune]);}
 						}
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "dc":
 						API.sendChat("[NoBot] @" + un + " Sorry, too lazy to move anyone.");
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "eta":
 						API.sendChat("[NoBot] @" + un + " You'll get there eventually.");
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
@@ -554,6 +548,7 @@ function chatMe(msg){
 									break;
 							}
 						}
+						API.moderateDeleteChat(msgid);
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
@@ -588,6 +583,7 @@ function chatMe(msg){
 										break;
 								}
 							}
+							API.moderateDeleteChat(msgid);
 							Funbot.misc.ready = false;
 							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 							break;
@@ -672,15 +668,11 @@ function chatMe(msg){
 										break;
 								}
 							}
+							API.moderateDeleteChat(msgid);
 							Funbot.misc.ready = false;
 							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 							break;
 
-						case "meow":
-							API.sendChat("[NoBot] http://i.imgur.com/aa0j7wY.gif");
-							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-							break;
-						
 						case "catfact":
 							if(typeof command[1] == "undefined"){
 								var crowd = API.getUsers();
@@ -709,6 +701,7 @@ function chatMe(msg){
 								}
 							}
 							if(API.getUser(uid).role < 2 || API.getUser(uid).role > 1 || Funbot.admins.indexOf(uid) > -1){
+								API.moderateDeleteChat(msgid);
 								Funbot.misc.ready = false;
 								setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 							}
