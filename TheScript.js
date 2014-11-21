@@ -241,7 +241,7 @@ function chatMe(msg){
 			var id = data.fromID;
 			var msg = data.message;
 			var userfrom = data.from;
-			console.log(msg + " || " + id + " || " + from + " || " + userfrom);
+			//console.log(msg + " || " + id + " || " + from + " || " + userfrom);
 			console.log(data.message + " || " + data.message.from + " || " + data.message.fromID);
 			var command = msg.substring(1).split(' ');
 			if(typeof command[2] != "undefined"){
