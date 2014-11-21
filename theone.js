@@ -240,7 +240,7 @@ function chatMe(msg){
 			var msg = data.message, un = data.un, uid = data.uid;
 			var fromID = data.uid;
 			var msg = data.message;
-			var msgid = data.message.id;
+			var msgid = data.cid;
 			console.log(msg + " || " + msgid + " || " + fromID + " || " + un);
 			var command = msg.substring(1).split(' ');
 			if(typeof command[2] != "undefined"){
