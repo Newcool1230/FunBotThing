@@ -253,7 +253,7 @@ function chatMe(msg){
 				switch(command[0].toLowerCase()){
 					case "command":
 					case "commands":
-						var sentences = ["[NoBot] @" + un + ", sorry I'm too busy to show you my commands","[NoBot] @" + un + ""];
+						var sentences = ["[NoBot] @" + un + ", sorry I'm too lazy to show you my commands","[NoBot] @" + un + " Here, I like you: http://pastebin.com/raw.php?i=yHPMbQjT"];
 						var a = Math.floor(Math.random()*sentences.length);
 						API.sendChat(sentences[a]);
 						break;
@@ -279,9 +279,14 @@ function chatMe(msg){
 							break;
 							
 					case "rules":
+						API.sendChat("[NoBot] @" + un + " *yawns* Oke, oke, gimme a sec");
+						setTimeout(function(){API.sendChat("[NoBot] @" + un + " http://bit.ly/rulesdte");}, 350);
+						break;
+						
 					case "oplist":
 					case "op":
 						API.sendChat("[NoBot] @" + un + " *yawns* Oke, oke, gimme a sec");
+						setTimeout(function(){API.sendChat("[NoBot] @" + un + " http://bit.ly/dteoplist");}, 350);
 						break;
 
 					case "linkin":
@@ -292,7 +297,6 @@ function chatMe(msg){
 					case "props":
 							if(typeof command[1] === "undefined"){
 								API.sendChat("@"+ API.getDJ().username +", " + un + " congratulated you for your awesome song");
-								setTimeout(function(){API.sendChat("[NoBot] @" + un + " Now let me sleep!");}, 150);
 							}
 							break;
 	 
@@ -534,8 +538,7 @@ function chatMe(msg){
 								setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 							}
 							break;
-	 
-	 
+
 						case "cookie":
 						case "reward":
 							if(typeof command[1] == "@"){
@@ -691,6 +694,10 @@ function chatMe(msg){
 								Funbot.misc.ready = false;
 								setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 							}
+							break;
+						
+						default:
+							API.chatLog("@" + un + " is dumb :l");
 							break;
 				}
 			}
