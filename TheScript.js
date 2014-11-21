@@ -31,12 +31,6 @@ Funbot.settings.interactive = true;
 Funbot.settings.ruleSkip = true;
 Funbot.settings.removedFilter = true;
 
-// Keywords of blocked songs
-var blockedSongs = [];
-
-// Keywords of blocked artist.
-var blockedArtists = [];
-
 Funbot.filters.commandWords = [".linkin",".say",".test",".ping",".marco",".reward",".add",".addsong",".flipcoin",".catfact",".dogfact",".hug",".8ball",".fortune",".songlink",".download",".help",".whywoot",".whymeh",".props",".votes",".woot",".meh",".version",".userstats @",".mystats",".source",".roomstats",".roomstats2",".register",".join",".leave",".roll"];
 
 // Fun misc
@@ -150,7 +144,6 @@ Array.prototype.remove=function(){
 
 if(window.location.hostname === "plug.dj"){
 	API.on(API.DJ_ADVANCE, djAdvanceEvent);
-	API.on(API.DJ_ADVANCE, listener);
 	API.on(API.DJ_ADVANCE, woot);
 	API.on(API.USER_JOIN, UserJoin);
 	API.on(API.DJ_ADVANCE, DJ_ADVANCE);
@@ -183,9 +176,6 @@ Funbot.unhook = function(){
 		API.off(API.DJ_ADVANCE);
 		API.off(API.VOTE_UPDATE);
 		API.off(API.CHAT);
-		$('#playback').show();
-		$('#audience').show();
-		API.setVolume(15);
 	}, 100);
 };
 
@@ -239,32 +229,6 @@ function getUserID(username) {
 botMethods.cleanString = function(string){
 	return string.replace("&#39;", "'").replace(/&amp;/g, "&").replace(/&#34;/g, "\"").replace(/&#59;/g, ";").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
 };
-
-function listener(data){
-	if (data == null){
-		return;
-	}
- 
-	var title = data.media.title;
-	var author = data.media.author;
-	for (var i = 0; i < blockedSongs.length; i++){
-		if (title.indexOf(blockedSongs[i]) != -1 || author.indexOf(blockedArtists[i]) != -1){
-			API.chatLog(':warning: I wanna skip.');
-			return;
-		}
-	}
- 
-	var songLenRaw = $("#time-remaining-value").text();
-	var songLenParts = songLenRaw.split(":");
-	var songLen = (parseInt(songLenParts[0].substring(1)) * 60) + parseInt(songLenParts[1]);
-	if (songLen >= songBoundary){
-		window.setTimeout(skipLongSong, 1000 * songBoundary);
-	}
-}
- 
-function skipLongSong(){
-	API.chatLog(':warning: I wanna skip.');
-}
  
 function chatMe(msg){
 	API.sendChat(msg);
@@ -277,465 +241,455 @@ function chatMe(msg){
 			var id = data.fromID;
 			var msg = data.message;
 			var userfrom = data.from;
+			console.log(msg + " || " + id + " || " + from + " || " + userfrom);
 			var command = msg.substring(1).split(' ');
 			if(typeof command[2] != "undefined"){
-				for(var i = 2; i<command.length; i++){
+				for(var i = 2; i < command.length; i++){
 					command[1] = command[1] + ' ' + command[i];
 				}
 			}
 			if(Funbot.misc.ready || Funbot.admins.indexOf(fromID) > -1 || API.getUser(data.fromID).permission > 1 || API.getUser(fromID).permission < 2){
+			
 				switch(command[0].toLowerCase()){
- 
-				case "command":
-				case "commands":
-					API.sendChat("[NoBot] Sorry I'm too busy to show you my commands");
-					break;
-					
-				case "test":
-					API.sendChat("[NoBot] Stahp I'm busy");
-					break;
-					
-				case "ping":
-					API.sendChat("[NoBot] Pong!");
-					break;
-					
-				case "marco":
-					API.sendChat("[NoBot] Polo!");
-					break;
-					
-				case "say":
-						if(API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1 || typeof command[1] === "undefined"){
-						API.sendChat(command[1]);
-						}else{
-						 API.sendChat("[NoBot] This command requires staff members only!");
-						}
+					case "command":
+					case "commands":
+						API.sendChat("[NoBot] Sorry I'm too busy to show you my commands");
 						break;
 						
-				case "linkin":
-				case "link":
-						API.sendChat("[NoBot] Was that ever a command? Well it's not anymore.");
+					case "test":
+						API.sendChat("[NoBot] Stahp I'm busy");
 						break;
+						
+					case "ping":
+						API.sendChat("[NoBot] Pong!");
+						break;
+						
+					case "marco":
+						API.sendChat("[NoBot] Polo!");
+						break;
+						
+					case "say":
+							if(API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1 || typeof command[1] === "undefined"){
+							API.sendChat(command[1]);
+							}else{
+							 API.sendChat("[NoBot] This command requires staff members only!");
+							}
+							break;
 
-				case "props":
-						if(typeof command[1] === "undefined"){
-							API.sendChat("@"+ API.getDJ().username +", your song rocks!");
+					case "linkin":
+					case "link":
+							API.sendChat("[NoBot] Was that ever a command? Well it's not anymore.");
+							break;
+
+					case "props":
+							if(typeof command[1] === "undefined"){
+								API.sendChat("@"+ API.getDJ().username +", your song rocks!");
+							}
+							break;
+	 
+					case "votes":
+							if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
+								API.sendChat("[NoBot] Users vote:  :+1: " + API.getRoomScore().positive + " | :-1: " + API.getRoomScore().negative + " | :purple_heart: " + API.getRoomScore().curates);
+								Funbot.misc.ready = false;
+								setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
+							}
+							break;
+
+					case "version":
+							API.sendChat("[NoBot] " + Funbot.misc.version);
+							Funbot.misc.ready = false;
+							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
+							break;
+							
+					case "source":
+							API.sendChat("[NoBot] DJ - ɴᴇᴏɴ - TFL originally wrote me at github, available here: http://goo.gl/iLRyWJ");
+							Funbot.misc.ready = false;
+							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
+							break;
+							
+					case "reload":
+							if(API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1 || API.getUser().username == "Beta Tester"){
+								API.sendChat("[NoBot] Now reloading script...");
+								setTimeout(function(){Funbot.unhook();}, 150);
+								setTimeout(function(){Funbot.hook();}, 550);
+							}else{
+								API.sendChat("[NoBot] This command requires bouncer +");
+							}
+							break;
+							
+					case "die":
+						if(API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1 || API.getUser().username == "Beta Tester"){
+							API.sendChat('[NoBot] Unhooking Events...');
+							setTimeout(function(){API.sendChat('[NoBot] Deleting bot data...');	}, 150);
+							setTimeout(function(){Funbot.unhook();								}, 700);
+							setTimeout(function(){API.sendChat('[NoBot] I am dead.');			}, 750);
+						}else{
+							API.sendChat("[NoBot] This command requires bouncer+");
 						}
 						break;
- 
-				case "votes":
+	 
+					case "autowoot":
+					case "whyauto":
+					case "whywoot":
+						API.sendChat("[NoBot] If you are in this room, it means you'll most probably like the song that's playing. Therefore, you'll woot most of the songs. Autowoot does it for you.");
+						Funbot.misc.ready = false;
+						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
+						break;
+	 
+					case "help":
+						var d = new Date();
+						var n = d.getUTCDay();
+						switch (n){
+							case 0:
+								n = "monday";
+								break;
+							case 1:
+								n = "tuesday";
+								break;
+							case 2:
+								n = "wednesday";
+								break;
+							case 3:
+								n = "thursday";
+								break;
+							case 5:
+								n = "friday";
+								break;
+							case 6:
+								n = "saturday";
+								break;
+							case 7:
+								n = "sunday";
+								break;
+						}
+						var sentences = ["[NoBot] Kill it with fire.","[NoBot] Someone, call 911, this dude needs help over here","[NoBot] I think it's time to call a BA.","[NoBot] Do I really need to work on a " + n + "??"];
+						var a = Math.floor(Math.random()*sentences.length);
+						API.sendChat(sentences[a]);
+						break;
+
+						
+					case "seacrit":
+						API.sendChat("[NoBot] Omigod, @" + from);
+						break;
+					
+					case "author":
+					case "authors":
+					case "creator":
+							if(Funbot.admins.indexOf(fromID) !== -1 || API.getUser(fromID).permission < 2){
+								API.sendChat("This bot was originally created by: ๖ۣۜĐل - ɴᴇᴏɴ - TFL, and it's copyrighted! Edited by T98 for educational purposes.");
+							}
+							break;
+	
+					case "fortune":
+							if(typeof command[1] == "undefined"){
+								var crowd = API.getUsers();
+								var randomUser = Math.floor(Math.random() * crowd.length);
+								var randomFortune = Math.floor(Math.random() * Funbot.misc.fortune.length);
+								var randomSentence = Math.floor(Math.random() * 1);
+								switch(randomSentence){
+									case 0:
+										API.sendChat(Funbot.misc.fortune[randomFortune]);
+										break;
+									case 1:
+										API.sendChat(Funbot.misc.fortune[randomFortune]);
+										break;
+								}
+							}else{
+								if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
+								var randomFortune = Math.floor(Math.random() * Funbot.misc.fortune.length);
+								var randomSentence = Math.floor(Math.random() * 1);
+								switch(randomSentence){
+									case 0:
+										API.sendChat(Funbot.misc.fortune[randomFortune]);
+										break;
+									case 1:
+										API.sendChat(Funbot.misc.fortune[randomFortune]);
+										break;
+							}
+							}
 						if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
-						API.sendChat("[NoBot] Users vote:  :+1: " + API.getRoomScore().positive + " | :-1: " + API.getRoomScore().negative + " | :purple_heart: " + API.getRoomScore().curates);
-							Funbot.misc.ready = false;
-							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-						}
-						break;
-						
-				case "version":
-						API.sendChat("[NoBot] " + Funbot.misc.version);
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-						break;
-						
-				case "source":
-						API.sendChat("DJ - ɴᴇᴏɴ - TFL originally wrote me at github, available here: http://goo.gl/iLRyWJ");
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-						break;
-						
-				case "reload":
-						if(API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
-						API.sendChat("Now reloading script...");
-						setTimeout(function(){
-						Funbot.unhook();
-						}, 150);
-						setTimeout(function(){
-						Funbot.hook();
-						}, 550);
-						}else{
-						API.sendChat("This command requires bouncer +");
-						}
-						break;
-						
-				case "die":
-					if(API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
-						API.sendChat('[NoBot] Unhooking Events...');
-						setTimeout(function(){
-							API.sendChat('[NoBot] Deleting bot data...');
-						}, 150);
-						setTimeout(function(){
-							API.sendChat('[NoBot] I am dead.');
-						}, 750);
-						setTimeout(function(){
-							Funbot.unhook();
-						}, 700);
-					}else{
-						API.sendChat("This command requires bouncer+");
-					}
-					break;
- 
-				case "autowoot":
-				case "whyauto":
-				case "whywoot":
-					API.sendChat("[NoBot] If you are in this room, it means you'll most probably like the song that's playing. Therefore, you'll woot most of the songs. Autowoot does it for you.");
-					Funbot.misc.ready = false;
-					setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-					break;
- 
-				case "help":
-					var d = new Date();
-					var n = d.getUTCDay();
-					switch (n){
-						case 0:
-							n = "monday";
+								Funbot.misc.ready = false;
+								setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
+							}
 							break;
-						case 1:
-							n = "tuesday";
-							break;
-						case 2:
-							n = "wednesday";
-							break;
-						case 3:
-							n = "thursday";
-							break;
-						case 5:
-							n = "friday";
-							break;
-						case 6:
-							n = "saturday";
-							break;
-						case 7:
-							n = "sunday";
-							break;
-					}
-					var sentences = ["[NoBot] Kill it with fire.","[NoBot] Someone, call 911, this dude needs help over here","[NoBot] I think it's time to call a BA.","[NoBot] Do I really need to work on a " + n + "??"];
-					var a = Math.floor(Math.random()*sentences.length);
-					API.sendChat(sentences[a]);
-					break;
 
-					
-				case "seacrit":
-					API.sendChat("[NoBot] Omigod, @" + from);
-					break;
-				
-				case "author":
-				case "authors":
-				case "creator":
-						if(Funbot.admins.indexOf(fromID) !== -1 || API.getUser(fromID).permission < 2){
-							API.sendChat("This bot was originally created by: ๖ۣۜĐل - ɴᴇᴏɴ - TFL, and it's copyrighted! Edited by T98 for educational purposes.");
-						}
-						break;
-						
-				case "commandfilter":
-				case "cf":
-						if(API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1) Funbot.settings.commandFilter ? API.sendChat("Commands filter is enabled") : API.sendChat("Commands filter is disabled");
-						botMethods.save();
-						break;
- 
-				case "fortune":
-						if(typeof command[1] == "undefined"){
-							var crowd = API.getUsers();
-							var randomUser = Math.floor(Math.random() * crowd.length);
-							var randomFortune = Math.floor(Math.random() * Funbot.misc.fortune.length);
-							var randomSentence = Math.floor(Math.random() * 1);
-							switch(randomSentence){
-								case 0:
-									API.sendChat(Funbot.misc.fortune[randomFortune]);
-									break;
-								case 1:
-									API.sendChat(Funbot.misc.fortune[randomFortune]);
-									break;
-							}
-						}else{
-							if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
-							var randomFortune = Math.floor(Math.random() * Funbot.misc.fortune.length);
-							var randomSentence = Math.floor(Math.random() * 1);
-							switch(randomSentence){
-								case 0:
-									API.sendChat(Funbot.misc.fortune[randomFortune]);
-									break;
-								case 1:
-									API.sendChat(Funbot.misc.fortune[randomFortune]);
-									break;
-						}
-						}
-					if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
-							Funbot.misc.ready = false;
-							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-						}
-						break;
-
-				case "dc":
-					API.sendChat("[NoBot] Sorry, too lazy to move anyone.");
-					break;
-				
-				case "eta":
-					API.sendChat("[NoBot] You'll get there eventually.");
-					break;
- 
-				 case "8ball":
-						if(typeof command[1] == "undefined"){
-							var crowd = API.getUsers();
-							var randomUser = Math.floor(Math.random() * crowd.length);
-							var randomBall = Math.floor(Math.random() * Funbot.misc.ball.length);
-							var randomSentence = Math.floor(Math.random() * 1);
-							switch(randomSentence){
-								case 0:
-									API.sendChat(Funbot.misc.ball[randomBall]);
-									break;
-								case 1:
-									API.sendChat(Funbot.misc.ball[randomBall]);
-									break;
-							}
-						}else{
-							if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
-							var randomBall = Math.floor(Math.random() * Funbot.misc.ball.length);
-							var randomSentence = Math.floor(Math.random() * 1);
-							switch(randomSentence){
-								case 0:
-									API.sendChat(Funbot.misc.ball[randomBall]);
-									break;
-								case 1:
-									API.sendChat(Funbot.misc.ball[randomBall]);
-									break;
-						}
-						}
-					if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
-							Funbot.misc.ready = false;
-							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-						}
-						break;
- 
-					case "flipcoin":
-						if(typeof command[1] == "undefined"){
-							var crowd = API.getUsers();
-							var randomUser = Math.floor(Math.random() * crowd.length);
-							var randomHt = Math.floor(Math.random() * Funbot.misc.ht.length);
-							var randomSentence = Math.floor(Math.random() * 1);
-							switch(randomSentence){
-								case 0:
-									API.sendChat(Funbot.misc.ht[randomHt]);
-									break;
-								case 1:
-									API.sendChat(Funbot.misc.ht[randomHt]);
-									break;
-							}
-						}else{
-							if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
-							var randomHt = Math.floor(Math.random() * Funbot.misc.ht.length);
-							var randomSentence = Math.floor(Math.random() * 1);
-							switch(randomSentence){
-								case 0:
-									API.sendChat(Funbot.misc.ht[randomHt]);
-									break;
-								case 1:
-									API.sendChat(Funbot.misc.ht[randomHt]);
-									break;
-						}
-						}
-					if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
-							Funbot.misc.ready = false;
-							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-						}
-						break;
-						
-						
-					case "punish":
-						if(typeof command[1] == "@"){
-							var crowd = API.getUsers();
-							var randomUser = Math.floor(Math.random() * crowd.length);
-							var randomSentence = Math.floor(Math.random() * 6);
-							switch(randomSentence){
-								case 0:
-								case 1:
-									API.sendChat("/me stares at "+command[1]+" in a creepy way");
-									break;
-								case 2:
-								case 3:
-									API.sendChat("/me pokes "+command[1]+" in the eyes");
-									break;
-								case 4:
-								case 5:
-								case 6:
-									API.sendChat("/me makes "+command[1]+"'s mother cry");
-									break;
-							}
-						}else{
-							if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
-							var randomSentence = Math.floor(Math.random() * 6);
-							switch(randomSentence){
-								case 0:
-								case 1:
-									API.sendChat("/me stares at "+command[1]+" in a creepy way");
-									break;
-								case 2:
-								case 3:
-									API.sendChat("/me pokes "+command[1]+" in the eyes");
-									break;
-								case 4:
-								case 5:
-								case 6:
-									API.sendChat("/me makes "+command[1]+"'s mother cry");
-									break;
-							}
-						}
-						if(Funbot.admins.indexOf(fromID) == -1 || API.getUser(fromID).permission < 2){
-							Funbot.misc.ready = false;
-							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-						}
-						break;
- 
- 
-					case "cookie":
-					case "reward":
-						if(typeof command[1] == "@"){
-							var crowd = API.getUsers();
-							var randomUser = Math.floor(Math.random() * crowd.length);
-							var randomCookie = Math.floor(Math.random() * Funbot.misc.cookie.length);
-							var randomSentence = Math.floor(Math.random() * 1);
-							switch(randomSentence){
-								case 0:
-									API.sendChat("[NoBot] " + crowd[randomUser].username + ", you were rewarded with " + Funbot.misc.cookie[randomCookie]+ ". Enjoy!");
-									break;
-								case 1:
-									API.sendChat("[NoBot] " + crowd[randomUser].username + ", you were rewarded with " + Funbot.misc.cookie[randomCookie]+ ". Enjoy!");
-									break;
-							}
-						}else{
-						if(typeof command[1] == "@") command[1] = command[1].substring(1);
-							var randomCookie = Math.floor(Math.random() * Funbot.misc.cookie.length);
-							var randomSentence = Math.floor(Math.random() * 1);
-							switch(randomSentence){
-								case 0:
-									API.sendChat("[NoBot] " + command[1] + ", you were rewarded with " + Funbot.misc.cookie[randomCookie]+ ". Enjoy!");
-									break;
-								case 1:
-									API.sendChat("[NoBot] " + command[1] + ", you were rewarded with " + Funbot.misc.cookie[randomCookie]+ ". Enjoy!");
-									break;
-							}
-						}
-					if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
-							Funbot.misc.ready = false;
-							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-						}
-						break;
-						
-						
-					case "hug":
-						if(typeof command[1] == "@"){
-							var crowd = API.getUsers();
-							var randomUser = Math.floor(Math.random() * crowd.length);
-							var randomSentence = Math.floor(Math.random() * 3);
-							switch(randomSentence){
-								case 0:
-									API.sendChat("Hugs? Forget that!");
-									setTimeout(function(){
-										API.sendChat("/me grabs @"+command[1]+"'s ass");
-									}, 650);
-									break;
-								case 1:
-									API.sendChat("/me gives @"+command[1]+" a big bear hug");
-									break;
-								case 2:
-									API.sendChat("/me gives @"+command[1]+" a soft, furry hug");
-									break;
-								case 3:
-									API.sendChat("/me gives @"+command[1]+" an awkward hug");
-									break;
-							}
-						}else{
-							if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
-							var crowd = API.getUsers();
-							var randomUser = Math.floor(Math.random() * crowd.length);
-							var randomSentence = Math.floor(Math.random() * 3);
-							switch(randomSentence){
-								case 0:
-									API.sendChat("Hugs? Forget that!");
-									setTimeout(function(){
-										API.sendChat("/me grabs @"+command[1]+"'s ass");
-									}, 650);
-									break;
-								case 1:
-									API.sendChat("/me gives @"+command[1]+" a big bear hug");
-									break;
-								case 2:
-									API.sendChat("/me gives @"+command[1]+" a soft, furry hug");
-									break;
-								case 3:
-									API.sendChat("/me gives @"+command[1]+" an awkward hug");
-									break;
-							}
-						}
-					if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
-							Funbot.misc.ready = false;
-							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-						}
-						break;
- 
-				 case "dogfact":
-						if(typeof command[1] == "undefined"){
-							var crowd = API.getUsers();
-							var randomUser = Math.floor(Math.random() * crowd.length);
-							var randomDogfact = Math.floor(Math.random() * Funbot.misc.dogfact.length);
-							var randomSentence = Math.floor(Math.random() * 1);
-							switch(randomSentence){
-								case 0:
-									API.sendChat(Funbot.misc.dogfact[randomDogfact]);
-									break;
-								case 1:
-									API.sendChat(Funbot.misc.dogfact[randomDogfact]);
-									break;
-							}
-						}else{
-							if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
-							var randomDogfact = Math.floor(Math.random() * Funbot.misc.dogfact.length);
-							var randomSentence = Math.floor(Math.random() * 1);
-							switch(randomSentence){
-								case 0:
-									API.sendChat(Funbot.misc.dogfact[randomdogfact]);
-									break;
-								case 1:
-									API.sendChat(Funbot.misc.dogfact[randomDogfact]);
-									break;
-						}
-						}
-					if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
-							Funbot.misc.ready = false;
-							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-						}
+					case "dc":
+						API.sendChat("[NoBot] Sorry, too lazy to move anyone.");
 						break;
 					
-					case "catfact":
-						if(typeof command[1] == "undefined"){
-							var crowd = API.getUsers();
-							var randomUser = Math.floor(Math.random() * crowd.length);
-							var randomCatfact = Math.floor(Math.random() * Funbot.misc.catfact.length);
-							var randomSentence = Math.floor(Math.random() * 1);
-							switch(randomSentence){
-								case 0:
-									API.sendChat(Funbot.misc.catfact[randomCatfact]);
-									break;
-								case 1:
-									API.sendChat(Funbot.misc.catfact[randomCatfact]);
-									break;
-							}
-						}else{
-							if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
-							var randomCatfact = Math.floor(Math.random() * Funbot.misc.catfact.length);
-							var randomSentence = Math.floor(Math.random() * 1);
-							switch(randomSentence){
-								case 0:
-									API.sendChat(Funbot.misc.catfact[randomCatfact]);
-									break;
-								case 1:
-									API.sendChat(Funbot.misc.catfact[randomCatfact]);
-									break;
-						}
-						}
-					if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
-							Funbot.misc.ready = false;
-							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
-						}
+					case "eta":
+						API.sendChat("[NoBot] You'll get there eventually.");
 						break;
+	 
+					 case "8ball":
+							if(typeof command[1] == "undefined"){
+								var crowd = API.getUsers();
+								var randomUser = Math.floor(Math.random() * crowd.length);
+								var randomBall = Math.floor(Math.random() * Funbot.misc.ball.length);
+								var randomSentence = Math.floor(Math.random() * 1);
+								switch(randomSentence){
+									case 0:
+										API.sendChat(Funbot.misc.ball[randomBall]);
+										break;
+									case 1:
+										API.sendChat(Funbot.misc.ball[randomBall]);
+										break;
+								}
+							}else{
+								if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
+								var randomBall = Math.floor(Math.random() * Funbot.misc.ball.length);
+								var randomSentence = Math.floor(Math.random() * 1);
+								switch(randomSentence){
+									case 0:
+										API.sendChat(Funbot.misc.ball[randomBall]);
+										break;
+									case 1:
+										API.sendChat(Funbot.misc.ball[randomBall]);
+										break;
+							}
+							}
+						if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
+								Funbot.misc.ready = false;
+								setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
+							}
+							break;
+	 
+						case "flipcoin":
+							if(typeof command[1] == "undefined"){
+								var crowd = API.getUsers();
+								var randomUser = Math.floor(Math.random() * crowd.length);
+								var randomHt = Math.floor(Math.random() * Funbot.misc.ht.length);
+								var randomSentence = Math.floor(Math.random() * 1);
+								switch(randomSentence){
+									case 0:
+										API.sendChat(Funbot.misc.ht[randomHt]);
+										break;
+									case 1:
+										API.sendChat(Funbot.misc.ht[randomHt]);
+										break;
+								}
+							}else{
+								if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
+								var randomHt = Math.floor(Math.random() * Funbot.misc.ht.length);
+								var randomSentence = Math.floor(Math.random() * 1);
+								switch(randomSentence){
+									case 0:
+										API.sendChat(Funbot.misc.ht[randomHt]);
+										break;
+									case 1:
+										API.sendChat(Funbot.misc.ht[randomHt]);
+										break;
+							}
+							}
+						if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
+								Funbot.misc.ready = false;
+								setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
+							}
+							break;
+							
+							
+						case "punish":
+							if(typeof command[1] == "@"){
+								var crowd = API.getUsers();
+								var randomUser = Math.floor(Math.random() * crowd.length);
+								var randomSentence = Math.floor(Math.random() * 6);
+								switch(randomSentence){
+									case 0:
+									case 1:
+										API.sendChat("/me stares at "+command[1]+" in a creepy way");
+										break;
+									case 2:
+									case 3:
+										API.sendChat("/me pokes " + command[1] + " in the eyes");
+										break;
+									case 4:
+									case 5:
+									case 6:
+										API.sendChat("/me makes " + command[1]+"'s mother cry");
+										break;
+								}
+							}else{
+								if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
+								var randomSentence = Math.floor(Math.random() * 6);
+								switch(randomSentence){
+									case 0:
+									case 1:
+										API.sendChat("/me stares at " + command[1] + " in a creepy way");
+										break;
+									case 2:
+									case 3:
+										API.sendChat("/me pokes "+command[1]+" in the eyes");
+										break;
+									case 4:
+									case 5:
+									case 6:
+										API.sendChat("/me makes "+command[1]+"'s mother cry");
+										break;
+								}
+							}
+							if(Funbot.admins.indexOf(fromID) == -1 || API.getUser(fromID).permission < 2){
+								Funbot.misc.ready = false;
+								setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
+							}
+							break;
+	 
+	 
+						case "cookie":
+						case "reward":
+							if(typeof command[1] == "@"){
+								var crowd = API.getUsers();
+								var randomUser = Math.floor(Math.random() * crowd.length);
+								var randomCookie = Math.floor(Math.random() * Funbot.misc.cookie.length);
+								var randomSentence = Math.floor(Math.random() * 1);
+								switch(randomSentence){
+									case 0:
+										API.sendChat("[NoBot] " + crowd[randomUser].username + ", you were rewarded with " + Funbot.misc.cookie[randomCookie]+ ". Enjoy!");
+										break;
+									case 1:
+										API.sendChat("[NoBot] " + crowd[randomUser].username + ", you were rewarded with " + Funbot.misc.cookie[randomCookie]+ ". Enjoy!");
+										break;
+								}
+							}else{
+							if(typeof command[1] == "@") command[1] = command[1].substring(1);
+								var randomCookie = Math.floor(Math.random() * Funbot.misc.cookie.length);
+								var randomSentence = Math.floor(Math.random() * 1);
+								switch(randomSentence){
+									case 0:
+										API.sendChat("[NoBot] " + command[1] + ", you were rewarded with " + Funbot.misc.cookie[randomCookie]+ ". Enjoy!");
+										break;
+									case 1:
+										API.sendChat("[NoBot] " + command[1] + ", you were rewarded with " + Funbot.misc.cookie[randomCookie]+ ". Enjoy!");
+										break;
+								}
+							}
+						if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
+								Funbot.misc.ready = false;
+								setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
+							}
+							break;
+							
+							
+						case "hug":
+							if(typeof command[1] == "@"){
+								var crowd = API.getUsers();
+								var randomUser = Math.floor(Math.random() * crowd.length);
+								var randomSentence = Math.floor(Math.random() * 3);
+								switch(randomSentence){
+									case 0:
+										API.sendChat("Hugs? Forget that!");
+										setTimeout(function(){
+											API.sendChat("/me grabs @"+command[1]+"'s ass");
+										}, 650);
+										break;
+									case 1:
+										API.sendChat("/me gives @"+command[1]+" a big bear hug");
+										break;
+									case 2:
+										API.sendChat("/me gives @"+command[1]+" a soft, furry hug");
+										break;
+									case 3:
+										API.sendChat("/me gives @"+command[1]+" an awkward hug");
+										break;
+								}
+							}else{
+								if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
+								var crowd = API.getUsers();
+								var randomUser = Math.floor(Math.random() * crowd.length);
+								var randomSentence = Math.floor(Math.random() * 3);
+								switch(randomSentence){
+									case 0:
+										API.sendChat("Hugs? Forget that!");
+										setTimeout(function(){
+											API.sendChat("/me grabs @"+command[1]+"'s ass");
+										}, 650);
+										break;
+									case 1:
+										API.sendChat("/me gives @"+command[1]+" a big bear hug");
+										break;
+									case 2:
+										API.sendChat("/me gives @"+command[1]+" a soft, furry hug");
+										break;
+									case 3:
+										API.sendChat("/me gives @"+command[1]+" an awkward hug");
+										break;
+								}
+							}
+						if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
+								Funbot.misc.ready = false;
+								setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
+							}
+							break;
+	 
+					 case "dogfact":
+							if(typeof command[1] == "undefined"){
+								var crowd = API.getUsers();
+								var randomUser = Math.floor(Math.random() * crowd.length);
+								var randomDogfact = Math.floor(Math.random() * Funbot.misc.dogfact.length);
+								var randomSentence = Math.floor(Math.random() * 1);
+								switch(randomSentence){
+									case 0:
+										API.sendChat(Funbot.misc.dogfact[randomDogfact]);
+										break;
+									case 1:
+										API.sendChat(Funbot.misc.dogfact[randomDogfact]);
+										break;
+								}
+							}else{
+								if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
+								var randomDogfact = Math.floor(Math.random() * Funbot.misc.dogfact.length);
+								var randomSentence = Math.floor(Math.random() * 1);
+								switch(randomSentence){
+									case 0:
+										API.sendChat(Funbot.misc.dogfact[randomdogfact]);
+										break;
+									case 1:
+										API.sendChat(Funbot.misc.dogfact[randomDogfact]);
+										break;
+							}
+							}
+						if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
+								Funbot.misc.ready = false;
+								setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
+							}
+							break;
+							
+						case "meow":
+							API.sendChat("[NoBot] http://i.imgur.com/aa0j7wY.gif");
+							setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
+							break;
+						
+						case "catfact":
+							if(typeof command[1] == "undefined"){
+								var crowd = API.getUsers();
+								var randomUser = Math.floor(Math.random() * crowd.length);
+								var randomCatfact = Math.floor(Math.random() * Funbot.misc.catfact.length);
+								var randomSentence = Math.floor(Math.random() * 1);
+								switch(randomSentence){
+									case 0:
+										API.sendChat(Funbot.misc.catfact[randomCatfact]);
+										break;
+									case 1:
+										API.sendChat(Funbot.misc.catfact[randomCatfact]);
+										break;
+								}
+							}else{
+								if(command[1].indexOf("@") === 0) command[1] = command[1].substring(1);
+								var randomCatfact = Math.floor(Math.random() * Funbot.misc.catfact.length);
+								var randomSentence = Math.floor(Math.random() * 1);
+								switch(randomSentence){
+									case 0:
+										API.sendChat(Funbot.misc.catfact[randomCatfact]);
+										break;
+									case 1:
+										API.sendChat(Funbot.misc.catfact[randomCatfact]);
+										break;
+							}
+							}
+						if(API.getUser(fromID).permission < 2 || API.getUser(fromID).permission > 1 || Funbot.admins.indexOf(fromID) > -1){
+								Funbot.misc.ready = false;
+								setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
+							}
+							break;
 				}
 			}
 		}
