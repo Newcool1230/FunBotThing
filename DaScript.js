@@ -290,16 +290,14 @@ function chatMe(msg){
 						break;
 
 					case "rules":
-						API.sendChat("[NoBot] @" + un + " *yawns* Oke, oke, gimme a sec");
-						setTimeout(function(){API.sendChat("[NoBot] @" + un + " http://bit.ly/rulesdte");}, 350);
+						API.sendChat("[NoBot] @" + un + " http://bit.ly/rulesdte");
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 						
 					case "oplist":
 					case "op":
-						API.sendChat("[NoBot] @" + un + " *yawns* Oke, oke, gimme a sec");
-						setTimeout(function(){API.sendChat("[NoBot] @" + un + " http://bit.ly/dteoplist");}, 350);
+						API.sendChat("[NoBot] @" + un + " http://bit.ly/dteoplist");
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
