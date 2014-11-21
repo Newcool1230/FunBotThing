@@ -353,10 +353,9 @@ function chatMe(msg){
 
 					case "die":
 						if(API.getUser(uid).role > 1 || Funbot.admins.indexOf(uid) > -1 || API.getUser().username == "Beta Tester"){
-							API.sendChat('[NoBot] Unhooking Events...');
-							setTimeout(function(){API.sendChat('[NoBot] Deleting bot data...');	}, 150);
-							setTimeout(function(){Funbot.unhook();								}, 700);
-							setTimeout(function(){API.sendChat('[NoBot] I am dead.');			}, 750);
+							Funbot.unhook();
+							setTimeout(function(){API.sendChat('[NoBot] Murder is punishable w........ ');}, 700);
+							setTimeout(function(){API.sendChat('/me Voice slowly fades away, as the bot bleeds on the ground');}, 750);
 						}else{
 							API.sendChat("[NoBot] @" + un + " This command requires bouncer+");
 						}
