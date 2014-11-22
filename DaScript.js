@@ -36,7 +36,7 @@ Funbot.filters.commandWords = [".linkin",".say",".test",".ping",".marco",".rewar
 // Fun misc
 Funbot.misc.tacos = ["Delicious", "Tasty"];
 Funbot.misc.cookie = ["a chocolate chip cookie", "a sugar cookie", "an oatmeal raisin cookie", "a 'special' brownie", "an animal cracker", "a scooby snack", "a blueberry muffin", "a cupcake","Strawberry Sunday", "Chocolate Chip Icecream Cone", "Cookie Dough Triple Scoop ", "Mint Chocolate Chip Icecream Cone", "Chocolate Icecream Sunday", "Banana Split with Whipped Cream", "Vanilla Icecream Cone with Sprinkles ", "Bubblegum Flavored Popcicle"];
-Funbot.misc.ball = [" [:8ball:] It is certain"," [:8ball:] It is decidedly so"," [:8ball:] Without a doubt"," [:8ball:] Yes definitely"," [:8ball:] You may rely on it"," [:8ball:] As I see it yes","[:8ball:] Nop.", " [:8ball:] Most likely"," [:8ball:] Outlook good"," [:8ball:] Yes"," [:8ball:] Signs point to yes :trollface:"," [:8ball:] Uh oh."," [:8ball:] Ask again later"," [:8ball:] Better not tell you now"," [:8ball:] Cannot predict now"," [:8ball:] Concentrate and ask again"," [:8ball:] Don't count on it"," [:8ball:] My reply is no"," [:8ball:] My sources say no"," [:8ball:] Outlook not so good"," [:8ball:] Very doubtful"];
+Funbot.misc.ball = [" [:8ball:] It is certain"," [:8ball:] It is decidedly so"," [:8ball:] Without a doubt"," [:8ball:] Yes, definitely"," [:8ball:] Probably"," [:8ball:] As I see it, yes","[:8ball:] Nop.", " [:8ball:] Most likely"," [:8ball:] If the stars allow it, then yes"," [:8ball:] Yes"," [:8ball:] Signs point to yes :trollface:"," [:8ball:] Uh oh."," [:8ball:] Ask again later"," [:8ball:] Better not tell you now"," [:8ball:] Cannot predict now"," [:8ball:] Concentrate and ask again"," [:8ball:] Don't count on it"," [:8ball:] My reply is no"," [:8ball:] My sources say no"," [:8ball:] Outlook not so good"," [:8ball:] Very doubtful"," [:8ball:] Ha."];
 
 Funbot.misc.ht = ["My magic coins says: Tails", "My magic coin says: Heads"];
 
@@ -256,8 +256,6 @@ function chatMe(msg){
 						var a = Math.floor(Math.random()*sentences.length);
 						API.sendChat(sentences[a]);
 						API.moderateDeleteChat(msgid);
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "test":
@@ -265,20 +263,14 @@ function chatMe(msg){
 						var a = Math.floor(Math.random()*sentences.length);
 						API.sendChat(sentences[a]);
 						API.moderateDeleteChat(msgid);
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "ping":
 						API.sendChat("[NoBot] @" + un + ", pong!");
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "marco":
 						API.sendChat("[NoBot] @" + un + ", polo!");
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "say":
@@ -288,16 +280,12 @@ function chatMe(msg){
 							API.sendChat("[NoBot] @" + un + ", this command requires staff members only!");
 						}
 						API.moderateDeleteChat(msgid);
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "rules":
 						API.sendChat("[NoBot] @" + un + " *yawns* Oke, oke, gimme a sec");
 						setTimeout(function(){API.sendChat("[NoBot] @" + un + " http://bit.ly/rulesdte");}, 350);
 						API.moderateDeleteChat(msgid);
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 						
 					case "oplist":
@@ -305,16 +293,12 @@ function chatMe(msg){
 						API.sendChat("[NoBot] @" + un + " *yawns* Oke, oke, gimme a sec");
 						setTimeout(function(){API.sendChat("[NoBot] @" + un + " http://bit.ly/dteoplist");}, 350);
 						API.moderateDeleteChat(msgid);
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "linkin":
 					case "link":
 						API.sendChat("[NoBot] @" + un + ", was that ever a command? Well it's not anymore.");
 						API.moderateDeleteChat(msgid);
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "props":
@@ -322,8 +306,6 @@ function chatMe(msg){
 							API.sendChat("@"+ API.getDJ().username +", " + un + " congratulated you for your awesome song");
 						}
 						API.moderateDeleteChat(msgid);
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "version":
@@ -336,8 +318,6 @@ function chatMe(msg){
 					case "source":
 						API.sendChat("[NoBot] @" + un + " DJ - ɴᴇᴏɴ - TFL originally wrote me at github, available here: http://goo.gl/iLRyWJ");
 						API.moderateDeleteChat(msgid);
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "reload":
@@ -372,7 +352,7 @@ function chatMe(msg){
 						Funbot.misc.ready = false;
 						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
-	 
+
 					case "help":
 						var d = new Date();
 						var n = d.getUTCDay();
@@ -434,15 +414,11 @@ function chatMe(msg){
 					case "dc":
 						API.sendChat("[NoBot] @" + un + " Sorry, too lazy to move anyone.");
 						API.moderateDeleteChat(msgid);
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "eta":
 						API.sendChat("[NoBot] @" + un + " You'll get there eventually.");
 						API.moderateDeleteChat(msgid);
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					 case "8ball":
@@ -472,8 +448,6 @@ function chatMe(msg){
 									break;
 							}
 						}
-						Funbot.misc.ready = false;
-						setTimeout(function(){ Funbot.misc.ready = true; }, Funbot.settings.cooldown * 1000);
 						break;
 
 					case "flipcoin":
