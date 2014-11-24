@@ -672,7 +672,7 @@ function chatMe(msg){
 							break;
 						
 						default:
-							API.chatLog(un + "atttempted command [" + command[0].toLowerCase() + "]");
+							API.chatLog(un + " atttempted command [" + command[0].toLowerCase() + "]");
 							break;
 				}
 			}
