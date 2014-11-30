@@ -94,7 +94,7 @@ if(window.location.hostname === "plug.dj"){
 	
 	API.on(API.GRAB_UPDATE, function(obj){
 		var media = API.getMedia();
-		l("|| [GRAB] " + obj.user.username + " added " + media.author + " - " + media.title + " ||",false);
+		l(":purple_heart: " + obj.user.username + " added " + media.author + " - " + media.title,false);
 	});
 
 	API.on(API.CHAT_COMMAND, function(data){
@@ -193,7 +193,7 @@ if(window.location.hostname === "plug.dj"){
 				}
 				break;
 
-			//p3 ~ Extremely inefficient
+			//p3
 			case "lockskip":case "skip":case "commands":case "nick":case "avail":case "afk":case "work":case "sleep":case "join":case "leave":case "whoami":case "refresh":case "version":case "mute":case "link":case "unmute":case "nextsong":case "automute":case "alertson":case "alertsoff":case "getpos":case "ignore":case "whois":case "kick":case "add":case "remove":case "lock":case "unlock":case "help":case "me":case "em":
 			break;
 
