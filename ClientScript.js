@@ -65,7 +65,7 @@ if(window.location.hostname === "plug.dj"){
 			logcheck.push(argument);
 			messages.push(msgid.toString());
 		};
-		if (user == "THe Puff"){
+		if (user == "CatSnore"){
 			var puff = msg.toLowerCase().split(" ");
 			var tag = ["beta","beta tester","@beta tester","all","people","everyone","ppl","peeps","guys","guise","bros"];
 			switch (puff[0]){
