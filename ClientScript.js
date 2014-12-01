@@ -5,6 +5,9 @@ if(window.location.hostname === "plug.dj"){
 	var currentcap = API.getStaff().length + API.getAmbassadors().length + API.getAdmins().length;
 	c('/cap ' + parseInt(currentcap));
 
+	//var reasons = ["Violating community rules","Verbal abuse or harassment","Spamming or trolling","Offensive language","Negative attitude"];
+	//var time = ["API.MUTE.SHORT", "API.MUTE.MEDIUM", "API.MUTE.LONG"];
+
 	var lockPuff = false;
 	var strobeon = false;
 
@@ -59,9 +62,8 @@ if(window.location.hostname === "plug.dj"){
 		var msgid = data.cid;
 		var user = data.un;
 		var userid = data.uid;
-		var argument = "| " + user + " - " + msg + " |";
+		var argument = "[MSG] " + msg + " || User: " + user + " || MsgID: " + msgid + " || UserID: " + userid;
 		if (typeof user != "undefined"){
-			console.log("[MSG] " + msg + " || User: " + user + " || MsgID: " + msgid + " || UserID: " + userid);
 			logcheck.push(argument);
 			messages.push(msgid.toString());
 		};
