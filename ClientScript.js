@@ -99,7 +99,22 @@ if(window.location.hostname === "plug.dj"){
 		l(":purple_heart: " + obj.user.username + " added " + media.author + " - " + media.title,false);
 	});
 
+API.on(API.CHAT_COMMAND, function(d) {
+
+});
+
 	API.on(API.CHAT_COMMAND, function(data){
+		0 === data.indexOf("/mutes") && $.ajax({url:"https://plug.dj/_/rooms/state", success:function(a) {
+			if (0 < Object.keys(a.data[0].mutes).length) {
+				for (var b in a.data[0].mutes) {
+					if (!a.data[0].mutes.hasOwnProperty(b)) continue;
+					var c = API.getUser(b);
+					API.chatLog((c ? "Name: " + c.username + "ID: " + b : "ID: " + b) + " (" + Math.floor(a.data[0].mutes[b] / 60) + "min " + a.data[0].mutes[b] % 60 + "s)");
+				}
+			} else {
+				API.chatLog("0 muted users!");
+			}
+		}});
 		var msg = data;
 		var command = msg.substring(1).split(' ');
 		console.log("[COMMAND] - " + msg);
@@ -197,13 +212,92 @@ if(window.location.hostname === "plug.dj"){
 
 			//p3
 			case "lockskip":case "skip":case "commands":case "nick":case "avail":case "afk":case "work":case "sleep":case "join":case "leave":case "whoami":case "refresh":case "version":case "mute":case "link":case "unmute":case "nextsong":case "automute":case "alertson":case "alertsoff":case "getpos":case "ignore":case "whois":case "kick":case "add":case "remove":case "lock":case "unlock":case "help":case "me":case "em":
-			break;
+				break;
+
+			case "mutes":
+				break;
+
+			case "txt":
+				if (msgOn){
+					msgOn = false;
+					l(":heavy_multiplication_x: Warning turned off",false);
+				}else if(!msgOn){
+					msgOn = true;
+					l(":white_check_mark: Warning every " + Limit + "min",false);
+					setTimeout(loop,5e4);
+				}
+				break;
+
+			case "check":
+				if (msg1){var n = 0;}
+				else if (!msg1){var n = 1;}
+				if (msgOn === true){
+					l(":anger: " + Potato + " minutes remaining");
+					l("Message is: " + mm[n]);
+				}else{
+					l(":anger: Messages are disabled");
+					l("Message is: " + mm[n]);
+				}
+				break;
+
+			case "send":
+				if (msg1){var n = 0;}
+				else if (!msg1){var n = 1;}
+				message(n);
+				break;
+
+			case "thelp":
+				l("------=[ TBOT Alpha v1.0 ]=------",true);
+				l("/txt || Turns messages on (1 hour interval)",false);
+				l("/check || Shows msg and time",false);
+				l("/send || Sends the message regardless of interval",false);
+				l("/thelp || This message",false);
+				l("------=[ TBOT Alpha v1.0 ]=------",true);
+				break;
 
 			default:
-				l("Command " + command[0] + " is not a command!",true);
+				l("Command " + command[0] + " is not a command!",false);
 				break;
 		};
 	});
+
+	var mm = ["[Broadcast] Don't forget to join during Ninja Day, on December the 5th! http://tinyurl.com/NinjaDayDTE",
+	"[Broadcast] Don't forget to check our tournament out! Winner will get a free game! http://tinyurl.com/CompetitionDTE"];
+	var msgOn = false;
+	var OneMin = 0;
+	var Limit = 60;
+	var Potato = Limit - OneMin;
+	var msg1 = true;
+
+	aid();
+	function aid(){
+		l("------=[ TBOT Alpha v1.0 ]=------",true);
+		l("/thelp || Commands",false);
+		l("------=[ TBOT Alpha v1.0 ]=------",true);
+	}
+
+	function message(n){
+		c(mm[n]);
+		msg1 = !msg1;
+	}
+
+	function loop(){
+		if (msgOn){
+			OneMin++;
+			Potato = Limit - OneMin;
+			API.chatLog(":anger: " + Potato + " minutes remaining",false);
+			if (OneMin >= Limit){
+				if (msg1){
+					message(0);
+				}else if(msg1){
+					message(1);
+				}
+				OneMin = 0;
+			}
+			setTimeout(loop,5e4);
+		}
+	}
+
 }else{
 	alert("This bot only functions at http://plug.dj/");
 };
