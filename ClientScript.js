@@ -24,6 +24,17 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.ADVANCE, JoinLeave);
 	API.on(API.USER_JOIN, JoinLeave);
 	API.on(API.USER_LEAVE, JoinLeave);
+	API.on(API.ADVANCE, autojoin);
+
+	function autojoin() {
+		var dj = API.getDJ();
+		setTimeout(function(){
+			if (dj == null || API.getWaitListPosition() <= -1){
+				$('#dj-button').click();
+			}
+		},300);
+	}
+	autojoin();
 
 	function JoinLeave(){
 		var p = parseInt(API.getStaff().length + API.getAmbassadors().length + API.getAdmins().length + off);
@@ -98,23 +109,38 @@ if(window.location.hostname === "plug.dj"){
 		var media = API.getMedia();
 		l(":purple_heart: " + obj.user.username + " added " + media.author + " - " + media.title,false);
 	});
-
-API.on(API.CHAT_COMMAND, function(d) {
-
-});
+/*
+function potato(a) {
+	if (0 < Object.keys(a.data[0].mutes).length) {
+		for (var b in a.data[0].mutes) {
+			if (!a.data[0].mutes.hasOwnProperty(b)) continue;
+			var c = API.getUser(b);
+			API.chatLog((c ? "Name: " + c.username + "ID: " + b : "ID: " + b) + " (" + Math.floor(a.data[0].mutes[b] / 60) + "min " + a.data[0].mutes[b] % 60 + "s)");
+		}
+	} else {
+		API.chatLog("0 muted users!");
+	}
+}*/
+/*
+function taters(a) {
+	if (Object.keys(a.data[0].booth.shouldCycle)){
+		Object.keys(a.data[0].booth.shouldCycle) = false;
+	}else{
+		Object.keys(a.data[0].booth.shouldCycle) = true;
+	}
+}*/
 
 	API.on(API.CHAT_COMMAND, function(data){
-		0 === data.indexOf("/mutes") && $.ajax({url:"https://plug.dj/_/rooms/state", success:function(a) {
-			if (0 < Object.keys(a.data[0].mutes).length) {
-				for (var b in a.data[0].mutes) {
-					if (!a.data[0].mutes.hasOwnProperty(b)) continue;
-					var c = API.getUser(b);
-					API.chatLog((c ? "Name: " + c.username + "ID: " + b : "ID: " + b) + " (" + Math.floor(a.data[0].mutes[b] / 60) + "min " + a.data[0].mutes[b] % 60 + "s)");
+		0 === data.indexOf("/cycle") && $.ajax({url:"https://plug.dj/_/rooms/state", success:function(a){
+				if (a.data[0].booth.shouldCycle){
+					a.data[0].booth.shouldCycle = false;
+				}else{
+					a.data[0].booth.shouldCycle = true;
 				}
-			} else {
-				API.chatLog("0 muted users!");
+				console.log(a.data[0].booth.shouldCycle);
 			}
-		}});
+		});
+
 		var msg = data;
 		var command = msg.substring(1).split(' ');
 		console.log("[COMMAND] - " + msg);
