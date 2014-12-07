@@ -5,9 +5,6 @@ if(window.location.hostname === "plug.dj"){
 	var currentcap = API.getStaff().length + API.getAmbassadors().length + API.getAdmins().length;
 	c('/cap ' + parseInt(currentcap));
 
-	//var reasons = ["Violating community rules","Verbal abuse or harassment","Spamming or trolling","Offensive language","Negative attitude"];
-	//var time = ["API.MUTE.SHORT", "API.MUTE.MEDIUM", "API.MUTE.LONG"];
-
 	var lockPuff = false;
 	var strobeon = false;
 
@@ -29,7 +26,7 @@ if(window.location.hostname === "plug.dj"){
 	function autojoin() {
 		var dj = API.getDJ();
 		setTimeout(function(){
-			if (dj == null || API.getWaitListPosition() <= -1){
+			if (API.getWaitListPosition() <= -1){
 				$('#dj-button').click();
 			}
 		},300);
@@ -103,44 +100,13 @@ if(window.location.hostname === "plug.dj"){
 			}
 		};
 	});
-	
-	
+
 	API.on(API.GRAB_UPDATE, function(obj){
 		var media = API.getMedia();
 		l(":purple_heart: " + obj.user.username + " added " + media.author + " - " + media.title,false);
 	});
-/*
-function potato(a) {
-	if (0 < Object.keys(a.data[0].mutes).length) {
-		for (var b in a.data[0].mutes) {
-			if (!a.data[0].mutes.hasOwnProperty(b)) continue;
-			var c = API.getUser(b);
-			API.chatLog((c ? "Name: " + c.username + "ID: " + b : "ID: " + b) + " (" + Math.floor(a.data[0].mutes[b] / 60) + "min " + a.data[0].mutes[b] % 60 + "s)");
-		}
-	} else {
-		API.chatLog("0 muted users!");
-	}
-}*/
-/*
-function taters(a) {
-	if (Object.keys(a.data[0].booth.shouldCycle)){
-		Object.keys(a.data[0].booth.shouldCycle) = false;
-	}else{
-		Object.keys(a.data[0].booth.shouldCycle) = true;
-	}
-}*/
 
 	API.on(API.CHAT_COMMAND, function(data){
-		0 === data.indexOf("/cycle") && $.ajax({url:"https://plug.dj/_/rooms/state", success:function(a){
-				if (a.data[0].booth.shouldCycle){
-					a.data[0].booth.shouldCycle = false;
-				}else{
-					a.data[0].booth.shouldCycle = true;
-				}
-				console.log(a.data[0].booth.shouldCycle);
-			}
-		});
-
 		var msg = data;
 		var command = msg.substring(1).split(' ');
 		console.log("[COMMAND] - " + msg);
@@ -236,10 +202,6 @@ function taters(a) {
 				}
 				break;
 
-			//p3
-			case "lockskip":case "skip":case "commands":case "nick":case "avail":case "afk":case "work":case "sleep":case "join":case "leave":case "whoami":case "refresh":case "version":case "mute":case "link":case "unmute":case "nextsong":case "automute":case "alertson":case "alertsoff":case "getpos":case "ignore":case "whois":case "kick":case "add":case "remove":case "lock":case "unlock":case "help":case "me":case "em":
-				break;
-
 			case "mutes":
 				break;
 
@@ -281,14 +243,38 @@ function taters(a) {
 				l("------=[ TBOT Alpha v1.0 ]=------",true);
 				break;
 
+			case "emojis":
+				l('~=[,,_,,]:3',false);
+				l('¬_¬',false);
+				l('ಠ_ಠ',false);
+				l('ლ(ಥ益ಥლ',false);
+				l('(っ◔‿◔)っ',false);
+				l('(╥﹏╥)',false);
+				l('(─‿‿─)',false);
+				l('(ʃƪ ˘ ³˘)',false);
+				l('(ᕗ ಠ益ಠ)ᕗ ︵﻿ ┻━┻',false);
+				l('(╯°□°)╯︵ ┻━┻',false);
+				l('( ͡° ͜ʖ ͡°)',false);
+				l('¯\_(ツ)_/¯',false);
+				break;
+
+			//p3
+			case "lockskip":case "skip":case "commands":case "nick":case "avail":
+			case "afk":case "work":case "sleep":case "join":case "leave":case "whoami":
+			case "refresh":case "version":case "mute":case "link":case "unmute":
+			case "nextsong":case "automute":case "alertson":case "alertsoff":
+			case "getpos":case "ignore":case "whois":case "kick":case "add":
+			case "remove":case "lock":case "unlock":case "help":case "me":case "em":
+				break;
+
 			default:
 				l("Command " + command[0] + " is not a command!",false);
 				break;
 		};
 	});
 
-	var mm = ["[Broadcast] Don't forget to join during Ninja Day, on December the 5th! http://tinyurl.com/NinjaDayDTE",
-	"[Broadcast] Don't forget to check our tournament out! Winner will get a free game! http://tinyurl.com/CompetitionDTE"];
+	var mm = ["[Broadcast] Don't forget to check the OP list! http://bit.ly/dteoplist",
+	"[Broadcast] Don't forget to read our rules! https://bit.ly/rulesDTE "];
 	var msgOn = false;
 	var OneMin = 0;
 	var Limit = 60;
