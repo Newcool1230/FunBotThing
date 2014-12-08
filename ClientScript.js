@@ -148,8 +148,12 @@ if(window.location.hostname === "plug.dj"){
 				ct("Admins are the people that work for plug.dj. They have a plug.dj logo next to their names in chat. http://blog.plug.dj/team/");
 				break;
 
-			case "pp":
 			case "xp":
+				ct('There is a limit to how much XP you can earn in a single 24-hour period, which starts at midnight GMT. XP and PP are earned on ticks. There are a specific amount of ticks in a 24-hour period and you can earn XP');
+				ct('for a certain amount of them, and they do not need to be earned sequentially (you can earn 3 ticks now, 4 ticks later, etc.)');
+				break;
+
+			case "pp":
 			case "points":
 			case "point":
 				ct("The website check every minute what you did in the website during that time (such as Wooting, chatting, etc), and then generates a proportional amount of XP and PP for it. XP, however, has a daily cap, so you can't farm it.");
@@ -203,6 +207,10 @@ if(window.location.hostname === "plug.dj"){
 				break;
 
 			case "mutes":
+				break;
+
+			case "12":
+				ct('ᄅ⇂');
 				break;
 
 			case "txt":
