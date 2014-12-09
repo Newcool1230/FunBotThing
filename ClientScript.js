@@ -26,7 +26,7 @@ if(window.location.hostname === "plug.dj"){
 	function autojoin() {
 		var dj = API.getDJ();
 		setTimeout(function(){
-			if (API.getWaitListPosition() <= -1){
+			if (API.getWaitListPosition() <= -1 && dj.username != API.getUser().username){
 				$('#dj-button').click();
 			}
 		},300);
