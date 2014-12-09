@@ -21,17 +21,6 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.ADVANCE, JoinLeave);
 	API.on(API.USER_JOIN, JoinLeave);
 	API.on(API.USER_LEAVE, JoinLeave);
-	API.on(API.ADVANCE, autojoin);
-
-	function autojoin() {
-		var dj = API.getDJ();
-		setTimeout(function(){
-			if (API.getWaitListPosition() <= -1 && dj.username != API.getUser().username){
-				$('#dj-button').click();
-			}
-		},300);
-	}
-	autojoin();
 
 	function JoinLeave(){
 		var p = parseInt(API.getStaff().length + API.getAmbassadors().length + API.getAdmins().length + off);
@@ -99,11 +88,6 @@ if(window.location.hostname === "plug.dj"){
 					break;
 			}
 		};
-	});
-
-	API.on(API.GRAB_UPDATE, function(obj){
-		var media = API.getMedia();
-		l(":purple_heart: " + obj.user.username + " added " + media.author + " - " + media.title,false);
 	});
 
 	API.on(API.CHAT_COMMAND, function(data){
