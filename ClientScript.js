@@ -1,5 +1,6 @@
 if(window.location.hostname === "plug.dj"){
 	API.chatLog("Client Support Script + Custom avatar cap - Activated");
+	//This script was made by Beta Tester (https://plug.dj/@/beta-tester)
 
 	var u = API.getUser().username;
 	var currentcap = API.getStaff().length + API.getAmbassadors().length + API.getAdmins().length;
@@ -24,12 +25,12 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.GRAB_UPDATE, function(obj){
 		var media = API.getMedia();
-		if (grabmsg){l(" 🚨 🚨 🚨 🚨 🚨 [:purple_heart: " + obj.user.username + " (UID " + obj.user.id + ") added " + media.author + " - " + media.title + "]",false);};
+		if (grabmsg){l(" 🚨 🚨 🚨 🚨 🚨 :purple_heart: " + obj.user.username + " (UID " + obj.user.id + ") added " + media.author + " - " + media.title,false);};
 	});
 
 	API.on(API.VOTE_UPDATE, function(obj){
 		if (obj.vote == -1){
-			if (mehmsg){l(" 🚨 🚨 🚨 🚨 🚨 [:x: " + obj.user.username + " (UID " + obj.user.id + ") meh'ed this]",false);};
+			if (mehmsg){l(" 🚨 🚨 🚨 🚨 🚨 :x: " + obj.user.username + " (UID " + obj.user.id + ") meh'ed this",false);};
 		}
 	});
 
@@ -39,11 +40,11 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.ADVANCE, autojoin);
 
 	function ujoined(user) {
-		if (joinmsg){l(" 🚨 🚨 🚨 🚨 🚨 [:door: " + user.username + " (UID " + user.id + ") joined]",false);};
+		if (joinmsg){l(" 🚨 🚨 🚨 🚨 🚨 :door: " + user.username + " (UID " + user.id + ") joined",false);};
 	};
 
 	function uleft(user){
-		if (joinmsg){l(" 🚨 🚨 🚨 🚨 🚨 [:door: " + user.username + " (UID " + user.id + ") left]",false);};
+		if (joinmsg){l(" 🚨 🚨 🚨 🚨 🚨 :door: " + user.username + " (UID " + user.id + ") left",false);};
 	};
 
 	function autojoin() {
@@ -68,12 +69,12 @@ if(window.location.hostname === "plug.dj"){
 			if (API.getDJ().username == u){
 				if (currentcap != p - 1){
 					currentcap = p - 1;
-					l(' 🚨 🚨 🚨 🚨 [:construction: Cap set to ' + parseInt(p) + "]",false);
+					l(' 🚨 🚨 🚨 🚨 :construction: Cap set to ' + parseInt(p),false);
 					c("/cap " + currentcap);
 				}
 			}else if (currentcap != p){
 				currentcap = p;
-				l(' 🚨 🚨 🚨 🚨 [:construction: Cap set to ' + parseInt(p) + "]",false);
+				l(' 🚨 🚨 🚨 🚨 :construction: Cap set to ' + parseInt(p),false);
 				c("/cap " + currentcap);
 			}
 		};
@@ -152,9 +153,9 @@ if(window.location.hostname === "plug.dj"){
 			case "jmsg":
 				joinmsg = !joinmsg;
 				if (joinmsg){
-					l(' 🚨 🚨 🚨 🚨 [:white_check_mark: Join message on]',false);
+					l(' 🚨 🚨 🚨 🚨 :white_check_mark: Join message on',false);
 				}else if (!joinmsg){
-					l(' 🚨 🚨 🚨 🚨 [:white_check_mark: Join message off]',false);
+					l(' 🚨 🚨 🚨 🚨 :white_check_mark: Join message off',false);
 				}
 				break;
 
@@ -162,9 +163,9 @@ if(window.location.hostname === "plug.dj"){
 			case "gmsg":
 				grabmsg = !grabmsg;
 				if (grabmsg){
-					l(' 🚨 🚨 🚨 🚨 [:white_check_mark: Grab message on]',false);
+					l(' 🚨 🚨 🚨 🚨 :white_check_mark: Grab message on',false);
 				}else if (!grabmsg){
-					l(' 🚨 🚨 🚨 🚨 [:white_check_mark: Grab message off]',false);
+					l(' 🚨 🚨 🚨 🚨 :white_check_mark: Grab message off',false);
 				}
 				break;
 			
@@ -172,9 +173,9 @@ if(window.location.hostname === "plug.dj"){
 			case "mmsg":
 				mehmsg = mehmsg;
 				if (mehmsg){
-					l(' 🚨 🚨 🚨 🚨 [:white_check_mark: Meh message on]',false);
+					l(' 🚨 🚨 🚨 🚨 :white_check_mark: Meh message on',false);
 				}else if (!mehmsg){
-					l(' 🚨 🚨 🚨 🚨 [:white_check_mark: Meh message off]',false);
+					l(' 🚨 🚨 🚨 🚨 :white_check_mark: Meh message off',false);
 				}
 				break;
 			
@@ -182,9 +183,9 @@ if(window.location.hostname === "plug.dj"){
 			case "auto":
 				autolock = !autolock;
 				if (mehmsg){
-					l(' 🚨 🚨 🚨 🚨 [:white_check_mark: Autojoin on]',false);
+					l(' 🚨 🚨 🚨 🚨 :white_check_mark: Autojoin on',false);
 				}else if (!mehmsg){
-					l(' 🚨 🚨 🚨 🚨 [:white_check_mark: Autojoin off]',false);
+					l(' 🚨 🚨 🚨 🚨 :white_check_mark: Autojoin off',false);
 				}
 				break;
 
