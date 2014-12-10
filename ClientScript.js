@@ -35,11 +35,11 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.ADVANCE, autojoin);
 
 	function ujoined(user) {
-		if (joinmsg){l(":door: " + user.username + " (ID " + user.id + ") has just joined the room",false);};
+		if (joinmsg){l(":door: " + user.username + " (ID " + user.id + ") joined",false);};
 	};
 
 	function uleft(user){
-		if (joinmsg){l(":door: " + user.username + " (ID " + user.id + ") has just left the room",false);};
+		if (joinmsg){l(":door: " + user.username + " (ID " + user.id + ") left",false);};
 	};
 
 	function autojoin() {
