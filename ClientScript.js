@@ -297,7 +297,7 @@ if(window.location.hostname === "plug.dj"){
 				l("/check || Shows msg and time",false);
 				l("/send || Sends the message regardless of interval",false);
 				l("/thelp || This message",false);
-				l("Meh message: " + mmsg,false);
+				l("Meh message: " + mehmsg,false);
 				l("Grab message: " + gmsg,false);
 				l("Join message: " + jmsg,false);
 				l("------=[ TBOT Alpha v1.0 ]=------",true);
@@ -338,7 +338,7 @@ if(window.location.hostname === "plug.dj"){
 	function aid(){
 		l("------=[ TBOT Alpha v1.0 ]=------",true);
 		l("/thelp || Commands",false);
-		l("Meh message: " + mmsg,false);
+		l("Meh message: " + mehmsg,false);
 		l("Grab message: " + gmsg,false);
 		l("Join message: " + jmsg,false);
 		l("------=[ TBOT Alpha v1.0 ]=------",true);
