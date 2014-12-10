@@ -9,6 +9,7 @@ if(window.location.hostname === "plug.dj"){
 
 	var joinmsg = true;
 	var grabmsg = true;
+	var mehmsg = true;
 
 	var off;var on;
 	if (API.getUser().role == 0){off = 1;on = 0;}
@@ -26,7 +27,13 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.GRAB_UPDATE, function(obj){
 		var media = API.getMedia();
-		if (grabmsg){l(":purple_heart: " + obj.user.username + " (ID " + user.id + ") added " + media.author + " - " + media.title,false);};
+		if (grabmsg){l(":purple_heart: " + obj.user.username + " (ID " + obj.user.id + ") added " + media.author + " - " + media.title,false);};
+	});
+
+	API.on(API.VOTE_UPDATE, function(obj){
+		if (obj.vote == -1){
+			if (mehmsg){l(":x: " + obj.user.username + " (ID " + obj.user.id + ") meh'ed this",false);};
+		}
 	});
 
 	API.on(API.USER_JOIN, ujoined);
@@ -155,6 +162,16 @@ if(window.location.hostname === "plug.dj"){
 					l(':white_check_mark: Grab message on',false);
 				}else if (!grabmsg){
 					l(':white_check_mark: Grab message off',false);
+				}
+				break;
+			
+			case "mehmsg":
+			case "mmsg":
+				mehmsg = mehmsg;
+				if (mehmsg){
+					l(':white_check_mark: Meh message on',false);
+				}else if (!mehmsg){
+					l(':white_check_mark: Meh message off',false);
 				}
 				break;
 
