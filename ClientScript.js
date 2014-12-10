@@ -7,8 +7,8 @@ if(window.location.hostname === "plug.dj"){
 
 	var lockPuff = false;
 
-	var joinmsg = false;
-	var grabmsg = false;
+	var joinmsg = true;
+	var grabmsg = true;
 
 	var off;var on;
 	if (API.getUser().role == 0){off = 1;on = 0;}
@@ -26,7 +26,7 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.GRAB_UPDATE, function(obj){
 		var media = API.getMedia();
-		if (grabmsg){l(":purple_heart: " + obj.user.username + " added " + media.author + " - " + media.title,false);};
+		if (grabmsg){l(":purple_heart: " + obj.user.username + " of ID " + user.id + " added " + media.author + " - " + media.title,false);};
 	});
 
 	API.on(API.USER_JOIN, ujoined);
@@ -35,11 +35,11 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.ADVANCE, autojoin);
 
 	function ujoined(user) {
-		if (joinmsg){l(":door: " + user.username + " has just joined the room",false);};
+		if (joinmsg){l(":door: " + user.username + " of ID " + user.id + " has just joined the room",false);};
 	};
 
 	function uleft(user){
-		if (joinmsg){l(":door: " + user.username + " has just left the room",false);};
+		if (joinmsg){l(":door: " + user.username + " of ID " + user.id + " has just left the room",false);};
 	};
 
 	function autojoin() {
@@ -138,8 +138,8 @@ if(window.location.hostname === "plug.dj"){
 				ct("There's a set timeout before you can post links on chat or Meh after you join");
 				break;
 
-			case "join":
 			case "joinmsg":
+			case "jmsg":
 				joinmsg = !joinmsg;
 				if (joinmsg){
 					l(':white_check_mark: Join message on',false);
@@ -148,8 +148,8 @@ if(window.location.hostname === "plug.dj"){
 				}
 				break;
 
-			case "grab":
 			case "grabmsg":
+			case "gmsg":
 				grabmsg = !grabmsg;
 				if (grabmsg){
 					l(':white_check_mark: Grab message on',false);
