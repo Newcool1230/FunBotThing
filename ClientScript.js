@@ -69,12 +69,12 @@ if(window.location.hostname === "plug.dj"){
 			if (API.getDJ().username == u){
 				if (currentcap != p - 1){
 					currentcap = p - 1;
-					l(' 🚨 🚨 🚨 🚨 :construction: Cap set to ' + parseInt(p),false);
+					l(' 🚨 🚨 🚨 🚨 🚨 :construction: Cap set to ' + parseInt(p),false);
 					c("/cap " + currentcap);
 				}
 			}else if (currentcap != p){
 				currentcap = p;
-				l(' 🚨 🚨 🚨 🚨 :construction: Cap set to ' + parseInt(p),false);
+				l(' 🚨 🚨 🚨 🚨 🚨 :construction: Cap set to ' + parseInt(p),false);
 				c("/cap " + currentcap);
 			}
 		};
