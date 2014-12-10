@@ -6,7 +6,8 @@ if(window.location.hostname === "plug.dj"){
 	c('/cap ' + parseInt(currentcap));
 
 	var lockPuff = false;
-	var strobeon = false;
+
+	var joinmsg = false;
 
 	var off;var on;
 	if (API.getUser().role == 0){off = 1;on = 0;}
@@ -21,6 +22,29 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.ADVANCE, JoinLeave);
 	API.on(API.USER_JOIN, JoinLeave);
 	API.on(API.USER_LEAVE, JoinLeave);
+
+	API.on(API.USER_JOIN, ujoined);
+	API.on(API.USER_LEAVE, uleft);
+
+	API.on(API.ADVANCE, autojoin);
+
+	function ujoined(user) {
+		if (joinmsg){l(user.username + " joined the room",false);};
+	};
+
+	function uleft(user){
+		if (joinmsg){l(user.username + " left the room",false);};
+	};
+
+	function autojoin() {
+		var dj = API.getDJ();
+		setTimeout(function(){
+			if (API.getWaitListPosition() <= -1 && dj.username != API.getUser().username){
+				$('#dj-button').click();
+			}
+		},300);
+	}
+	autojoin();
 
 	function JoinLeave(){
 		var p = parseInt(API.getStaff().length + API.getAmbassadors().length + API.getAdmins().length + off);
@@ -90,6 +114,11 @@ if(window.location.hostname === "plug.dj"){
 		};
 	});
 
+	API.on(API.GRAB_UPDATE, function(obj){
+		var media = API.getMedia();
+		l(":purple_heart: " + obj.user.username + " added " + media.author + " - " + media.title,false);
+	});
+
 	API.on(API.CHAT_COMMAND, function(data){
 		var msg = data;
 		var command = msg.substring(1).split(' ');
@@ -106,6 +135,16 @@ if(window.location.hostname === "plug.dj"){
 		switch(command[0].toLowerCase()){
 			case "timeout":
 				ct("There's a set timeout before you can post links on chat or Meh after you join");
+				break;
+
+			case "join":
+			case "joinmsg":
+				joinmsg = !joinmsg;
+				if (joinmsg){
+					l(':white_check_mark: Join message on',false);
+				}else if (!joinmsg){
+					l(':white_check_mark: Join message off',false);
+				}
 				break;
 
 			case "woot":
@@ -173,21 +212,6 @@ if(window.location.hostname === "plug.dj"){
 			case "clearlog":
 				logcheck = [];
 				l("Log cleared.",false);
-				break;
-			
-			case "strobe":
-				var x = require("dc35f/fefa3/cccff/c230c");
-				strobeon = !strobeon;
-				if (strobeon){
-					x.toggleLights(false);
-					x.onFXChange(null,["strobe"]);
-					x.strobeSwap();
-					l("Strobe lights on!",false);
-				}else if (!strobeon){
-					x.onFXChange(null,["strobe"]);
-					x.toggleLights(true);
-					l("Strobe lights off!",false);
-				}
 				break;
 
 			case "mutes":
