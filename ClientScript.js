@@ -8,6 +8,7 @@ if(window.location.hostname === "plug.dj"){
 	var lockPuff = false;
 
 	var joinmsg = false;
+	var grabmsg = false;
 
 	var off;var on;
 	if (API.getUser().role == 0){off = 1;on = 0;}
@@ -23,17 +24,22 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.USER_JOIN, JoinLeave);
 	API.on(API.USER_LEAVE, JoinLeave);
 
+	API.on(API.GRAB_UPDATE, function(obj){
+		var media = API.getMedia();
+		if (grabmsg){l(":purple_heart: " + obj.user.username + " added " + media.author + " - " + media.title,false);};
+	});
+
 	API.on(API.USER_JOIN, ujoined);
 	API.on(API.USER_LEAVE, uleft);
 
 	API.on(API.ADVANCE, autojoin);
 
 	function ujoined(user) {
-		if (joinmsg){l(user.username + " joined the room",false);};
+		if (joinmsg){l(":door: " + user.username + " has just joined the room",false);};
 	};
 
 	function uleft(user){
-		if (joinmsg){l(user.username + " left the room",false);};
+		if (joinmsg){l(":door: " + user.username + " has just left the room",false);};
 	};
 
 	function autojoin() {
@@ -114,11 +120,6 @@ if(window.location.hostname === "plug.dj"){
 		};
 	});
 
-	API.on(API.GRAB_UPDATE, function(obj){
-		var media = API.getMedia();
-		l(":purple_heart: " + obj.user.username + " added " + media.author + " - " + media.title,false);
-	});
-
 	API.on(API.CHAT_COMMAND, function(data){
 		var msg = data;
 		var command = msg.substring(1).split(' ');
@@ -144,6 +145,16 @@ if(window.location.hostname === "plug.dj"){
 					l(':white_check_mark: Join message on',false);
 				}else if (!joinmsg){
 					l(':white_check_mark: Join message off',false);
+				}
+				break;
+
+			case "grab":
+			case "grabmsg":
+				grabmsg = !grabmsg;
+				if (grabmsg){
+					l(':white_check_mark: Grab message on',false);
+				}else if (!grabmsg){
+					l(':white_check_mark: Grab message off',false);
 				}
 				break;
 
