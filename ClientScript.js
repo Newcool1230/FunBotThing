@@ -26,7 +26,7 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.GRAB_UPDATE, function(obj){
 		var media = API.getMedia();
-		if (grabmsg){l(":purple_heart: " + obj.user.username + " of ID " + user.id + " added " + media.author + " - " + media.title,false);};
+		if (grabmsg){l(":purple_heart: " + obj.user.username + " (ID " + user.id + ") added " + media.author + " - " + media.title,false);};
 	});
 
 	API.on(API.USER_JOIN, ujoined);
@@ -35,11 +35,11 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.ADVANCE, autojoin);
 
 	function ujoined(user) {
-		if (joinmsg){l(":door: " + user.username + " of ID " + user.id + " has just joined the room",false);};
+		if (joinmsg){l(":door: " + user.username + " (ID " + user.id + ") has just joined the room",false);};
 	};
 
 	function uleft(user){
-		if (joinmsg){l(":door: " + user.username + " of ID " + user.id + " has just left the room",false);};
+		if (joinmsg){l(":door: " + user.username + " (ID " + user.id + ") has just left the room",false);};
 	};
 
 	function autojoin() {
