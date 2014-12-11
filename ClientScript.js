@@ -85,26 +85,23 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.ADVANCE, mediaupdate);
 	function mediaupdate(obj){
-		l(obj.lastPlay.dj.username + " playing " + obj.lastPlay.media.author + " - " + obj.lastPlay.media.title,false);
-		l(" 🚨 🚨 🚨 :green_heart: " + obj.lastPlay.score.positive + " |  :purple_heart: " + obj.lastPlay.score.grabs + " |  :broken_heart: " + obj.lastPlay.score.negative,false);
+		l(" 🚨 🚨 🚨 🚨 🚨 :green_heart: " + obj.lastPlay.score.positive + " |  :purple_heart: " + obj.lastPlay.score.grabs + " |  :broken_heart: " + obj.lastPlay.score.negative,false);
+		l(" 🚨 🚨 🚨 🚨 🚨 :musical_note: Now playing: " + obj.media.author + " - " + obj.media.title,false);
+		l(" 🚨 🚨 🚨 🚨 🚨 :musical_note: Current DJ: " + obj.dj.username,false);
 	}
+
 	/*
 	{dj: <user Object>,
 	media: <media Object>,
-	score: {positive: <int>,
-			negative: <int>,
-			grabs: <int>
-			},
-	lastPlay: {
-		dj: <user Object>,
-		media: <media Object>,
-		score: {
-			positive: <int>,
-			negative: <int>,
-			grabs: <int>
+	score: {positive: <int>,negative: <int>,grabs: <int>},
+	lastPlay: {dj: <user Object>,media: <media Object>,score: {
+				positive: <int>,
+				negative: <int>,
+				grabs: <int>
+			}
 		}
-	}
-}*/
+	}*/
+
 	function deleteAll(){
 		console.log("Starting length: " + messages.length);
 		for (var i = 0; i < messages.length; i++){
