@@ -192,6 +192,7 @@ if(window.location.hostname === "plug.dj"){
 			case "getid":
 			case "getuid":
 			case "id":
+			case "uid":
 				var xname = command[1].substring(1).toString();
 				var oname = xname.substring(0,xname.length - 2);
 				var uname = oname.toLowerCase();
@@ -221,7 +222,7 @@ if(window.location.hostname === "plug.dj"){
 			
 			case "mehmsg":
 			case "mmsg":
-				mehmsg = mehmsg;
+				mehmsg = !mehmsg;
 				if (mehmsg){
 					l(' 🚨 🚨 🚨 🚨 :white_check_mark: Meh message on',false);
 				}else if (!mehmsg){
