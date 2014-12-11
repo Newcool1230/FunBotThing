@@ -165,6 +165,7 @@ if(window.location.hostname === "plug.dj"){
 			}else if (i == API.getUsers().length - 1){
 				l("User " + name + " not found.",false);
 			}
+			l(i,false);
 		}
 	}
 
