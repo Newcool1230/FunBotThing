@@ -87,7 +87,7 @@ if(window.location.hostname === "plug.dj"){
 	function mediaupdate(obj){
 		l(" 🚨 🚨 🚨 🚨 🚨 :green_heart: " + obj.lastPlay.score.positive + " |  :purple_heart: " + obj.lastPlay.score.grabs + " |  :broken_heart: " + obj.lastPlay.score.negative,false);
 		l(" 🚨 🚨 🚨 🚨 🚨 :musical_note: Now playing: " + obj.media.author + " - " + obj.media.title,false);
-		l(" 🚨 🚨 🚨 🚨 🚨 :musical_note: Current DJ: " + obj.dj.username,false);
+		l(" 🚨 🚨 🚨 🚨 🚨 :musical_note: Current DJ: " + obj.dj.username + " (UID " + obj.dj.id + ")",false);
 	}
 
 	/*
