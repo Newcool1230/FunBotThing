@@ -3,7 +3,12 @@ if(window.location.hostname === "plug.dj"){
 	//This script was made by Beta Tester (https://plug.dj/@/beta-tester)
 
 	var u = API.getUser().username;
-	var currentcap = API.getStaff().length + API.getAmbassadors().length + API.getAdmins().length;
+	var currentcap = 0;
+	for (var i = 0; i < API.getUsers().length; i++){
+		if (API.getUsers()[i].role > 0){
+			currentcap++;
+		}
+	}
 	c('/cap ' + parseInt(currentcap));
 
 	var lockPuff = false;
@@ -12,6 +17,7 @@ if(window.location.hostname === "plug.dj"){
 	var grabmsg = true;
 	var mehmsg = true;
 	var autolock = true;
+	var cap = true;
 
 	var off;var on;
 	if (API.getUser().role == 0){off = 1;on = 0;}
@@ -37,15 +43,31 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.USER_JOIN, ujoined);
 	API.on(API.USER_LEAVE, uleft);
 
-	API.on(API.ADVANCE, autojoin);
-
 	function ujoined(user) {
 		if (joinmsg){l(" 🚨 🚨 🚨 🚨 🚨 :door: " + user.username + " (UID " + user.id + ") joined",false);};
+		JoinLeave(user);
 	};
 
 	function uleft(user){
 		if (joinmsg){l(" 🚨 🚨 🚨 🚨 🚨 :door: " + user.username + " (UID " + user.id + ") left",false);};
+		JoinLeave(user);
 	};
+
+	API.on(API.ADVANCE, JoinLeave);
+
+	function JoinLeave(user){
+		if (cap){
+			currentcap = 0;
+			for (var i = 0; i < API.getUsers().length; i++){
+				if (API.getUsers()[i].role > 0){
+					currentcap++;
+				}
+			}
+			c('/cap ' + parseInt(currentcap));
+		}
+	}
+
+	API.on(API.ADVANCE, autojoin);
 
 	function autojoin() {
 		if (autolock){
@@ -58,27 +80,6 @@ if(window.location.hostname === "plug.dj"){
 		}
 	}
 	autojoin();
-
-	API.on(API.ADVANCE, JoinLeave);
-	API.on(API.USER_JOIN, JoinLeave);
-	API.on(API.USER_LEAVE, JoinLeave);
-
-	function JoinLeave(){
-		var p = parseInt(API.getStaff().length + API.getAmbassadors().length + API.getAdmins().length + off);
-		for (var i = 0; i <= p; i++){
-			if (API.getDJ().username == u){
-				if (currentcap != p - 1){
-					currentcap = p - 1;
-					l(' 🚨 🚨 🚨 🚨 🚨 :construction: Cap set to ' + parseInt(p),false);
-					c("/cap " + currentcap);
-				}
-			}else if (currentcap != p){
-				currentcap = p;
-				l(' 🚨 🚨 🚨 🚨 🚨 :construction: Cap set to ' + parseInt(p),false);
-				c("/cap " + currentcap);
-			}
-		};
-	};
 
 	function deleteAll(){
 		console.log("Starting length: " + messages.length);
@@ -178,7 +179,7 @@ if(window.location.hostname === "plug.dj"){
 					l(' 🚨 🚨 🚨 🚨 :white_check_mark: Meh message off',false);
 				}
 				break;
-			
+
 			case "autojoin":
 			case "auto":
 				autolock = !autolock;
@@ -186,6 +187,18 @@ if(window.location.hostname === "plug.dj"){
 					l(' 🚨 🚨 🚨 🚨 :white_check_mark: Autojoin on',false);
 				}else if (!autolock){
 					l(' 🚨 🚨 🚨 🚨 :white_check_mark: Autojoin off',false);
+				}
+				break;
+
+			case "togglecap":
+			case "captoggle":
+			case "capset":
+			case "setcap":
+				cap = !cap;
+				if (cap){
+					l(' 🚨 🚨 🚨 🚨 :white_check_mark: AutoCap on',false);
+				}else if (!cap){
+					l(' 🚨 🚨 🚨 🚨 :white_check_mark: AutoCap off',false);
 				}
 				break;
 
