@@ -56,13 +56,16 @@ if(window.location.hostname === "plug.dj"){
 	function JoinLeave(user){
 		if (cap){
 			if (user.role > 0);{
-				currentcap = 0;
+				var thiscap = 0;
 				for (var i = 0; i < API.getUsers().length; i++){
 					if (API.getUsers()[i].role > 0){
-						currentcap++;
+						thiscap++;
 					}
 				}
-				c('/cap ' + parseInt(currentcap));
+				if (thiscap != currentcap){
+					currentcap = thiscap;
+					c('/cap ' + parseInt(currentcap));
+				}
 			}
 		}
 	}
