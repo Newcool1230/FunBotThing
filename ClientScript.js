@@ -64,7 +64,10 @@ if(window.location.hostname === "plug.dj"){
 				}
 				if (thiscap != currentcap){
 					currentcap = thiscap;
-					c('/cap ' + parseInt(currentcap));
+					if (currentcap > 10){
+						currentcap = 10;
+						c('/cap ' + parseInt(currentcap));
+					}
 				}
 			}
 		}
