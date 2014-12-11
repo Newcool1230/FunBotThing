@@ -57,13 +57,15 @@ if(window.location.hostname === "plug.dj"){
 
 	function JoinLeave(user){
 		if (cap){
-			currentcap = 0;
-			for (var i = 0; i < API.getUsers().length; i++){
-				if (API.getUsers()[i].role > 0){
-					currentcap++;
+			if (user.role > 0);{
+				currentcap = 0;
+				for (var i = 0; i < API.getUsers().length; i++){
+					if (API.getUsers()[i].role > 0){
+						currentcap++;
+					}
 				}
+				c('/cap ' + parseInt(currentcap));
 			}
-			c('/cap ' + parseInt(currentcap));
 		}
 	}
 
@@ -81,6 +83,32 @@ if(window.location.hostname === "plug.dj"){
 	}
 	autojoin();
 
+	API.on(API.ADVANCE, mediaupdate);
+	function mediaupdate(obj1,obj2){
+		l(obj2.dj.username + " playing " + obj2.media.author + " - " + obj2.media.title,false);
+		l(" 🚨 🚨 🚨 :green_heart: " + obj2.score.positive + " |  :purple_heart: " + obj2.score.grabs + " |  :broken_heart: " + obj2.score.negative,false);
+		l(obj1.dj.username + " playing " + obj1.media.author + " - " + obj1.media.title,false);
+		l(" 🚨 🚨 🚨 :green_heart: " + obj1.score.positive + " |  :purple_heart: " + obj1.score.grabs + " |  :broken_heart: " + obj1.score.negative,false);
+	}
+	/*
+	{
+	dj: <user Object>,
+	media: <media Object>,
+	score: {
+		positive: <int>,
+		negative: <int>,
+		grabs: <int>
+	},
+	lastPlay: {
+		dj: <user Object>,
+		media: <media Object>,
+		score: {
+			positive: <int>,
+			negative: <int>,
+			grabs: <int>
+		}
+	}
+}*/
 	function deleteAll(){
 		console.log("Starting length: " + messages.length);
 		for (var i = 0; i < messages.length; i++){
