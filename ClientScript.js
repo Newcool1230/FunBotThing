@@ -16,7 +16,7 @@ if(window.location.hostname === "plug.dj"){
 	var joinmsg = true;
 	var grabmsg = true;
 	var mehmsg = true;
-	var autolock = true;
+	var autolock = false;
 	var cap = true;
 
 	var off;var on;
@@ -158,13 +158,16 @@ if(window.location.hostname === "plug.dj"){
 		};
 	});
 
-	function getuid(name){
+	function getuid(uname,oname){
+		var toggle = false;
 		for (var i = 0; i < API.getUsers().length; i++){
-			if (API.getUsers()[i].username == name){
-				l(name + "'s UID is " + API.getUsers()[i].id,false);
-			}else if (i == API.getUsers().length - 1){
-				l("User " + name + " not found.",false);
+			if (API.getUsers()[i].username.toLowerCase() == uname){
+				l(" 🚨 🚨 🚨 🚨 🚨 :grey_exclamation:" + API.getUsers()[i].username + "'s UID is " + API.getUsers()[i].id,false);
+				toggle = true;
 			}
+		}
+		if (!toggle){
+			l(" 🚨 🚨 🚨 🚨 🚨 :grey_exclamation: User " + oname + " doesn't exist / not in the room.",false);
 		}
 	}
 
@@ -187,9 +190,13 @@ if(window.location.hostname === "plug.dj"){
 				break;
 
 			case "getid":
-				var uname = command[1].substring(1).toString();
-				console.log(uname);
-				getuid(uname);
+			case "getuid":
+			case "id":
+				var xname = command[1].substring(1).toString();
+				var oname = xname.substring(0,xname.length - 2);
+				var uname = oname.toLowerCase();
+				console.log(xname + "||" + uname + "||" + oname);
+				getuid(uname,oname);
 				break;
 
 			case "joinmsg":
@@ -377,7 +384,7 @@ if(window.location.hostname === "plug.dj"){
 				break;
 
 			default:
-				l(" 🚨 🚨 🚨 🚨 🚨 [Command " + command[0] + " is not a command!]",false);
+				l(" 🚨 🚨 🚨 🚨 🚨 :exclamation: Command " + command[0] + " is not a command!",false);
 				break;
 		};
 	});
