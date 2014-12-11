@@ -182,9 +182,9 @@ if(window.location.hostname === "plug.dj"){
 			case "autojoin":
 			case "auto":
 				autolock = !autolock;
-				if (mehmsg){
+				if (autolock){
 					l(' 🚨 🚨 🚨 🚨 :white_check_mark: Autojoin on',false);
-				}else if (!mehmsg){
+				}else if (!autolock){
 					l(' 🚨 🚨 🚨 🚨 :white_check_mark: Autojoin off',false);
 				}
 				break;
