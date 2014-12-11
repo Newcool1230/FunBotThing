@@ -165,7 +165,6 @@ if(window.location.hostname === "plug.dj"){
 			}else if (i == API.getUsers().length - 1){
 				l("User " + name + " not found.",false);
 			}
-			l(i,false);
 		}
 	}
 
@@ -188,7 +187,8 @@ if(window.location.hostname === "plug.dj"){
 				break;
 
 			case "getid":
-				getuid(command[1]);
+				var uname = command[1].substring(1).toString();
+				getuid(uname);
 				break;
 
 			case "joinmsg":
