@@ -31,7 +31,7 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.GRAB_UPDATE, function(obj){
 		var media = API.getMedia();
-		if (grabmsg){l(" 🚨 🚨 🚨 🚨 🚨 :purple_heart: " + obj.user.username + " (UID " + obj.user.id + ") added " + media.author + " - " + media.title,false);};
+		if (grabmsg){l(" 🚨 🚨 🚨 🚨 🚨 :purple_heart: " + obj.user.username + " (UID " + obj.user.id + ") grabbed",false);};
 	});
 
 	API.on(API.VOTE_UPDATE, function(obj){
