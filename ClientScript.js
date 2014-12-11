@@ -188,6 +188,7 @@ if(window.location.hostname === "plug.dj"){
 
 			case "getid":
 				var uname = command[1].substring(1).toString();
+				console.log(uname);
 				getuid(uname);
 				break;
 
