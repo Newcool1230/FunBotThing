@@ -67,6 +67,7 @@ if(window.location.hostname === "plug.dj"){
 					if (currentcap > 10){
 						currentcap = 10;
 						c('/cap ' + parseInt(currentcap));
+						l('Cap set to ' + currentcap);
 					}
 				}
 			}
