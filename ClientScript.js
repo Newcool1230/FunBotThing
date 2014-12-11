@@ -53,8 +53,6 @@ if(window.location.hostname === "plug.dj"){
 		JoinLeave(user);
 	};
 
-	API.on(API.ADVANCE, JoinLeave);
-
 	function JoinLeave(user){
 		if (cap){
 			if (user.role > 0);{
