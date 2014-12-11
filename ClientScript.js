@@ -158,6 +158,16 @@ if(window.location.hostname === "plug.dj"){
 		};
 	});
 
+	function getuid(name){
+		for (var i = 0; i < API.getUsers().length; i++){
+			if (API.getUsers()[i].username == name){
+				l(name + "'s UID is " + API.getUsers()[i].id,false);
+			}else if (i == API.getUsers().length - 1){
+				l("User " + name + " not found.",false);
+			}
+		}
+	}
+
 	API.on(API.CHAT_COMMAND, function(data){
 		var msg = data;
 		var command = msg.substring(1).split(' ');
@@ -174,6 +184,10 @@ if(window.location.hostname === "plug.dj"){
 		switch(command[0].toLowerCase()){
 			case "timeout":
 				ct("There's a set timeout before you can post links on chat or Meh after you join");
+				break;
+
+			case "getid":
+				getuid(command[1]);
 				break;
 
 			case "joinmsg":
