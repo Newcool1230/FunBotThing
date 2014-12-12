@@ -1,5 +1,4 @@
 if(window.location.hostname === "plug.dj"){
-	API.chatLog("Beta's Client Support Script + Custom avatar cap - Activated");
 	//This script was made by Beta Tester (https://plug.dj/@/beta-tester)
 	//CSS help from Marciano
 
@@ -19,6 +18,8 @@ if(window.location.hostname === "plug.dj"){
 	var mehmsg = false;
 	var autolock = false;
 	var cap = false;
+	var songup = false;
+	var autograb = false;
 
 	var off;var on;
 	if (API.getUser().role == 0){off = 1;on = 0;}
@@ -26,20 +27,47 @@ if(window.location.hostname === "plug.dj"){
 
 	var messages = [];
 	var logcheck = [];
-	
 	var menu = '\
-	<section id="xmenu">\
-		<div id="xjoinmsg" class="xbutton">Join Message</div>\
-		<div id="xgrabmsg" class="xbutton">Grab Message</div>\
-		<div id="xmehmsg" class="xbutton">Meh Message</div>\
-		<div id="xautojoin" class="xbutton">Toggle AutoJoin</div>\
-		<div id="xautocap" class="xbutton">Toggle AutoCap</div>\
-	</section>\
+		<section id="xprequel">\
+			<div id="xtitle" class="xtxt">BetaBot - Alpha</div>\
+		</section>\
+		<section id="xmenu">\
+			<div id="xjoinmsg" class="xbutton">Join Message</div>\
+			<div id="xgrabmsg" class="xbutton">Grab Message</div>\
+			<div id="xmehmsg" class="xbutton">Meh Message</div>\
+			<div id="xautojoin" class="xbutton">AutoJoin</div>\
+			<div id="xautograb" class="xbutton">AutoGrab</div>\
+			<div id="xautocap" class="xbutton">AutoCap</div>\
+			<div id="xsongup" class="xbutton">Song Updates</div>\
+		</section>\
 	';
+
 	var style = '\
 		<style>\
-			#xmenu {position: absolute; top: 53px; padding: 10px; width: 130px; background-color:#111317; z-index: 10; font-family: "Open Sans", sans-serif;}\
+			#xprequel {\
+				position: absolute;\
+				top: 53px;\
+				padding: 10px;\
+				width: 130px;\
+				background-color: #272B34;\
+				outline: #FFFFFF double;\
+				z-index: 10;\
+				font-family: "Open Sans", sans-serif;\
+			}\
+			#xprequel .ativo {color: #42A5DC;}\
+			#xmenu {\
+				position: absolute;\
+				top: 95px;\
+				padding: 10px;\
+				width: 130px;\
+				background-color: #111317;\
+				outline: #FFFFFF double;\
+				z-index: 10;\
+				font-family: "Open Sans", sans-serif;\
+			}\
 			#xmenu .ativo {color: #42A5DC;}\
+			.xtxt: {color: #3366FF; padding: 2px 15px;}\
+			.xtxt:hover, #xprequel .ativo:hover {color: #DCDCDC;}\
 			.xbutton: {color: #D1D1D1; padding: 2px 15px;}\
 			.xbutton:hover, #xmenu .ativo:hover {cursor: pointer; color: #89be6c;}\
 		</style>\
@@ -48,14 +76,27 @@ if(window.location.hostname === "plug.dj"){
 	$('#room').append(menu);    //Adicionar o menu ao elemento #room
 	$('body').prepend(style);   //Adicionar uma tag de estilos ao corpo da página
 	
-	$('#xjoinmsg').on('click', function() { joinmsg = !joinmsg; $(this).toggleClass('ativo'); l('Join clicked:' + joinmsg,false);});   //Listeners dos botões
-	$('#xgrabmsg').on('click', function() { grabmsg = !grabmsg; $(this).toggleClass('ativo'); l('Grab clicked: ' + grabmsg,false);});
-	$('#xmehmsg').on('click', function() { mehmsg = !mehmsg; $(this).toggleClass('ativo'); l('Meh clicked: ' + mehmsg,false);});
-	$('#xautojoin').on('click', function() { autolock = !autolock; $(this).toggleClass('ativo'); l('Join clicked: ' + autolock,false);});
-	$('#xautocap').on('click', function() { cap = !cap; $(this).toggleClass('ativo'); l('Cap clicked: ' + cap,false);});
+	$('#xjoinmsg').on('click',	function(){ joinmsg = !joinmsg;	$(this).toggleClass('ativo'); beautify("Join message",joinmsg);});   //Listeners dos botões
+	$('#xgrabmsg').on('click',	function(){ grabmsg = !grabmsg;	$(this).toggleClass('ativo'); beautify("Grab message",grabmsg);});
+	$('#xmehmsg').on('click',	function(){ mehmsg = !mehmsg;	$(this).toggleClass('ativo'); beautify("Meh message",mehmsg);});
+	$('#xautocap').on('click',	function(){ cap = !cap;			$(this).toggleClass('ativo'); beautify("AutoCap",mehmsg);});
+	$('#xautograb').on('click',	function(){ autograb = !autograb;$(this).toggleClass('ativo'); beautify("AutoGrab",autograb);});
+	$('#xautojoin').on('click',	function(){ autolock = !autolock;$(this).toggleClass('ativo'); beautify("AutoJoin",autolock);});
+	$('#xsongup').on('click',	function(){ songup = !songup;	$(this).toggleClass('ativo'); beautify("Song update",songup);});
 
 	function c(msg){API.sendChat(msg);}
 	function l(msg,state){API.chatLog(msg,state);}
+	function beautify(arg,arg2){
+		var a;
+		if (arg2){a = "on";}else if(!arg2){a = "off";}
+		l(' 🚨 🚨 🚨 🚨 :white_check_mark: ' + arg + ' is now ' + a,false);
+	}
+	function onify(arg){
+		var a;
+		if (arg){a = "on"}
+		else if(!arg){a = "off"}
+		return a
+	}
 
 	API.on(API.GRAB_UPDATE, function(obj){
 		var media = API.getMedia();
@@ -118,9 +159,11 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.ADVANCE, mediaupdate);
 	function mediaupdate(obj){
-		l(" 🚨 🚨 🚨 🚨 🚨 :green_heart: " + obj.lastPlay.score.positive + " 🚨 🚨 | 🚨 🚨 :purple_heart: " + obj.lastPlay.score.grabs + " 🚨 🚨 | 🚨 🚨 :broken_heart: " + obj.lastPlay.score.negative,false);
-		l(" 🚨 🚨 🚨 :musical_note: Now playing: " + obj.media.author + " - " + obj.media.title,false);
-		l(" 🚨 🚨 🚨 :musical_note: Current DJ: " + obj.dj.username + " (UID " + obj.dj.id + ")",false);
+		if (songup){
+			l(" 🚨 🚨 🚨 🚨 🚨 :green_heart: " + obj.lastPlay.score.positive + " 🚨 🚨 | 🚨 🚨 :purple_heart: " + obj.lastPlay.score.grabs + " 🚨 🚨 | 🚨 🚨 :broken_heart: " + obj.lastPlay.score.negative,false);
+			l(" 🚨 🚨 🚨 :musical_note: Now playing: " + obj.media.author + " - " + obj.media.title,false);
+			l(" 🚨 🚨 🚨 :musical_note: Current DJ: " + obj.dj.username + " (UID " + obj.dj.id + ")",false);
+		}
 	}
 
 	function deleteAll(){
@@ -185,6 +228,11 @@ if(window.location.hostname === "plug.dj"){
 		if (!toggle){
 			l(" 🚨 🚨 🚨 🚨 🚨 :grey_exclamation: User " + oname + " doesn't exist / not in the room.",false);
 		}
+	}
+
+	function grab(){
+		setTimeout(function(){$("#grab").click();}, 500);
+		setTimeout(function(){$($(".grab .menu ul li")[0]).mousedown();}, 500);
 	}
 
 	API.on(API.CHAT_COMMAND, function(data){
@@ -418,14 +466,8 @@ if(window.location.hostname === "plug.dj"){
 
 	aid();
 	function aid(){
-		l(" 🚨 ------=[ TBOT Alpha v1.0 ]=------",true);
-		l(" 🚨 🚨 🚨 🚨 🚨 /thelp || Commands",false);
-		l(" 🚨 🚨 🚨 🚨 🚨 Meh message: " + mehmsg + " (/mmsg)",false);
-		l(" 🚨 🚨 🚨 🚨 🚨 Grab message: " + grabmsg + " (/gmsg)",false);
-		l(" 🚨 🚨 🚨 🚨 🚨 Join message: " + joinmsg + " (/jmsg)",false);
-		l(" 🚨 🚨 🚨 🚨 🚨 Auto cap: " + cap + " (/setcap)",false);
-		l(" 🚨 🚨 🚨 🚨 🚨 Auto join: " + autolock + " (/autojoin)",false);
-		l(" 🚨 ------=[ TBOT Alpha v1.0 ]=------",true);
+		l(" 🚨 🚨 🚨 🚨 Beta's Client Support Script - Activated",false);
+		l(" 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 Do /thelp for commands",false);
 	}
 
 	function message(n){
