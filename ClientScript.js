@@ -269,7 +269,7 @@ if(window.location.hostname === "plug.dj"){
 				break;
 
 			case "ba":
-				ct("Brand Ambassadors are people who help moderate the website. Here's more about the BA project: http://blog.plug.dj/brand-ambassadors/");
+				ct("Brand Ambassadors are volunteers who help moderate the website and test features. Here's more about the BA project: http://blog.plug.dj/brand-ambassadors/");
 				break;
 
 			case "admin":
