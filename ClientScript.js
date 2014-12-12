@@ -355,18 +355,6 @@ if(window.location.hostname === "plug.dj"){
 				message(n);
 				break;
 
-			case "thelp":
-				l("------=[ TBOT Alpha v1.0 ]=------",true);
-				l("/txt || Turns messages on (1 hour interval)",false);
-				l("/check || Shows msg and time",false);
-				l("/send || Sends the message regardless of interval",false);
-				l("/thelp || This message",false);
-				l("Meh message: " + mehmsg,false);
-				l("Grab message: " + grabmsg,false);
-				l("Join message: " + joinmsg,false);
-				l("------=[ TBOT Alpha v1.0 ]=------",true);
-				break;
-
 			case "emojis":
 				l('~=[,,_,,]:3 🚨 🚨 || 🚨 🚨 ¬_¬ 🚨 🚨 || 🚨 🚨 ಠ_ಠ',false);
 				l('ლ(ಥ益ಥლ 🚨 🚨 || 🚨 🚨 (っ◔‿◔)っ 🚨 🚨 || 🚨 🚨 (╥﹏╥)',false);
@@ -382,6 +370,19 @@ if(window.location.hostname === "plug.dj"){
 			case "nextsong":case "automute":case "alertson":case "alertsoff":
 			case "getpos":case "ignore":case "whois":case "kick":case "add":
 			case "remove":case "lock":case "unlock":case "help":case "me":case "em":
+				break;
+			
+			case "thelp":
+				l(" 🚨 ------=[ TBOT Alpha v1.0 ]=------",true);
+				l(" 🚨 🚨 🚨 🚨 🚨 /txt || Turns messages on (1 hour interval)",false);
+				l(" 🚨 🚨 🚨 🚨 🚨 /check || Shows msg and time",false);
+				l(" 🚨 🚨 🚨 🚨 🚨 /send || Sends the message regardless of interval",false);
+				l(" 🚨 🚨 🚨 🚨 🚨 /thelp || This message",false);
+				l(" 🚨 🚨 🚨 🚨 🚨 Meh message: " + mehmsg + " (/mmsg)",false);
+				l(" 🚨 🚨 🚨 🚨 🚨 Grab message: " + grabmsg + " (/gmsg)",false);
+				l(" 🚨 🚨 🚨 🚨 🚨 Join message: " + joinmsg + " (/jmsg)",false);
+				l(" 🚨 🚨 🚨 🚨 🚨 Auto cap: " + cap + " (/setcap)",false);
+				l(" 🚨 ------=[ TBOT Alpha v1.0 ]=------",true);
 				break;
 
 			default:
@@ -400,13 +401,13 @@ if(window.location.hostname === "plug.dj"){
 
 	aid();
 	function aid(){
-		l("------=[ TBOT Alpha v1.0 ]=------",true);
-		l("/thelp || Commands",false);
-		l("Meh message: " + mehmsg + "(/mmsg)",false);
-		l("Grab message: " + grabmsg + "(/gmsg)",false);
-		l("Join message: " + joinmsg + "(/jmsg)",false);
-		l("Auto cap: " + cap + "(/setcap)",false);
-		l("------=[ TBOT Alpha v1.0 ]=------",true);
+		l(" 🚨 ------=[ TBOT Alpha v1.0 ]=------",true);
+		l(" 🚨 🚨 🚨 🚨 🚨 /thelp || Commands",false);
+		l(" 🚨 🚨 🚨 🚨 🚨 Meh message: " + mehmsg + " (/mmsg)",false);
+		l(" 🚨 🚨 🚨 🚨 🚨 Grab message: " + grabmsg + " (/gmsg)",false);
+		l(" 🚨 🚨 🚨 🚨 🚨 Join message: " + joinmsg + " (/jmsg)",false);
+		l(" 🚨 🚨 🚨 🚨 🚨 Auto cap: " + cap + " (/setcap)",false);
+		l(" 🚨 ------=[ TBOT Alpha v1.0 ]=------",true);
 	}
 
 	function message(n){
