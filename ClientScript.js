@@ -109,6 +109,12 @@ if(window.location.hostname === "plug.dj"){
 		}
 	});
 
+	API.on(API.ADVANCE, function(){
+		if (autograb){
+			grab();
+		}
+	});
+
 	API.on(API.USER_JOIN, ujoined);
 	API.on(API.USER_LEAVE, uleft);
 
