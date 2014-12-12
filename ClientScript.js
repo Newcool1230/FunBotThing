@@ -197,7 +197,7 @@ if(window.location.hostname === "plug.dj"){
 			logcheck.push(argument);
 			messages.push(msgid.toString());
 		};
-		if (user == "Steven"){
+		if (user == "THe Puff"){
 			var puff = msg.toLowerCase().split(" ");
 			var tag = ["beta","beta tester","@beta tester","all","people","everyone","ppl","peeps","guys","guise","bros"];
 			switch (puff[0]){
@@ -212,7 +212,8 @@ if(window.location.hostname === "plug.dj"){
 						if (!lockPuff){
 							if (typeof puff[1] != "undefined" && puff[1] == tag[i]
 							|| typeof puff[1] == "undefined"){
-								l("Like wtf how'd you get Steven to say hi",true);
+								//l("Like wtf how'd you get Steven to say hi",true);
+								c("Heya schmoobey butt! - Credits to 'THe Puff' for suggesting a sentence. (C) 2014 All Rights Reserved | Protected by Creative Commons 4.0");
 								lockPuff = true;
 								setTimeout(function(){lockPuff = false;},3000);
 							}
