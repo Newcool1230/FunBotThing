@@ -21,8 +21,8 @@ if(window.location.hostname === "plug.dj"){
 
 	function grab(){
 		if (!grablock){
-			setTimeout(function(){$("#grab").click();}, 100);
-			setTimeout(function(){$($(".grab .menu ul li")[0]).mousedown();}, 100);
+			setTimeout(function(){$("#grab").click();}, 1000);
+			setTimeout(function(){$($(".grab .menu ul li")[0]).mousedown();}, 1000);
 		}
 	}
 
