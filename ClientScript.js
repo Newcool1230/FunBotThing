@@ -1,6 +1,7 @@
 if(window.location.hostname === "plug.dj"){
-	API.chatLog("Client Support Script + Custom avatar cap - Activated");
+	API.chatLog("Beta's Client Support Script + Custom avatar cap - Activated");
 	//This script was made by Beta Tester (https://plug.dj/@/beta-tester)
+	//CSS help from Marciano
 
 	var u = API.getUser().username;
 	var currentcap = 0;
@@ -13,11 +14,11 @@ if(window.location.hostname === "plug.dj"){
 
 	var lockPuff = false;
 
-	var joinmsg = true;
-	var grabmsg = true;
-	var mehmsg = true;
+	var joinmsg = false;
+	var grabmsg = false;
+	var mehmsg = false;
 	var autolock = false;
-	var cap = true;
+	var cap = false;
 
 	var off;var on;
 	if (API.getUser().role == 0){off = 1;on = 0;}
@@ -25,8 +26,35 @@ if(window.location.hostname === "plug.dj"){
 
 	var messages = [];
 	var logcheck = [];
+	
+	var menu = '\
+	<section id="xmenu">\
+		<div id="xjoinmsg" class="xbutton">Join Message</div>\
+		<div id="xgrabmsg" class="xbutton">Grab Message</div>\
+		<div id="xmehmsg" class="xbutton">Meh Message</div>\
+		<div id="xautojoin" class="xbutton">Toggle AutoJoin</div>\
+		<div id="xautocap" class="xbutton">Toggle AutoCap</div>\
+	</section>\
+	';
+	var style = '\
+		<style>\
+			#xmenu {position: absolute; top: 53px; padding: 10px; width: 130px; background-color:#111317; z-index: 10; font-family: "Open Sans", sans-serif;}\
+			#xmenu .ativo {color: #42A5DC;}\
+			.xbutton: {color: #D1D1D1; padding: 2px 15px;}\
+			.xbutton:hover, #xmenu .ativo:hover {cursor: pointer; color: #89be6c;}\
+		</style>\
+	';
 
-	function c(msg){API.sendChat(msg);};
+	$('#room').append(menu);    //Adicionar o menu ao elemento #room
+	$('body').prepend(style);   //Adicionar uma tag de estilos ao corpo da página
+	
+	$('#xjoinmsg').on('click', function() { joinmsg = !joinmsg; $(this).toggleClass('ativo'); l('Join clicked:' + joinmsg,false);});   //Listeners dos botões
+	$('#xgrabmsg').on('click', function() { grabmsg = !grabmsg; $(this).toggleClass('ativo'); l('Grab clicked: ' + grabmsg,false);});
+	$('#xmehmsg').on('click', function() { mehmsg = !mehmsg; $(this).toggleClass('ativo'); l('Meh clicked: ' + mehmsg,false);});
+	$('#xautojoin').on('click', function() { autolock = !autolock; $(this).toggleClass('ativo'); l('Join clicked: ' + autolock,false);});
+	$('#xautocap').on('click', function() { cap = !cap; $(this).toggleClass('ativo'); l('Cap clicked: ' + cap,false);});
+
+	function c(msg){API.sendChat(msg);}
 	function l(msg,state){API.chatLog(msg,state);}
 
 	API.on(API.GRAB_UPDATE, function(obj){
@@ -94,18 +122,6 @@ if(window.location.hostname === "plug.dj"){
 		l(" 🚨 🚨 🚨 :musical_note: Now playing: " + obj.media.author + " - " + obj.media.title,false);
 		l(" 🚨 🚨 🚨 :musical_note: Current DJ: " + obj.dj.username + " (UID " + obj.dj.id + ")",false);
 	}
-
-	/*
-	{dj: <user Object>,
-	media: <media Object>,
-	score: {positive: <int>,negative: <int>,grabs: <int>},
-	lastPlay: {dj: <user Object>,media: <media Object>,score: {
-				positive: <int>,
-				negative: <int>,
-				grabs: <int>
-			}
-		}
-	}*/
 
 	function deleteAll(){
 		console.log("Starting length: " + messages.length);
@@ -382,6 +398,7 @@ if(window.location.hostname === "plug.dj"){
 				l(" 🚨 🚨 🚨 🚨 🚨 Grab message: " + grabmsg + " (/gmsg)",false);
 				l(" 🚨 🚨 🚨 🚨 🚨 Join message: " + joinmsg + " (/jmsg)",false);
 				l(" 🚨 🚨 🚨 🚨 🚨 Auto cap: " + cap + " (/setcap)",false);
+				l(" 🚨 🚨 🚨 🚨 🚨 Auto join: " + autolock + " (/autojoin)",false);
 				l(" 🚨 ------=[ TBOT Alpha v1.0 ]=------",true);
 				break;
 
@@ -407,6 +424,7 @@ if(window.location.hostname === "plug.dj"){
 		l(" 🚨 🚨 🚨 🚨 🚨 Grab message: " + grabmsg + " (/gmsg)",false);
 		l(" 🚨 🚨 🚨 🚨 🚨 Join message: " + joinmsg + " (/jmsg)",false);
 		l(" 🚨 🚨 🚨 🚨 🚨 Auto cap: " + cap + " (/setcap)",false);
+		l(" 🚨 🚨 🚨 🚨 🚨 Auto join: " + autolock + " (/autojoin)",false);
 		l(" 🚨 ------=[ TBOT Alpha v1.0 ]=------",true);
 	}
 
