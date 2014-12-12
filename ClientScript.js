@@ -402,9 +402,10 @@ if(window.location.hostname === "plug.dj"){
 	function aid(){
 		l("------=[ TBOT Alpha v1.0 ]=------",true);
 		l("/thelp || Commands",false);
-		l("Meh message: " + mehmsg,false);
-		l("Grab message: " + grabmsg,false);
-		l("Join message: " + joinmsg,false);
+		l("Meh message: " + mehmsg + "(/mmsg)",false);
+		l("Grab message: " + grabmsg + "(/gmsg)",false);
+		l("Join message: " + joinmsg + "(/jmsg)",false);
+		l("Auto cap: " + cap + "(/setcap)",false);
 		l("------=[ TBOT Alpha v1.0 ]=------",true);
 	}
 
