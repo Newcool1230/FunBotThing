@@ -20,6 +20,7 @@ if(window.location.hostname === "plug.dj"){
 	var cap = false;
 	var songup = false;
 	var autograb = false;
+	var mutedood = false;
 
 	var off;var on;
 	if (API.getUser().role == 0){off = 1;on = 0;}
@@ -114,6 +115,15 @@ if(window.location.hostname === "plug.dj"){
 			grab();
 		}
 	});
+
+	API.on(API.USER_JOIN, function(user){
+		if (mutedood){
+			if (user.level == 1){
+				API.moderateMuteUser(user.id,1,API.MUTE.SHORT);
+			}
+		}
+	});
+
 
 	API.on(API.USER_JOIN, ujoined);
 	API.on(API.USER_LEAVE, uleft);
@@ -258,6 +268,10 @@ if(window.location.hostname === "plug.dj"){
 		switch(command[0].toLowerCase()){
 			case "timeout":
 				ct("There's a set timeout before you can post links on chat or Meh after you join");
+				break;
+
+			case "mutedood":
+				mutedood = !mutedood;
 				break;
 
 			case "getid":
