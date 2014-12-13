@@ -20,6 +20,7 @@ if(window.location.hostname === "plug.dj"){
 	var cap = false;
 	var songup = false;
 	var autograb = false;
+	var autowoot = false;
 	var mutedood = false;
 
 	var off;var on;
@@ -38,6 +39,7 @@ if(window.location.hostname === "plug.dj"){
 			<div id="xmehmsg" class="xbutton">Meh Message</div>\
 			<div id="xautojoin" class="xbutton">AutoJoin</div>\
 			<div id="xautograb" class="xbutton">AutoGrab</div>\
+			<div id="xautowoot" class="xbutton">AutoWoot</div>\
 			<div id="xautocap" class="xbutton">AutoCap</div>\
 			<div id="xsongup" class="xbutton">Song Updates</div>\
 		</section>\
@@ -77,26 +79,19 @@ if(window.location.hostname === "plug.dj"){
 	$('#room').append(menu);    //Adicionar o menu ao elemento #room
 	$('body').prepend(style);   //Adicionar uma tag de estilos ao corpo da página
 	
-	$('#xjoinmsg').on('click',	function(){ joinmsg = !joinmsg;	$(this).toggleClass('ativo'); beautify("Join message",joinmsg);});   //Listeners dos botões
-	$('#xgrabmsg').on('click',	function(){ grabmsg = !grabmsg;	$(this).toggleClass('ativo'); beautify("Grab message",grabmsg);});
-	$('#xmehmsg').on('click',	function(){ mehmsg = !mehmsg;	$(this).toggleClass('ativo'); beautify("Meh message",mehmsg);});
-	$('#xautocap').on('click',	function(){ cap = !cap;			$(this).toggleClass('ativo'); beautify("AutoCap",mehmsg);});
-	$('#xautograb').on('click',	function(){ autograb = !autograb;$(this).toggleClass('ativo'); beautify("AutoGrab",autograb);});
-	$('#xautojoin').on('click',	function(){ autolock = !autolock;$(this).toggleClass('ativo'); beautify("AutoJoin",autolock);});
-	$('#xsongup').on('click',	function(){ songup = !songup;	$(this).toggleClass('ativo'); beautify("Song update",songup);});
+	$('#xjoinmsg').on('click',	function(){ joinmsg = !joinmsg;	$(this).toggleClass('ativo');});   //Listeners dos botões
+	$('#xgrabmsg').on('click',	function(){ grabmsg = !grabmsg;	$(this).toggleClass('ativo');});
+	$('#xmehmsg').on('click',	function(){ mehmsg = !mehmsg;	$(this).toggleClass('ativo');});
+	$('#xautocap').on('click',	function(){ cap = !cap;			$(this).toggleClass('ativo');});
+	$('#xautograb').on('click',	function(){ autograb = !autograb;$(this).toggleClass('ativo');});
+	$('#xautojoin').on('click',	function(){ autolock = !autolock;$(this).toggleClass('ativo');});
+	$('#xautowoot').on('click',	function(){ autowoot = !autowoot;$(this).toggleClass('ativo');woot();});
+	$('#xsongup').on('click',	function(){ songup = !songup;	$(this).toggleClass('ativo');});
 
 	function c(msg){API.sendChat(msg);}
 	function l(msg,state){API.chatLog(msg,state);}
-	function beautify(arg,arg2){
-		var a;
-		if (arg2){a = "on";}else if(!arg2){a = "off";}
-		l(' 🚨 🚨 🚨 🚨 :white_check_mark: ' + arg + ' is now ' + a,false);
-	}
-	function onify(arg){
-		var a;
-		if (arg){a = "on"}
-		else if(!arg){a = "off"}
-		return a
+	function woot(){
+		$('#woot').click();
 	}
 
 	API.on(API.GRAB_UPDATE, function(obj){
@@ -113,6 +108,12 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.ADVANCE, function(){
 		if (autograb){
 			grab();
+		}
+	});
+
+	API.on(API.ADVANCE, function(){
+		if (autowoot){
+			setTimeout(woot,1000);
 		}
 	});
 
