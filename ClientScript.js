@@ -92,6 +92,7 @@ if(window.location.hostname === "plug.dj"){
 	$('body').prepend(style);   //Adicionar uma tag de estilos ao corpo da página
 
 	$('#xautowoot').toggleClass('ativo');
+	$('#xjoinmsg').toggleClass('ativo');
 	$('#xgrabmsg').toggleClass('ativo');
 	$('#xmehmsg').toggleClass('ativo');
 	$('#xsongup').toggleClass('ativo');
