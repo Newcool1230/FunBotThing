@@ -116,10 +116,13 @@ if(window.location.hostname === "plug.dj"){
 		}
 	});
 
+	var save;
+
 	API.on(API.USER_JOIN, function(user){
 		if (mutedood){
 			if (user.level == 1){
 				API.moderateMuteUser(user.id,1,API.MUTE.SHORT);
+				save = user.id;
 			}
 		}
 	});
@@ -272,6 +275,10 @@ if(window.location.hostname === "plug.dj"){
 
 			case "mutedood":
 				mutedood = !mutedood;
+				break;
+
+			case "unmutedood":
+				API.moderateUnmuteUser(save);
 				break;
 
 			case "getid":
