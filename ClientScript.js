@@ -4,26 +4,13 @@ if(window.location.hostname === "plug.dj"){
 
 	var u = API.getUser().username;
 
-	var lockPuff = false;
-
-	var joinmsg = false;
-	var grabmsg = false;
-	var mehmsg = false;
-	var autolock = false;
-	var cap = false;
-	var songup = false;
-	var autograb = false;
-	var autowoot = false;
-	var mutedood = false;
-	var pufflock = false;
-	var afkmsg = false;
-
 	var off;var on;
 	if (API.getUser().role == 0){off = 1;on = 0;}
 	else{off = 0;on = 1;};
 
 	var messages = [];
 	var logcheck = [];
+
 	var menu = '\
 		<section id="xprequel">\
 			<div id="xtitle" class="xtxt">BetaBot - Alpha</div>\
@@ -90,6 +77,19 @@ if(window.location.hostname === "plug.dj"){
 
 	$('#room').append(menu);    //Adicionar o menu ao elemento #room
 	$('body').prepend(style);   //Adicionar uma tag de estilos ao corpo da página
+
+	var autowoot = true;
+	var joinmsg = true;
+	var grabmsg = true;
+	var mehmsg = true;
+	var songup = true;
+	var lockPuff = false;
+	var autolock = false;
+	var cap = false;
+	var autograb = false;
+	var mutedood = false;
+	var pufflock = false;
+	var afkmsg = false;
 
 	$('#xautowoot').toggleClass('ativo');
 	$('#xjoinmsg').toggleClass('ativo');
