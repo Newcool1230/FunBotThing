@@ -168,7 +168,7 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.ADVANCE, function(){
 		if (autowoot){
-			setTimeout(woot,1000);
+			setTimeout(woot,5000);
 		}
 	});
 
