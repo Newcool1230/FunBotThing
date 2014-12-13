@@ -22,6 +22,8 @@ if(window.location.hostname === "plug.dj"){
 	var autograb = false;
 	var autowoot = false;
 	var mutedood = false;
+	var pufflock = false;
+	var mutedood = false;
 
 	var off;var on;
 	if (API.getUser().role == 0){off = 1;on = 0;}
@@ -42,6 +44,8 @@ if(window.location.hostname === "plug.dj"){
 			<div id="xautowoot" class="xbutton">AutoWoot</div>\
 			<div id="xautocap" class="xbutton">AutoCap</div>\
 			<div id="xsongup" class="xbutton">Song Updates</div>\
+			<div id="xpuff" class="xbutton">THe Puff</div>\
+			<div id="xmuter" class="xbutton">Alt Muter</div>\
 		</section>\
 	';
 
@@ -87,6 +91,8 @@ if(window.location.hostname === "plug.dj"){
 	$('#xautojoin').on('click',	function(){ autolock = !autolock;$(this).toggleClass('ativo');});
 	$('#xautowoot').on('click',	function(){ autowoot = !autowoot;$(this).toggleClass('ativo');woot();});
 	$('#xsongup').on('click',	function(){ songup = !songup;	$(this).toggleClass('ativo');});
+	$('#xpuff').on('click',	function(){ pufflock = !pufflock;	$(this).toggleClass('ativo');});
+	$('#xmuter').on('click',	function(){ mutedood = !mutedood;$(this).toggleClass('ativo');});
 
 	function c(msg){API.sendChat(msg);}
 	function l(msg,state){API.chatLog(msg,state);}
@@ -127,7 +133,6 @@ if(window.location.hostname === "plug.dj"){
 			}
 		}
 	});
-
 
 	API.on(API.USER_JOIN, ujoined);
 	API.on(API.USER_LEAVE, uleft);
@@ -211,31 +216,33 @@ if(window.location.hostname === "plug.dj"){
 			logcheck.push(argument);
 			messages.push(msgid.toString());
 		};
-		if (user == "THe Puff"){
-			var puff = msg.toLowerCase().split(" ");
-			var tag = ["beta","beta tester","@beta tester","all","people","everyone","ppl","peeps","guys","guise","bros"];
-			switch (puff[0]){
+		if (pufflock){
+			if (user == "THe Puff"){
+				var puff = msg.toLowerCase().split(" ");
+				var tag = ["beta","beta tester","@beta tester","all","people","everyone","ppl","peeps","guys","guise","bros"];
+				switch (puff[0]){
 
-				case "hi":case "hello":case "greetings":case "salutations":
-				case "howdy":case "ciao":case "salut":case "hai":case "hey":
-				case "hay":case "ohai":case "ohaio":case "ohay":case "ohei":
-				case "oheio":case "ohey":case "haider":case "oy":case "ohoy":
-				case "hola":case "holla":case "hyao": case "hoy":
+					case "hi":case "hello":case "greetings":case "salutations":
+					case "howdy":case "ciao":case "salut":case "hai":case "hey":
+					case "hay":case "ohai":case "ohaio":case "ohay":case "ohei":
+					case "oheio":case "ohey":case "haider":case "oy":case "ohoy":
+					case "hola":case "holla":case "hyao": case "hoy":
 
-					for (var i = 0;i < tag.length; i++){
-						if (!lockPuff){
-							if (typeof puff[1] != "undefined" && puff[1] == tag[i]
-							|| typeof puff[1] == "undefined"){
-								//l("Like wtf how'd you get Steven to say hi",true);
-								c("Heya schmoobey butt! - Credits to 'THe Puff' for suggesting a sentence. (C) 2014 All Rights Reserved | Protected by Creative Commons 4.0");
-								lockPuff = true;
-								setTimeout(function(){lockPuff = false;},3000);
+						for (var i = 0;i < tag.length; i++){
+							if (!lockPuff){
+								if (typeof puff[1] != "undefined" && puff[1] == tag[i]
+								|| typeof puff[1] == "undefined"){
+									//l("Like wtf how'd you get Steven to say hi",true);
+									c("Heya schmoobey butt! - Credits to 'THe Puff' for suggesting a sentence. (C) 2014 All Rights Reserved | Protected by Creative Commons 4.0");
+									lockPuff = true;
+									setTimeout(function(){lockPuff = false;},3000);
+								}
 							}
 						}
-					}
-					break;
-			}
-		};
+						break;
+				}
+			};
+		}
 	});
 
 	function getuid(uname,oname){
