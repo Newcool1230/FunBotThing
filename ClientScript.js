@@ -46,6 +46,7 @@ if(window.location.hostname === "plug.dj"){
 			<div id="xsongup" class="xbutton">Song Updates</div>\
 			<div id="xpuff" class="xbutton">THe Puff</div>\
 			<div id="xmuter" class="xbutton">Alt Muter</div>\
+			<div id="xdel" class="xbutton">Delete All Chat</div>\
 		</section>\
 	';
 
@@ -93,6 +94,7 @@ if(window.location.hostname === "plug.dj"){
 	$('#xsongup').on('click',	function(){ songup = !songup;	$(this).toggleClass('ativo');});
 	$('#xpuff').on('click',	function(){ pufflock = !pufflock;	$(this).toggleClass('ativo');});
 	$('#xmuter').on('click',	function(){ mutedood = !mutedood;$(this).toggleClass('ativo');});
+	$('#xdel').on('click',	function(){ del1();});
 
 	function c(msg){API.sendChat(msg);}
 	function l(msg,state){API.chatLog(msg,state);}
@@ -189,6 +191,16 @@ if(window.location.hostname === "plug.dj"){
 			l(" 🚨 🚨 🚨 :musical_note: Now playing: " + obj.media.author + " - " + obj.media.title,false);
 			l(" 🚨 🚨 🚨 :musical_note: Current DJ: " + obj.dj.username + " (UID " + obj.dj.id + ")",false);
 		}
+	}
+
+	function del1(){
+		var r = confirm("Delete entire chat on log?");
+		if (r == true) {
+			deleteAll();
+			l(" 🚨 🚨 🚨 🚨 🚨 [Running command " + command[0] + ".]",true);
+		}else{
+			l(" 🚨 🚨 🚨 🚨 🚨 [Command " + command[0] + " denied.]",true);
+		};
 	}
 
 	function deleteAll(){
@@ -394,13 +406,7 @@ if(window.location.hostname === "plug.dj"){
 
 			case "clearall":
 			case "deleteall":
-				var r = confirm("Delete entire chat on log?");
-				if (r == true) {
-					deleteAll();
-					l(" 🚨 🚨 🚨 🚨 🚨 [Running command " + command[0] + ".]",true);
-				}else{
-					l(" 🚨 🚨 🚨 🚨 🚨 [Command " + command[0] + " denied.]",true);
-				};
+				del1();
 				break;
 
 			case "msgs":
