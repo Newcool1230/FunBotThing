@@ -105,10 +105,23 @@ if(window.location.hostname === "plug.dj"){
 	$('#xautojoin').on('click',	function(){ autolock = !autolock;$(this).toggleClass('ativo');});
 	$('#xautowoot').on('click',	function(){ autowoot = !autowoot;$(this).toggleClass('ativo');woot();});
 	$('#xsongup').on('click',	function(){ songup = !songup;	$(this).toggleClass('ativo');});
-	$('#xpuff').on('click',	function(){ pufflock = !pufflock;	$(this).toggleClass('ativo');});
+	$('#xpuff').on('click',		function(){ pufflock = !pufflock;$(this).toggleClass('ativo');});
 	$('#xmuter').on('click',	function(){ mutedood = !mutedood;$(this).toggleClass('ativo');});
-	$('#xafk').on('click',	function(){ afkmsg = !afkmsg;		$(this).toggleClass('ativo');});
-	$('#xdel').on('click',	function(){ del1();});
+	$('#xafk').on('click',		function(){ afkmsg = !afkmsg;	$(this).toggleClass('ativo');});
+	$('#xdel').on('click',		function(){ del1();});
+
+	$("#chat-messages").click(function() {
+		$("#Id_display").remove();
+		var e = $("#user-rollover .username").text();
+		var t;
+		var n = API.getUsers();
+		for (var i = 0; i < n.length; i++) {
+			if (n[i].username == e) {
+				t = n[i].id
+			}
+		}
+		$("#user-rollover .info").append('<div id="Id_display" style="position:absolute;top:-20px;left:110px">UID: ' + t + "</div>");
+	});
 
 	function c(msg){API.sendChat(msg);}
 	function l(msg,state){API.chatLog(msg,state);}
@@ -131,18 +144,22 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.CHAT, function(data){
 		var msg = data.message;
 		var user = data.un;
-		for (var i = 0; i < tet.length; i++){
-			var zz = msg.toLowerCase().indexOf(tet[i]);
-			if (zz != -1){
-				blunq.play();
+		var userid = data.uid;
+		var me = API.getUser().username;
+		if (userid != "undefined" && me == "Beta Tester"){
+			for (var i = 0; i < tet.length; i++){
+				var zz = msg.toLowerCase().indexOf(tet[i]);
+				if (zz != -1){
+					blunq.play();
+				}
 			}
-		}
-		if (!coollock && afkmsg){
-			var tst = msg.indexOf('@Beta Tester');
-			if (tst != -1){
-				c('[AFK] @' + user + ' "Beta is busy right now", says Beta, explaining the situation');
-				coollock = true;
-				setTimeout(function(){coollock = false},60000);
+			if (!coollock && afkmsg){
+				var tst = msg.indexOf('@Beta Tester');
+				if (tst != -1){
+					c('[AFK] @' + user + ' "Beta is busy right now", says Beta, explaining the situation');
+					coollock = true;
+					setTimeout(function(){coollock = false},60000);
+				}
 			}
 		}
 	});
