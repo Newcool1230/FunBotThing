@@ -121,7 +121,7 @@ if(window.location.hostname === "plug.dj"){
 			}
 		}
 		var a = "Open Sans";
-		$("#user-rollover .info").append('<div id="Id_display" style="position:absolute; top:-18px; left:117px; color:#808691; font-size: 12px; font-family: ' + a + ', sans-serif; text-decoration: overline;">ID: ' + t + "</div>");
+		$("#user-rollover .info").append('<div id="Id_display" style="position:absolute; top:-18px; left:125px; color:#808691; font-size: 11px; font-family: ' + a + ', sans-serif; text-decoration: overline;">ID: ' + t + "</div>");
 	});
 
 	function c(msg){API.sendChat(msg);}
