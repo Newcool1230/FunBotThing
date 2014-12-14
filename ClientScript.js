@@ -78,7 +78,7 @@ if(window.location.hostname === "plug.dj"){
 	$('#room').append(menu);    //Adicionar o menu ao elemento #room
 	$('body').prepend(style);   //Adicionar uma tag de estilos ao corpo da página
 
-	var autowoot = true;
+	var autowoot = true; woot();
 	var joinmsg = true;
 	var grabmsg = true;
 	var mehmsg = true;
