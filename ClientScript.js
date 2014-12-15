@@ -78,7 +78,7 @@ if(window.location.hostname === "plug.dj"){
 	$('#room').append(menu);
 	$('body').prepend(style);
 
-	var autowoot = true; woot();
+	var autowoot = true;
 	var joinmsg = true;
 	var grabmsg = true;
 	var mehmsg = true;
