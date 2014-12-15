@@ -75,8 +75,8 @@ if(window.location.hostname === "plug.dj"){
 		</style>\
 	';
 
-	$('#room').append(menu);    //Adicionar o menu ao elemento #room
-	$('body').prepend(style);   //Adicionar uma tag de estilos ao corpo da página
+	$('#room').append(menu);
+	$('body').prepend(style);
 
 	var autowoot = true; woot();
 	var joinmsg = true;
@@ -97,7 +97,7 @@ if(window.location.hostname === "plug.dj"){
 	$('#xmehmsg').toggleClass('ativo');
 	$('#xsongup').toggleClass('ativo');
 
-	$('#xjoinmsg').on('click',	function(){ joinmsg = !joinmsg;	$(this).toggleClass('ativo');});   //Listeners dos botões
+	$('#xjoinmsg').on('click',	function(){ joinmsg = !joinmsg;	$(this).toggleClass('ativo');});
 	$('#xgrabmsg').on('click',	function(){ grabmsg = !grabmsg;	$(this).toggleClass('ativo');});
 	$('#xmehmsg').on('click',	function(){ mehmsg = !mehmsg;	$(this).toggleClass('ativo');});
 	$('#xautocap').on('click',	function(){ cap = !cap;			$(this).toggleClass('ativo');});
