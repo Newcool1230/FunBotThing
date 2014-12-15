@@ -121,7 +121,8 @@ if(window.location.hostname === "plug.dj"){
 			}
 		}
 		var a = "Open Sans";
-		$("#user-rollover .info").append('<div id="Id_display" style="position:absolute; top:-18px; left:125px; color:#808691; font-size: 11px; font-family: ' + a + ', sans-serif;">ID: ' + t + "</div>");
+		$('#user-rollover .meta .joined').css({top:"64px"});
+		$("#user-rollover .info").append('<div id="Id_display" style="position:absolute; top:-21px; left:108px; color:#808691; font-size: 11px; font-family: ' + a + ', sans-serif;">ID: ' + t + "</div>");
 	});
 
 	function c(msg){API.sendChat(msg);}
@@ -132,7 +133,7 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.GRAB_UPDATE, function(obj){
 		var media = API.getMedia();
-		if (grabmsg){l("           :purple_heart: " + obj.user.username + " (UID " + obj.user.id + ") grabbed",false);};
+		if (grabmsg){l("           :purple_heart: " + obj.user.username + " (ID " + obj.user.id + ") grabbed",false);};
 	});
 
 	var blunq = new Audio();
@@ -174,7 +175,7 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.VOTE_UPDATE, function(obj){
 		if (obj.vote == -1){
-			if (mehmsg){l("           :x: " + obj.user.username + " (UID " + obj.user.id + ") meh'ed this",false);};
+			if (mehmsg){l("           :x: " + obj.user.username + " (ID " + obj.user.id + ") meh'ed this",false);};
 		}
 	});
 
@@ -205,13 +206,13 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.USER_LEAVE, uleft);
 
 	function ujoined(user) {
-		if (user.level > 1 && joinmsg){l("           :door: " + user.username + " (UID " + user.id + ") joined",false);};
-		if (user.level == 1 && joinmsg){l("           :door: " + user.username + " (UID " + user.id + ") joined (Level 1)",true);};
+		if (user.level > 1 && joinmsg){l("           :door: " + user.username + " (ID " + user.id + ") joined",false);};
+		if (user.level == 1 && joinmsg){l("           :door: " + user.username + " (ID " + user.id + ") joined (Level 1)",true);};
 		JoinLeave(user);
 	};
 
 	function uleft(user){
-		if (joinmsg){l("           :door: " + user.username + " (UID " + user.id + ") left",false);};
+		if (joinmsg){l("           :door: " + user.username + " (ID " + user.id + ") left",false);};
 		JoinLeave(user);
 	};
 
@@ -261,7 +262,7 @@ if(window.location.hostname === "plug.dj"){
 		if (songup){
 			l("           :green_heart: " + obj.lastPlay.score.positive + "     |     :purple_heart: " + obj.lastPlay.score.grabs + "     |     :broken_heart: " + obj.lastPlay.score.negative,false);
 			l("       :musical_note: Now playing: " + obj.media.author + " - " + obj.media.title,false);
-			l("       :musical_note: Current DJ: " + obj.dj.username + " (UID " + obj.dj.id + ")",false);
+			l("       :musical_note: Current DJ: " + obj.dj.username + " (ID " + obj.dj.id + ")",false);
 		}
 	}
 
@@ -333,7 +334,7 @@ if(window.location.hostname === "plug.dj"){
 		var toggle = false;
 		for (var i = 0; i < API.getUsers().length; i++){
 			if (API.getUsers()[i].username.toLowerCase() == uname){
-				l("           :grey_exclamation:" + API.getUsers()[i].username + "'s UID is " + API.getUsers()[i].id,false);
+				l("           :grey_exclamation:" + API.getUsers()[i].username + "'s ID is " + API.getUsers()[i].id,false);
 				toggle = true;
 			}
 		}
