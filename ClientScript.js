@@ -110,7 +110,11 @@ if(window.location.hostname === "plug.dj"){
 	$('#xafk').on('click',		function(){ afkmsg = !afkmsg;	$(this).toggleClass('ativo');});
 	$('#xdel').on('click',		function(){ del1();});
 
-	$("#chat-messages").click(function(){
+	$("#chat-messages").click(displayid);
+	$("#dj-canvas").mousemove(displayid);
+	$("#audience-canvas").mousemove(displayid);
+
+	function displayid(){
 		$("#Id_display").remove();
 		var e = $("#user-rollover .username").text();
 		var t;
@@ -123,7 +127,7 @@ if(window.location.hostname === "plug.dj"){
 		var a = "Open Sans";
 		$('#user-rollover .meta .joined').css({top:"64px"});
 		$("#user-rollover .info").append('<div id="Id_display" style="position:absolute; top:-21px; left:108px; color:#808691; font-size: 11px; font-family: ' + a + ', sans-serif;">ID: ' + t + "</div>");
-	});
+	}
 
 	function c(msg){API.sendChat(msg);}
 	function l(msg,state){API.chatLog(msg,state);}
