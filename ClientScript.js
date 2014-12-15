@@ -103,7 +103,7 @@ if(window.location.hostname === "plug.dj"){
 	$('#xautocap').on('click',	function(){ cap = !cap;			$(this).toggleClass('ativo');});
 	$('#xautograb').on('click',	function(){ autograb = !autograb;$(this).toggleClass('ativo');});
 	$('#xautojoin').on('click',	function(){ autolock = !autolock;$(this).toggleClass('ativo');});
-	$('#xautowoot').on('click',	function(){ autowoot = !autowoot;$(this).toggleClass('ativo');woot();});
+	$('#xautowoot').on('click',	function(){ autowoot = !autowoot;$(this).toggleClass('ativo');});
 	$('#xsongup').on('click',	function(){ songup = !songup;	$(this).toggleClass('ativo');});
 	$('#xpuff').on('click',		function(){ pufflock = !pufflock;$(this).toggleClass('ativo');});
 	$('#xmuter').on('click',	function(){ mutedood = !mutedood;$(this).toggleClass('ativo');});
