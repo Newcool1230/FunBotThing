@@ -205,7 +205,8 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.USER_LEAVE, uleft);
 
 	function ujoined(user) {
-		if (joinmsg){l("           :door: " + user.username + " (UID " + user.id + ") joined",false);};
+		if (user.level > 1 && joinmsg){l("           :door: " + user.username + " (UID " + user.id + ") joined",false);};
+		if (user.level == 1 && joinmsg){l("           :door: " + user.username + " (UID " + user.id + ") joined (Level 1)",true);};
 		JoinLeave(user);
 	};
 
