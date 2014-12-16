@@ -138,7 +138,7 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.GRAB_UPDATE, function(obj){
 		var media = API.getMedia();
-		if (grabmsg){addChat("           " + obj.user.username + " (ID " + obj.user.id + ") grabbed","#aa74ff");};
+		if (grabmsg){addChat("           " + obj.user.username + " (ID " + obj.user.id + ") grabbed","#7774ff");};
 	});
 
 	var blunq = new Audio();
@@ -211,7 +211,7 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.USER_LEAVE, uleft);
 
 	function ujoined(user) {
-		if (user.level > 1 && joinmsg){addChat("           " + user.username + " (ID " + user.id + ") joined","#fef8a0");};
+		if (user.level > 1 && joinmsg){addChat("           " + user.username + " (ID " + user.id + ") joined","#c5e0ff");};
 		if (user.level == 1 && joinmsg){addChat("           " + user.username + " (ID " + user.id + ") joined (Level 1)","#fef8a0");};
 		JoinLeave(user);
 	};
