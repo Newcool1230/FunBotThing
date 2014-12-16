@@ -138,7 +138,7 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.GRAB_UPDATE, function(obj){
 		var media = API.getMedia();
-		if (grabmsg){l("           :purple_heart: " + obj.user.username + " (ID " + obj.user.id + ") grabbed",false);};
+		if (grabmsg){addChat("           " + obj.user.username + " (ID " + obj.user.id + ") grabbed","#aa74ff");};
 	});
 
 	var blunq = new Audio();
@@ -180,7 +180,7 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.VOTE_UPDATE, function(obj){
 		if (obj.vote == -1){
-			if (mehmsg){l("           :x: " + obj.user.username + " (ID " + obj.user.id + ") meh'ed this",false);};
+			if (mehmsg){addChat("           " + obj.user.username + " (ID " + obj.user.id + ") meh'ed this","#ff8585");};
 		}
 	});
 
@@ -211,13 +211,13 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.USER_LEAVE, uleft);
 
 	function ujoined(user) {
-		if (user.level > 1 && joinmsg){l("           :door: " + user.username + " (ID " + user.id + ") joined",false);};
-		if (user.level == 1 && joinmsg){l("           :door: " + user.username + " (ID " + user.id + ") joined (Level 1)",true);};
+		if (user.level > 1 && joinmsg){addChat("           " + user.username + " (ID " + user.id + ") joined","#fef8a0");};
+		if (user.level == 1 && joinmsg){addChat("           " + user.username + " (ID " + user.id + ") joined (Level 1)","#fef8a0");};
 		JoinLeave(user);
 	};
 
 	function uleft(user){
-		if (joinmsg){l("           :door: " + user.username + " (ID " + user.id + ") left",false);};
+		if (joinmsg){addChat("           " + user.username + " (ID " + user.id + ") left","#c5e0ff");};
 		JoinLeave(user);
 	};
 
@@ -242,7 +242,7 @@ if(window.location.hostname === "plug.dj"){
 					if (thiscap <= 10){currentcap = thiscap;}
 					else{thiscap = 10;currentcap = thiscap;}
 					c('/cap ' + parseInt(currentcap));
-					l('           :couple: Cap set to ' + currentcap);
+					addChat('           Cap set to ' + currentcap,"#c5b5ff");
 				}
 			}
 		}
@@ -322,8 +322,8 @@ if(window.location.hostname === "plug.dj"){
 							if (!lockPuff){
 								if (typeof puff[1] != "undefined" && puff[1] == tag[i]
 								|| typeof puff[1] == "undefined"){
-									//l("Like wtf how'd you get Steven to say hi",true);
-									c("Heya schmoobey butt! - Credits to 'THe Puff' for suggesting a sentence. (C) 2014 All Rights Reserved | Protected by Creative Commons 4.0");
+									//addChat("Like wtf how'd you get Steven to say hi","#AA3333");
+									c("Heya shmoobey butt! - Credits to 'THe Puff' for suggesting a sentence. (C) 2014 All Rights Reserved | Protected by Creative Commons 4.0");
 									lockPuff = true;
 									setTimeout(function(){lockPuff = false;},3000);
 								}
@@ -339,12 +339,12 @@ if(window.location.hostname === "plug.dj"){
 		var toggle = false;
 		for (var i = 0; i < API.getUsers().length; i++){
 			if (API.getUsers()[i].username.toLowerCase() == uname){
-				l("           :grey_exclamation:" + API.getUsers()[i].username + "'s ID is " + API.getUsers()[i].id,false);
+				addChat("           " + API.getUsers()[i].username + "'s ID is " + API.getUsers()[i].id,"#ececec");
 				toggle = true;
 			}
 		}
 		if (!toggle){
-			l("           :grey_exclamation: User " + oname + " doesn't exist / not in the room.",false);
+			addChat("           User " + oname + " doesn't exist / not in the room.","#ececec");
 		}
 	}
 
@@ -383,6 +383,17 @@ if(window.location.hostname === "plug.dj"){
 				API.moderateUnmuteUser(save);
 				break;
 
+			case "lookup":
+				$.ajax({
+					type: 'GET',
+					url: 'https://plug.dj/_/users/' + command[1]
+				}).done(function(user) {
+					data = user.data[0];
+
+					addChat("<b>Name:</b> " + data.username + "<br><b>Blurb:</b> " + data.blurb + "<br><b>ID:</b> " + data.id + "<br><b>Level:</b> " + data.level + "<br><b>Avatar:</b> " + data.avatar + "<br><b>Status:</b> " + data.status + "<br><b>Badge:</b> " + data.badge, "#CCCCCC");
+				});
+				break;
+
 			case "getid":
 			case "getuid":
 			case "id":
@@ -398,9 +409,9 @@ if(window.location.hostname === "plug.dj"){
 			case "jmsg":
 				joinmsg = !joinmsg;
 				if (joinmsg){
-					l('         :white_check_mark: Join message on',false);
+					addChat('         Join message on',"#ececec");
 				}else if (!joinmsg){
-					l('         :white_check_mark: Join message off',false);
+					addChat('         Join message off',"#ececec");
 				}
 				break;
 
@@ -408,9 +419,9 @@ if(window.location.hostname === "plug.dj"){
 			case "gmsg":
 				grabmsg = !grabmsg;
 				if (grabmsg){
-					l('         :white_check_mark: Grab message on',false);
+					addChat('         Grab message on',"#ececec");
 				}else if (!grabmsg){
-					l('         :white_check_mark: Grab message off',false);
+					addChat('         Grab message off',"#ececec");
 				}
 				break;
 			
@@ -418,9 +429,9 @@ if(window.location.hostname === "plug.dj"){
 			case "mmsg":
 				mehmsg = !mehmsg;
 				if (mehmsg){
-					l('         :white_check_mark: Meh message on',false);
+					addChat('         Meh message on',"#ececec");
 				}else if (!mehmsg){
-					l('         :white_check_mark: Meh message off',false);
+					addChat('         Meh message off',"#ececec");
 				}
 				break;
 
@@ -428,9 +439,9 @@ if(window.location.hostname === "plug.dj"){
 			case "auto":
 				autolock = !autolock;
 				if (autolock){
-					l('         :white_check_mark: Autojoin on',false);
+					addChat('         Autojoin on',"#ececec");
 				}else if (!autolock){
-					l('         :white_check_mark: Autojoin off',false);
+					addChat('         Autojoin off',"#ececec");
 				}
 				break;
 
@@ -440,9 +451,9 @@ if(window.location.hostname === "plug.dj"){
 			case "setcap":
 				cap = !cap;
 				if (cap){
-					l('         :white_check_mark: AutoCap on',false);
+					addChat('         AutoCap on',"#ececec");
 				}else if (!cap){
-					l('         :white_check_mark: AutoCap off',false);
+					addChat('         AutoCap off',"#ececec");
 				}
 				break;
 
@@ -492,19 +503,19 @@ if(window.location.hostname === "plug.dj"){
 				break;
 
 			case "msgs":
-				l("           [Messages length: " + messages.length + "]", false);
+				addChat("           [Messages length: " + messages.length + "]", "#ececec");
 				break;
 
 			case "logcheck":
 			case "checklog":
 				console.log(logcheck);
-				l("           [Check console for chat log since last clear]",false);
+				addChat("           [Check console for chat log since last clear]","#ececec");
 				break;
 
 			case "logclear":
 			case "clearlog":
 				logcheck = [];
-				l("           [Log cleared.]",false);
+				addChat("           [Log cleared.]","#ececec");
 				break;
 
 			case "mutes":
@@ -517,10 +528,10 @@ if(window.location.hostname === "plug.dj"){
 			case "txt":
 				if (msgOn){
 					msgOn = false;
-					l("           [:heavy_multiplication_x: Warning turned off]",false);
+					addChat("           [Warning turned off]","#ececec");
 				}else if(!msgOn){
 					msgOn = true;
-					l("           [:white_check_mark: Warning every " + Limit + "min]",false);
+					addChat("           [Warning every " + Limit + "min]","#ececec");
 					setTimeout(loop,5e4);
 				}
 				break;
@@ -529,11 +540,11 @@ if(window.location.hostname === "plug.dj"){
 				if (msg1){var n = 0;}
 				else if (!msg1){var n = 1;}
 				if (msgOn === true){
-					l("           [:anger: " + Potato + " minutes remaining]");
-					l("           [Message is: " + mm[n] + "]");
+					addChat("           [" + Potato + " minutes remaining]","#ececec");
+					addChat("           [Message is: " + mm[n] + "]","#ececec");
 				}else{
-					l("           [:anger: Messages are disabled]");
-					l("           [Message is: " + mm[n] + "]");
+					addChat("           [Messages are disabled]","#ececec");
+					addChat("           [Message is: " + mm[n] + "]","#ececec");
 				}
 				break;
 
@@ -544,11 +555,11 @@ if(window.location.hostname === "plug.dj"){
 				break;
 
 			case "emojis":
-				l('~=[,,_,,]:3     ||     ¬_¬     ||     ಠ_ಠ',false);
-				l('ლ(ಥ益ಥლ     ||     (っ◔‿◔)っ     ||     (╥﹏╥)',false);
-				l('(─‿‿─)   ||   (ʃƪ ˘ ³˘)   ||   ( ͡° ͜ʖ ͡°)',false);
-				l('(ᕗ ಠ益ಠ)ᕗ ︵﻿ ┻━┻   ||   (╯°□°)╯︵ ┻━┻',false);
-				l('         ¯\\_(ツ)_/¯',false);
+				addChat('~=[,,_,,]:3     ||     ¬_¬     ||     ಠ_ಠ',"#ececec");
+				addChat('ლ(ಥ益ಥლ     ||     (っ◔‿◔)っ     ||     (╥﹏╥)',"#ececec");
+				addChat('(─‿‿─)   ||   (ʃƪ ˘ ³˘)   ||   ( ͡° ͜ʖ ͡°)',"#ececec");
+				addChat('(ᕗ ಠ益ಠ)ᕗ ︵﻿ ┻━┻   ||   (╯°□°)╯︵ ┻━┻',"#ececec");
+				addChat('         ¯\\_(ツ)_/¯',"#ececec");
 				break;
 
 			//p3
@@ -561,21 +572,21 @@ if(window.location.hostname === "plug.dj"){
 				break;
 			
 			case "thelp":
-				l("   ------=[ TBOT Alpha v1.0 ]=------",true);
-				l("           /txt || Turns messages on (1 hour interval)",false);
-				l("           /check || Shows msg and time",false);
-				l("           /send || Sends the message regardless of interval",false);
-				l("           /thelp || This message",false);
-				l("           Meh message: " + mehmsg + " (/mmsg)",false);
-				l("           Grab message: " + grabmsg + " (/gmsg)",false);
-				l("           Join message: " + joinmsg + " (/jmsg)",false);
-				l("           Auto cap: " + cap + " (/setcap)",false);
-				l("           Auto join: " + autolock + " (/autojoin)",false);
-				l("   ------=[ TBOT Alpha v1.0 ]=------",true);
+				addChat("   ------=[ TBOT Alpha v1.0 ]=------","#7174ff");
+				addChat("           /txt || Turns messages on (1 hour interval)","#ececec");
+				addChat("           /check || Shows msg and time","#ececec");
+				addChat("           /send || Sends the message regardless of interval","#ececec");
+				addChat("           /thelp || This message","#ececec");
+				addChat("           Meh message: " + mehmsg + " (/mmsg)","#ececec");
+				addChat("           Grab message: " + grabmsg + " (/gmsg)","#ececec");
+				addChat("           Join message: " + joinmsg + " (/jmsg)","#ececec");
+				addChat("           Auto cap: " + cap + " (/setcap)","#ececec");
+				addChat("           Auto join: " + autolock + " (/autojoin)","#ececec");
+				addChat("   ------=[ TBOT Alpha v1.0 ]=------","#7174ff");
 				break;
 
 			default:
-				l("           :exclamation: Command " + command[0] + " is not a command!",false);
+				addChat("           Command " + command[0] + " is not a command!","#fea6a6");
 				break;
 		};
 	});
@@ -590,8 +601,8 @@ if(window.location.hostname === "plug.dj"){
 
 	aid();
 	function aid(){
-		l("         Beta's Client Support Script - Activated",false);
-		l("                       Do /thelp for commands",false);
+		addChat("         Beta's Client Support Script - Activated","#ececec");
+		addChat("                       Do /thelp for commands","#ececec");
 	}
 
 	function message(n){
@@ -603,7 +614,7 @@ if(window.location.hostname === "plug.dj"){
 		if (msgOn){
 			OneMin++;
 			Potato = Limit - OneMin;
-			API.chatLog(":anger: " + Potato + " minutes remaining",false);
+			addChat(Potato + " minutes remaining","#ececec");
 			if (OneMin >= Limit){
 				if (msg1){
 					message(0);
@@ -614,6 +625,24 @@ if(window.location.hostname === "plug.dj"){
 			}
 			setTimeout(loop,5e4);
 		}
+	}
+
+	function addChat(text, color, icon) {
+		var chat = $('#chat-messages'),
+			a = chat.scrollTop() > chat[0].scrollHeight - chat.height() - 28;
+
+		if (color == undefined)
+			color = "#9fee00";
+
+		if (icon != undefined)
+			chat.append("<div class='update antitroll-update' style='border-left: solid 3px " + color + "; background-image: uraddChat(" + icon + "); background-repeat: no-repeat; background-position: 5px center'><span class='antitroll-text' style='color: " + color + "'>" + text + "</span></div>");
+		else
+			chat.append("<div class='update antitroll-update' style='border-left: solid 3px " + color + "'><span class='antitroll-text' style='color: " + color + "'>" + text + "</span></div>");
+
+		if (a)
+			chat.scrollTop(chat[0].scrollHeight);
+		if (chat.children().length >= 512)
+			chat.children().first().remove();
 	}
 
 }else{
