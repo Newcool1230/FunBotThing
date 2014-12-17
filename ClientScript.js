@@ -77,6 +77,8 @@ if(window.location.hostname === "plug.dj"){
 
 	$('#room').append(menu);
 	$('body').prepend(style);
+	$('#meh').css({left:"-1px"});
+	$('#woot').css({left:"1px"});
 
 	var autowoot = true;
 	var joinmsg = true;
@@ -188,9 +190,7 @@ if(window.location.hostname === "plug.dj"){
 		if (autograb){
 			grab();
 		}
-	});
-
-	API.on(API.ADVANCE, function(){
+		
 		if (autowoot){
 			setTimeout(woot,5000);
 		}
@@ -211,8 +211,9 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.USER_LEAVE, uleft);
 
 	function ujoined(user) {
-		if (user.level > 1 && joinmsg){addChat("           " + user.username + " (ID " + user.id + ") joined","#c5e0ff");};
-		if (user.level == 1 && joinmsg){addChat("           " + user.username + " (ID " + user.id + ") joined (Level 1)","#fef8a0");};
+		if (user.friend){var f = "Your friend ";}else{var f = "";}
+			if (user.level > 1 && joinmsg){addChat("           " + f + user.username + " (ID " + user.id + ") joined","#c5e0ff");};
+			if (user.level == 1 && joinmsg){addChat("           " + f + user.username + " (ID " + user.id + ") joined (Lvl 1)","#fef8a0");};
 		JoinLeave(user);
 	};
 
@@ -266,8 +267,8 @@ if(window.location.hostname === "plug.dj"){
 	function mediaupdate(obj){
 		if (songup){
 			l("           :green_heart: " + obj.lastPlay.score.positive + "     |     :purple_heart: " + obj.lastPlay.score.grabs + "     |     :broken_heart: " + obj.lastPlay.score.negative,false);
-			l("       :musical_note: Now playing: " + obj.media.author + " - " + obj.media.title,false);
-			l("       :musical_note: Current DJ: " + obj.dj.username + " (ID " + obj.dj.id + ")",false);
+			addChat("<b>       Now playing:</b> " + obj.media.author + "<br>       " + obj.media.title,"#ececec",true,true);
+			addChat("<b>       Current DJ:</b> " + obj.dj.username + " (ID " + obj.dj.id + ")","#ececec",true,true);
 		}
 	}
 
@@ -389,8 +390,37 @@ if(window.location.hostname === "plug.dj"){
 					url: 'https://plug.dj/_/users/' + command[1]
 				}).done(function(user) {
 					data = user.data[0];
+					switch (data.status){
+						case 0:
+							var stt = "Available (0)";
+							break;
+						case 1:
+							var stt = "Away (1)";
+							break;
+						case 2:
+							var stt = "Working (2)";
+							break;
+						case 3:
+							var stt = "Gaming (3)";
+							break;
+						case 4:
+							var stt = "Offline / Undefined";
+							break;
+						default:
+							var stt = "Wot."
+					}
 
-					addChat("<b>Name:</b> " + data.username + "<br><b>Blurb:</b> " + data.blurb + "<br><b>ID:</b> " + data.id + "<br><b>Level:</b> " + data.level + "<br><b>Avatar:</b> " + data.avatar + "<br><b>Status:</b> " + data.status + "<br><b>Badge:</b> " + data.badge, "#CCCCCC");
+					if (typeof data.username == null){
+						addChat("<b>    User has not updated yet!</b>","#CCCCCC");
+					}else{
+						addChat("<b>    Name:</b> " + data.username + "<br><b>\
+						    Blurb:</b> " + data.blurb + "<br><b>\
+						    ID:</b> " + data.id + "<br><b>\
+						    Level:</b> " + data.level + "<br><b>\
+						    Avatar:</b> " + data.avatarID + "<br><b>\
+						    Status:</b> " + stt + "<br><b>\
+						    Badge:</b> " + data.badge, "#CCCCCC");
+					}
 				});
 				break;
 
@@ -601,8 +631,8 @@ if(window.location.hostname === "plug.dj"){
 
 	aid();
 	function aid(){
-		addChat("         Beta's Client Support Script - Activated","#ececec");
-		addChat("                       Do /thelp for commands","#ececec");
+		addChat("         Beta's Client Support Script - Activated","#ececec",true);
+		addChat("                       Do /thelp for commands","#ececec",true);
 	}
 
 	function message(n){
@@ -627,17 +657,24 @@ if(window.location.hostname === "plug.dj"){
 		}
 	}
 
-	function addChat(text, color, icon) {
+	function addChat(text, color, state, size) {
 		var chat = $('#chat-messages'),
 			a = chat.scrollTop() > chat[0].scrollHeight - chat.height() - 28;
 
 		if (color == undefined)
 			color = "#9fee00";
+			
+		if (state){
+			chat.append("<div class='update antitroll-update' style='border-left: double 6px " + color + ";'><span class='antitroll-text' style='color: " + color + "; " + si + "'>" + text + "<br></span></div>");
+		}else{
+			chat.append("<div class='update antitroll-update' style=''><span class='antitroll-text' style='color: " + color + "; " + si + "'>" + text + "<br></span></div>");
+		}
 
-		if (icon != undefined)
-			chat.append("<div class='update antitroll-update' style='border-left: solid 3px " + color + "; background-image: uraddChat(" + icon + "); background-repeat: no-repeat; background-position: 5px center'><span class='antitroll-text' style='color: " + color + "'>" + text + "</span></div>");
-		else
-			chat.append("<div class='update antitroll-update' style='border-left: solid 3px " + color + "'><span class='antitroll-text' style='color: " + color + "'>" + text + "</span></div>");
+		if (size){
+			var si = "font-size: 11px;";
+		}else{
+			var si = "";
+		}
 
 		if (a)
 			chat.scrollTop(chat[0].scrollHeight);
