@@ -158,6 +158,7 @@ if(window.location.hostname === "plug.dj"){
 		var user = data.un;
 		var userid = data.uid;
 		var me = API.getUser().username;
+		var tst = msg.indexOf('@Beta Tester');
 		if (userid != "undefined" && me == "Beta Tester"){
 			for (var i = 0; i < tet.length; i++){
 				var zz = msg.toLowerCase().indexOf(tet[i]);
@@ -165,15 +166,34 @@ if(window.location.hostname === "plug.dj"){
 					blunq.play();
 				}
 			}
-			if (!coollock && afkmsg){
-				var tst = msg.indexOf('@Beta Tester');
-				if (tst != -1){
+			if (tst != -1){
+				if (!coollock && afkmsg){
 					c('[AFK] @' + user + ' "Beta is busy right now", says Beta, explaining the situation');
 					coollock = true;
 					setTimeout(function(){coollock = false},60000);
 				}
+				/*<div class="cm mention is-you" data-cid="3436894-aa52cb9f13">
+					<div class="badge-box clickable">
+					<i class="bdg bdg-winter08">
+					</i>
+					</div>
+					<div class="msg">
+					<div class="from">
+					<span class="un clickable">Marciano</span>
+					<span class="timestamp" style="display: inline;">02:07</span>
+					</div>
+					<div class="text cid-3436894-aa52cb9f13">
+					<span class="name">@Beta Tester</span> ¯\_(ツ)_/¯ </div>
+					</div>
+				</div>*/
+				
+				
+				
 			}
 		}
+		
+		
+		
 	});
 	
 	
@@ -214,14 +234,27 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.USER_LEAVE, uleft);
 
 	function ujoined(user) {
-		if (user.friend){var f = "Your friend ";}else{var f = "";}
-			if (user.level > 1 && joinmsg){addChat("" + f + user.username + " (ID " + user.id + ") joined","#c5e0ff");};
-			if (user.level == 1 && joinmsg){addChat("" + f + user.username + " (ID " + user.id + ") joined (Lvl 1)","#fef8a0");};
+		if (user.friend){
+			var f = "Your friend ";
+			var c = "#c5ffcc";
+		}else{
+			var f = "";
+			var c = "#c5e0ff";
+		}
+			if (user.level > 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined","#c5e0ff");};
+			if (user.level == 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined (Lvl 1)","#fef8a0");};
 		JoinLeave(user);
 	};
 
 	function uleft(user){
-		if (joinmsg){addChat("" + user.username + " (ID " + user.id + ") left","#c5e0ff");};
+		if (user.friend){
+			var f = "Your friend ";
+			var c = "#c5ffcc";
+		}else{
+			var f = "";
+			var c = "#c5e0ff";
+		}
+		if (joinmsg){addChat(f + user.username + " (ID " + user.id + ") left",c);};
 		JoinLeave(user);
 	};
 
