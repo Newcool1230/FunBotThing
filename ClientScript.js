@@ -82,12 +82,17 @@ if(window.location.hostname === "plug.dj"){
 	$("#room .app-right").animate({width:"400"});
 	$('#chat-input-field').animate({width:"360"});
 	$("#chat-input").animate({width:"380"});
-	$("#grab .top .icon").animate({left:"22"})
-	$("#grab .top .label").remove()
-	$("#woot .top .icon").animate({left:"22"})
-	$("#woot .top .label").remove()
-	$("#meh .top .icon").animate({left:"20"})
-	$("#meh .top .label").remove()
+	$("#grab .top .icon").animate({left:"22"});
+	$("#grab .top .label").remove();
+	$("#woot .top .icon").animate({left:"22"});
+	$("#woot .top .label").remove();
+	$("#meh .top .icon").animate({left:"20"});
+	$("#meh .top .label").remove();
+	$("#playlist-meta").animate({width:"1200"});
+	$("#footer-user").animate({left:"1200"});
+	$("#footer-user .info .points").animate({left:"235"});
+	var fontname = "Open Sans";
+	$("#footer-user").append('<div id="uid_display" style="position:absolute; top:7px; left:170px; color:#eeeeee; font-size: 13px; font-family: ' + fontname + ', sans-serif;">ID: ' + API.getUser().id + "     </div>");
 
 	var autowoot = true;
 	var joinmsg = true;
@@ -192,14 +197,8 @@ if(window.location.hostname === "plug.dj"){
 					<span class="name">@Beta Tester</span> ¯\_(ツ)_/¯ </div>
 					</div>
 				</div>*/
-				
-				
-				
 			}
 		}
-		
-		
-		
 	});
 	
 	
@@ -207,6 +206,7 @@ if(window.location.hostname === "plug.dj"){
 		if (data.un == API.getUser().username){
 			$('.chat-id-' + data['chatID']).attr('style','background-image:url(https://raw.github.com/Maxorq/LastPlug/c75755255596c8e2f35fc087f6abfc2a6d875adf/img/sparkle.gif);');
 		}
+		$("#playlist-meta").css({width:"1200"});
 	});
 
 	API.on(API.VOTE_UPDATE, function(obj){
