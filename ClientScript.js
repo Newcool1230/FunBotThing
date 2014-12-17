@@ -28,6 +28,7 @@ if(window.location.hostname === "plug.dj"){
 			<div id="xpuff" class="xbutton">THe Puff</div>\
 		</section>\
 		<section id="xmod">\
+			<div id="xdel" class="xbutton">8min warning</div>\
 			<div id="xdel" class="xbutton">Delete All Chat</div>\
 			<div id="xmuter" class="xbutton">Alt Muter</div>\
 		</section>\
@@ -91,8 +92,7 @@ if(window.location.hostname === "plug.dj"){
 	$("#playlist-meta").animate({width:"1200"});
 	$("#footer-user").animate({left:"1200"});
 	$("#footer-user .info .points").animate({left:"235"});
-	var fontname = "Open Sans";
-	$("#footer-user").append('<div id="uid_display" style="position:absolute; top:7px; left:170px; color:#eeeeee; font-size: 13px; font-family: ' + fontname + ', sans-serif;">ID: ' + API.getUser().id + "     </div>");
+	$("#footer-user .info .meta .bar").animate({width:"123"});
 
 	var autowoot = true;
 	var joinmsg = true;
@@ -452,6 +452,23 @@ if(window.location.hostname === "plug.dj"){
 						default:
 							var stt = "Wot."
 					}
+					switch(data.badge){
+						case "bt":
+							var bb = "Beta Tester";
+							break;
+						case "ss":
+							var bb = "Plug SuperStar";
+							break;
+						case "og":
+							var bb = "Original Ganster";
+							break;
+						case "ea":
+							var bb = "Early Adopter";
+							break;
+						default:
+							var bb = data.badge;
+							break;
+					}
 
 					if (data.username == 'null'){
 						addChat("<b>    User has not updated yet!</b>","#CCCCCC");
@@ -462,7 +479,7 @@ if(window.location.hostname === "plug.dj"){
 						    Level:</b> " + data.level + "<br><b>\
 						    Avatar:</b> " + data.avatarID + "<br><b>\
 						    Status:</b> " + stt + "<br><b>\
-						    Badge:</b> " + data.badge, "#CCCCCC");
+						    Badge:</b> " + bb, "#CCCCCC");
 					}
 				});
 				break;
