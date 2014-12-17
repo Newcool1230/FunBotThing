@@ -241,7 +241,7 @@ if(window.location.hostname === "plug.dj"){
 			var f = "";
 			var c = "#c5e0ff";
 		}
-			if (user.level > 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined","#c5e0ff");};
+			if (user.level > 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined",c);};
 			if (user.level == 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined (Lvl 1)","#fef8a0");};
 		JoinLeave(user);
 	};
