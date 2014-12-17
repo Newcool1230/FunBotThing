@@ -416,7 +416,7 @@ if(window.location.hostname === "plug.dj"){
 				case "ss":var bb = "Plug SuperStar";break;
 				case "og":var bb = "Original Ganster";break;
 				case "ea":var bb = "Early Adopter";break;
-				default:var bb = data.badge;break;
+				default:var bb = data.badge;
 			}
 
 			if (data.username == 'null'){
