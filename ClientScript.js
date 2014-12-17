@@ -479,6 +479,10 @@ if(window.location.hostname === "plug.dj"){
 				}
 				break;
 
+			case "shrug":
+				c(command[1] + " ¯\\_(ツ)_/¯");
+				break;
+
 			case "getid":
 			case "getuid":
 			case "id":
