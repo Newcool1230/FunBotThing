@@ -315,16 +315,6 @@ if(window.location.hostname === "plug.dj"){
 		}
 	}
 
-	function del1(){
-		var r = confirm("Delete entire chat on log?");
-		if (r == true) {
-			deleteAll();
-			l("[Running command " + command[0] + ".]",true);
-		}else{
-			l("[Command " + command[0] + " denied.]",true);
-		};
-	}
-
 	function deleteAll(){
 		console.log("Starting length: " + messages.length);
 		for (var i = 0; i < messages.length; i++){
@@ -588,7 +578,13 @@ if(window.location.hostname === "plug.dj"){
 
 			case "clearall":
 			case "deleteall":
-				del1();
+				var r = confirm("Delete entire chat on log?");
+				if (r == true) {
+					deleteAll();
+					l("[Running command " + command[0] + ".]",true);
+				}else{
+					l("[Command " + command[0] + " denied.]",true);
+				};
 				break;
 
 			case "msgs":
