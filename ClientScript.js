@@ -397,6 +397,42 @@ if(window.location.hostname === "plug.dj"){
 		setTimeout(function(){$($(".grab .menu ul li")[0]).mousedown();}, 500);
 	}
 
+	function lookfor(id){
+		$.ajax({
+			type: 'GET',
+			url: 'https://plug.dj/_/users/' + id
+		}).done(function(user) {
+			data = user.data[0];
+			switch (data.status){
+				case 0:var stt = "Available (0)";break;
+				case 1:var stt = "Away (1)";break;
+				case 2:var stt = "Working (2)";break;
+				case 3:var stt = "Gaming (3)";break;
+				case 4:var stt = "Offline / Undefined";break;
+				default:var stt = "Wot."break;
+			}
+			switch(data.badge){
+				case "bt":var bb = "Beta Tester";break;
+				case "ss":var bb = "Plug SuperStar";break;
+				case "og":var bb = "Original Ganster";break;
+				case "ea":var bb = "Early Adopter";break;
+				default:var bb = data.badge;break;
+			}
+
+			if (data.username == 'null'){
+				addChat("<b>    User has not updated yet!</b>","#CCCCCC");
+			}else{
+				addChat("<b>    Name:</b> " + data.username + "<br><b>\
+				    Blurb:</b> " + data.blurb + "<br><b>\
+				    ID:</b> " + data.id + "<br><b>\
+				    Level:</b> " + data.level + "<br><b>\
+				    Avatar:</b> " + data.avatarID + "<br><b>\
+				    Status:</b> " + stt + "<br><b>\
+				    Badge:</b> " + bb, "#CCCCCC");
+			}
+		});
+	}
+
 	API.on(API.CHAT_COMMAND, function(data){
 		var msg = data;
 		var command = msg.substring(1).split(' ');
@@ -428,60 +464,19 @@ if(window.location.hostname === "plug.dj"){
 				break;
 
 			case "lookup":
-				$.ajax({
-					type: 'GET',
-					url: 'https://plug.dj/_/users/' + command[1]
-				}).done(function(user) {
-					data = user.data[0];
-					switch (data.status){
-						case 0:
-							var stt = "Available (0)";
-							break;
-						case 1:
-							var stt = "Away (1)";
-							break;
-						case 2:
-							var stt = "Working (2)";
-							break;
-						case 3:
-							var stt = "Gaming (3)";
-							break;
-						case 4:
-							var stt = "Offline / Undefined";
-							break;
-						default:
-							var stt = "Wot."
-					}
-					switch(data.badge){
-						case "bt":
-							var bb = "Beta Tester";
-							break;
-						case "ss":
-							var bb = "Plug SuperStar";
-							break;
-						case "og":
-							var bb = "Original Ganster";
-							break;
-						case "ea":
-							var bb = "Early Adopter";
-							break;
-						default:
-							var bb = data.badge;
-							break;
-					}
+				lookfor(command[1]);
+				break;
 
-					if (data.username == 'null'){
-						addChat("<b>    User has not updated yet!</b>","#CCCCCC");
-					}else{
-						addChat("<b>    Name:</b> " + data.username + "<br><b>\
-						    Blurb:</b> " + data.blurb + "<br><b>\
-						    ID:</b> " + data.id + "<br><b>\
-						    Level:</b> " + data.level + "<br><b>\
-						    Avatar:</b> " + data.avatarID + "<br><b>\
-						    Status:</b> " + stt + "<br><b>\
-						    Badge:</b> " + bb, "#CCCCCC");
+			case "search":
+				var xname = command[1].substring(1).toString();
+				var oname = xname.substring(0,xname.length - 2);
+				var uname = oname.toLowerCase();
+				console.log(xname + "||" + uname + "||" + oname);
+				for (var i = 0; i < API.getUsers().length; i++){
+					if (oname == API.getUsers()[i].username){
+						lookfor(API.getUsers()[i].id);
 					}
-				});
+				}
 				break;
 
 			case "getid":
