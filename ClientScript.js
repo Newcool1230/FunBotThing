@@ -79,6 +79,8 @@ if(window.location.hostname === "plug.dj"){
 	$('body').prepend(style);
 	$('#meh').css({left:"-1px"});
 	$('#woot').css({left:"1px"});
+	$("#room .app-right").css({width:"400"});
+	$("#chat-input").css({width:"360"});
 
 	var autowoot = true;
 	var joinmsg = true;
@@ -267,7 +269,8 @@ if(window.location.hostname === "plug.dj"){
 	function mediaupdate(obj){
 		if (songup){
 			l("           :green_heart: " + obj.lastPlay.score.positive + "     |     :purple_heart: " + obj.lastPlay.score.grabs + "     |     :broken_heart: " + obj.lastPlay.score.negative,false);
-			addChat("<b>       Now playing:</b> " + obj.media.author + "<br>       " + obj.media.title,"#ececec",true,true);
+			addChat("<b>       Now playing:</b> " + obj.media.title + "<br>\
+						<b>     Author:</b> " + obj.media.author,"#ececec",true,true);
 			addChat("<b>       Current DJ:</b> " + obj.dj.username + " (ID " + obj.dj.id + ")","#ececec",true,true);
 		}
 	}
@@ -410,7 +413,7 @@ if(window.location.hostname === "plug.dj"){
 							var stt = "Wot."
 					}
 
-					if (typeof data.username == null){
+					if (data.username == 'null'){
 						addChat("<b>    User has not updated yet!</b>","#CCCCCC");
 					}else{
 						addChat("<b>    Name:</b> " + data.username + "<br><b>\
@@ -631,8 +634,8 @@ if(window.location.hostname === "plug.dj"){
 
 	aid();
 	function aid(){
-		addChat("         Beta's Client Support Script - Activated","#ececec",true);
-		addChat("                       Do /thelp for commands","#ececec",true);
+		addChat("Beta's Client Support Script - Activated","#ececec",true);
+		addChat("Do /thelp for commands","#ececec",true);
 	}
 
 	function message(n){
@@ -665,9 +668,9 @@ if(window.location.hostname === "plug.dj"){
 			color = "#9fee00";
 			
 		if (state){
-			chat.append("<div class='update antitroll-update' style='border-left: double 6px " + color + ";'><span class='antitroll-text' style='color: " + color + "; " + si + "'>" + text + "<br></span></div>");
+			chat.append("<div class='update antitroll-update' style='border-left: double 6px " + color + ";'><center><span class='antitroll-text' style='color: " + color + "; " + si + "'>" + text + "<br></span></center></div>");
 		}else{
-			chat.append("<div class='update antitroll-update' style=''><span class='antitroll-text' style='color: " + color + "; " + si + "'>" + text + "<br></span></div>");
+			chat.append("<div class='update antitroll-update' style=''><center><span class='antitroll-text' style='color: " + color + "; " + si + "'>" + text + "<br></span></center></div>");
 		}
 
 		if (size){
