@@ -1,6 +1,6 @@
 if(window.location.hostname === "plug.dj"){
 	//This script was made by Beta Tester (https://plug.dj/@/beta-tester)
-	//CSS help from Marciano
+	//Initial CSS help from Marciano
 
 	var u = API.getUser().username;
 
@@ -258,7 +258,7 @@ if(window.location.hostname === "plug.dj"){
 			var c = "#c5ffcc";
 		}else{
 			var f = "";
-			var c = "#c5e0ff";
+			var c = "#7774ff";
 		}
 		if (joinmsg){addChat(f + user.username + " (ID " + user.id + ") left",c);};
 		JoinLeave(user);
