@@ -409,7 +409,7 @@ if(window.location.hostname === "plug.dj"){
 				case 2:var stt = "Working (2)";break;
 				case 3:var stt = "Gaming (3)";break;
 				case 4:var stt = "Offline / Undefined";break;
-				default:var stt = "Wot.";break;
+				default:var stt = "Wot.";
 			}
 			switch(data.badge){
 				case "bt":var bb = "Beta Tester";break;
