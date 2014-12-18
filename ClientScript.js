@@ -438,7 +438,7 @@ if(window.location.hostname === "plug.dj"){
 
 		switch(command[0].toLowerCase()){
 			case "timeout":
-				ct("There's a set timeout before you can post links on chat or Meh after you join");
+				ct("You must wait 10 minutes before you can post links on chat after you join a room. This is done to prevent spam.");
 				break;
 
 			case "nsfw":
@@ -471,6 +471,14 @@ if(window.location.hostname === "plug.dj"){
 
 			case "shrug":
 				c(command[1] + " ¯\\_(ツ)_/¯");
+				break;
+
+			case "quote":
+				c("/me ❝ " + command[1] + " ❞");
+				break;
+
+			case "sing":
+				c("/me ♪ " + command[1] + " ♫");
 				break;
 
 			case "getid":
