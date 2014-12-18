@@ -126,7 +126,15 @@ if(window.location.hostname === "plug.dj"){
 	$('#xpuff').on('click',		function(){ pufflock = !pufflock;$(this).toggleClass('ativo');});
 	$('#xmuter').on('click',	function(){ mutedood = !mutedood;$(this).toggleClass('ativo');});
 	$('#xafk').on('click',		function(){ afkmsg = !afkmsg;	$(this).toggleClass('ativo');});
-	$('#xdel').on('click',		function(){ del1();});
+	$('#xdel').on('click',		function(){
+		var r = confirm("Delete entire chat on log?");
+		if (r === true) {
+			deleteAll();
+			l("[Running command " + command[0] + "]",true);
+		}else{
+			l("[Command " + command[0] + " denied]",true);
+		};
+	});
 	$('#xtimeskip').on('click',	function(){ timeskip = !timeskip;$(this).toggleClass('ativo');});
 
 	$("#chat-messages").click(displayid);
@@ -638,7 +646,7 @@ if(window.location.hostname === "plug.dj"){
 			case "clearall":
 			case "deleteall":
 				var r = confirm("Delete entire chat on log?");
-				if (r == true) {
+				if (r === true) {
 					deleteAll();
 					l("[Running command " + command[0] + "]",true);
 				}else{
