@@ -466,6 +466,31 @@ if(window.location.hostname === "plug.dj"){
 				case "null":		var bb = "No Badge";break;
 				default:			var bb = data.badge;
 			}
+			var jin = data.joined.split('-');
+			var lk = jin[2].split(' ');
+			var lj = lk[1].split('.');
+			switch (jin[1]){
+				case "01":	var mnt = "Jan";break;
+				case "02":	var mnt = "Feb";break;
+				case "03":	var mnt = "Mar";break;
+				case "04":	var mnt = "Apr";break;
+				case "05":	var mnt = "May";break;
+				case "06":	var mnt = "Jun";break;
+				case "07":	var mnt = "Jul";break;
+				case "08":	var mnt = "Aug";break;
+				case "09":	var mnt = "Sep";break;
+				case "10":	var mnt = "Oct";break;
+				case "11":	var mnt = "Nov";break;
+				case "12":	var mnt = "Dec";break;
+				default:	var mnt = "???";
+			}
+			switch (lk[0]){
+				case "01":	var day = "st";break;
+				case "02":	var day = "nd";break;
+				case "03":	var day = "rd";break;
+				default:	var day = "th";
+			}
+			var jnd = mnt + " " + lk[0] + day +  " " + jin[0] + " at " + lj[0];
 
 			if (data.username == null){
 				addChat("<b>    User has not updated yet!</b>","#CCCCCC");
@@ -476,6 +501,8 @@ if(window.location.hostname === "plug.dj"){
 				    Level:</b> " + data.level + "<br><b>\
 				    Avatar:</b> " + data.avatarID + "<br><b>\
 				    Status:</b> " + stt + "<br><b>\
+				    Role:</b> " + data.gRole + "<br><b>\
+				    Joined:</b> " + jnd + "<br><b>\
 				    Badge:</b> " + bb, "#CCCCCC");
 			}
 		});
