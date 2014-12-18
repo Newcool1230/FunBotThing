@@ -131,7 +131,7 @@ if(window.location.hostname === "plug.dj"){
 		if (r === true) {
 			deleteAll();
 		}else{
-			l("[Command " + command[0] + " denied]",true);
+			l("[Command DELETEALL denied]",true);
 		};
 	});
 	$('#xtimeskip').on('click',	function(){ timeskip = !timeskip;$(this).toggleClass('ativo');});
