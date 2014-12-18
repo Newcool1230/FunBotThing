@@ -447,6 +447,7 @@ if(window.location.hostname === "plug.dj"){
 				case "food05":var bb = "Sushi Badge";break;
 				case "animals01":var bb = "Wolf Badge";break;
 				case "animals02":var bb = "Cat Badge";break;
+				case "null":var bb = "No Badge";break;
 				default:var bb = data.badge;
 			}
 
@@ -537,9 +538,9 @@ if(window.location.hostname === "plug.dj"){
 			case "jmsg":
 				joinmsg = !joinmsg;
 				if (joinmsg){
-					addChat('         Join message on',"#ececec");
+					addChat('Join message on',"#ececec");
 				}else if (!joinmsg){
-					addChat('         Join message off',"#ececec");
+					addChat('Join message off',"#ececec");
 				}
 				break;
 
@@ -547,9 +548,9 @@ if(window.location.hostname === "plug.dj"){
 			case "gmsg":
 				grabmsg = !grabmsg;
 				if (grabmsg){
-					addChat('         Grab message on',"#ececec");
+					addChat('Grab message on',"#ececec");
 				}else if (!grabmsg){
-					addChat('         Grab message off',"#ececec");
+					addChat('Grab message off',"#ececec");
 				}
 				break;
 			
@@ -557,9 +558,9 @@ if(window.location.hostname === "plug.dj"){
 			case "mmsg":
 				mehmsg = !mehmsg;
 				if (mehmsg){
-					addChat('         Meh message on',"#ececec");
+					addChat('Meh message on',"#ececec");
 				}else if (!mehmsg){
-					addChat('         Meh message off',"#ececec");
+					addChat('Meh message off',"#ececec");
 				}
 				break;
 
@@ -567,9 +568,9 @@ if(window.location.hostname === "plug.dj"){
 			case "auto":
 				autolock = !autolock;
 				if (autolock){
-					addChat('         Autojoin on',"#ececec");
+					addChat('Autojoin on',"#ececec");
 				}else if (!autolock){
-					addChat('         Autojoin off',"#ececec");
+					addChat('Autojoin off',"#ececec");
 				}
 				break;
 
@@ -579,9 +580,9 @@ if(window.location.hostname === "plug.dj"){
 			case "setcap":
 				cap = !cap;
 				if (cap){
-					addChat('         AutoCap on',"#ececec");
+					addChat('AutoCap on',"#ececec");
 				}else if (!cap){
-					addChat('         AutoCap off',"#ececec");
+					addChat('AutoCap off',"#ececec");
 				}
 				break;
 
