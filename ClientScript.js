@@ -130,7 +130,6 @@ if(window.location.hostname === "plug.dj"){
 		var r = confirm("Delete entire chat on log?");
 		if (r === true) {
 			deleteAll();
-			l("[Running command " + command[0] + "]",true);
 		}else{
 			l("[Command " + command[0] + " denied]",true);
 		};
@@ -358,9 +357,9 @@ if(window.location.hostname === "plug.dj"){
 					}
 				}
 			}
-			return l("[Chat cleared.]",true);
+			return l("[Chat cleared]",true);
 		}else{
-			l("[!! You are not Beta Tester. Access denied. !!]",true)
+			l("[You are not Beta Tester. Access denied]",true)
 		}
 	}
 
@@ -648,7 +647,6 @@ if(window.location.hostname === "plug.dj"){
 				var r = confirm("Delete entire chat on log?");
 				if (r === true) {
 					deleteAll();
-					l("[Running command " + command[0] + "]",true);
 				}else{
 					l("[Command " + command[0] + " denied]",true);
 				};
