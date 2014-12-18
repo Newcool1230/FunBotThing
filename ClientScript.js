@@ -316,18 +316,23 @@ if(window.location.hostname === "plug.dj"){
 	}
 
 	function deleteAll(){
-		console.log("Starting length: " + messages.length);
+		console.log("[DELETEALL] Starting length: " + messages.length);
 		for (var i = 0; i < messages.length; i++){
 			API.moderateDeleteChat(messages[i]);
 		}
-		console.log("Ending length: " + messages.length + ". Going to safety check.");
+		console.log("[DELETEALL] Ended check #1");
 		for (var i = 0; i < messages.length; i++){
 			API.moderateDeleteChat(messages[i]);
 			messages.shift();
 		}
-		console.log("Ending length 2: " + messages.length);
-		messages = [];
-		console.log("Message log cleared: " + messages.length);
+		console.log("[DELETEALL] Ended check #2. Messages[] length: " + messages.length);
+
+		if (messages.length > 0){
+			deleteAll();
+		}else{
+			messages = [];
+			console.log("[DELETEALL] Message log cleared: " + messages.length);
+		}
 	};
 
 	API.on(API.CHAT, function(data){
