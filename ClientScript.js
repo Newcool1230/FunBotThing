@@ -228,7 +228,7 @@ if(window.location.hostname === "plug.dj"){
 		if (timeskip){
 			if (API.getMedia().duration > 480){
 				blunq.play();
-				addChat("Song is over 8 minutes","#ff3535",true,true);
+				addChat("<b>Song is over 8 minutes</b>","#ff3535",true,true);
 			}
 		}
 	});
@@ -434,6 +434,7 @@ if(window.location.hostname === "plug.dj"){
 				case "ea":var bb = "Early Adopter";break;
 				case "ba":var bb = "Brand Ambassador";break;
 				case "admin":var bb = "Admin Badge";break;
+				case "plot":var bb = "Translator Badge";break;
 				case "winter01":var bb = "Ski Boot";break;
 				case "winter02":var bb = "Snowman Badge";break;
 				case "winter03":var bb = "Snowflake Badge";break;
