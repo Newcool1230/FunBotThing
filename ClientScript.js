@@ -28,7 +28,7 @@ if(window.location.hostname === "plug.dj"){
 			<div id="xpuff" class="xbutton">THe Puff</div>\
 		</section>\
 		<section id="xmod">\
-			<div id="xdel" class="xbutton">8min warning</div>\
+			<div id="xtimeskip" class="xbutton">8min warning</div>\
 			<div id="xdel" class="xbutton">Delete All Chat</div>\
 			<div id="xmuter" class="xbutton">Alt Muter</div>\
 		</section>\
@@ -106,12 +106,14 @@ if(window.location.hostname === "plug.dj"){
 	var mutedood = false;
 	var pufflock = false;
 	var afkmsg = false;
+	var timeskip = true;
 
 	$('#xautowoot').toggleClass('ativo');
 	$('#xjoinmsg').toggleClass('ativo');
 	$('#xgrabmsg').toggleClass('ativo');
 	$('#xmehmsg').toggleClass('ativo');
 	$('#xsongup').toggleClass('ativo');
+	$('#xtimeskip').toggleClass('ativo');
 
 	$('#xjoinmsg').on('click',	function(){ joinmsg = !joinmsg;	$(this).toggleClass('ativo');});
 	$('#xgrabmsg').on('click',	function(){ grabmsg = !grabmsg;	$(this).toggleClass('ativo');});
@@ -125,6 +127,7 @@ if(window.location.hostname === "plug.dj"){
 	$('#xmuter').on('click',	function(){ mutedood = !mutedood;$(this).toggleClass('ativo');});
 	$('#xafk').on('click',		function(){ afkmsg = !afkmsg;	$(this).toggleClass('ativo');});
 	$('#xdel').on('click',		function(){ del1();});
+	$('#xtimeskip').on('click',	function(){ timeskip = !timeskip;$(this).toggleClass('ativo');});
 
 	$("#chat-messages").click(displayid);
 	$("#dj-canvas").mousemove(displayid);
@@ -219,9 +222,14 @@ if(window.location.hostname === "plug.dj"){
 		if (autograb){
 			grab();
 		}
-		
 		if (autowoot){
 			setTimeout(woot,5000);
+		}
+		if (timeskip){
+			if (API.getMedia().duration > 480){
+				blunq.play();
+				addChat("Song is over 8 minutes","#ff3535",true,true);
+			}
 		}
 	});
 
