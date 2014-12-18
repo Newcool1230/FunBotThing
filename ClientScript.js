@@ -492,6 +492,10 @@ if(window.location.hostname === "plug.dj"){
 			}
 			var jnd = mnt + " " + lk[0] + day +  " " + jin[0] + " at " + lj[0];
 
+			if (data.gRole < 3){var g = "Regular (" + data.gRole + ")";};
+			if (data.gRole == 3){var g = "Brand Ambassador (" + data.gRole + ")";};
+			if (data.gRole > 3){var g = "Admin (" + data.gRole + ")";};
+
 			if (data.username == null){
 				addChat("<b>    User has not updated yet!</b>","#CCCCCC");
 			}else{
@@ -501,7 +505,7 @@ if(window.location.hostname === "plug.dj"){
 				    Level:</b> " + data.level + "<br><b>\
 				    Avatar:</b> " + data.avatarID + "<br><b>\
 				    Status:</b> " + stt + "<br><b>\
-				    Role:</b> " + data.gRole + "<br><b>\
+				    Role:</b> " + g + "<br><b>\
 				    Joined:</b> " + jnd + "<br><b>\
 				    Badge:</b> " + bb, "#CCCCCC");
 			}
