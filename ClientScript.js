@@ -1,6 +1,6 @@
 if(window.location.hostname === "plug.dj"){
 	//This script was made by Beta Tester (https://plug.dj/@/beta-tester)
-	//Help from Marciano
+	//Initial CSS help from Marciano
 
 	var u = API.getUser().username;
 
@@ -80,7 +80,7 @@ if(window.location.hostname === "plug.dj"){
 	$('body').prepend(style);
 	$('#meh').animate({left:"-1px"});
 	$('#woot').animate({left:"1px"});
-	$("#room .app-right").animate({width:"400"});
+	$("#room .app-right").animate({width:"399"});
 	$('#chat-input-field').animate({width:"360"});
 	$("#chat-input").animate({width:"380"});
 	$("#grab .top .icon").animate({left:"22"});
@@ -424,6 +424,29 @@ if(window.location.hostname === "plug.dj"){
 				case "ss":var bb = "Plug SuperStar";break;
 				case "og":var bb = "Original Ganster";break;
 				case "ea":var bb = "Early Adopter";break;
+				case "ba":var bb = "Brand Ambassador";break;
+				case "admin":var bb = "Admin Badge";break;
+				case "winter01":var bb = "Ski Boot";break;
+				case "winter02":var bb = "Snowman Badge";break;
+				case "winter03":var bb = "Snowflake Badge";break;
+				case "winter04":var bb = "Reindeer Badge";break;
+				case "winter05":var bb = "Penguin Badge";break;
+				case "winter06":var bb = "Tree Badge";break;
+				case "winter07":var bb = "Ski Badge";break;
+				case "winter08":var bb = "Snowboard Badge";break;
+				case "winter09":var bb = "Ice Skating";break;
+				case "winter10":var bb = "Hockey Badge";break;
+				case "music01":var bb = "Record Player";break;
+				case "music02":var bb = "Musical Keyboard";break;
+				case "music03":var bb = "Compact Cassette";break;
+				case "music04":var bb = "Disco Ball";break;
+				case "food01":var bb = "Pizza Badge";break;
+				case "food02":var bb = "Ice Cream Badge";break;
+				case "food03":var bb = "Drink Badge";break;
+				case "food04":var bb = "Donut Badge";break;
+				case "food05":var bb = "Sushi Badge";break;
+				case "animals01":var bb = "Wolf Badge";break;
+				case "animals02":var bb = "Cat Badge";break;
 				default:var bb = data.badge;
 			}
 
