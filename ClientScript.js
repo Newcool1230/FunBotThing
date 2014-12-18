@@ -1,6 +1,6 @@
 if(window.location.hostname === "plug.dj"){
 	//This script was made by Beta Tester (https://plug.dj/@/beta-tester)
-	//Initial CSS help from Marciano
+	//Help from Marciano
 
 	var u = API.getUser().username;
 
@@ -316,24 +316,37 @@ if(window.location.hostname === "plug.dj"){
 	}
 
 	function deleteAll(){
-		console.log("[DELETEALL] Starting length: " + messages.length);
-		for (var i = 0; i < messages.length; i++){
-			API.moderateDeleteChat(messages[i]);
-		}
-		console.log("[DELETEALL] Ended check #1");
-		for (var i = 0; i < messages.length; i++){
-			API.moderateDeleteChat(messages[i]);
-			messages.shift();
-		}
-		console.log("[DELETEALL] Ended check #2. Messages[] length: " + messages.length);
-
-		if (messages.length > 0){
-			deleteAll();
+		var user = API.getUser();
+		var msgs = document.getElementsByClassName('message');
+		if (user.username == "Beta Tester"){
+			for (var i = 0; i < msgs.length; i++) {
+				for (var j = 0; j < msgs[i].classList.length; j++) {
+					if (msgs[i].classList[j].indexOf('message') == 0) {
+						$.ajax({type: 'DELETE', url: '/_/chat/' + msgs[i].getAttribute('data-cid')});
+					}
+				}
+			}
+			var emotes = document.getElementsByClassName('emote');
+			for (var i = 0; i < emotes.length; i++) {
+				for (var j = 0; j < emotes[i].classList.length; j++) {
+					if (emotes[i].classList[j].indexOf('emote') == 0) {
+						$.ajax({type: 'DELETE', url: '/_/chat/' + emotes[i].getAttribute('data-cid')});
+					}
+				}
+			}
+			var mentions = document.getElementsByClassName('mention');
+			for (var i = 0; i < mentions.length; i++) {
+				for (var j = 0; j < mentions[i].classList.length; j++) {
+					if (mentions[i].classList[j].indexOf('mention') == 0) {
+						$.ajax({type: 'DELETE', url: '/_/chat/' + mentions[i].getAttribute('data-cid')});
+					}
+				}
+			}
+			return l("[Chat cleared.]",true);
 		}else{
-			messages = [];
-			console.log("[DELETEALL] Message log cleared: " + messages.length);
+			l("[!! You are not Beta Tester. Access denied. !!]",true)
 		}
-	};
+	}
 
 	API.on(API.CHAT, function(data){
 		var msg = data.message;
@@ -594,9 +607,9 @@ if(window.location.hostname === "plug.dj"){
 				var r = confirm("Delete entire chat on log?");
 				if (r == true) {
 					deleteAll();
-					l("[Running command " + command[0] + ".]",true);
+					l("[Running command " + command[0] + "]",true);
 				}else{
-					l("[Command " + command[0] + " denied.]",true);
+					l("[Command " + command[0] + " denied]",true);
 				};
 				break;
 
