@@ -428,39 +428,39 @@ if(window.location.hostname === "plug.dj"){
 				default:var stt = "Wot.";
 			}
 			switch(data.badge){
-				case "bt":var bb = "Beta Tester";break;
-				case "ss":var bb = "Plug SuperStar";break;
-				case "og":var bb = "Original Ganster";break;
-				case "ea":var bb = "Early Adopter";break;
-				case "ba":var bb = "Brand Ambassador";break;
-				case "admin":var bb = "Admin Badge";break;
-				case "plot":var bb = "Translator Badge";break;
-				case "winter01":var bb = "Ski Boot";break;
-				case "winter02":var bb = "Snowman Badge";break;
-				case "winter03":var bb = "Snowflake Badge";break;
-				case "winter04":var bb = "Reindeer Badge";break;
-				case "winter05":var bb = "Penguin Badge";break;
-				case "winter06":var bb = "Tree Badge";break;
-				case "winter07":var bb = "Ski Badge";break;
-				case "winter08":var bb = "Snowboard Badge";break;
-				case "winter09":var bb = "Ice Skating";break;
-				case "winter10":var bb = "Hockey Badge";break;
-				case "music01":var bb = "Record Player";break;
-				case "music02":var bb = "Musical Keyboard";break;
-				case "music03":var bb = "Compact Cassette";break;
-				case "music04":var bb = "Disco Ball";break;
-				case "food01":var bb = "Pizza Badge";break;
-				case "food02":var bb = "Ice Cream Badge";break;
-				case "food03":var bb = "Drink Badge";break;
-				case "food04":var bb = "Donut Badge";break;
-				case "food05":var bb = "Sushi Badge";break;
-				case "animals01":var bb = "Wolf Badge";break;
-				case "animals02":var bb = "Cat Badge";break;
-				case "null":var bb = "No Badge";break;
-				default:var bb = data.badge;
+				case "bt":			var bb = "Beta Tester";break;
+				case "ss":			var bb = "Plug SuperStar";break;
+				case "og":			var bb = "Original Ganster";break;
+				case "ea":			var bb = "Early Adopter";break;
+				case "ba":			var bb = "Brand Ambassador";break;
+				case "admin":		var bb = "Admin Badge";break;
+				case "plot":		var bb = "Translator Badge";break;
+				case "winter01":	var bb = "Ski Boot";break;
+				case "winter02":	var bb = "Snowman Badge";break;
+				case "winter03":	var bb = "Snowflake Badge";break;
+				case "winter04":	var bb = "Reindeer Badge";break;
+				case "winter05":	var bb = "Penguin Badge";break;
+				case "winter06":	var bb = "Tree Badge";break;
+				case "winter07":	var bb = "Ski Badge";break;
+				case "winter08":	var bb = "Snowboard Badge";break;
+				case "winter09":	var bb = "Ice Skating";break;
+				case "winter10":	var bb = "Hockey Badge";break;
+				case "music01":		var bb = "Record Player";break;
+				case "music02":		var bb = "Musical Keyboard";break;
+				case "music03":		var bb = "Compact Cassette";break;
+				case "music04":		var bb = "Disco Ball";break;
+				case "food01":		var bb = "Pizza Badge";break;
+				case "food02":		var bb = "Ice Cream Badge";break;
+				case "food03":		var bb = "Drink Badge";break;
+				case "food04":		var bb = "Donut Badge";break;
+				case "food05":		var bb = "Sushi Badge";break;
+				case "animals01":	var bb = "Wolf Badge";break;
+				case "animals02":	var bb = "Cat Badge";break;
+				case "null":		var bb = "No Badge";break;
+				default:			var bb = data.badge;
 			}
 
-			if (data.username == 'null'){
+			if (data.username == null){
 				addChat("<b>    User has not updated yet!</b>","#CCCCCC");
 			}else{
 				addChat("<b>    Name:</b> " + data.username + "<br><b>\
