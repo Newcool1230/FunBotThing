@@ -662,7 +662,7 @@ if(window.location.hostname === "plug.dj"){
 
 			case "xp":
 				ct('There is a limit to how much XP you can earn in a single 24-hour period, which starts at midnight GMT. XP and PP are earned on ticks. There are a specific amount of ticks in a 24-hour period and you can earn XP');
-				setTimeout(function(){ct('for a certain amount of them, and they do not need to be earned sequentially (you can earn 3 ticks now, 4 ticks later, etc.)');},250);
+				setTimeout(function(){ct('~for a certain amount of them, and they do not need to be earned sequentially (you can earn 3 ticks now, 4 ticks later, etc.)');},250);
 				break;
 
 			case "pp":
@@ -749,6 +749,13 @@ if(window.location.hostname === "plug.dj"){
 				addChat('(─‿‿─)   ||   (ʃƪ ˘ ³˘)   ||   ( ͡° ͜ʖ ͡°)',"#ececec");
 				addChat('(ᕗ ಠ益ಠ)ᕗ ︵﻿ ┻━┻   ||   (╯°□°)╯︵ ┻━┻',"#ececec");
 				addChat('¯\\_(ツ)_/¯',"#ececec");
+				break;
+
+			case "readd":
+				var ledj = API.getDJ().id;
+				API.moderateForceSkip();
+				API.moderateAddJD(ledj);
+				API.moderateMoveDJ(ledj,1);
 				break;
 
 			//p3
