@@ -97,7 +97,7 @@ function lookfor(id){
 		if (data.gRole > 3){var g = "Admin (" + data.gRole + ")";};
 
 		if (data.username == null){
-			addChat("<b>    User has not updated yet!</b>","#CCCCCC");
+			addChat("<b>    User has not updated yet!</b>","#ececec");
 		}else{
 			addChat("<b>    Name:</b> " + data.username + "<br><b>\
 			    Blurb:</b> " + data.blurb + "<br><b>\
@@ -107,7 +107,7 @@ function lookfor(id){
 			    Status:</b> " + stt + "<br><b>\
 			    Role:</b> " + g + "<br><b>\
 			    Joined:</b> " + jnd + "<br><b>\
-			    Badge:</b> " + bb, "#CCCCCC");
+			    Badge:</b> " + bb, "#ececec");
 		}
 	});
 }
@@ -156,9 +156,6 @@ API.on(API.CHAT_COMMAND, function(data){
 			break;
 
 		case "getid":
-		case "getuid":
-		case "id":
-		case "uid":
 			var xname = command[1].substring(1).toString();
 			var oname = xname.substring(0,xname.length - 2);
 			var uname = oname.toLowerCase();
@@ -180,6 +177,23 @@ API.on(API.CHAT_COMMAND, function(data){
 					lookfor(API.getUsers()[i].id);
 				}
 			}
+			break;
+
+		case "cmd":
+			addChat("__________","#eb9595");
+			addChat("/<b>getid</b> + [<b>@username </b>]","#ececec");
+			addChat("Returns user's ID (if user is in the room)","#c8c8c8");
+			addChat("/<b>lookup</b> + [<b>UID</b>]","#ececec");
+			addChat("Shows info about user (if user has updated to the new site)","#c8c8c8");
+			addChat("/<b>search</b> + [<b>@username </b>]","#ececec");
+			addChat("Shows info about user (if user is in the room)","#c8c8c8");
+			addChat("/<b>shrug</b> + [<b>MSG</b>]","#ececec");
+			addChat("Adds ¯\\_(ツ)_/¯ to the end of your message","#c8c8c8");
+			addChat("/<b>quote</b> + [<b>MSG</b>]","#ececec");
+			addChat("Italics message surrounded by ❝ ❞","#c8c8c8");
+			addChat("/<b>sing</b> + [<b>MSG</b>]","#ececec");
+			addChat("Italics message surrounded by ♪ ♫","#c8c8c8");
+			addChat("¯¯¯¯¯¯¯¯¯¯","#eb9595");
 			break;
 	}
 });
@@ -209,3 +223,7 @@ function addChat(text, color, state, size) {
 	if (chat.children().length >= 512)
 		chat.children().first().remove();
 }
+
+addChat("Beta Tester's getID script initiated!","#ececec");
+addChat("Beta v0.5","#eb9595");
+addChat("Check commands with /cmd","#ececec");
