@@ -307,7 +307,6 @@ if(window.location.hostname === "plug.dj"){
 	}
 
 	API.on(API.ADVANCE, autojoin);
-
 	function autojoin() {
 		if (autolock){
 			var dj = API.getDJ();
@@ -558,6 +557,10 @@ if(window.location.hostname === "plug.dj"){
 				}
 				break;
 
+			case "cya":
+				ct("Cya later! c: Thanks a lot for passing by! o/");
+				break;
+
 			case "shrug":
 				c(command[1] + " ¯\\_(ツ)_/¯");
 				break;
@@ -666,6 +669,11 @@ if(window.location.hostname === "plug.dj"){
 			case "points":
 			case "point":
 				ct("The website check every minute what you did in the website during that time (such as Wooting, chatting, etc), and then generates a proportional amount of XP and PP for it. XP, however, has a daily cap, so you can't farm it.");
+				break;
+
+			case "pn":
+			case "notes":
+				ct("Plug Notes (PNs) are a reward for donating to plug.dj. Everyone gets free 350PNs though, for testing how they work");
 				break;
 
 			case "rank":
