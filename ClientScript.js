@@ -369,20 +369,20 @@ if(window.location.hostname === "plug.dj"){
 		var userid = data.uid;
 		var lelock = false;
 		var count = 0;
-		//Ghostbusters \/
-		for (var i = 0; i < API.getUsers().length; i++){
-			if (user == API.getUsers()[i]){
-				lelock = true;
-			}
-			count++;
-			if (count == API.getUsers().length && !lelock){
-				//addChat("User " + user + " is ghosting","#dfc98c");
-			}
-		}
 		var argument = "[MSG] " + msg + " || User: " + user + " || MsgID: " + msgid + " || UserID: " + userid;
 		if (typeof user != "undefined"){
 			logcheck.push(argument);
 			messages.push(msgid.toString());
+			//Ghostbusters \/
+			for (var i = 0; i < API.getUsers().length; i++){
+				if (user == API.getUsers()[i]){
+					lelock = true;
+				}
+				count++;
+				if (count == API.getUsers().length && !lelock){
+					addChat("User " + user + " is ghosting","#dfc98c");
+				}
+			}
 		};
 		if (pufflock){
 			if (user == "THe Puff"){
@@ -551,6 +551,13 @@ if(window.location.hostname === "plug.dj"){
 
 			case "unmutedood":
 				API.moderateUnmuteUser(save);
+				break;
+				
+			case "del":
+				$.ajax({
+					type: 'DELETE',
+					url: '/_/chat/' + command[1]
+				});
 				break;
 
 			case "lookup":
