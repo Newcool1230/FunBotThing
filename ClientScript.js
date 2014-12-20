@@ -374,7 +374,7 @@ if(window.location.hostname === "plug.dj"){
 			logcheck.push(argument);
 			messages.push(msgid.toString());
 			//Ghostbusters \/
-			for (var i = 0; i < API.getUsers().length; i++){
+			/*for (var i = 0; i < API.getUsers().length; i++){
 				if (user == API.getUsers()[i]){
 					lelock = true;
 				}
@@ -382,7 +382,7 @@ if(window.location.hostname === "plug.dj"){
 				if (count == API.getUsers().length && !lelock){
 					//addChat("User " + user + " is ghosting","#dfc98c");
 				}
-			}
+			}*/
 		};
 		if (pufflock){
 			if (user == "THe Puff"){
