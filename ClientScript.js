@@ -773,7 +773,7 @@ if(window.location.hostname === "plug.dj"){
 			case "readd":
 				var ledj = API.getDJ().id;
 				API.moderateForceSkip();
-				API.moderateAddJD(ledj);
+				API.moderateAddDJ(ledj);
 				API.moderateMoveDJ(ledj,1);
 				break;
 
