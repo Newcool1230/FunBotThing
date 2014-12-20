@@ -367,6 +367,16 @@ if(window.location.hostname === "plug.dj"){
 		var msgid = data.cid;
 		var user = data.un;
 		var userid = data.uid;
+		var lelock = false;
+		//Ghostbusters \/
+		for (var i = 0; i < API.getUsers().length; i++){
+			if (user == API.getUsers()[i]){
+				lelock = true;
+			}
+		}
+		if (!lelock){
+			addChat("User " + user + " is ghosting","#dfc98c");
+		}
 		var argument = "[MSG] " + msg + " || User: " + user + " || MsgID: " + msgid + " || UserID: " + userid;
 		if (typeof user != "undefined"){
 			logcheck.push(argument);
