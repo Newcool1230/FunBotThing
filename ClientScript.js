@@ -375,9 +375,9 @@ if(window.location.hostname === "plug.dj"){
 				lelock = true;
 			}
 			count++;
-		}
-		if (count == API.getUsers().length && !lelock){
-			addChat("User " + user + " is ghosting","#dfc98c");
+			if (count == API.getUsers().length && !lelock){
+				addChat("User " + user + " is ghosting","#dfc98c");
+			}
 		}
 		var argument = "[MSG] " + msg + " || User: " + user + " || MsgID: " + msgid + " || UserID: " + userid;
 		if (typeof user != "undefined"){
