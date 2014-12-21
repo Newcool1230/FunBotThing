@@ -524,6 +524,11 @@ if(window.location.hostname === "plug.dj"){
 				ct('NSFW means Not Safe For Watching (objectionable content) -- nudity, scant clothing (incl. lingerie), blood and or violence (gore), snuff (dying)');
 				break;
 
+			case "emojisheet":
+			case "emojicheat":
+				ct("http://www.emoji-cheat-sheet.com/");
+				break;
+
 			case "mutedood":
 				mutedood = !mutedood;
 				break;
