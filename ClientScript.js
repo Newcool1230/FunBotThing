@@ -84,7 +84,7 @@ if(window.location.hostname === "plug.dj"){
 	$('#chat-input-field').animate({width:"360"});
 	$("#chat-input").animate({width:"380"});
 	$("#grab .top .icon").animate({left:"22"});
-	$("#grab .top .label").remove();
+	$("#grab .top .label").text() = "Snag dat";
 	$("#woot .top .icon").animate({left:"22"});
 	$("#woot .top .label").remove();
 	$("#meh .top .icon").animate({left:"20"});
@@ -93,6 +93,13 @@ if(window.location.hostname === "plug.dj"){
 	$("#footer-user").animate({left:"1200"});
 	$("#footer-user .info .points").animate({left:"235"});
 	$("#footer-user .info .meta .bar").animate({width:"123"});
+	/** Pirate Mode */
+	//$("#chat-input-field").mousemove(function(){$("#chat-input-field").attr({"placeholder":"Ay mate! Press the rat to board this ship!"})});
+	//$("#grab .top .label").text("Snag");
+	//$("#woot .top .label").text("Yarr!");
+	//$("#meh .top .label").text("Nay");
+	//$("#dj-button span").text("Walk the Plank");
+	/** End of Pirate Mode */
 
 	var autowoot = true;
 	var joinmsg = true;
@@ -279,13 +286,7 @@ if(window.location.hostname === "plug.dj"){
 		JoinLeave(user);
 	};
 
-	var currentcap = 0;
-	for (var i = 0; i < API.getUsers().length; i++){
-		if (API.getUsers()[i].role > 0){
-			currentcap++;
-		}
-	}
-	c('/cap ' + parseInt(currentcap));
+	c('/cap 10');
 
 	function JoinLeave(user){
 		if (cap){
@@ -332,7 +333,9 @@ if(window.location.hostname === "plug.dj"){
 	function deleteAll(){
 		var user = API.getUser();
 		var msgs = document.getElementsByClassName('message');
-		if (user.username == "Beta Tester"){
+		var emotes = document.getElementsByClassName('emote');
+		var mentions = document.getElementsByClassName('mention');
+		//if (user.username == "Beta Tester"){
 			for (var i = 0; i < msgs.length; i++) {
 				for (var j = 0; j < msgs[i].classList.length; j++) {
 					if (msgs[i].classList[j].indexOf('message') == 0) {
@@ -340,7 +343,6 @@ if(window.location.hostname === "plug.dj"){
 					}
 				}
 			}
-			var emotes = document.getElementsByClassName('emote');
 			for (var i = 0; i < emotes.length; i++) {
 				for (var j = 0; j < emotes[i].classList.length; j++) {
 					if (emotes[i].classList[j].indexOf('emote') == 0) {
@@ -348,7 +350,6 @@ if(window.location.hostname === "plug.dj"){
 					}
 				}
 			}
-			var mentions = document.getElementsByClassName('mention');
 			for (var i = 0; i < mentions.length; i++) {
 				for (var j = 0; j < mentions[i].classList.length; j++) {
 					if (mentions[i].classList[j].indexOf('mention') == 0) {
@@ -357,9 +358,9 @@ if(window.location.hostname === "plug.dj"){
 				}
 			}
 			return l("[Chat cleared]",true);
-		}else{
-			l("[You are not Beta Tester. Access denied]",true)
-		}
+		//}else{
+		//	l("[You are not Beta Tester. Access denied]",true)
+		//}
 	}
 
 	API.on(API.CHAT, function(data){
@@ -374,15 +375,7 @@ if(window.location.hostname === "plug.dj"){
 			logcheck.push(argument);
 			messages.push(msgid.toString());
 			//Ghostbusters \/
-			/*for (var i = 0; i < API.getUsers().length; i++){
-				if (user == API.getUsers()[i]){
-					lelock = true;
-				}
-				count++;
-				if (count == API.getUsers().length && !lelock){
-					//addChat("User " + user + " is ghosting","#dfc98c");
-				}
-			}*/
+
 		};
 		if (pufflock){
 			if (user == "THe Puff"){
@@ -702,12 +695,12 @@ if(window.location.hostname === "plug.dj"){
 
 			case "clearall":
 			case "deleteall":
-				var r = confirm("Delete entire chat on log?");
-				if (r === true) {
+				//var r = confirm("Delete entire chat on log?");
+				//if (r === true) {
 					deleteAll();
-				}else{
-					l("[Command " + command[0] + " denied]",true);
-				};
+				//}else{
+				//	l("[Command " + command[0] + " denied]",true);
+				//};
 				break;
 
 			case "msgs":
