@@ -697,12 +697,22 @@ if(window.location.hostname === "plug.dj"){
 
 			case "clearall":
 			case "deleteall":
-				//var r = confirm("Delete entire chat on log?");
-				//if (r === true) {
+				var r = confirm("Delete entire chat on log?");
+				if (r === true) {
 					deleteAll();
-				//}else{
-				//	l("[Command " + command[0] + " denied]",true);
-				//};
+				}else{
+					l("[Command " + command[0] + " denied]",true);
+				};
+				break;
+
+			case "rainbow":
+			case "rainbows":
+			case "hearts":
+				c(":heart: :yellow_heart: :green_heart: :blue_heart: :purple_heart: :heart: :yellow_heart: :green_heart: :blue_heart: :purple_heart:");
+				setTimeout(function(){c(":purple_heart: :heart: :yellow_heart: :green_heart: :blue_heart: :purple_heart: :heart: :yellow_heart: :green_heart: :blue_heart:")},250);
+				setTimeout(function(){c(":blue_heart: :purple_heart: :heart: :yellow_heart: :green_heart: :blue_heart: :purple_heart: :heart: :yellow_heart: :green_heart:")},500);
+				setTimeout(function(){c(":green_heart: :blue_heart: :purple_heart: :heart: :yellow_heart: :green_heart: :blue_heart: :purple_heart: :heart: :yellow_heart:")},750);
+				setTimeout(function(){c(":yellow_heart: :green_heart: :blue_heart: :purple_heart: :heart: :yellow_heart: :green_heart: :blue_heart: :purple_heart: :heart:")},1000);
 				break;
 
 			case "msgs":
