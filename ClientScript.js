@@ -89,10 +89,10 @@ if(window.location.hostname === "plug.dj"){
 	$("#woot .top .label").remove();
 	$("#meh .top .icon").animate({left:"20"});
 	$("#meh .top .label").remove();
-	$("#playlist-meta").animate({width:"1200"});
-	$("#footer-user").animate({left:"1200"});
-	$("#footer-user .info .points").animate({left:"235"});
-	$("#footer-user .info .meta .bar").animate({width:"123"});
+	//$("#playlist-meta").animate({width:"1200"});
+	//$("#footer-user").animate({left:"1200"});
+	//$("#footer-user .info .points").animate({left:"235"});
+	//$("#footer-user .info .meta .bar").animate({width:"123"});
 	/** Pirate Mode */
 	//$("#chat-input-field").mousemove(function(){$("#chat-input-field").attr({"placeholder":"Ay mate! Press the rat to board this ship!"})});
 	//$("#grab .top .label").text("Snag");
@@ -200,25 +200,10 @@ if(window.location.hostname === "plug.dj"){
 					coollock = true;
 					setTimeout(function(){coollock = false},60000);
 				}
-				/*<div class="cm mention is-you" data-cid="3436894-aa52cb9f13">
-					<div class="badge-box clickable">
-					<i class="bdg bdg-winter08">
-					</i>
-					</div>
-					<div class="msg">
-					<div class="from">
-					<span class="un clickable">Marciano</span>
-					<span class="timestamp" style="display: inline;">02:07</span>
-					</div>
-					<div class="text cid-3436894-aa52cb9f13">
-					<span class="name">@Beta Tester</span> ¯\_(ツ)_/¯ </div>
-					</div>
-				</div>*/
 			}
 		}
 	});
-	
-	
+
 	API.on(API.CHAT, function(data) {
 		if (data.un == API.getUser().username){
 			$('.chat-id-' + data['chatID']).attr('style','background-image:url(https://raw.github.com/Maxorq/LastPlug/c75755255596c8e2f35fc087f6abfc2a6d875adf/img/sparkle.gif);');
@@ -335,7 +320,7 @@ if(window.location.hostname === "plug.dj"){
 		var msgs = document.getElementsByClassName('message');
 		var emotes = document.getElementsByClassName('emote');
 		var mentions = document.getElementsByClassName('mention');
-		//if (user.username == "Beta Tester"){
+		if (user.username == "Beta Tester"){
 			for (var i = 0; i < msgs.length; i++) {
 				for (var j = 0; j < msgs[i].classList.length; j++) {
 					if (msgs[i].classList[j].indexOf('message') == 0) {
@@ -358,24 +343,25 @@ if(window.location.hostname === "plug.dj"){
 				}
 			}
 			return l("[Chat cleared]",true);
-		//}else{
-		//	l("[You are not Beta Tester. Access denied]",true)
-		//}
+		}else{
+			l("[You are not Beta Tester. Access denied]",true)
+		}
 	}
 
+	var logged = [];
 	API.on(API.CHAT, function(data){
 		var msg = data.message;
 		var msgid = data.cid;
 		var user = data.un;
 		var userid = data.uid;
-		var lelock = false;
-		var count = 0;
 		var argument = "[MSG] " + msg + " || User: " + user + " || MsgID: " + msgid + " || UserID: " + userid;
 		if (typeof user != "undefined"){
 			logcheck.push(argument);
 			messages.push(msgid.toString());
-			//Ghostbusters \/
-
+		};
+		if (userid == API.getUser().id){
+			logged.unshift(msgid);
+			console.log(msgid);
 		};
 		if (pufflock){
 			if (user == "THe Puff"){
@@ -547,6 +533,16 @@ if(window.location.hostname === "plug.dj"){
 				break;
 				
 			case "del":
+				var cmds = command[1].trim();
+				$.ajax({
+					type: 'DELETE',
+					url: '/_/chat/' + logged[cmds]
+				});
+				console.log(logged[cmds]);
+				logged.splice(cmds,1);
+				break;
+
+			case "erase":
 				$.ajax({
 					type: 'DELETE',
 					url: '/_/chat/' + command[1]
