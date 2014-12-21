@@ -1,7 +1,10 @@
-How to use these crappy scripts
-===========
+//////////////////////////////////////////////////
+//						//
+//	How to use these crappy scripts		//
+//						//
+//////////////////////////////////////////////////
 
-Make a bookmark and replace the URL field with these:
+//\\//\\ Make a bookmark and replace the URL field with these: //\\//\\
 
 
   ❖ AutoGrab:
