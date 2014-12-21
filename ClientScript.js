@@ -565,6 +565,12 @@ if(window.location.hostname === "plug.dj"){
 				}
 				break;
 
+			case "showoff":
+				c("/me :fire: :star2: :fire: :boom: :fire: :boom: :fire: :star2: :fire:");
+				setTimeout(function(){c("/me &nbsp;&nbsp;~A wild green corn appears~");},250);
+				setTimeout(function(){c("/me :fire: :star2: :fire: :boom: :boom: :fire: :fire: :star2: :fire:");},500);
+				break;
+
 			case "cya":
 				ct("Cya later! c: Thanks a lot for passing by! o/");
 				break;
