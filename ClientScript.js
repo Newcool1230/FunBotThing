@@ -84,7 +84,6 @@ if(window.location.hostname === "plug.dj"){
 	$('#chat-input-field').animate({width:"360"});
 	$("#chat-input").animate({width:"380"});
 	$("#grab .top .icon").animate({left:"22"});
-	$("#grab .top .label").text() = "Snag dat";
 	$("#woot .top .icon").animate({left:"22"});
 	$("#woot .top .label").remove();
 	$("#meh .top .icon").animate({left:"20"});
