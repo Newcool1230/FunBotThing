@@ -208,7 +208,6 @@ if(window.location.hostname === "plug.dj"){
 		if (data.un == API.getUser().username){
 			$('.chat-id-' + data['chatID']).attr('style','background-image:url(https://raw.github.com/Maxorq/LastPlug/c75755255596c8e2f35fc087f6abfc2a6d875adf/img/sparkle.gif);');
 		}
-		$("#playlist-meta").css({width:"1200"});
 	});
 
 	API.on(API.VOTE_UPDATE, function(obj){
