@@ -100,6 +100,7 @@ if(window.location.hostname === "plug.dj"){
 	//$("#meh .top .label").text("Nay");
 	//$("#dj-button span").text("Walk the Plank");
 	/** End of Pirate Mode */
+	$('.emoji-trollface').replaceWith('<span style="background: url(https://i.imgur.com/osBR8Jj.png); width: 16px; height: 16px;"></span>');
 
 	var autowoot = true;
 	var joinmsg = true;
@@ -420,7 +421,7 @@ if(window.location.hostname === "plug.dj"){
 				case 1:	var stt = "Away (1)";break;
 				case 2:	var stt = "Working (2)";break;
 				case 3:	var stt = "Gaming (3)";break;
-				case 4:	var stt = "Offline / Undefined";break;
+				case 4:	var stt = "Offline / Undefined (4?)";break;
 				default:var stt = "Wot.";
 			}
 			switch(data.badge){
@@ -462,8 +463,8 @@ if(window.location.hostname === "plug.dj"){
 				case "tiki03":		var bb = "Green Tree (" + data.badge + ")";break;
 				case "tiki04":		var bb = "Purple Tree (" + data.badge + ")";break;
 				default:
-					if (typeof data.badge == "null"){
-						var bb = "No Badge";
+					if (data.badge == null){
+						var bb = "User has no badge";
 					}else{
 						var bb = data.badge;
 					}
