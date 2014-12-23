@@ -553,6 +553,11 @@ if(window.location.hostname === "plug.dj"){
 				});
 				break;
 
+			case "break":
+				API.sendChat('/me  ');
+				setTimeout(function(){API.sendChat('/del 0')},550);
+				break;
+
 			case "lookup":
 				lookfor(command[1]);
 				break;
