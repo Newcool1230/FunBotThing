@@ -500,6 +500,19 @@ if(window.location.hostname === "plug.dj"){
 			if (data.gRole == 3){var g = "Brand Ambassador (" + data.gRole + ")";};
 			if (data.gRole > 3){var g = "Admin (" + data.gRole + ")";};
 
+			//** Supposed to be working but isn't */
+			var votestats = 'None';
+			var votestate = 0;
+			for (var i = 0; i < API.getUsers().length; i++){
+				if (API.getUsers()[i].username == data.username){
+					votestate = API.getUsers()[i].vote;
+				}
+			}
+			if (votestate == 1){votestats == "Woot!"}
+			else if (votestate == 0){votestats == "None"}
+			else if (votestate == -1){votestats == "Meh"}
+			//** Supposed to be working but isn't */
+
 			if (data.username == null){
 				addChat("<b>    User has not updated yet!</b>","#CCCCCC");
 			}else{
