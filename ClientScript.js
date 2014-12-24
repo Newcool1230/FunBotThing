@@ -354,7 +354,7 @@ if(window.location.hostname === "plug.dj"){
 		var msgid = data.cid;
 		var user = data.un;
 		var userid = data.uid;
-		var argument = "[MSG] " + msg + " || User: " + user + " || MsgID: " + msgid + " || UserID: " + userid;
+		var argument = "[MsgID] - " + msgid + " || [UserID] - " + userid + " || [User] - " + user + " || [MSG] - " + msg;
 		if (typeof user != "undefined"){
 			logcheck.push(argument);
 			messages.push(msgid.toString());
