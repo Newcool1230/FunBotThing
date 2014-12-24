@@ -511,7 +511,8 @@ if(window.location.hostname === "plug.dj"){
 				    Status:</b> " + stt + "<br><b>\
 				    Role:</b> " + g + "<br><b>\
 				    Joined:</b> " + jnd + "<br><b>\
-				    Badge:</b> " + bb, "#CCCCCC");
+				    Badge:</b> " + bb + "<br><b>\
+				    Slug:</b> <a style='color: #aec9ea;' href='/@/" + data.slug + "' target='_blank'>" + data.slug + "</a>", "#CCCCCC");
 			}
 		});
 	}
