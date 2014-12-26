@@ -219,7 +219,9 @@ if(window.location.hostname === "plug.dj"){
 				var picLink = hts.slice(ht,jp);
 				$("#chat-messages > .cm[data-cid='" + msgID + "']").append("<center><img style='margin:10px; max-width:325px' src='" + picLink + "'></img></center>");
 			}
-			chat.scrollTop(chat[0].scrollHeight);
+			var chat = $('#chat-messages');
+			var a = chat.scrollTop() > chat[0].scrollHeight - chat.height() - 28;
+			if (a){chat.scrollTop(chat[0].scrollHeight);}
 		}
 	});
 
@@ -920,7 +922,7 @@ if(window.location.hostname === "plug.dj"){
 
 		if (color == undefined)
 			color = "#9fee00";
-			
+
 		if (state){
 			chat.append("<div class='update antitroll-update' style='border-left: double 6px " + color + "';'><center><span class='antitroll-text' style='color: " + color + "; " + si + "'>" + text + "<br></span></center></div>");
 		}else{
