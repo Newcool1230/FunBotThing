@@ -220,20 +220,22 @@ API.on(API.CHAT_COMMAND, function(data){
 			break;
 
 		case "cmd":
-			addChat("__________","#eb9595");
-			addChat("/<b>getid</b> + [<b>@username </b>]","#ececec");
-			addChat("Returns user's ID (if user is in the room)","#c8c8c8");
-			addChat("/<b>lookup</b> + [<b>UID</b>]","#ececec");
-			addChat("Shows info about user (if user has updated to the new site)","#c8c8c8");
-			addChat("/<b>search</b> + [<b>@username </b>]","#ececec");
-			addChat("Shows info about user (if user is in the room)","#c8c8c8");
-			addChat("/<b>shrug</b> + [<b>MSG</b>]","#ececec");
-			addChat("Adds ¯\\_(ツ)_/¯ to the end of your message","#c8c8c8");
-			addChat("/<b>quote</b> + [<b>MSG</b>]","#ececec");
-			addChat("Italics message surrounded by ❝ ❞","#c8c8c8");
-			addChat("/<b>sing</b> + [<b>MSG</b>]","#ececec");
-			addChat("Italics message surrounded by ♪ ♫","#c8c8c8");
-			addChat("¯¯¯¯¯¯¯¯¯¯","#eb9595");
+			addChat("<a style='color:#eb9595;'>__________</a><br>\
+			<a style='color:#ececec;'>/<b>getid</b> + [<b>@username </b>]</a><br>\
+			<a style='color:#c8c8c8;'>Returns user's ID (if user is in the room)</a><br><br>\
+			<a style='color:#ececec;'>/<b>lookup</b> + [<b>UID</b>]</a><br>\
+			<a style='color:#c8c8c8;'>Shows info about user (if user has updated to the new site)</a><br><br>\
+			<a style='color:#ececec;'>/<b>search</b> + [<b>@username </b>]</a><br>\
+			<a style='color:#c8c8c8;'>Shows info about user (if user is in the room)</a><br><br>\
+			<a style='color:#ececec;'>/<b>shrug</b> + [<b>MSG</b>]</a><br>\
+			<a style='color:#c8c8c8;'>Adds ¯\\_(ツ)_/¯ to the end of your message</a><br><br>\
+			<a style='color:#ececec;'>/<b>quote</b> + [<b>MSG</b>]</a><br>\
+			<a style='color:#c8c8c8;'>Italics message surrounded by ❝ ❞</a><br><br>\
+			<a style='color:#ececec;'>/<b>sing</b> + [<b>MSG</b>]</a><br>\
+			<a style='color:#c8c8c8;'>Italics message surrounded by ♪ ♫</a><br>","#CCCCCC");
+			addChat("<a style='color:#ff2e2e;'><b>Warning!</b></a><a style='color:#ececec;'><pre> </pre>[@username ] = '@' + 'username' + ' '</a><br>\
+			<a style='color:#ececec;'>If the <b>@</b> and the <em><b>space</b></em> aren't inserted, it will not work!</a><br>\
+			<a style='color:#eb9595;'>¯¯¯¯¯¯¯¯¯¯</a>","#CCCCCC");
 			break;
 	}
 });
@@ -264,6 +266,6 @@ function addChat(text, color, state, size) {
 		chat.children().first().remove();
 }
 
-addChat("Beta Tester's getID script initiated!","#ececec");
-addChat("Beta v0.6","#eb9595");
-addChat("Check commands with /cmd","#ececec");
+addChat("<a style='color:#ececec;'>Beta Tester's getID script initiated!</a><br>\
+	<a style='color:#eb9595;'>Beta v0.6</a><br>\
+	<a style='color:#ececec;'>Check commands with /cmd</a>","#CCCCCC");
