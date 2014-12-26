@@ -185,6 +185,7 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.CHAT, function(data){
 		var msg = data.message;
+		var msgID = data.cid;
 		var user = data.un;
 		var userid = data.uid;
 		var me = API.getUser().username;
@@ -216,7 +217,7 @@ if(window.location.hostname === "plug.dj"){
 				}
 				jp = jp + 5;
 				var picLink = hts.slice(ht,jp);
-				addChat("<img src='" + picLink + "'></img>", "#CCCCCC");
+				$("#chat-messages > .cm[data-cid='" + msgID + "']").append("<img style='margin:10px; max-width:325px' src='" + picLink + "'></img>");
 			}
 		}
 	});
