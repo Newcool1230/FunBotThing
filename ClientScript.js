@@ -464,7 +464,7 @@ if(window.location.hostname === "plug.dj"){
 				case "tiki04":		var bb = "Purple Tree (" + data.badge + ")";break;
 				default:
 					if (data.badge == null){
-						var bb = "User has no badge";
+						var bb = "<a style='color:#eaaeae;'>[None]</a>";
 					}else{
 						var bb = data.badge;
 					}
@@ -513,19 +513,31 @@ if(window.location.hostname === "plug.dj"){
 			else if (votestate == -1){votestats == "Meh"}
 			//** Supposed to be working but isn't */
 
+			var blurbTrue = "<a style='color:#eaaeae;'>[None]</a>";
+			if (data.blurb != null){
+				blurbTrue = data.blurb;
+			}
+
+			var hasProfile = "<a style='color:#eaaeae;'>[No profile yet]</a>";
+			var profileColor = "#eaaeae"
+			if (data.level > 5){
+				hasProfile = "";
+				profileColor = "#aec9ea"
+			}
+
 			if (data.username == null){
-				addChat("<b>    User has not updated yet!</b>","#CCCCCC");
+				addChat("<b><a style='color:#eaaeae;'>[User has not updated yet!]</a></b>","#CCCCCC");
 			}else{
-				addChat("<b>    Name:</b> " + data.username + "<br><b>\
-				    Blurb:</b> " + data.blurb + "<br><b>\
-				    ID:</b> " + data.id + "<br><b>\
-				    Level:</b> " + data.level + "<br><b>\
-				    Avatar:</b> " + data.avatarID + "<br><b>\
-				    Status:</b> " + stt + "<br><b>\
-				    Role:</b> " + g + "<br><b>\
-				    Joined:</b> " + jnd + "<br><b>\
-				    Badge:</b> " + bb + "<br><b>\
-				    Slug:</b> <a style='color: #aec9ea;' href='/@/" + data.slug + "' target='_blank'>" + data.slug + "</a>", "#CCCCCC");
+				addChat("<b>Name:</b> " + data.username + "<br><b>\
+				Blurb:</b> " + blurbTrue + "<br><b>\
+				ID:</b> " + data.id + "<br><b>\
+				Level:</b> " + data.level + "<br><b>\
+				Avatar:</b> " + data.avatarID + "<br><b>\
+				Status:</b> " + stt + "<br><b>\
+				Role:</b> " + g + "<br><b>\
+				Joined:</b> " + jnd + "<br><b>\
+				Badge:</b> " + bb + "<br><b>\
+				Slug:</b> <a style='color: " + profileColor + ";' href='/@/" + data.slug + "' target='_blank'>" + data.slug + "</a> " + hasProfile, "#CCCCCC");
 			}
 		});
 	}
@@ -814,10 +826,15 @@ if(window.location.hostname === "plug.dj"){
 				break;
 
 			case "readd":
-				var ledj = API.getDJ().id;
+				//BUGGED!
+				var userID = API.getDJ().id;
+				API.once(API.ADVANCE, function() {
+					API.once(API.WAIT_LIST_UPDATE, function() {
+						API.moderateMoveDJ(userID, 1);
+					});
+					API.moderateAddDJ(userID);
+				});
 				API.moderateForceSkip();
-				setTimeout(function(){API.moderateAddDJ(ledj);}, 1000);
-				setTimeout(function(){API.moderateMoveDJ(ledj,1);}, 2000);
 				break;
 
 			//p3
