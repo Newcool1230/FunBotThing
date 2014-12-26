@@ -208,13 +208,14 @@ if(window.location.hostname === "plug.dj"){
 		var pn = ['.png','.gif','.jpg']
 		for (var i = 0; i < pn.length; i++){
 			var ht = msg.indexOf('http');
-			ht = ht.replace('http','https');
-			if (msg.indexOf('httpss') != -1){
-				ht = ht.replace('httpss','https');
-			}
 			var jp = msg.indexOf(pn[i]);
 			if (ht != -1 && jp != -1){
-				var picLink = msg.slice(ht,jp);
+				var hts = msg.replace('http','https');
+				if (hts.indexOf('httpss') != -1){
+					hts = hts.replace('httpss','https');
+				}
+				jp = jp + 5;
+				var picLink = hts.slice(ht,jp);
 				addChat("<img src='" + picLink + "'></img>", "#CCCCCC");
 			}
 		}
