@@ -16,7 +16,7 @@ Edited FunBot (Original by DJ NEON TFL):
    $.getScript('https://rawgit.com/Tetheu98/FunBotThing/master/ActualScript.js');
  }());
 
-Client Script (feel free to copy and customize):
+Client Script:
 ==
  javascript:(function(){
    $.getScript('https://rawgit.com/Tetheu98/FunBotThing/master/ClientScript.js');
