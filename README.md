@@ -5,9 +5,9 @@ How to use these crappy scripts
 
 
   AutoGrab:
- javascript:(function(){
- 	$.getScript('https://rawgit.com/Tetheu98/FunBotThing/master/AutoGrab.js');
- }());
+❖ javascript:(function(){
+❖ 	$.getScript('https://rawgit.com/Tetheu98/FunBotThing/master/AutoGrab.js');
+❖ }());
 
   Edited FunBot (Original by DJ NEON TFL)
  javascript:(function(){
