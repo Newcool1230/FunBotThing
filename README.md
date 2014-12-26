@@ -36,4 +36,6 @@ Delete Own Messages:
 
 ==
 
-    NOTE! These are all my personal scripts.They might stop working for no reason, and are probably set to my preferences. Feel free to copy and customize, although I'd like /some/ credit pls <3
+    NOTE! These are all my personal scripts.They might stop working for no reason,
+    and are probably set to my preferences. Feel free to copy and customize,
+    although I'd like /some/ credit pls <3
