@@ -1,7 +1,5 @@
-How to use these crappy scripts
+❖ How to use these crappy scripts ❖
 =======
-    NOTE! These are all my personal scripts. They might stop working for no reason, and are probably set to my preferences. Feel free to copy and customize, although I'd like /some/ credit pls <3
-
 
     Make a bookmark and replace the URL field with these:
 
@@ -35,3 +33,7 @@ Delete Own Messages:
  javascript:(function(){
    $.getScript('https://rawgit.com/Tetheu98/FunBotThing/master/deleteOwn.js');
  }());
+
+==
+
+    NOTE! These are all my personal scripts.They might stop working for no reason, and are probably set to my preferences. Feel free to copy and customize, although I'd like /some/ credit pls <3
