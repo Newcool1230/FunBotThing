@@ -45,12 +45,12 @@ API.on(API.CHAT_COMMAND, function(data){
 			break;
 
 		case "cmd":
-			addChat("__________","#eb9595");
-			addChat("/<b>del</b> + #[Array position (if unsure, go with 0)]","#ececec");
-			addChat("Deletes your own message","#c8c8c8");
-			addChat("/<b>erase</b> + [MSG ID]","#ececec");
-			addChat("Deletes specified message (Except from BAs/Admins)","#c8c8c8");
-			addChat("¯¯¯¯¯¯¯¯¯¯","#eb9595");
+			addChat("<a style='color:#eb9595;'>__________<br>\
+			<a style='color:#ececec;'>/<b>del</b> + #[Array position (if unsure, go with 0)]<br>\
+			<a style='color:#c8c8c8;'>Deletes your own messages<br>\
+			<a style='color:#ececec;'>/<b>erase</b> + [MSG ID]<br>\
+			<a style='color:#c8c8c8;'>Deletes specified message (Except from BAs/Admins)<br>\
+			<a style='color:#eb9595;'>¯¯¯¯¯¯¯¯¯¯","#eb9595");
 			break;
 	}
 });
@@ -80,6 +80,6 @@ function addChat(text, color, state, size) {
 		chat.children().first().remove();
 }
 
-addChat("Beta Tester's deleteOwn script initiated!","#ececec");
-addChat("Beta v0.5","#eb9595");
-addChat("Check commands with /cmd","#ececec");
+addChat("<a style='color:#ececec;'>Beta Tester's deleteOwn script initiated!</a><br>\
+	<a style='color:#eb9595;'>Beta v0.6</a><br>\
+	<a style='color:#ececec;'>Check commands with /cmd</a>","#CCCCCC");
