@@ -206,7 +206,7 @@ if(window.location.hostname === "plug.dj"){
 			}
 		}
 
-		var pn = ['.png','.gif','.jpg']
+		var pn = ['.png','.gif','.jpg','.jpeg']
 		for (var i = 0; i < pn.length; i++){
 			var ht = msg.indexOf('http');
 			var jp = msg.indexOf(pn[i]);
@@ -217,8 +217,9 @@ if(window.location.hostname === "plug.dj"){
 				}
 				jp = jp + 5;
 				var picLink = hts.slice(ht,jp);
-				$("#chat-messages > .cm[data-cid='" + msgID + "']").append("<img style='margin:10px; max-width:325px' src='" + picLink + "'></img>");
+				$("#chat-messages > .cm[data-cid='" + msgID + "']").append("<center><img style='margin:10px; max-width:325px' src='" + picLink + "'></img></center>");
 			}
+			chat.scrollTop(chat[0].scrollHeight);
 		}
 	});
 
