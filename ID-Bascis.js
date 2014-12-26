@@ -17,7 +17,7 @@ function displayid(){
 		t = "0000000"
 	}
 	$('#user-rollover .meta .joined').css({top:"64px"});
-	$("#user-rollover .info").append('<div id="Id_display" style="position:absolute; top:-21px; left:108px; color:#808691; font-size: 11px; font-family: ' + a + ', sans-serif;">ID: ' + t + "     </div>");
+	$("#user-rollover .info").append('<div id="Id_display" style="position:absolute; top:-21px; left:108px; color:#808691; font-size: 11px; font-family: ' + a + ', sans-serif;">ID: ' + t + "     </div>");
 }
 
 function lookfor(id){
@@ -27,44 +27,58 @@ function lookfor(id){
 	}).done(function(user) {
 		data = user.data[0];
 		switch (data.status){
-			case 0:var stt = "Available (0)";break;
-			case 1:var stt = "Away (1)";break;
-			case 2:var stt = "Working (2)";break;
-			case 3:var stt = "Gaming (3)";break;
-			case 4:var stt = "Offline / Undefined";break;
+			case 0:	var stt = "Available (0)";break;
+			case 1:	var stt = "Away (1)";break;
+			case 2:	var stt = "Working (2)";break;
+			case 3:	var stt = "Gaming (3)";break;
+			case 4:	var stt = "Offline / Undefined (4?)";break;
 			default:var stt = "Wot.";
 		}
 		switch(data.badge){
-			case "bt":			var bb = "Beta Tester";break;
-			case "ss":			var bb = "Plug SuperStar";break;
-			case "og":			var bb = "Original Ganster";break;
-			case "ea":			var bb = "Early Adopter";break;
-			case "ba":			var bb = "Brand Ambassador";break;
-			case "admin":		var bb = "Admin Badge";break;
-			case "plot":		var bb = "Translator Badge";break;
-			case "winter01":	var bb = "Ski Boot";break;
-			case "winter02":	var bb = "Snowman Badge";break;
-			case "winter03":	var bb = "Snowflake Badge";break;
-			case "winter04":	var bb = "Reindeer Badge";break;
-			case "winter05":	var bb = "Penguin Badge";break;
-			case "winter06":	var bb = "Tree Badge";break;
-			case "winter07":	var bb = "Ski Badge";break;
-			case "winter08":	var bb = "Snowboard Badge";break;
-			case "winter09":	var bb = "Ice Skating";break;
-			case "winter10":	var bb = "Hockey Badge";break;
-			case "music01":		var bb = "Record Player";break;
-			case "music02":		var bb = "Musical Keyboard";break;
-			case "music03":		var bb = "Compact Cassette";break;
-			case "music04":		var bb = "Disco Ball";break;
-			case "food01":		var bb = "Pizza Badge";break;
-			case "food02":		var bb = "Ice Cream Badge";break;
-			case "food03":		var bb = "Drink Badge";break;
-			case "food04":		var bb = "Donut Badge";break;
-			case "food05":		var bb = "Sushi Badge";break;
-			case "animals01":	var bb = "Wolf Badge";break;
-			case "animals02":	var bb = "Cat Badge";break;
-			case "null":		var bb = "No Badge";break;
-			default:			var bb = data.badge;
+			case "bt":			var bb = "Beta Tester (" + data.badge + ")";break;
+			case "ss":			var bb = "Plug SuperStar (" + data.badge + ")";break;
+			case "og":			var bb = "Original Ganster (" + data.badge + ")";break;
+			case "ea":			var bb = "Early Adopter (" + data.badge + ")";break;
+			case "ba":			var bb = "Brand Ambassador (" + data.badge + ")";break;
+			case "admin":		var bb = "Admin Badge (" + data.badge + ")";break;
+			case "plot":		var bb = "Translator Badge (" + data.badge + ")";break;
+			case "winter01":	var bb = "Ski Boot (" + data.badge + ")";break;
+			case "winter02":	var bb = "Snowman Badge (" + data.badge + ")";break;
+			case "winter03":	var bb = "Snowflake Badge (" + data.badge + ")";break;
+			case "winter04":	var bb = "Reindeer Badge (" + data.badge + ")";break;
+			case "winter05":	var bb = "Penguin Badge (" + data.badge + ")";break;
+			case "winter06":	var bb = "Tree Badge (" + data.badge + ")";break;
+			case "winter07":	var bb = "Ski Badge (" + data.badge + ")";break;
+			case "winter08":	var bb = "Snowboard Badge (" + data.badge + ")";break;
+			case "winter09":	var bb = "Ice Skating (" + data.badge + ")";break;
+			case "winter10":	var bb = "Hockey Badge (" + data.badge + ")";break;
+			case "music01":		var bb = "Record Player (" + data.badge + ")";break;
+			case "music02":		var bb = "Musical Keyboard (" + data.badge + ")";break;
+			case "music03":		var bb = "Compact Cassette (" + data.badge + ")";break;
+			case "music04":		var bb = "Disco Ball (" + data.badge + ")";break;
+			case "food01":		var bb = "Pizza Badge (" + data.badge + ")";break;
+			case "food02":		var bb = "Ice Cream Badge (" + data.badge + ")";break;
+			case "food03":		var bb = "Drink Badge (" + data.badge + ")";break;
+			case "food04":		var bb = "Donut Badge (" + data.badge + ")";break;
+			case "food05":		var bb = "Sushi Badge (" + data.badge + ")";break;
+			case "food06":		var bb = "Hamburguer Badge (" + data.badge + ")";break;
+			case "food07":		var bb = "Fries Badge (" + data.badge + ")";break;
+			case "animals01":	var bb = "Wolf Badge (" + data.badge + ")";break;
+			case "animals02":	var bb = "Cat Badge (" + data.badge + ")";break;
+			case "animals03":	var bb = "Chicken Badge (" + data.badge + ")";break;
+			case "style01":		var bb = "Shoe Badge (" + data.badge + ")";break;
+			case "style02":		var bb = "Joystick Badge (" + data.badge + ")";break;
+			case "tiki01":		var bb = "Fat Tiki Mask (" + data.badge + ")";break;
+			case "tiki02":		var bb = "Slim Tiki Mask (" + data.badge + ")";break;
+			case "tiki03":		var bb = "Green Tree (" + data.badge + ")";break;
+			case "tiki04":		var bb = "Purple Tree (" + data.badge + ")";break;
+			default:
+				if (data.badge == null){
+					var bb = "<a style='color:#eaaeae;'>[None]</a>";
+				}else{
+					var bb = data.badge;
+				}
+				break;
 		}
 		var jin = data.joined.split('-');
 		var lk = jin[2].split(' ');
@@ -96,18 +110,44 @@ function lookfor(id){
 		if (data.gRole == 3){var g = "Brand Ambassador (" + data.gRole + ")";};
 		if (data.gRole > 3){var g = "Admin (" + data.gRole + ")";};
 
+		//** Supposed to be working but isn't */
+		var votestats = 'None';
+		var votestate = 0;
+		for (var i = 0; i < API.getUsers().length; i++){
+			if (API.getUsers()[i].username == data.username){
+				votestate = API.getUsers()[i].vote;
+			}
+		}
+		if (votestate == 1){votestats == "Woot!"}
+		else if (votestate == 0){votestats == "None"}
+		else if (votestate == -1){votestats == "Meh"}
+		//** Supposed to be working but isn't */
+
+		var blurbTrue = "<a style='color:#eaaeae;'>[None]</a>";
+		if (data.blurb != null){
+			blurbTrue = data.blurb;
+		}
+
+		var hasProfile = "<a style='color:#eaaeae;'>[No profile yet]</a>";
+		var profileColor = "#eaaeae"
+		if (data.level > 5){
+			hasProfile = "";
+			profileColor = "#aec9ea"
+		}
+
 		if (data.username == null){
-			addChat("<b>    User has not updated yet!</b>","#ececec");
+			addChat("<b><a style='color:#eaaeae;'>[User has not updated yet!]</a></b>","#CCCCCC");
 		}else{
-			addChat("<b>    Name:</b> " + data.username + "<br><b>\
-			    Blurb:</b> " + data.blurb + "<br><b>\
-			    ID:</b> " + data.id + "<br><b>\
-			    Level:</b> " + data.level + "<br><b>\
-			    Avatar:</b> " + data.avatarID + "<br><b>\
-			    Status:</b> " + stt + "<br><b>\
-			    Role:</b> " + g + "<br><b>\
-			    Joined:</b> " + jnd + "<br><b>\
-			    Badge:</b> " + bb, "#ececec");
+			addChat("<b>Name:</b> " + data.username + "<br><b>\
+			Blurb:</b> " + blurbTrue + "<br><b>\
+			ID:</b> " + data.id + "<br><b>\
+			Level:</b> " + data.level + "<br><b>\
+			Avatar:</b> " + data.avatarID + "<br><b>\
+			Status:</b> " + stt + "<br><b>\
+			Role:</b> " + g + "<br><b>\
+			Joined:</b> " + jnd + "<br><b>\
+			Badge:</b> " + bb + "<br><b>\
+			Slug:</b> <a style='color: " + profileColor + ";' href='/@/" + data.slug + "' target='_blank'>" + data.slug + "</a> " + hasProfile, "#CCCCCC");
 		}
 	});
 }
@@ -225,5 +265,5 @@ function addChat(text, color, state, size) {
 }
 
 addChat("Beta Tester's getID script initiated!","#ececec");
-addChat("Beta v0.5","#eb9595");
+addChat("Beta v0.6","#eb9595");
 addChat("Check commands with /cmd","#ececec");
