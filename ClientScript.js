@@ -89,6 +89,7 @@ if(window.location.hostname === "plug.dj"){
 	$("#woot .top .label").remove();
 	$("#meh .top .icon").animate({left:"20"});
 	$("#meh .top .label").remove();
+	$("#search-input-field").attr({"maxlength":256})
 	//$("#playlist-meta").animate({width:"1200"});
 	//$("#footer-user").animate({left:"1200"});
 	//$("#footer-user .info .points").animate({left:"235"});
