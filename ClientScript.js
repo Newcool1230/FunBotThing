@@ -204,11 +204,19 @@ if(window.location.hostname === "plug.dj"){
 				}
 			}
 		}
-	});
 
-	API.on(API.CHAT, function(data) {
-		if (data.un == API.getUser().username){
-			$('.chat-id-' + data['chatID']).attr('style','background-image:url(https://raw.github.com/Maxorq/LastPlug/c75755255596c8e2f35fc087f6abfc2a6d875adf/img/sparkle.gif);');
+		var pn = ['.png','.gif','.jpg']
+		for (var i = 0; i < pn.length; i++){
+			var ht = msg.indexOf('http');
+			ht = ht.replace('http','https');
+			if (msg.indexOf('httpss') != -1){
+				ht = ht.replace('httpss','https');
+			}
+			var jp = msg.indexOf(pn[i]);
+			if (ht != -1 && jp != -1){
+				var picLink = msg.slice(ht,jp);
+				addChat("<img src='" + picLink + "'></img>", "#CCCCCC");
+			}
 		}
 	});
 
