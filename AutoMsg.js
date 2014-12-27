@@ -70,7 +70,7 @@ function instructions(){
 	addChat("<img src='https://i.imgur.com/7Ax7ThH.gif'></img><br>\
 	<a style='color:#7174ff;'><b>------=[ AutoMsg Beta v0.5 ]=------</b></a><br>\
 	<a style='color:#ffffff;'><b>/txt</b></a><br>\
-	<a style='color:#CCCCCC;'>Turns messages on (1 hour interval)</a><br><br>\
+	<a style='color:#CCCCCC;'>Turns messages on (5 min default)</a><br><br>\
 	<a style='color:#ffffff;'><b>/settime</b> + <b><em>TIME (in minutes)</em></b></a><br>\
 	<a style='color:#CCCCCC;'>Edits the interval</a><br><br>\
 	<a style='color:#ffffff;'><b>/setmsg</b> + <b><em>MESSAGE</em></b></a><br>\
