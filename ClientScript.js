@@ -206,6 +206,7 @@ if(window.location.hostname === "plug.dj"){
 			}
 		}
 
+			//Bootleg Inline Images//
 		var pn = ['.png','.gif','.jpg','.jpeg']
 		for (var i = 0; i < pn.length; i++){
 			var ht = msg.indexOf('http');
@@ -217,11 +218,12 @@ if(window.location.hostname === "plug.dj"){
 				}
 				jp = jp + 5;
 				var picLink = hts.slice(ht,jp);
-				$("#chat-messages > .cm[data-cid='" + msgID + "']").append("<center><img style='margin:10px; max-width:325px' src='" + picLink + "'></img></center>");
+				$("#chat-messages > .cm[data-cid='" + msgID + "']").append("<center><img style='margin:10px; max-width:335px' src='" + picLink + "'></img></center>");
 			}
 			var chat = $('#chat-messages');
-			var a = chat.scrollTop() > chat[0].scrollHeight - chat.height() - 28;
-			if (a){chat.scrollTop(chat[0].scrollHeight);}
+			if (chat.scrollTop() > chat[0].scrollHeight - chat.height() - 50){
+				chat.scrollTop(chat[0].scrollHeight);
+			}
 		}
 	});
 
@@ -590,7 +592,15 @@ if(window.location.hostname === "plug.dj"){
 			case "unmutedood":
 				API.moderateUnmuteUser(save);
 				break;
-				
+
+			case "sacrifice":
+			case "offering":
+				c("/me :fire: :fire: :fire: :fire: :fire:");
+				setTimeout(function(){c("/me :fire: :fire: :goat: :fire: :fire:")},250);
+				setTimeout(function(){c("/me :fire: :fire: :fire: :fire: :fire:")},500);
+				setTimeout(function(){c("/me Please, all mighty Gods, accept this sacrifice!")},750);
+				break;
+
 			case "del":
 				var cmds = command[1].trim();
 				$.ajax({
@@ -631,7 +641,7 @@ if(window.location.hostname === "plug.dj"){
 
 			case "showoff":
 				c("/me :fire: :star2: :fire: :boom: :fire: :boom: :fire: :star2: :fire:");
-				setTimeout(function(){c("/me &nbsp;&nbsp;~A wild green corn appears~");},250);
+				setTimeout(function(){c("/me &nbsp;&nbsp;~A wild me appears~");},250);
 				setTimeout(function(){c("/me :fire: :star2: :fire: :boom: :boom: :fire: :fire: :star2: :fire:");},500);
 				break;
 
@@ -740,7 +750,7 @@ if(window.location.hostname === "plug.dj"){
 
 			case "xp":
 				ct('There is a limit to how much XP you can earn in a single 24-hour period, which starts at midnight GMT. XP and PP are earned on ticks. There are a specific amount of ticks in a 24-hour period and you can earn XP');
-				setTimeout(function(){ct('~for a certain amount of them, and they do not need to be earned sequentially (you can earn 3 ticks now, 4 ticks later, etc.)');},250);
+				setTimeout(function(){c('~for a certain amount of them, and they do not need to be earned sequentially (you can earn 3 ticks now, 4 ticks later, etc.)');},250);
 				break;
 
 			case "pp":
