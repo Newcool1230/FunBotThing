@@ -1,7 +1,6 @@
 var messageSet = "Message! :o";
 var timeSet = 5;
 var msgOn = false;
-var test1 = false;
 var OneMin = 0;
 var Potato = timeSet - OneMin;
 
