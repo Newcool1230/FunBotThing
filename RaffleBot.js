@@ -190,6 +190,14 @@ API.on(API.CHAT, function(data){
 				}
 				break;
 
+			case "slap":
+				if (itsMe){
+					c("/me *slaps LeDCV*");
+				}else{
+					delFrom();
+				}
+				break;
+
 			default:
 				delFrom();
 				break;
