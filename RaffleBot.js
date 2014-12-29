@@ -14,7 +14,7 @@ function raffleEnd(){
 				c("/me In total, " + raffleS.usersList.length + " users joined!");
 				rafflePicked = Math.floor(Math.random() * raffleS.usersList.length);
 				var pickedName = raffleS.usersList[rafflePicked];
-				setTimeout(function(){c("/me Congratulations " + pickedName + ", you have won! Let @LeDCV or @ColorfulMind know your forum name!");},250);
+				setTimeout(function(){c("/me Congratulations @" + pickedName + ", you have won! Let @LeDCV or @ColorfulMind know your forum name!");},250);
 				raffleS.usersList.splice(rafflePicked,1);
 			}
 		}
