@@ -59,7 +59,7 @@ API.on(API.CHAT, function(data){
 					raffleS.usersList = [];
 					delFrom();
 					raffleS.isOn = true;
-					c("/me Raffle was started by " + user + "! Type .join to enter it! You have " + raffleS.time + " seconds");
+					c("/me Raffle was started by " + user + "! Type !join to enter it! You have " + raffleS.time + " seconds");
 					var timeTimes1000 = raffleS.time * 1000;
 					var raffleTimeout = setTimeout(raffleEnd,timeTimes1000);
 				}else{
