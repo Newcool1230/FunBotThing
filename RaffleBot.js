@@ -15,8 +15,8 @@ function raffleEnd(){
 				rafflePicked = Math.floor(Math.random() * raffleS.usersList.length);
 				var pickedName = raffleS.usersList[rafflePicked];
 				setTimeout(function(){c("/me Congratulations " + pickedName + ", you have won! Let @LeDCV or @ColorfulMind know your forum name!");},250);
+				raffleS.usersList.splice(rafflePicked,1);
 			}
-			raffleS.usersList = [];
 		}
 	}
 	raffleS.isOn = false;
@@ -56,6 +56,7 @@ API.on(API.CHAT, function(data){
 			case "startraffle":
 			case "rafflestart":
 				if (urole() >= 3){
+					raffleS.usersList = [];
 					delFrom();
 					raffleS.isOn = true;
 					c("/me Raffle was started by " + user + "! Type .join to enter it! You have " + raffleS.time + " seconds");
@@ -164,6 +165,21 @@ API.on(API.CHAT, function(data){
 					delFrom();
 					if (!antispam){
 						ct("This command is for Managers and above!",true);
+						antispam = true;
+						setTimeout(function(){antispam = false;},5000);
+					}
+				}
+				break;
+
+			case "redraw":
+				if (urole() >= 4){
+					delFrom();
+					raffleS.isOn = true;
+					raffleEnd();
+				}else{
+					delFrom();
+					if (!antispam){
+						ct("This command is for Co-Hosts and above!",true);
 						antispam = true;
 						setTimeout(function(){antispam = false;},5000);
 					}
