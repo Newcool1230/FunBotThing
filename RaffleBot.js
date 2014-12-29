@@ -91,7 +91,7 @@ API.on(API.CHAT, function(data){
 					}
 					if (!locklist){
 						raffleS.usersList.push(user);
-						addChat("<a style='color:#41b5ff;'><b>" + user + "</b></a> entered the raffle at " + h + ":" + m + ":" + s,"#CCCCCC");
+						addChat("<a style='color:#41b5ff;'><b>" + user + "</b></a> entered the raffle at " + h + ":" + m + ":" + s + " (UTC)","#CCCCCC");
 					}else{
 						locklist = false;
 					}
