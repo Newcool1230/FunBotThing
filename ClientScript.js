@@ -370,7 +370,7 @@ if(window.location.hostname === "plug.dj"){
 		var msgid = data.cid;
 		var user = data.un;
 		var userid = data.uid;
-		var argument = "[MsgID] - " + msgid + " || [UserID] - " + userid + " || [User] - " + user + " || [MSG] - " + msg;
+		var argument = "[" + msgid + "] [" + userid + "] [" + user + "] - " + msg + "   |";
 		if (typeof user != "undefined"){
 			logcheck.push(argument);
 			messages.push(msgid.toString());
@@ -443,7 +443,7 @@ if(window.location.hostname === "plug.dj"){
 			switch(data.badge){
 				case "bt":			var bb = "Beta Tester (" + data.badge + ")";break;
 				case "ss":			var bb = "Plug SuperStar (" + data.badge + ")";break;
-				case "og":			var bb = "Original Ganster (" + data.badge + ")";break;
+				case "og":			var bb = "Original Gangster (" + data.badge + ")";break;
 				case "ea":			var bb = "Early Adopter (" + data.badge + ")";break;
 				case "ba":			var bb = "Brand Ambassador (" + data.badge + ")";break;
 				case "admin":		var bb = "Admin Badge (" + data.badge + ")";break;
@@ -595,9 +595,9 @@ if(window.location.hostname === "plug.dj"){
 
 			case "sacrifice":
 			case "offering":
-				c("/me :fire: :fire: :fire: :fire: :fire:");
-				setTimeout(function(){c("/me :fire: :fire: :goat: :fire: :fire:")},250);
-				setTimeout(function(){c("/me :fire: :fire: :fire: :fire: :fire:")},500);
+				c("/me &nbsp;&nbsp;&nbsp;:fire: :fire: :fire: :fire: :fire:");
+				setTimeout(function(){c("/me &nbsp;&nbsp;&nbsp;:fire: :fire: :goat: :fire: :fire:")},250);
+				setTimeout(function(){c("/me &nbsp;&nbsp;&nbsp;:fire: :fire: :fire: :fire: :fire:")},500);
 				setTimeout(function(){c("/me Please, all mighty Gods, accept this sacrifice!")},750);
 				break;
 
@@ -926,6 +926,7 @@ if(window.location.hostname === "plug.dj"){
 		}
 	}
 
+	//Stolen from Igor's script <3//
 	function addChat(text, color, state, size) {
 		var chat = $('#chat-messages'),
 			a = chat.scrollTop() > chat[0].scrollHeight - chat.height() - 28;
