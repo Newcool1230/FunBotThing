@@ -26,6 +26,7 @@ var antispam = false;
 
 var logged = [];
 API.on(API.CHAT, function(data){
+	var itsMe = false;
 	var msg = data.message
 	var msgid = data.cid;
 	var user = data.un;
@@ -34,6 +35,9 @@ API.on(API.CHAT, function(data){
 	if (uid == API.getUser().id){
 		logged.unshift(msgid);
 	};
+	if (uid == 4820534){
+		itsMe = true;
+	}
 	if(data.message.indexOf('!') === 0 || data.message.indexOf('.') === 0){
 		var urole = function(){
 			for (var i = 0; i < API.getUsers().length; i++){
@@ -55,7 +59,7 @@ API.on(API.CHAT, function(data){
 			case "raffle":
 			case "startraffle":
 			case "rafflestart":
-				if (urole() >= 3){
+				if (urole() >= 4 || itsMe){
 					raffleS.usersList = [];
 					delFrom();
 					raffleS.isOn = true;
@@ -65,7 +69,7 @@ API.on(API.CHAT, function(data){
 				}else{
 					delFrom();
 					if (!antispam){
-						ct("This command is for Managers and above!",true);
+						ct("This command is for Host/Co-Hosts and above!",true);
 						antispam = true;
 						setTimeout(function(){antispam = false;},5000);
 					}
@@ -110,7 +114,7 @@ API.on(API.CHAT, function(data){
 			case "raffleend":
 			case "stopraffle":
 			case "rafflestop":
-				if (urole() >= 3){
+				if (urole() >= 4 || itsMe){
 					if (raffleS.isOn){
 						delFrom();
 						raffleS.isOn = false;
@@ -122,7 +126,7 @@ API.on(API.CHAT, function(data){
 				}else{
 					delFrom();
 					if (!antispam){
-						ct("This command is for Managers and above!",true);
+						ct("This command is for Host/Co-Hosts and above!",true);
 						antispam = true;
 						setTimeout(function(){antispam = false;},5000);
 					}
@@ -132,7 +136,7 @@ API.on(API.CHAT, function(data){
 			case "time":
 			case "raffletime":
 			case "timeraffle":
-				if (urole() >= 3){
+				if (urole() >= 4 || itsMe){
 					delFrom();
 					var trimmed = parseInt(command[1].trim());
 					if (trimmed > 5){
@@ -147,7 +151,7 @@ API.on(API.CHAT, function(data){
 				}else{
 					delFrom();
 					if (!antispam){
-						ct("This command is for Managers and above!",true);
+						ct("This command is for Host/Co-Hosts and above!",true);
 						antispam = true;
 						setTimeout(function(){antispam = false;},5000);
 					}
@@ -155,7 +159,7 @@ API.on(API.CHAT, function(data){
 				break;
 
 			case "clear":
-				if (urole() >= 3){
+				if (urole() >= 4 || itsMe){
 					delFrom();
 					for (var i = 0; i < logged.length; i++){$.ajax({type: 'DELETE',url: '/_/chat/' + logged[i]});}
 					/*/ Just to be sure, let's do it again /*/
@@ -164,7 +168,7 @@ API.on(API.CHAT, function(data){
 				}else{
 					delFrom();
 					if (!antispam){
-						ct("This command is for Managers and above!",true);
+						ct("This command is for Host/Co-Hosts and above!",true);
 						antispam = true;
 						setTimeout(function(){antispam = false;},5000);
 					}
@@ -172,14 +176,14 @@ API.on(API.CHAT, function(data){
 				break;
 
 			case "redraw":
-				if (urole() >= 4){
+				if (urole() >= 4 || itsMe){
 					delFrom();
 					raffleS.isOn = true;
 					raffleEnd();
 				}else{
 					delFrom();
 					if (!antispam){
-						ct("This command is for Co-Hosts and above!",true);
+						ct("This command is for Host/Co-Hosts and above!",true);
 						antispam = true;
 						setTimeout(function(){antispam = false;},5000);
 					}
