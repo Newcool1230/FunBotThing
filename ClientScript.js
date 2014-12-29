@@ -370,7 +370,14 @@ if(window.location.hostname === "plug.dj"){
 		var msgid = data.cid;
 		var user = data.un;
 		var userid = data.uid;
-		var argument = "[" + msgid + "] [" + userid + "] [" + user + "] - " + msg + "   |";
+		var d = new Date();
+		var h = d.getUTCHours();
+		var m = d.getUTCMinutes();
+		var s = d.getUTCSeconds();
+		if (h < 10){h = "0" + h;}
+		if (m < 10){m = "0" + m;}
+		if (s < 10){s = "0" + s;}
+		var argument = "[UTC - " + h + ":" + m + ":" + s + "] [" + msgid + "] [" + userid + "] [" + user + "] - " + msg + "   |";
 		if (typeof user != "undefined"){
 			logcheck.push(argument);
 			messages.push(msgid.toString());
