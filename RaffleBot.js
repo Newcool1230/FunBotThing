@@ -198,6 +198,29 @@ API.on(API.CHAT, function(data){
 				}
 				break;
 
+			case "flirt":
+				if (urole() >= 4 || itsMe){
+					var allUsers = API.getUsers();
+					var ranUser = Math.floor(Math.random() * allUsers.length);
+					var flirts = ["Heey @" + allUsers[ranUser].username + ", how you doing? *winks*",
+						"Oh, I've always considered @" + allUsers[ranUser].username + " the hottest out of everyone here ;)",
+						"So @" + allUsers[ranUser].username + "... Are you busy this weekend? I'd like to get know you better :blush:",
+						"I can't hold it back anymore! I LOVE YOU @" + allUsers[ranUser].username + "! Will you marry me?",
+						"Hello @" + allUsers[ranUser].username + "... Do you come here often?",
+						"WOW! @" + allUsers[ranUser].username + " is SO hot! Dayum!",
+						"Hey @" + allUsers[ranUser].username + ", please come here often... I want to stare at you longer <3",
+						"@" + allUsers[ranUser].username + " You are my day, you are my night... You are my everything... Please, date me.",
+						"@" + allUsers[ranUser].username + " <3 :blush:",
+						"@" + allUsers[ranUser].username + " I... I've been too shy to say this but... This is the time... You are the prettiest person I know... Please love me back",
+						"@" + allUsers[ranUser].username + " You're cute <3",
+						"@" + allUsers[ranUser].username + " You smell differently when you're awake..."];
+					var ranFlirt = Math.floor(Math.random() * flirts.length);
+					c(flirts[ranFlirt]);
+				}else{
+					delFrom();
+				}
+				break;
+
 			default:
 				delFrom();
 				break;
