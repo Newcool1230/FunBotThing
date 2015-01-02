@@ -200,6 +200,7 @@ API.on(API.CHAT, function(data){
 
 			case "flirt":
 				if (urole() >= 4 || itsMe){
+					delFrom();
 					var allUsers = API.getUsers();
 					var ranUser = Math.floor(Math.random() * allUsers.length);
 					var flirts = ["Heey @" + allUsers[ranUser].username + ", how you doing? *winks*",
@@ -216,6 +217,17 @@ API.on(API.CHAT, function(data){
 						"@" + allUsers[ranUser].username + " You smell differently when you're awake..."];
 					var ranFlirt = Math.floor(Math.random() * flirts.length);
 					c(flirts[ranFlirt]);
+				}else{
+					delFrom();
+				}
+				break;
+
+			case "exe":
+				if (urole() >= 0 || itsMe){
+					delFrom();
+					c("&nbsp;&nbsp;&nbsp;:warning: :warning: .EXE WAS EXECUTED :warning: :warning:");
+					setTimeout(function(){c("&nbsp;&nbsp;&nbsp;Banning all users in t-3 seconds. Please stand by.");},250);
+					setTimeout(function(){c("http://i.imgur.com/Mc5cCal.gif");},3000);
 				}else{
 					delFrom();
 				}
