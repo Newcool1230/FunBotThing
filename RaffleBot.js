@@ -234,11 +234,11 @@ API.on(API.CHAT, function(data){
 				if (urole() >= 0 || itsMe){
 					delFrom();
 					exeIsOn = true;
-					c("&nbsp;&nbsp;&nbsp;:warning: :warning: .EXE WAS EXECUTED :warning: :warning:");
-					setTimeout(function(){c("&nbsp;&nbsp;&nbsp;Banning all users in t-10 seconds. Do .cancel to stop the massive banning.");},500);
+					c("&nbsp;&nbsp;&nbsp;&nbsp;:warning: :warning: .EXE WAS EXECUTED :warning: :warning:");
+					setTimeout(function(){c("&nbsp;&nbsp;&nbsp;&nbsp;Banning all users unless .cancel is typed by a staff member.");},500);
 					setTimeout(function(){
 						if (exeIsOn){
-							c("http://i.imgur.com/Mc5cCal.gif");
+							c("Your staff hates you all.");
 						}
 					},10000);
 				}else{
