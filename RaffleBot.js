@@ -209,7 +209,7 @@ API.on(API.CHAT, function(data){
 						var ranUser = Math.floor(Math.random() * allUsers.length);
 						userTagged = allUsers[ranUser].username;
 					}else{
-						userTagged == command[1];
+						userTagged = command[1];
 					}
 					var flirts = ["Heey @" + userTagged + ", how you doing? *winks*",
 						"Oh, I've always considered @" + userTagged + " the hottest out of everyone here ;)",
