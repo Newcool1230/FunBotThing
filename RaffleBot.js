@@ -1,6 +1,7 @@
 var raffleS = {usersList:[],isOn:false,time:30};
 function c(ms){API.sendChat(ms);}
 var rafflePicked;
+var exeIsOn = false;
 
 function raffleEnd(){
 	if (raffleS.isOn){
@@ -201,20 +202,26 @@ API.on(API.CHAT, function(data){
 			case "flirt":
 				if (urole() >= 4 || itsMe){
 					delFrom();
-					var allUsers = API.getUsers();
-					var ranUser = Math.floor(Math.random() * allUsers.length);
-					var flirts = ["Heey @" + allUsers[ranUser].username + ", how you doing? *winks*",
-						"Oh, I've always considered @" + allUsers[ranUser].username + " the hottest out of everyone here ;)",
-						"So @" + allUsers[ranUser].username + "... Are you busy this weekend? I'd like to get know you better :blush:",
-						"I can't hold it back anymore! I LOVE YOU @" + allUsers[ranUser].username + "! Will you marry me?",
-						"Hello @" + allUsers[ranUser].username + "... Do you come here often?",
-						"WOW! @" + allUsers[ranUser].username + " is SO hot! Dayum!",
-						"Hey @" + allUsers[ranUser].username + ", please come here often... I want to stare at you longer <3",
-						"@" + allUsers[ranUser].username + " You are my day, you are my night... You are my everything... Please, date me.",
-						"@" + allUsers[ranUser].username + " <3 :blush:",
-						"@" + allUsers[ranUser].username + " I... I've been too shy to say this but... This is the time... You are the prettiest person I know... Please love me back",
-						"@" + allUsers[ranUser].username + " You're cute <3",
-						"@" + allUsers[ranUser].username + " You smell differently when you're awake..."];
+					var userTagged;
+					if (typeof command[1] == "undefined"){
+						var allUsers = API.getUsers();
+						var ranUser = Math.floor(Math.random() * allUsers.length);
+						userTagged = allUsers[ranUser].username;
+					}else{
+						userTagged == command[1];
+					}
+					var flirts = ["Heey @" + userTagged + ", how you doing? *winks*",
+						"Oh, I've always considered @" + userTagged + " the hottest out of everyone here ;)",
+						"So @" + userTagged + "... Are you busy this weekend? I'd like to get know you better :blush:",
+						"I can't hold it back anymore! I LOVE YOU @" + userTagged + "! Will you marry me?",
+						"Hello @" +  + "... Do you come here often?",
+						"WOW! @" + userTagged + " is SO hot! Dayum!",
+						"Hey @" + userTagged + ", please come here often... I want to stare at you longer <3",
+						"@" + userTagged + " You are my day, you are my night... You are my everything... Please, date me.",
+						"@" + userTagged + " <3 :blush:",
+						"@" + userTagged + " I... I've been too shy to say this but... This is the time... You are the prettiest person I know... Please love me back",
+						"@" + userTagged + " You're cute <3",
+						"@" + userTagged + " You smell differently when you're awake..."];
 					var ranFlirt = Math.floor(Math.random() * flirts.length);
 					c(flirts[ranFlirt]);
 				}else{
@@ -225,9 +232,26 @@ API.on(API.CHAT, function(data){
 			case "exe":
 				if (urole() >= 0 || itsMe){
 					delFrom();
+					exeIsOn = true;
 					c("&nbsp;&nbsp;&nbsp;:warning: :warning: .EXE WAS EXECUTED :warning: :warning:");
-					setTimeout(function(){c("&nbsp;&nbsp;&nbsp;Banning all users in t-3 seconds. Please stand by.");},250);
-					setTimeout(function(){c("http://i.imgur.com/Mc5cCal.gif");},3000);
+					setTimeout(function(){c("&nbsp;&nbsp;&nbsp;Banning all users in t-10 seconds. Do .cancel to stop the massive banning.");},500);
+					setTimeout(function(){
+						if (exeIsOn){
+							c("http://i.imgur.com/Mc5cCal.gif");
+						}
+					},10000);
+				}else{
+					delFrom();
+				}
+				break;
+
+			case "cancel":
+				if (urole() >= 0 || itsMe){
+					delFrom();
+					if (exeIsOn){
+						c("http://i.imgur.com/Mc5cCal.gif");
+						exeIsOn = false;
+					}
 				}else{
 					delFrom();
 				}
