@@ -2,6 +2,7 @@ var raffleS = {usersList:[],isOn:false,time:30};
 function c(ms){API.sendChat(ms);}
 var rafflePicked;
 var exeIsOn = false;
+var userTagged = "";
 
 function raffleEnd(){
 	if (raffleS.isOn){
@@ -202,7 +203,7 @@ API.on(API.CHAT, function(data){
 			case "flirt":
 				if (urole() >= 4 || itsMe){
 					delFrom();
-					var userTagged;
+					userTagged = "";
 					if (typeof command[1] == "undefined"){
 						var allUsers = API.getUsers();
 						var ranUser = Math.floor(Math.random() * allUsers.length);
