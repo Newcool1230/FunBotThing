@@ -387,7 +387,7 @@ if(window.location.hostname === "plug.dj"){
 			console.log(msgid);
 		};
 		if (pufflock){
-			if (user == "THe Puff"){
+			if (user == "THe Puff" || user == "Epiphainein"){
 				var puff = msg.toLowerCase().split(" ");
 				var tag = ["beta","beta tester","@beta tester","all","people","everyone","ppl","peeps","guys","guise","bros"];
 				switch (puff[0]){
@@ -403,9 +403,15 @@ if(window.location.hostname === "plug.dj"){
 								if (typeof puff[1] != "undefined" && puff[1] == tag[i]
 								|| typeof puff[1] == "undefined"){
 									//addChat("Like wtf how'd you get Steven to say hi","#AA3333");
-									c("Heya shmoobey butt! - Credits to 'THe Puff' for suggesting a sentence. (C) 2014 All Rights Reserved | Protected by Creative Commons 4.0");
-									lockPuff = true;
-									setTimeout(function(){lockPuff = false;},3000);
+									if (user == "THe Puff"){
+										c("Heya shmoobey butt! - Credits to 'THe Puff' for suggesting a sentence. (C) 2014 All Rights Reserved | Protected by Creative Commons 4.0");
+										lockPuff = true;
+										setTimeout(function(){lockPuff = false;},3000);
+									}else if (user == "Epiphainein"){
+										c("Hey Pippy!");
+										lockPuff = true;
+										setTimeout(function(){lockPuff = false;},3000);
+									}
 								}
 							}
 						}
@@ -585,6 +591,11 @@ if(window.location.hostname === "plug.dj"){
 
 			case "nsfw":
 				ct('NSFW means Not Safe For Watching (objectionable content) -- nudity, scant clothing (incl. lingerie), blood and or violence (gore), snuff (dying)');
+				break;
+
+			case "mc":
+			case "minecraft":
+				ct('plug.dj now has its own Minecraft server! http://blog.plug.dj/2014/12/plugcraft-server/ (IP is plugdj.mcph.co)');
 				break;
 
 			case "emojisheet":
