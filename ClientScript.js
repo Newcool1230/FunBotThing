@@ -165,6 +165,21 @@ if(window.location.hostname === "plug.dj"){
 		$("#user-rollover .info").append('<div id="Id_display" style="position:absolute; top:-21px; left:108px; color:#808691; font-size: 11px; font-family: ' + a + ', sans-serif;">ID: ' + t + "     </div>");
 	}
 
+	function displayLvl(){
+		$("#footer-user .percentage").remove();
+		var lvl = $("#footer-user .progress").attr('style');
+		var lvlPc = lvl.substring(6,lvl.length - 1);
+		$("#footer-user .progress").append('<div class="percentage" style="font-size: 10px; position:block; margin-left:50px; margin-top:-1px"><b>' + lvlPc + '</b></div>');
+	}
+	$("#footer-user .bar").mouseenter(function(){
+		$("#footer-user .percentage").hide();
+	});
+	$("#footer-user .bar").mouseleave(function(){
+		$("#footer-user .percentage").show();
+	});
+
+	API.on(API.ADVANCE,displayLvl);
+
 	function c(msg){API.sendChat(msg);}
 	function l(msg,state){API.chatLog(msg,state);}
 	function woot(){
@@ -212,9 +227,9 @@ if(window.location.hostname === "plug.dj"){
 			var ht = msg.indexOf('http');
 			var jp = msg.indexOf(pn[i]);
 			if (ht != -1 && jp != -1){
-				var hts = msg.replace('http','https');
-				if (hts.indexOf('httpss') != -1){
-					hts = hts.replace('httpss','https');
+				var hts = msg.replace("http","https");
+				if (hts.indexOf("httpss") != -1){
+					hts = hts.replace("httpss","https");
 				}
 				jp = jp + 5;
 				var picLink = hts.slice(ht,jp);
