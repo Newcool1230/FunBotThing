@@ -28,6 +28,12 @@ ID Basics:
    $.getScript('https://rawgit.com/Tetheu98/FunBotThing/master/ID-Bascis.js');
  }());
 
+Percentage on level bar:
+==
+ javascript:(function(){
+   $.getScript('https://rawgit.com/Tetheu98/FunBotThing/master/percentage.js');
+ }());
+
 Delete Own Messages:
 ==
  javascript:(function(){
