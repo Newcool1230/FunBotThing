@@ -165,19 +165,20 @@ if(window.location.hostname === "plug.dj"){
 		$("#user-rollover .info").append('<div id="Id_display" style="position:absolute; top:-21px; left:108px; color:#808691; font-size: 11px; font-family: ' + a + ', sans-serif;">ID: ' + t + "     </div>");
 	}
 
+	//Percentage on progress bar :D
 	function displayLvl(){
 		$("#footer-user .percentage").remove();
 		var lvl = $("#footer-user .progress").attr('style');
 		var lvlPc = lvl.substring(6,lvl.length - 1);
 		$("#footer-user .progress").append('<div class="percentage" style="font-size: 10px; position:block; margin-left:50px; margin-top:-1px"><b>' + lvlPc + '</b></div>');
 	}
+	displayLvl();
 	$("#footer-user .bar").mouseenter(function(){
 		$("#footer-user .percentage").hide();
 	});
 	$("#footer-user .bar").mouseleave(function(){
 		$("#footer-user .percentage").show();
 	});
-
 	API.on(API.ADVANCE,displayLvl);
 
 	function c(msg){API.sendChat(msg);}
