@@ -9,6 +9,11 @@ $("#footer-user .bar").mouseenter(function(){$("#footer-user .percentage").hide(
 $("#footer-user .bar").mouseleave(function(){$("#footer-user .percentage").show();});
 API.on(API.ADVANCE,displayLvl);
 
+/*
+//\\//\\ Actually important ^ //\\//\\
+\\//\\// Not really important v \\//\\//
+*/
+
 //Stolen from Igor's script <3//
 function addChat(text, color, state, size) {
 	var chat = $('#chat-messages'),
