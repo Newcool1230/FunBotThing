@@ -90,18 +90,8 @@ if(window.location.hostname === "plug.dj"){
 	$("#meh .top .icon").animate({left:"20"});
 	$("#meh .top .label").remove();
 	$("#search-input-field").attr({"maxlength":256})
-	//$("#playlist-meta").animate({width:"1200"});
-	//$("#footer-user").animate({left:"1200"});
-	//$("#footer-user .info .points").animate({left:"235"});
-	//$("#footer-user .info .meta .bar").animate({width:"123"});
-	/** Pirate Mode */
-	//$("#chat-input-field").mousemove(function(){$("#chat-input-field").attr({"placeholder":"Ay mate! Press the rat to board this ship!"})});
-	//$("#grab .top .label").text("Snag");
-	//$("#woot .top .label").text("Yarr!");
-	//$("#meh .top .label").text("Nay");
-	//$("#dj-button span").text("Walk the Plank");
-	/** End of Pirate Mode */
 	$('.emoji-trollface').replaceWith('<span style="background: url(https://i.imgur.com/osBR8Jj.png); width: 16px; height: 16px;"></span>');
+	$('#dialog-container').css({left:'300px',top:'100px',width:'0px',height:'0px'});
 
 	var autowoot = true;
 	var joinmsg = true;
@@ -783,8 +773,7 @@ if(window.location.hostname === "plug.dj"){
 				break;
 
 			case "xp":
-				ct('There is a limit to how much XP you can earn in a single 24-hour period, which starts at midnight GMT. XP and PP are earned on ticks. There are a specific amount of ticks in a 24-hour period and you can earn XP');
-				setTimeout(function(){c('~for a certain amount of them, and they do not need to be earned sequentially (you can earn 3 ticks now, 4 ticks later, etc.)');},250);
+				ct('XP and PP are earned on ticks. There is a tick cap of 72 per day. After 6 hours (72 ticks), you hit the “XP cap” and will not gain XP until the next day. More info: http://goo.gl/7SDAAr');
 				break;
 
 			case "pp":
