@@ -2,9 +2,8 @@
 ===============
 
 Make a bookmark and replace the URL field with these:
+
 ---------
-
-
 ###AutoGrab:
 
  javascript:(function(){
