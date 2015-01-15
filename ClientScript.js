@@ -893,17 +893,16 @@ if(window.location.hostname === "plug.dj"){
 				break;
 			
 			case "thelp":
-				addChat("------=[ TBOT Alpha v1.0 ]=------","#7174ff");
-				addChat("/txt || Turns messages on (1 hour interval)","#ececec");
-				addChat("/check || Shows msg and time","#ececec");
-				addChat("/send || Sends the message regardless of interval","#ececec");
-				addChat("/thelp || This message","#ececec");
-				addChat("Meh message: " + mehmsg + " (/mmsg)","#ececec");
-				addChat("Grab message: " + grabmsg + " (/gmsg)","#ececec");
-				addChat("Join message: " + joinmsg + " (/jmsg)","#ececec");
-				addChat("Auto cap: " + cap + " (/setcap)","#ececec");
-				addChat("Auto join: " + autolock + " (/autojoin)","#ececec");
-				addChat("   ------=[ TBOT Alpha v1.0 ]=------","#7174ff");
+				addChat("<a style='color:#7174ff;'><b>------=[ AutoMsg Beta v0.5 ]=------</b></a><br>\
+						<a style='color:#ffffff;'><b>/txt</b></a><br>\
+						<a style='color:#CCCCCC;'>Turns messages on (1 hour interval)</a><br><br>\
+						<a style='color:#ffffff;'><b>/check</b></a><br>\
+						<a style='color:#CCCCCC;'>Shows message and time</a><br><br>\
+						<a style='color:#ffffff;'><b>/send</b></a><br>\
+						<a style='color:#CCCCCC;'>Sends the message regardless of interval</a><br><br>\
+						<a style='color:#ffffff;'><b>/thelp</b></a><br>\
+						<a style='color:#CCCCCC;'>This message</a><br>\
+						<a style='color:#7174ff;'><b>------=[ AutoMsg Beta v0.5 ]=------</b></a><br>","#CCCCCC");
 				break;
 
 			default:
