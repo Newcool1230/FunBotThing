@@ -187,7 +187,7 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.GRAB_UPDATE, function(obj){
 		var media = API.getMedia();
-		if (grabmsg){addChat("" + obj.user.username + " (ID " + obj.user.id + ") grabbed","#c5e0ff");};
+		if (grabmsg){addChat("" + obj.user.username + " (ID " + obj.user.id + ") grabbed <a style='color:#fffdc4;'>[[" + h + ":" + m + ":" + s + "]]</a>","#c5e0ff");};
 	});
 
 	var blunq = new Audio();
@@ -243,7 +243,14 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.VOTE_UPDATE, function(obj){
 		if (obj.vote == -1){
-			if (mehmsg){addChat("" + obj.user.username + " (ID " + obj.user.id + ") meh'ed this","#ff8585");};
+			var d = new Date();
+			var h = d.getUTCHours();
+			var m = d.getUTCMinutes();
+			var s = d.getUTCSeconds();
+			if (h < 10){h = "0" + h;}
+			if (m < 10){m = "0" + m;}
+			if (s < 10){s = "0" + s;}
+			if (mehmsg){addChat("" + obj.user.username + " (ID " + obj.user.id + ") meh'ed this <a style='color:#fffdc4;'>[[" + h + ":" + m + ":" + s + "]]</a>","#ff8585");};
 		}
 	});
 
@@ -284,8 +291,8 @@ if(window.location.hostname === "plug.dj"){
 			var f = "";
 			var c = "#7774ff";
 		}
-			if (user.level > 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined",c);};
-			if (user.level == 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined (Lvl 1)","#fef8a0");};
+			if (user.level > 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined <a style='color:#fffdc4;'>[[" + h + ":" + m + ":" + s + "]]</a>",c);};
+			if (user.level == 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined (Lvl 1) <a style='color:#fffdc4;'>[[" + h + ":" + m + ":" + s + "]]</a>","#fef8a0");};
 		JoinLeave(user);
 	};
 
@@ -297,7 +304,7 @@ if(window.location.hostname === "plug.dj"){
 			var f = "";
 			var c = "#7774ff";
 		}
-		if (joinmsg){addChat(f + user.username + " (ID " + user.id + ") left",c);};
+		if (joinmsg){addChat(f + user.username + " (ID " + user.id + ") left <a style='color:#fffdc4;'>[[" + h + ":" + m + ":" + s + "]]</a>",c);};
 		JoinLeave(user);
 	};
 
