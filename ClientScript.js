@@ -897,6 +897,7 @@ if(window.location.hostname === "plug.dj"){
 				break;
 			
 			case "cmds":
+			case "cmd":
 				addChat("<br><a style='color:#7174ff;'><b>------=[ Beta's Beta Script v0.5 ]=------</b></a><br><br>\
 						<a style='color:#ffffff;'><b>/id @</b><em>NAME</em></a><br>\
 						<a style='color:#CCCCCC;'>Returns the ID of that user</a><br><br>\
@@ -931,17 +932,19 @@ if(window.location.hostname === "plug.dj"){
 		if (color == undefined)
 			color = "#9fee00";
 
-		if (state){
-			chat.append("<div class='update antitroll-update' style='border-left: double 6px " + color + "';'><center><span class='antitroll-text' style='color: " + color + "; " + si + "'>" + text + "<br></span></center></div>");
-		}else{
-			chat.append("<div class='update antitroll-update' style=''><center><span class='antitroll-text' style='color: " + color + "; " + si + "'>" + text + "<br></span></center></div>");
-		}
-
 		if (size){
 			var si = "font-size: 11px;";
 		}else{
 			var si = "";
 		}
+
+		if (state){
+			chat.append("<div class='update antitroll-update' style='border-left: double 6px " + color + "; border-bottom: double 6px " + color + "'><center><span class='antitroll-text' style='color: " + color + "; " + si + "'>" + text + "<br></span></center></div>");
+		}else{
+			chat.append("<div class='update antitroll-update'><center><span class='antitroll-text' style='color: " + color + "; " + si + "'>" + text + "<br></span></center></div>");
+		}
+
+
 
 		if (a)
 			chat.scrollTop(chat[0].scrollHeight);
