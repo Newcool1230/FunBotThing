@@ -92,13 +92,14 @@ if(window.location.hostname === "plug.dj"){
 	$("#meh .top .icon").animate({left:"20"});
 	$("#meh .top .label").remove();
 	$("#search-input-field").attr({"maxlength":256})
-	$('.emoji-trollface').replaceWith('<span style="background: url(https://i.imgur.com/osBR8Jj.png); width: 16px; height: 16px;"></span>');
-	$('#dialog-container').css({left:'300px',top:'100px',width:'0px',height:'0px'});
-	$('#chat .disconnect').css({left:'-200px',height:'50px',width:'200px',border:'dotted 2px #F00'});
-	$('#chat .disconnect span').text('Connection lost');
-	$('#chat .disconnect span').css({top:'10px'});
-	$('#chat .spinner').hide();
-	//if ($('#chat .disconnect span').text() == "Potato"){$('#chat-input-field').hide();}
+	$(".emoji-trollface").replaceWith("<span style='background: url(https://i.imgur.com/osBR8Jj.png); width: 16px; height: 16px;'></span>");
+	$("#dialog-container").css({left:"300px",top:"100px",width:"0px",height:"0px"});
+	$("#chat .disconnect").css({left:"-200px",height:"50px",width:"200px",border:"dotted 2px #F00"});
+	$("#chat .disconnect span").text("Connection lost");
+	$("#chat .disconnect span").css({top:"10px"});
+	$("#chat .spinner").hide();
+	//if ($("#chat .disconnect span").text() == "Potato"){$("#chat-input-field").hide();}
+	$("#chat-messages").css("font-family: 'Open Sans' sans-serif; font-size:13px");
 
 	var autowoot = true;
 	var joinmsg = true;
@@ -256,7 +257,7 @@ if(window.location.hostname === "plug.dj"){
 		if (timeskip){
 			if (API.getMedia().duration > 480){
 				blunq.play();
-				addChat("<b>Song is over 8 minutes</b>","#ff3535",true,true);
+				addChat("<b>Song is over 8 minutes</b>","#ff3535",true);
 			}
 		}
 	});
@@ -327,7 +328,7 @@ if(window.location.hostname === "plug.dj"){
 			var dj = API.getDJ();
 			setTimeout(function(){
 				if (API.getWaitListPosition() <= -1 && dj.username != API.getUser().username){
-					$('#dj-button').click();
+					API.djJoin();
 				}
 			},300);
 		}
@@ -336,10 +337,12 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.ADVANCE, function(obj){
 		if (songup){
-			l(":green_heart: " + obj.lastPlay.score.positive + "&nbsp;&nbsp;|&nbsp;&nbsp;:purple_heart: " + obj.lastPlay.score.grabs + "&nbsp;&nbsp;|&nbsp;&nbsp;:broken_heart: " + obj.lastPlay.score.negative,false);
-			addChat("<br><a style='color:#e6ff99;'><b>Now playing:</b></a> " + obj.media.title + "<br>\
+			//l(":green_heart: " + obj.lastPlay.score.positive + "&nbsp;&nbsp;|&nbsp;&nbsp;:purple_heart: " + obj.lastPlay.score.grabs + "&nbsp;&nbsp;|&nbsp;&nbsp;:broken_heart: " + obj.lastPlay.score.negative,false);
+			addChat("<br><img src='https://i.imgur.com/5omgL6n.png'></img><br>\
+					<b><a style='color:#90ad2f;'>" + obj.lastPlay.score.positive + "</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a style='color:#aa74ff;'>" + obj.lastPlay.score.grabs + "</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a style='color:#c42e3b;'>" + obj.lastPlay.score.negative + "</a>&nbsp;&nbsp;|&nbsp;&nbsp;" + API.getUsers().length + "</b><br>\
+					<a style='color:#e6ff99;'><b>Now playing:</b></a> " + obj.media.title + "<br>\
 					<a style='color:#e6ff99;'><b>Author:</b></a> " + obj.media.author + "<br>\
-					<a style='color:#e6ff99;'><b>Current DJ:</b></a> " + obj.dj.username + " (ID " + obj.dj.id + ")<br>","#ececec",true,true);
+					<a style='color:#e6ff99;'><b>Current DJ:</b></a> " + obj.dj.username + " (ID " + obj.dj.id + ")<br>","#ececec",true);
 		}
 	});
 
@@ -925,25 +928,23 @@ if(window.location.hostname === "plug.dj"){
 	});
 
 	//Stolen from Igor's script <3//
-	function addChat(text, color, state, size) {
+	function addChat(text, color, state, hasBottom) {
 		var chat = $('#chat-messages'),
 			a = chat.scrollTop() > chat[0].scrollHeight - chat.height() - 28;
 
-		if (color == undefined)
-			color = "#9fee00";
-
-		if (size){
-			var si = "font-size: 11px;";
-		}else{
-			var si = "";
+		if (color == undefined){
+			color = "#99ffd7";
 		}
 
-		if (state){
-			chat.append("<div class='update antitroll-update' style='border-left: double 6px " + color + "; border-bottom: double 6px " + color + "'><center><span class='antitroll-text' style='color: " + color + "; " + si + "'>" + text + "<br></span></center></div>");
+		if (hasBottom){
+			chat.append("<div class='update betabot-update' style='border-left: double 6px " + color + "; border-bottom: double 6px " + color + "'><center><span class='betabot-text' style='color: " + color + "; font-size: 11px;'>" + text + "<br></span></center></div>");
 		}else{
-			chat.append("<div class='update antitroll-update'><center><span class='antitroll-text' style='color: " + color + "; " + si + "'>" + text + "<br></span></center></div>");
+			if (state){
+				chat.append("<div class='update betabot-update' style='border-left: double 6px " + color + ";'><center><span class='betabot-text' style='color: " + color + "; font-size: 11px;'>" + text + "<br></span></center></div>");
+			}else{
+				chat.append("<div class='update betabot-update'><center><span class='betabot-text' style='color: " + color + ";'>" + text + "<br></span></center></div>");
+			}
 		}
-
 
 
 		if (a)
@@ -952,10 +953,7 @@ if(window.location.hostname === "plug.dj"){
 			chat.children().first().remove();
 	}
 
-	aid();
-	function aid(){
-		addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br>","#ececec",true);
-	}
+	addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br>","#ececec",true,true);
 
 }else{
 	alert("This bot only functions at http://plug.dj/");
