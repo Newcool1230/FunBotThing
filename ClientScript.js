@@ -99,7 +99,7 @@ if(window.location.hostname === "plug.dj"){
 	$("#chat .disconnect span").css({top:"10px"});
 	$("#chat .spinner").hide();
 	//if ($("#chat .disconnect span").text() == "Potato"){$("#chat-input-field").hide();}
-	$("#chat-messages").css("font-family: 'Open Sans' sans-serif; font-size:13px");
+	$("#chat-messages").css({"font-family":"'Open Sans' sans-serif","font-size":"13px"});
 
 	var autowoot = true;
 	var joinmsg = true;
