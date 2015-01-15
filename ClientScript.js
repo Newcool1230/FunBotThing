@@ -983,9 +983,9 @@ if(window.location.hostname === "plug.dj"){
 				chat.append("<div class='update betabot-update' style='border-left: double 6px " + color + "; border-bottom: double 6px " + color + "'><center><span class='betabot-text' style='color: " + color + "; font-size: 11px;'>" + text + "<br></span></center></div>");
 			}else{
 				if (state){
-					chat.append("<div class='update betabot-update' style='border-left: double 6px " + color + "; margin-top:5px;'><center><span class='betabot-text' style='color: " + color + "; font-size: 11px;'>" + text + "<br></span></center></div>");
+					chat.append("<div class='update betabot-update' style='border-left: double 6px " + color + "; margin-top:5px;margin-bottom:5px;'><center><span class='betabot-text' style='color: " + color + "; font-size: 11px;'>" + text + "<br></span></center></div>");
 				}else{
-					chat.append("<div class='update betabot-update' style='margin-top:5px;'><center><span class='betabot-text' style='color: " + color + ";'>" + text + "<br></span></center></div>");
+					chat.append("<div class='update betabot-update' style='margin-top:5px;margin-bottom:5px;'><center><span class='betabot-text' style='color: " + color + ";'>" + text + "<br></span></center></div>");
 				}
 			}
 		}
