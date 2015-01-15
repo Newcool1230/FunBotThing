@@ -1,6 +1,7 @@
 if(window.location.hostname === "plug.dj"){
 	//This script was made by Beta Tester (https://plug.dj/@/beta-tester)
 	//Initial CSS help from Marciano
+	//Stole AddChat from Igor <3 Thanks a ton
 
 	var u = API.getUser().username;
 
@@ -13,7 +14,7 @@ if(window.location.hostname === "plug.dj"){
 
 	var menu = '\
 		<section id="xprequel">\
-			<div id="xtitle" class="xtxt">BetaBot - Alpha</div>\
+			<div id="xtitle" class="xtxt">&nbsp;</div>\
 		</section>\
 		<section id="xmain">\
 			<div id="xjoinmsg" class="xbutton">Join Message</div>\
@@ -45,6 +46,7 @@ if(window.location.hostname === "plug.dj"){
 				outline: #FFFFFF double;\
 				z-index: 10;\
 				font-family: "Open Sans", sans-serif;\
+				background-image:url(https://i.imgur.com/ung12ij.png)\
 			}\
 			#xprequel .ativo {color: #42A5DC;}\
 			#xmain {\
@@ -894,17 +896,25 @@ if(window.location.hostname === "plug.dj"){
 			case "remove":case "lock":case "unlock":case "help":case "me":case "em":
 				break;
 			
-			case "thelp":
-				addChat("<a style='color:#7174ff;'><b>------=[ AutoMsg Beta v0.5 ]=------</b></a><br>\
-						<a style='color:#ffffff;'><b>/txt</b></a><br>\
-						<a style='color:#CCCCCC;'>Turns messages on (1 hour interval)</a><br><br>\
-						<a style='color:#ffffff;'><b>/check</b></a><br>\
-						<a style='color:#CCCCCC;'>Shows message and time</a><br><br>\
-						<a style='color:#ffffff;'><b>/send</b></a><br>\
-						<a style='color:#CCCCCC;'>Sends the message regardless of interval</a><br><br>\
-						<a style='color:#ffffff;'><b>/thelp</b></a><br>\
-						<a style='color:#CCCCCC;'>This message</a><br>\
-						<a style='color:#7174ff;'><b>------=[ AutoMsg Beta v0.5 ]=------</b></a><br>","#CCCCCC");
+			case "cmds":
+				addChat("<br><a style='color:#7174ff;'><b>------=[ Beta's Beta Script v0.5 ]=------</b></a><br><br>\
+						<a style='color:#ffffff;'><b>/id @</b><em>NAME</em></a><br>\
+						<a style='color:#CCCCCC;'>Returns the ID of that user</a><br><br>\
+						<a style='color:#ffffff;'><b>/lookup </b><em>ID</em></a><br>\
+						<a style='color:#CCCCCC;'>Returns info about specified user</a><br><br>\
+						<a style='color:#ffffff;'><b>/search @</b><em>NAME</em></a><br>\
+						<a style='color:#CCCCCC;'>Returns info about specified user</a><br><br>\
+						<a style='color:#ffffff;'><b>/deleteall</b></a><br>\
+						<a style='color:#CCCCCC;'>Deletes all chat since joining</a><br><br>\
+						<a style='color:#ffffff;'><b>/del </b><em>MSG#</em></a><br>\
+						<a style='color:#CCCCCC;'>Deletes message from you, using Array position</a><br><br>\
+						<a style='color:#ffffff;'><b>/erase </b><em>MSGID</em></a><br>\
+						<a style='color:#CCCCCC;'>Deletes message with specified ID<br>(regardless of it being sent before or after you joined)</a><br><br>\
+						<a style='color:#ffffff;'><b>/readd</b></a><br>\
+						<a style='color:#CCCCCC;'>Skips > Puts in WL > Moves to 1st</a><br><br>\
+						<a style='color:#ffffff;'><b>/swap @</b><em>NAME</em> <b>@</b><em>NAME</em></a><br>\
+						<a style='color:#CCCCCC;'>Swaps two people in the WaitList</a><br><br>\
+						<a style='color:#7174ff;'><b>------=[ Beta's Beta Script v0.5 ]=------</b></a><br>","#CCCCCC");
 				break;
 
 			default:
