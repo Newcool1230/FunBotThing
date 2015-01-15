@@ -187,7 +187,14 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.GRAB_UPDATE, function(obj){
 		var media = API.getMedia();
-		if (grabmsg){addChat("" + obj.user.username + " (ID " + obj.user.id + ") grabbed <a style='color:#fffdc4;'>[[" + h + ":" + m + ":" + s + "]]</a>","#c5e0ff");};
+		var d = new Date();
+		var h = d.getHours();
+		var m = d.getMinutes();
+		var s = d.getSeconds();
+		if (h < 10){h = "0" + h;}
+		if (m < 10){m = "0" + m;}
+		if (s < 10){s = "0" + s;}
+		if (grabmsg){addChat("" + obj.user.username + " (ID " + obj.user.id + ") grabbed <a style='color:#fffdc4;'>[" + h + ":" + m + ":" + s + "]</a>","#c5e0ff");};
 	});
 
 	var blunq = new Audio();
@@ -244,13 +251,13 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.VOTE_UPDATE, function(obj){
 		if (obj.vote == -1){
 			var d = new Date();
-			var h = d.getUTCHours();
-			var m = d.getUTCMinutes();
-			var s = d.getUTCSeconds();
+			var h = d.getHours();
+			var m = d.getMinutes();
+			var s = d.getSeconds();
 			if (h < 10){h = "0" + h;}
 			if (m < 10){m = "0" + m;}
 			if (s < 10){s = "0" + s;}
-			if (mehmsg){addChat("" + obj.user.username + " (ID " + obj.user.id + ") meh'ed this <a style='color:#fffdc4;'>[[" + h + ":" + m + ":" + s + "]]</a>","#ff8585");};
+			if (mehmsg){addChat("" + obj.user.username + " (ID " + obj.user.id + ") meh'ed this <a style='color:#fffdc4;'>[" + h + ":" + m + ":" + s + "]</a>","#ff8585");};
 		}
 	});
 
@@ -291,8 +298,15 @@ if(window.location.hostname === "plug.dj"){
 			var f = "";
 			var c = "#7774ff";
 		}
-			if (user.level > 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined <a style='color:#fffdc4;'>[[" + h + ":" + m + ":" + s + "]]</a>",c);};
-			if (user.level == 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined (Lvl 1) <a style='color:#fffdc4;'>[[" + h + ":" + m + ":" + s + "]]</a>","#fef8a0");};
+		var d = new Date();
+		var h = d.getHours();
+		var m = d.getMinutes();
+		var s = d.getSeconds();
+		if (h < 10){h = "0" + h;}
+		if (m < 10){m = "0" + m;}
+		if (s < 10){s = "0" + s;}
+		if (user.level > 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined <a style='color:#fffdc4;'>[" + h + ":" + m + ":" + s + "]</a>",c);};
+		if (user.level == 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined (Lvl 1) <a style='color:#fffdc4;'>[" + h + ":" + m + ":" + s + "]</a>","#fef8a0");};
 		JoinLeave(user);
 	};
 
@@ -304,7 +318,14 @@ if(window.location.hostname === "plug.dj"){
 			var f = "";
 			var c = "#7774ff";
 		}
-		if (joinmsg){addChat(f + user.username + " (ID " + user.id + ") left <a style='color:#fffdc4;'>[[" + h + ":" + m + ":" + s + "]]</a>",c);};
+		var d = new Date();
+		var h = d.getHours();
+		var m = d.getMinutes();
+		var s = d.getSeconds();
+		if (h < 10){h = "0" + h;}
+		if (m < 10){m = "0" + m;}
+		if (s < 10){s = "0" + s;}
+		if (joinmsg){addChat(f + user.username + " (ID " + user.id + ") left <a style='color:#fffdc4;'>[" + h + ":" + m + ":" + s + "]</a>",c);};
 		JoinLeave(user);
 	};
 
