@@ -92,6 +92,11 @@ if(window.location.hostname === "plug.dj"){
 	$("#search-input-field").attr({"maxlength":256})
 	$('.emoji-trollface').replaceWith('<span style="background: url(https://i.imgur.com/osBR8Jj.png); width: 16px; height: 16px;"></span>');
 	$('#dialog-container').css({left:'300px',top:'100px',width:'0px',height:'0px'});
+	$('#chat .disconnect').css({left:'-200px',height:'50px',width:'200px',border:'dotted 2px #F00'});
+	$('#chat .disconnect span').text('Connection lost');
+	$('#chat .disconnect span').css({top:'10px'});
+	$('#chat .spinner').hide();
+	//if ($('#chat .disconnect span').text() == "Potato"){$('#chat-input-field').hide();}
 
 	var autowoot = true;
 	var joinmsg = true;
