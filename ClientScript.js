@@ -827,40 +827,8 @@ if(window.location.hostname === "plug.dj"){
 				addChat("[Log cleared.]","#ececec");
 				break;
 
-			case "mutes":
-				break;
-
 			case "12":
 				ct('ᄅ⇂');
-				break;
-
-			case "txt":
-				if (msgOn){
-					msgOn = false;
-					addChat("[Warning turned off]","#ececec");
-				}else if(!msgOn){
-					msgOn = true;
-					addChat("[Warning every " + Limit + "min]","#ececec");
-					setTimeout(loop,5e4);
-				}
-				break;
-
-			case "check":
-				if (msg1){var n = 0;}
-				else if (!msg1){var n = 1;}
-				if (msgOn === true){
-					addChat("[" + Potato + " minutes remaining]","#ececec");
-					addChat("[Message is: " + mm[n] + "]","#ececec");
-				}else{
-					addChat("[Messages are disabled]","#ececec");
-					addChat("[Message is: " + mm[n] + "]","#ececec");
-				}
-				break;
-
-			case "send":
-				if (msg1){var n = 0;}
-				else if (!msg1){var n = 1;}
-				message(n);
 				break;
 
 			case "emojis":
@@ -911,36 +879,6 @@ if(window.location.hostname === "plug.dj"){
 		};
 	});
 
-	var mm = ["[Broadcast] Don't forget to check the OP list! http://bit.ly/dteoplist",
-	"[Broadcast] Don't forget to read our rules! https://bit.ly/rulesDTE "];
-	var msgOn = false;
-	var OneMin = 0;
-	var Limit = 60;
-	var Potato = Limit - OneMin;
-	var msg1 = true;
-
-	function message(n){
-		c(mm[n]);
-		msg1 = !msg1;
-	}
-
-	function loop(){
-		if (msgOn){
-			OneMin++;
-			Potato = Limit - OneMin;
-			addChat(Potato + " minutes remaining","#ececec");
-			if (OneMin >= Limit){
-				if (msg1){
-					message(0);
-				}else if(msg1){
-					message(1);
-				}
-				OneMin = 0;
-			}
-			setTimeout(loop,5e4);
-		}
-	}
-
 	//Stolen from Igor's script <3//
 	function addChat(text, color, state, size) {
 		var chat = $('#chat-messages'),
@@ -969,8 +907,7 @@ if(window.location.hostname === "plug.dj"){
 
 	aid();
 	function aid(){
-		addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br>\
-			Do <b>/thelp</b> for commands<br>","#ececec",true);
+		addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br>","#ececec",true);
 	}
 
 }else{
