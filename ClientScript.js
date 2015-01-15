@@ -584,7 +584,6 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.CHAT_COMMAND, function(data){
 		var msg = data;
 		var command = msg.substring(1).split(' ');
-		console.log("[COMMAND] - " + msg);
 		if(typeof command[2] != "undefined"){
 			for(var i = 2; i < command.length; i++){
 				command[1] = command[1] + ' ' + command[i];
@@ -593,6 +592,8 @@ if(window.location.hostname === "plug.dj"){
 		if (typeof command[1] == "undefined"){command[1] = "";}
 		else{command[1] = command[1] + " ";};
 		function ct(msg){API.sendChat(command[1] + msg);};
+
+		console.log("[COMMAND] " + command[0] + " || [ARGUMENT] " + command[1]);
 
 		switch(command[0].toLowerCase()){
 			case "timeout":
@@ -854,6 +855,34 @@ if(window.location.hostname === "plug.dj"){
 					API.moderateAddDJ(userID);
 				});
 				API.moderateForceSkip();
+				break;
+
+			case "swap":
+				var arg = command[1];
+				var n1 = arg.indexOf('@');
+				var n2 = arg.lastIndexOf('@');
+				var u1 = arg.slice(n1 + 1,n2 - 1).trim();
+				var u2 = arg.slice(n2 + 1).trim();
+				var id1;var id2;
+				for (var i = 0; i < API.getUsers().length; i++){
+					if (API.getUsers()[i].username == u1){
+						n1 = API.getWaitListPosition(API.getUsers()[i].id);
+						id1 = API.getUsers()[i].id;
+					}
+					if (API.getUsers()[i].username == u2){
+						n2 = API.getWaitListPosition(API.getUsers()[i].id);
+						id2 = API.getUsers()[i].id;
+					}
+				}
+				var posTime1 = setTimeout(function(){API.moderateMoveDJ(id1,n2);},250);
+				var posTime2 = setTimeout(function(){API.moderateMoveDJ(id2,n1);},750);
+				switch ("undefined"){
+					case typeof n1:case typeof n2:
+					case typeof u1:case typeof u2:
+					case typeof id1:case typeof id2:
+						clearTimeout(posTime1);
+						clearTimeout(posTime2);
+				}
 				break;
 
 			//p3
