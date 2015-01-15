@@ -570,18 +570,18 @@ if(window.location.hostname === "plug.dj"){
 			}
 
 			if (data.username == null){
-				addChat("<b><a style='color:#eaaeae;'>[User has not updated yet!]</a></b>","#CCCCCC");
+				addChat("<b><a style='color:#eaaeae;'>[User has not updated yet!]</a></b>","#CCCCCC",false,false,true);
 			}else{
-				addChat("<b>Name:</b> " + data.username + "<br><b>\
-				Blurb:</b> " + blurbTrue + "<br><b>\
-				ID:</b> " + data.id + "<br><b>\
-				Level:</b> " + data.level + "<br><b>\
-				Avatar:</b> " + data.avatarID + "<br><b>\
-				Status:</b> " + stt + "<br><b>\
-				Role:</b> " + g + "<br><b>\
-				Joined:</b> " + jnd + "<br><b>\
-				Badge:</b> " + bb + "<br><b>\
-				Slug:</b> <a style='color: " + profileColor + ";' href='/@/" + data.slug + "' target='_blank'>" + data.slug + "</a> " + hasProfile, "#CCCCCC");
+				addChat("<br><a style='color:#42a5dc;'><b>Name:</b></a> " + data.username + "<br><b>\
+				<a style='color:#42a5dc;'>Slug:</b></a> <a style='color: " + profileColor + ";' href='/@/" + data.slug + "' target='_blank'>" + data.slug + "</a> " + hasProfile + "<br><b>\
+				<a style='color:#42a5dc;'>Blurb:</b></a> " + blurbTrue + "<br><b>\
+				<a style='color:#42a5dc;'>ID:</b></a> " + data.id + "<br><b>\
+				<a style='color:#42a5dc;'>Level:</b></a> " + data.level + "<br><b>\
+				<a style='color:#42a5dc;'>Avatar:</b></a> " + data.avatarID + "<br><b>\
+				<a style='color:#42a5dc;'>Status:</b></a> " + stt + "<br><b>\
+				<a style='color:#42a5dc;'>Role:</b></a> " + g + "<br><b>\
+				<a style='color:#42a5dc;'>Joined:</b></a> " + jnd + "<br><b>\
+				<a style='color:#42a5dc;'>Badge:</b></a> " + bb + "<br>", "#CCCCCC",false,false,true);
 			}
 		});
 	}
@@ -890,6 +890,17 @@ if(window.location.hostname === "plug.dj"){
 				}
 				break;
 
+			case "ban":
+				$.ajax({
+					type: 'POST', 
+					url: 'https://plug.dj/_/bans/add', 
+					contentType: 'application/json',
+					data: '{"userID":' + command[1] + ',"reason":1,"duration":"f"}'
+					}).done(function(msg) {
+							console.log(msg);
+				});
+				break;
+
 			//p3
 			case "lockskip":case "skip":case "commands":case "nick":case "avail":
 			case "afk":case "work":case "sleep":case "join":case "leave":case "whoami":
@@ -918,6 +929,8 @@ if(window.location.hostname === "plug.dj"){
 						<a style='color:#CCCCCC;'>Skips > Puts in WL > Moves to 1st</a><br><br>\
 						<a style='color:#ffffff;'><b>/swap @</b><em>NAME</em> <b>@</b><em>NAME</em></a><br>\
 						<a style='color:#CCCCCC;'>Swaps two people in the WaitList</a><br><br>\
+						<a style='color:#ffaaaa;'><b>/ban </b><em>ID</em></a><br>\
+						<a style='color:#CCCCCC;'>Permabans an user by its ID</a><br><br>\
 						<a style='color:#7174ff;'><b>------=[ Beta's Beta Script v0.5 ]=------</b></a><br>","#CCCCCC");
 				break;
 
@@ -928,7 +941,7 @@ if(window.location.hostname === "plug.dj"){
 	});
 
 	//Stolen from Igor's script <3//
-	function addChat(text, color, state, hasBottom) {
+	function addChat(text, color, state, hasBottom, isNotCenter) {
 		var chat = $('#chat-messages'),
 			a = chat.scrollTop() > chat[0].scrollHeight - chat.height() - 28;
 
@@ -936,13 +949,17 @@ if(window.location.hostname === "plug.dj"){
 			color = "#99ffd7";
 		}
 
-		if (hasBottom){
-			chat.append("<div class='update betabot-update' style='border-left: double 6px " + color + "; border-bottom: double 6px " + color + "'><center><span class='betabot-text' style='color: " + color + "; font-size: 11px;'>" + text + "<br></span></center></div>");
+		if (isNotCenter){
+			chat.append("<div class='update betabot-update'><div class='text-margin' style='margin-left: 10px;'><span class='betabot-text' style='color: " + color + "; font-size: 12px;'>" + text + "<br></span></div></div>");
 		}else{
-			if (state){
-				chat.append("<div class='update betabot-update' style='border-left: double 6px " + color + ";'><center><span class='betabot-text' style='color: " + color + "; font-size: 11px;'>" + text + "<br></span></center></div>");
+			if (hasBottom){
+				chat.append("<div class='update betabot-update' style='border-left: double 6px " + color + "; border-bottom: double 6px " + color + "'><center><span class='betabot-text' style='color: " + color + "; font-size: 11px;'>" + text + "<br></span></center></div>");
 			}else{
-				chat.append("<div class='update betabot-update'><center><span class='betabot-text' style='color: " + color + ";'>" + text + "<br></span></center></div>");
+				if (state){
+					chat.append("<div class='update betabot-update' style='border-left: double 6px " + color + "; margin-top:5px;'><center><span class='betabot-text' style='color: " + color + "; font-size: 11px;'>" + text + "<br></span></center></div>");
+				}else{
+					chat.append("<div class='update betabot-update' style='margin-top:5px;'><center><span class='betabot-text' style='color: " + color + ";'>" + text + "<br></span></center></div>");
+				}
 			}
 		}
 
