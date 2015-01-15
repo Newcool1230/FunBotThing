@@ -327,15 +327,14 @@ if(window.location.hostname === "plug.dj"){
 	}
 	autojoin();
 
-	API.on(API.ADVANCE, mediaupdate);
-	function mediaupdate(obj){
+	API.on(API.ADVANCE, function(obj){
 		if (songup){
-			l(":green_heart: " + obj.lastPlay.score.positive + "     |     :purple_heart: " + obj.lastPlay.score.grabs + "     |     :broken_heart: " + obj.lastPlay.score.negative,false);
-			addChat("<b>       Now playing:</b> " + obj.media.title + "<br>\
-						<b>     Author:</b> " + obj.media.author,"#ececec",true,true);
-			addChat("<b>       Current DJ:</b> " + obj.dj.username + " (ID " + obj.dj.id + ")","#ececec",true,true);
+			l(":green_heart: " + obj.lastPlay.score.positive + "&nbsp;&nbsp;|&nbsp;&nbsp;:purple_heart: " + obj.lastPlay.score.grabs + "&nbsp;&nbsp;|&nbsp;&nbsp;:broken_heart: " + obj.lastPlay.score.negative,false);
+			addChat("<br><a style='color:#e6ff99;'><b>Now playing:</b></a> " + obj.media.title + "<br>\
+					<a style='color:#e6ff99;'><b>Author:</b></a> " + obj.media.author + "<br>\
+					<a style='color:#e6ff99;'><b>Current DJ:</b></a> " + obj.dj.username + " (ID " + obj.dj.id + ")<br>","#ececec",true,true);
 		}
-	}
+	});
 
 	function deleteAll(){
 		var user = API.getUser();
@@ -921,12 +920,6 @@ if(window.location.hostname === "plug.dj"){
 	var Potato = Limit - OneMin;
 	var msg1 = true;
 
-	aid();
-	function aid(){
-		addChat("Beta's Client Support Script - Activated","#ececec",true);
-		addChat("Do /thelp for commands","#ececec",true);
-	}
-
 	function message(n){
 		c(mm[n]);
 		msg1 = !msg1;
@@ -973,6 +966,12 @@ if(window.location.hostname === "plug.dj"){
 			chat.scrollTop(chat[0].scrollHeight);
 		if (chat.children().length >= 512)
 			chat.children().first().remove();
+	}
+
+	aid();
+	function aid(){
+		addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br>\
+			Do <b>/thelp</b> for commands<br>","#ececec",true);
 	}
 
 }else{
