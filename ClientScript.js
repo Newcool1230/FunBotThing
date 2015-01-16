@@ -6,7 +6,7 @@ if(window.location.hostname === "plug.dj"){
 		addChat("<img src='https://i.imgur.com/Z7LDEp0.gif'></img><br><a style='color:#FF0000;font-size:15px;'><b>[WARNING]</b></a><a style='font-size:15px;'> You already had BetaBot activated. To update, please refresh and then click bookmark again. Reclicking doesn't work.</a>","#ff7575",true,true);
 	}else{
 
-	addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br>","#ececec",true,true);
+	addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f;'><b>Beta v0.5.1</b></a>","#ececec",true,true);
 
 	var betaWasOn = true;
 	var u = API.getUser().username;
@@ -368,7 +368,7 @@ if(window.location.hostname === "plug.dj"){
 		if (songup){
 			//l(":green_heart: " + obj.lastPlay.score.positive + "&nbsp;&nbsp;|&nbsp;&nbsp;:purple_heart: " + obj.lastPlay.score.grabs + "&nbsp;&nbsp;|&nbsp;&nbsp;:broken_heart: " + obj.lastPlay.score.negative,false);
 			addChat("<br><img src='https://i.imgur.com/fhagHZg.png'></img><br>\
-					<b><a style='color:#90ad2f;'>" + obj.lastPlay.score.positive + "</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a style='color:#aa74ff;'>" + obj.lastPlay.score.grabs + "</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a style='color:#c42e3b;'>" + obj.lastPlay.score.negative + "</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a style='color:#646b7e;'>" + API.getUsers().length + "</a></b><br>\
+					<b><a style='color:#90ad2f;'>" + obj.lastPlay.score.positive + "</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style='color:#aa74ff;'>" + obj.lastPlay.score.grabs + "</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style='color:#c42e3b;'>" + obj.lastPlay.score.negative + "</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style='color:#646b7e;'>" + API.getUsers().length + "</a></b><br>\
 					<a style='color:#e6ff99;'><b>Now playing:</b></a> " + obj.media.title + "<br>\
 					<a style='color:#e6ff99;'><b>Author:</b></a> " + obj.media.author + "<br>\
 					<a style='color:#e6ff99;'><b>Current DJ:</b></a> " + obj.dj.username + " (ID " + obj.dj.id + ")<br>","#ececec",true);
@@ -982,8 +982,8 @@ if(window.location.hostname === "plug.dj"){
 
 	//Stolen from Igor's script <3//
 	function addChat(text, color, state, hasBottom, isNotCenter) {
-		var chat = $('#chat-messages'),
-			a = chat.scrollTop() > chat[0].scrollHeight - chat.height() - 28;
+		var chat = $('#chat-messages');
+		var a = chat.scrollTop() > chat[0].scrollHeight - chat.height() - 28;
 
 		if (color == undefined){
 			color = "#99ffd7";
@@ -1003,11 +1003,12 @@ if(window.location.hostname === "plug.dj"){
 			}
 		}
 
-
-		if (a)
-			chat.scrollTop(chat[0].scrollHeight);
-		if (chat.children().length >= 512)
+		if (a){
+			$('#chat-messages').scrollTop(5000);
+		}
+		if (chat.children().length >= 512){
 			chat.children().first().remove();
+		}
 	}
 	}
 }else{
