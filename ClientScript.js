@@ -6,7 +6,7 @@ if(window.location.hostname === "plug.dj"){
 		addChat("<img src='https://i.imgur.com/Z7LDEp0.gif'></img><br><a style='color:#FF0000;font-size:15px;'><b>[WARNING]</b></a><a style='font-size:15px;'> You already had BetaBot activated. To update, please refresh and then click bookmark again. Reclicking doesn't work.</a>","#ff7575",true,true);
 	}else{
 
-	addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f;'><b>Beta v0.5.1</b></a>","#ececec",true,true);
+	addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f; font-size:10px'><em>Beta v0.5.1</em></a>","#ececec",true,true);
 
 	var betaWasOn = true;
 	var u = API.getUser().username;
@@ -573,18 +573,28 @@ if(window.location.hostname === "plug.dj"){
 			if (data.gRole == 3){var g = "Brand Ambassador (" + data.gRole + ")";};
 			if (data.gRole > 3){var g = "Admin (" + data.gRole + ")";};
 
-			//** Supposed to be working but isn't */
-			var votestats = 'None';
-			var votestate = 0;
+			//** Supposed to be working but isn't **//
+			var votestats = "<a style='color:#646b7e;'>Not in the room</a>";
+			var grabstats = "";
+			var votestate;
+			var grabstate;
 			for (var i = 0; i < API.getUsers().length; i++){
 				if (API.getUsers()[i].username == data.username){
 					votestate = API.getUsers()[i].vote;
+					grabstate = API.getUsers()[i].grab;
 				}
 			}
-			if (votestate == 1){votestats == "Woot!"}
-			else if (votestate == 0){votestats == "None"}
-			else if (votestate == -1){votestats == "Meh"}
-			//** Supposed to be working but isn't */
+			if (votestate == 1){votestats = "<a style='color:#90ad2f;'>Woot!</a>"}
+			else if (votestate == 0){votestats = "<a style='color:#646b7e;'>None</a>"}
+			else if (votestate == -1){votestats = "<a style='color:#c42e3b;'>Meh</a>"}
+			if (grabstate === true){grabstats = "| <a style='color:#aa74ff;'>Grabbed!</a>"}
+			else if (grabstate === false){grabstats = " <a style='color:#646b7e;'>| Didn't grab</a>"}
+
+			if (API.getDJ().username == data.username){
+				votestats = "<a style='color:#646b7e;'>Is currently DJ'ing</a>";
+				grabstats = "";
+			}
+			//** Supposed to be working but isn't **//
 
 			var blurbTrue = "<a style='color:#eaaeae;'>[None]</a>";
 			if (data.blurb != null){
@@ -610,7 +620,8 @@ if(window.location.hostname === "plug.dj"){
 				<a style='color:#42a5dc;'>Status:</b></a> " + stt + "<br><b>\
 				<a style='color:#42a5dc;'>Role:</b></a> " + g + "<br><b>\
 				<a style='color:#42a5dc;'>Joined:</b></a> " + jnd + "<br><b>\
-				<a style='color:#42a5dc;'>Badge:</b></a> " + bb + "<br>", "#CCCCCC",false,false,true);
+				<a style='color:#42a5dc;'>Badge:</b></a> " + bb + "<br><b>\
+				<a style='color:#42a5dc;'>Vote:</b></a> " + votestats + grabstats,"#CCCCCC",false,false,true);
 			}
 		});
 	}
@@ -965,10 +976,10 @@ if(window.location.hostname === "plug.dj"){
 						<a style='color:#CCCCCC;'>Deletes message from you, using Array position</a><br><br>\
 						<a style='color:#ffffff;'><b>/erase </b><em>MSGID</em></a><br>\
 						<a style='color:#CCCCCC;'>Deletes message with specified ID<br>(regardless of it being sent before or after you joined)</a><br><br>\
-						<a style='color:#ffffff;'><b>/readd</b></a><br>\
-						<a style='color:#CCCCCC;'>Skips > Puts in WL > Moves to 1st</a><br><br>\
-						<a style='color:#ffffff;'><b>/swap @</b><em>NAME</em> <b>@</b><em>NAME</em></a><br>\
-						<a style='color:#CCCCCC;'>Swaps two people in the WaitList</a><br><br>\
+						<a style='color:#e6ff99;'><b>/readd</b></a><br>\
+						<a style='color:#e6ff99;'>Skips > Puts in WL > Moves to 1st<br>BUGGED</a><br><br>\
+						<a style='color:#e6ff99;'><b>/swap @</b><em>NAME</em> <b>@</b><em>NAME</em></a><br>\
+						<a style='color:#e6ff99;'>Swaps two people in the WaitList<br>BUGGED</a><br><br>\
 						<a style='color:#ffaaaa;'><b>/ban </b><em>ID</em></a><br>\
 						<a style='color:#CCCCCC;'>Permabans an user by its ID</a><br><br>\
 						<a style='color:#7174ff;'><b>------=[ Beta's Beta Script v0.5 ]=------</b></a><br>","#CCCCCC");
@@ -1004,7 +1015,7 @@ if(window.location.hostname === "plug.dj"){
 		}
 
 		if (a){
-			$('#chat-messages').scrollTop(5000);
+			$('#chat-messages').scrollTop(50000);
 		}
 		if (chat.children().length >= 512){
 			chat.children().first().remove();
