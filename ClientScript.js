@@ -23,19 +23,19 @@ if(window.location.hostname === "plug.dj"){
 			<div id="xtitle" class="xtxt">&nbsp;</div>\
 		</section>\
 		<section id="xmain">\
-			<div id="xjoinmsg" class="xbutton">Join Message</div>\
-			<div id="xgrabmsg" class="xbutton">Grab Message</div>\
+			<div id="xjoinmsg" class="xbutton active">Join Message</div>\
+			<div id="xgrabmsg" class="xbutton active">Grab Message</div>\
 			<div id="xmehmsg" class="xbutton">Meh Message</div>\
-			<div id="xsongup" class="xbutton">Song Updates</div>\
-			<div id="xautowoot" class="xbutton">AutoWoot</div>\
+			<div id="xsongup" class="xbutton active">Song Updates</div>\
+			<div id="xautowoot" class="xbutton active">AutoWoot</div>\
 			<div id="xautojoin" class="xbutton">AutoJoin</div>\
 			<div id="xautograb" class="xbutton">AutoGrab</div>\
 			<div id="xautocap" class="xbutton">AutoCap</div>\
 			<div id="xafk" class="xbutton">AFK</div>\
-			<div id="xpuff" class="xbutton">THe Puff</div>\
+			<div id="xline" class="xbutton active">Bootleg Inline Imgs</div>\
 		</section>\
 		<section id="xmod">\
-			<div id="xtimeskip" class="xbutton">8min warning</div>\
+			<div id="xtimeskip" class="xbutton active">8min warning</div>\
 			<div id="xdel" class="xbutton">Delete All Chat</div>\
 			<div id="xmuter" class="xbutton">Alt Muter</div>\
 		</section>\
@@ -54,7 +54,7 @@ if(window.location.hostname === "plug.dj"){
 				font-family: "Open Sans", sans-serif;\
 				background-image:url(https://i.imgur.com/ung12ij.png)\
 			}\
-			#xprequel .ativo {color: #42A5DC;}\
+			#xprequel .active {color: #42A5DC;}\
 			#xmain {\
 				position: absolute;\
 				top: 95px;\
@@ -75,12 +75,12 @@ if(window.location.hostname === "plug.dj"){
 				z-index: 10;\
 				font-family: "Open Sans", sans-serif;\
 			}\
-			#xmain .ativo {color: #42A5DC;}\
-			#xmod .ativo {color: #42A5DC;}\
+			#xmain .active {color: #42A5DC;}\
+			#xmod .active {color: #42A5DC;}\
 			.xtxt: {color: #3366FF; padding: 2px 15px;}\
-			.xtxt:hover, #xprequel .ativo:hover {color: #DCDCDC;}\
+			.xtxt:hover, #xprequel .active:hover {color: #DCDCDC;}\
 			.xbutton: {color: #D1D1D1; padding: 2px 15px;}\
-			.xbutton:hover, #xmain .ativo:hover {cursor: pointer; color: #89be6c;}\
+			.xbutton:hover, #xmain .active:hover {cursor: pointer; color: #89be6c;}\
 		</style>\
 	';
 
@@ -119,25 +119,19 @@ if(window.location.hostname === "plug.dj"){
 	var pufflock = false;
 	var afkmsg = false;
 	var timeskip = true;
+	var inlineOn = true;
 
-	$('#xautowoot').toggleClass('ativo');
-	$('#xjoinmsg').toggleClass('ativo');
-	$('#xgrabmsg').toggleClass('ativo');
-	$('#xmehmsg').toggleClass('ativo');
-	$('#xsongup').toggleClass('ativo');
-	$('#xtimeskip').toggleClass('ativo');
-
-	$('#xjoinmsg').on('click',	function(){ joinmsg = !joinmsg;	$(this).toggleClass('ativo');});
-	$('#xgrabmsg').on('click',	function(){ grabmsg = !grabmsg;	$(this).toggleClass('ativo');});
-	$('#xmehmsg').on('click',	function(){ mehmsg = !mehmsg;	$(this).toggleClass('ativo');});
-	$('#xautocap').on('click',	function(){ cap = !cap;			$(this).toggleClass('ativo');});
-	$('#xautograb').on('click',	function(){ autograb = !autograb;$(this).toggleClass('ativo');});
-	$('#xautojoin').on('click',	function(){ autolock = !autolock;$(this).toggleClass('ativo');});
-	$('#xautowoot').on('click',	function(){ autowoot = !autowoot;$(this).toggleClass('ativo');});
-	$('#xsongup').on('click',	function(){ songup = !songup;	$(this).toggleClass('ativo');});
-	$('#xpuff').on('click',		function(){ pufflock = !pufflock;$(this).toggleClass('ativo');});
-	$('#xmuter').on('click',	function(){ mutedood = !mutedood;$(this).toggleClass('ativo');});
-	$('#xafk').on('click',		function(){ afkmsg = !afkmsg;	$(this).toggleClass('ativo');});
+	$('#xjoinmsg').on('click',	function(){ joinmsg = !joinmsg;	$(this).toggleClass('active');});
+	$('#xgrabmsg').on('click',	function(){ grabmsg = !grabmsg;	$(this).toggleClass('active');});
+	$('#xmehmsg').on('click',	function(){ mehmsg = !mehmsg;	$(this).toggleClass('active');});
+	$('#xautocap').on('click',	function(){ cap = !cap;			$(this).toggleClass('active');});
+	$('#xautograb').on('click',	function(){ autograb = !autograb;$(this).toggleClass('active');});
+	$('#xautojoin').on('click',	function(){ autolock = !autolock;$(this).toggleClass('active');});
+	$('#xautowoot').on('click',	function(){ autowoot = !autowoot;$(this).toggleClass('active');});
+	$('#xsongup').on('click',	function(){ songup = !songup;	$(this).toggleClass('active');});
+	$('#xline').on('click',		function(){ inlineOn = !inlineOn;$(this).toggleClass('active');});
+	$('#xmuter').on('click',	function(){ mutedood = !mutedood;$(this).toggleClass('active');});
+	$('#xafk').on('click',		function(){ afkmsg = !afkmsg;	$(this).toggleClass('active');});
 	$('#xdel').on('click',		function(){
 		var r = confirm("Delete entire chat on log?");
 		if (r === true) {
@@ -146,7 +140,7 @@ if(window.location.hostname === "plug.dj"){
 			l("[Command DELETEALL denied]",true);
 		};
 	});
-	$('#xtimeskip').on('click',	function(){ timeskip = !timeskip;$(this).toggleClass('ativo');});
+	$('#xtimeskip').on('click',	function(){ timeskip = !timeskip;$(this).toggleClass('active');});
 
 	$("#chat-messages").click(displayid);
 	$("#dj-canvas").mousemove(displayid);
@@ -233,6 +227,7 @@ if(window.location.hostname === "plug.dj"){
 		}
 
 			//Bootleg Inline Images//
+		if (inlineOn){
 		var pn = ['.png','.gif','.jpg','.jpeg']
 		for (var i = 0; i < pn.length; i++){
 			var ht = msg.indexOf('http');
@@ -250,6 +245,7 @@ if(window.location.hostname === "plug.dj"){
 			if (chat.scrollTop() > chat[0].scrollHeight - chat.height() - 50){
 				chat.scrollTop(chat[0].scrollHeight);
 			}
+		}
 		}
 	});
 
@@ -658,6 +654,10 @@ if(window.location.hostname === "plug.dj"){
 
 			case "unmutedood":
 				API.moderateUnmuteUser(save);
+				break;
+
+			case "thepuff":
+				pufflock = !pufflock;
 				break;
 
 			case "sacrifice":
