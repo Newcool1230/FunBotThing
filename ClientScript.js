@@ -489,6 +489,10 @@ if(window.location.hostname === "plug.dj"){
 			url: 'https://plug.dj/_/users/' + id
 		}).done(function(user) {
 			data = user.data[0];
+		
+		if (data.username == null){
+			addChat("<b><a style='color:#eaaeae;'>[User has not updated yet!]</a></b>","#CCCCCC",false,false,true);
+		}else{
 
 	//STATUS
 			switch (data.status){
@@ -600,9 +604,12 @@ if(window.location.hostname === "plug.dj"){
 			else if (grabstate === false){grabstats = " <a style='color:#646b7e;'>| Didn't grab</a> (<em>false</em>)"}
 
 			if (API.getDJ().username == data.username){
-				votestats = "<a style='color:#646b7e;'>Is currently DJ'ing</a>";
+				votestats = "<a style='color:#646b7e;'>(is currently DJ'ing)</a>";
 				grabstats = "";
 			}
+
+			var itsYou = false;
+			if (typeof userInfo != "undefined" && userInfo.username == API.getUser().username){itsYou = true;};
 
 	//BLURB
 			var blurbTrue = "<a style='color:#eaaeae;'>[None]</a>";
@@ -611,10 +618,18 @@ if(window.location.hostname === "plug.dj"){
 			}
 	//FRIEND
 			var isFriend = "";
-			if (userInfo.friend == true){
+			if (typeof userInfo != "undefined" && userInfo.friend == true){
 				isFriend = "Yes (<em>true</em>)";
 			}else{
 				isFriend = "No (<em>false</em>)";
+			}
+			if (itsYou){isFriend = "<a style='color:#646b7e;'>You can't be friends with yourself</a>";}
+
+	//LANGUAGE
+			var lang = "";
+			if (typeof userInfo != "undefined"){
+				lang = userInfo.language + " <a style='color:#646b7e;'>(<em>inaccurate</em>)</a>";
+				if (itsYou){lang = userInfo.language;};
 			}
 
 	//PROFILE
@@ -625,22 +640,19 @@ if(window.location.hostname === "plug.dj"){
 				profileColor = "#aec9ea";
 			}
 
-			if (data.username == null){
-				addChat("<b><a style='color:#eaaeae;'>[User has not updated yet!]</a></b>","#CCCCCC",false,false,true);
-			}else{
-				addChat("<br><a style='color:#42a5dc;'><b>Name:</b></a> " + data.username + "<br><b>\
-				<a style='color:#42a5dc;'>Slug:</b></a> <a style='color: " + profileColor + ";' href='/@/" + data.slug + "' target='_blank'>" + data.slug + "</a> " + hasProfile + "<br><b>\
-				<a style='color:#42a5dc;'>Blurb:</b></a> " + blurbTrue + "<br><b>\
-				<a style='color:#42a5dc;'>ID:</b></a> " + data.id + "<br><b>\
-				<a style='color:#42a5dc;'>Level:</b></a> " + data.level + "<br><b>\
-				<a style='color:#42a5dc;'>Avatar:</b></a> " + data.avatarID + "<br><b>\
-				<a style='color:#42a5dc;'>Status:</b></a> " + stt + "<br><b>\
-				<a style='color:#42a5dc;'>Role:</b></a> " + g + "<br><b>\
-				<a style='color:#42a5dc;'>Joined:</b></a> " + jnd + "<br><b>\
-				<a style='color:#42a5dc;'>Badge:</b></a> " + bb + "<br><b>\
-				<a style='color:#42a5dc;'>Friend:</b></a> " + isFriend + "<br><b>\
-				<a style='color:#42a5dc;'>Language:</b></a> " + userInfo.language + " (<em>inaccurate</em>)<br><b>\
-				<a style='color:#42a5dc;'>Vote:</b></a> " + votestats + grabstats,"#CCCCCC",false,false,true);
+			addChat("<br><a style='color:#42a5dc;'><b>Name:</b></a> " + data.username + "<br><b>\
+			<a style='color:#42a5dc;'>Slug:</b></a> <a style='color: " + profileColor + ";' href='/@/" + data.slug + "' target='_blank'>" + data.slug + "</a> " + hasProfile + "<br><b>\
+			<a style='color:#42a5dc;'>Blurb:</b></a> " + blurbTrue + "<br><b>\
+			<a style='color:#42a5dc;'>ID:</b></a> " + data.id + "<br><b>\
+			<a style='color:#42a5dc;'>Level:</b></a> " + data.level + "<br><b>\
+			<a style='color:#42a5dc;'>Avatar:</b></a> " + data.avatarID + "<br><b>\
+			<a style='color:#42a5dc;'>Status:</b></a> " + stt + "<br><b>\
+			<a style='color:#42a5dc;'>Role:</b></a> " + g + "<br><b>\
+			<a style='color:#42a5dc;'>Joined:</b></a> " + jnd + "<br><b>\
+			<a style='color:#42a5dc;'>Badge:</b></a> " + bb + "<br><b>\
+			<a style='color:#42a5dc;'>Friend:</b></a> " + isFriend + "<br><b>\
+			<a style='color:#42a5dc;'>Language:</b></a> " + lang + "<br><b>\
+			<a style='color:#42a5dc;'>Vote:</b></a> " + votestats + grabstats,"#CCCCCC",false,false,true);
 			}
 		});
 	}
