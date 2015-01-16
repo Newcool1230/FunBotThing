@@ -365,7 +365,7 @@ if(window.location.hostname === "plug.dj"){
 	API.on(API.ADVANCE, function(obj){
 		if (songup){
 			//l(":green_heart: " + obj.lastPlay.score.positive + "&nbsp;&nbsp;|&nbsp;&nbsp;:purple_heart: " + obj.lastPlay.score.grabs + "&nbsp;&nbsp;|&nbsp;&nbsp;:broken_heart: " + obj.lastPlay.score.negative,false);
-			addChat("<br><img src='https://i.imgur.com/5omgL6n.png'></img><br>\
+			addChat("<br><img src='https://i.imgur.com/fhagHZg.png'></img><br>\
 					<b><a style='color:#90ad2f;'>" + obj.lastPlay.score.positive + "</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a style='color:#aa74ff;'>" + obj.lastPlay.score.grabs + "</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a style='color:#c42e3b;'>" + obj.lastPlay.score.negative + "</a>&nbsp;&nbsp;|&nbsp;&nbsp;" + API.getUsers().length + "</b><br>\
 					<a style='color:#e6ff99;'><b>Now playing:</b></a> " + obj.media.title + "<br>\
 					<a style='color:#e6ff99;'><b>Author:</b></a> " + obj.media.author + "<br>\
@@ -890,6 +890,7 @@ if(window.location.hostname === "plug.dj"){
 				break;
 
 			case "swap":
+				//BUGGED!
 				var arg = command[1];
 				var n1 = arg.indexOf('@');
 				var n2 = arg.lastIndexOf('@');
@@ -906,7 +907,9 @@ if(window.location.hostname === "plug.dj"){
 						id2 = API.getUsers()[i].id;
 					}
 				}
-				var posTime1 = setTimeout(function(){API.moderateMoveDJ(id1,n2);},250);
+				if (n1 == -1){API.moderateAddDJ(id1);n1 = API.getWaitList().length;}
+				if (n2 == -1){API.moderateAddDJ(id2);n2 = API.getWaitList().length;}
+				var posTime1 = setTimeout(function(){API.moderateMoveDJ(id1,n2);},500);
 				var posTime2 = setTimeout(function(){API.moderateMoveDJ(id2,n1);},750);
 				switch ("undefined"){
 					case typeof n1:case typeof n2:
@@ -914,6 +917,10 @@ if(window.location.hostname === "plug.dj"){
 					case typeof id1:case typeof id2:
 						clearTimeout(posTime1);
 						clearTimeout(posTime2);
+						console.log("[ERROR]");
+						console.log("n1 " + n1 + " | n2 " + n2);
+						console.log("u1 " + u1 + " | u2 " + u2);
+						console.log("id1 " + id1 + " | id2 " + id2);
 				}
 				break;
 
