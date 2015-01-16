@@ -625,13 +625,6 @@ if(window.location.hostname === "plug.dj"){
 			}
 			if (itsYou){isFriend = "<a style='color:#646b7e;'>You can't be friends with yourself</a>";}
 
-	//LANGUAGE
-			var lang = "";
-			if (typeof userInfo != "undefined"){
-				lang = userInfo.language + " <a style='color:#646b7e;'>(<em>inaccurate</em>)</a>";
-				if (itsYou){lang = userInfo.language;};
-			}
-
 	//PROFILE
 			var hasProfile = "<a style='color:#eaaeae;'>[No profile yet]</a>";
 			var profileColor = "#eaaeae";
@@ -651,7 +644,6 @@ if(window.location.hostname === "plug.dj"){
 			<a style='color:#42a5dc;'>Joined:</b></a> " + jnd + "<br><b>\
 			<a style='color:#42a5dc;'>Badge:</b></a> " + bb + "<br><b>\
 			<a style='color:#42a5dc;'>Friend:</b></a> " + isFriend + "<br><b>\
-			<a style='color:#42a5dc;'>Language:</b></a> " + lang + "<br><b>\
 			<a style='color:#42a5dc;'>Vote:</b></a> " + votestats + grabstats,"#CCCCCC",false,false,true);
 			}
 		});
