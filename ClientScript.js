@@ -193,7 +193,7 @@ if(window.location.hostname === "plug.dj"){
 		if (h < 10){h = "0" + h;}
 		if (m < 10){m = "0" + m;}
 		if (s < 10){s = "0" + s;}
-		if (grabmsg){addChat("" + obj.user.username + " (ID " + obj.user.id + ") grabbed <br><a style='color:#dddddd;font-size:10px;'>[" + h + ":" + m + ":" + s + "]</a>","#c5e0ff");};
+		if (grabmsg){addChat("" + obj.user.username + " (ID " + obj.user.id + ") grabbed <br><a style='color:#dddddd;font-size:11px;'>[" + h + ":" + m + ":" + s + "]</a>","#c5e0ff");};
 	});
 
 	var blunq = new Audio();
@@ -256,7 +256,7 @@ if(window.location.hostname === "plug.dj"){
 			if (h < 10){h = "0" + h;}
 			if (m < 10){m = "0" + m;}
 			if (s < 10){s = "0" + s;}
-			if (mehmsg){addChat("" + obj.user.username + " (ID " + obj.user.id + ") meh'ed this <br><a style='color:#dddddd;font-size:10px;'>[" + h + ":" + m + ":" + s + "]</a>","#ff8585");};
+			if (mehmsg){addChat("" + obj.user.username + " (ID " + obj.user.id + ") meh'ed this <br><a style='color:#dddddd;font-size:11px;'>[" + h + ":" + m + ":" + s + "]</a>","#ff8585");};
 		}
 	});
 
@@ -304,8 +304,8 @@ if(window.location.hostname === "plug.dj"){
 		if (h < 10){h = "0" + h;}
 		if (m < 10){m = "0" + m;}
 		if (s < 10){s = "0" + s;}
-		if (user.level > 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined <br><a style='color:#dddddd;font-size:10px;'>[" + h + ":" + m + ":" + s + "]</a>",c);};
-		if (user.level == 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined (Lvl 1) <br><a style='color:#dddddd;font-size:10px;'>[" + h + ":" + m + ":" + s + "]</a>","#fef8a0");};
+		if (user.level > 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined <br><a style='color:#dddddd;font-size:11px;'>[" + h + ":" + m + ":" + s + "]</a>",c);};
+		if (user.level == 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined (Lvl 1) <br><a style='color:#dddddd;font-size:11px;'>[" + h + ":" + m + ":" + s + "]</a>","#fef8a0");};
 		JoinLeave(user);
 	};
 
@@ -324,7 +324,7 @@ if(window.location.hostname === "plug.dj"){
 		if (h < 10){h = "0" + h;}
 		if (m < 10){m = "0" + m;}
 		if (s < 10){s = "0" + s;}
-		if (joinmsg){addChat(f + user.username + " (ID " + user.id + ") left <br><a style='color:#dddddd;font-size:10px;'>[" + h + ":" + m + ":" + s + "]</a>",c);};
+		if (joinmsg){addChat(f + user.username + " (ID " + user.id + ") left <br><a style='color:#dddddd;font-size:11px;'>[" + h + ":" + m + ":" + s + "]</a>",c);};
 		JoinLeave(user);
 	};
 
@@ -980,7 +980,7 @@ if(window.location.hostname === "plug.dj"){
 			chat.append("<div class='update betabot-update'><div class='text-margin' style='margin-left: 10px;'><span class='betabot-text' style='color: " + color + "; font-size: 12px;'>" + text + "<br></span></div></div>");
 		}else{
 			if (hasBottom){
-				chat.append("<div class='update betabot-update' style='border-left: double 6px " + color + "; border-bottom: double 6px " + color + "'><center><span class='betabot-text' style='color: " + color + "; font-size: 12px;'>" + text + "<br></span></center></div>");
+				chat.append("<div class='update betabot-update' style='border-left: double 6px " + color + "; border-bottom: double 6px " + color + "'><center><span class='betabot-text' style='color: " + color + "; font-size: 13px;'>" + text + "<br></span></center></div>");
 			}else{
 				if (state){
 					chat.append("<div class='update betabot-update' style='border-left: double 6px " + color + "; margin-top:5px;margin-bottom:5px;'><center><span class='betabot-text' style='color: " + color + "; font-size: 12px;'>" + text + "<br></span></center></div>");
