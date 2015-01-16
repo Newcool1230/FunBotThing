@@ -489,6 +489,8 @@ if(window.location.hostname === "plug.dj"){
 			url: 'https://plug.dj/_/users/' + id
 		}).done(function(user) {
 			data = user.data[0];
+
+	//STATUS
 			switch (data.status){
 				case 0:	var stt = "Available (0)";break;
 				case 1:	var stt = "Away (1)";break;
@@ -497,6 +499,8 @@ if(window.location.hostname === "plug.dj"){
 				case 4:	var stt = "Offline / Undefined (4?)";break;
 				default:var stt = "Wot.";
 			}
+
+	//BADGE
 			switch(data.badge){
 				case "bt":			var bb = "Beta Tester (" + data.badge + ")";break;
 				case "ss":			var bb = "Plug SuperStar (" + data.badge + ")";break;
@@ -543,6 +547,8 @@ if(window.location.hostname === "plug.dj"){
 					}
 					break;
 			}
+
+	//JOINED
 			var jin = data.joined.split('-');
 			var lk = jin[2].split(' ');
 			var lj = lk[1].split('.');
@@ -569,11 +575,13 @@ if(window.location.hostname === "plug.dj"){
 			}
 			var jnd = mnt + " " + lk[0] + day +  " " + jin[0] + " at " + lj[0];
 
+	//ROLE
 			if (data.gRole < 3){var g = "Regular (" + data.gRole + ")";};
 			if (data.gRole == 3){var g = "Brand Ambassador (" + data.gRole + ")";};
 			if (data.gRole > 3){var g = "Admin (" + data.gRole + ")";};
 
-			//** Supposed to be working but isn't **//
+	//VOTE
+			var userInfo;
 			var votestats = "<a style='color:#646b7e;'>Not in the room</a>";
 			var grabstats = "";
 			var votestate;
@@ -582,30 +590,39 @@ if(window.location.hostname === "plug.dj"){
 				if (API.getUsers()[i].username == data.username){
 					votestate = API.getUsers()[i].vote;
 					grabstate = API.getUsers()[i].grab;
+					userInfo = API.getUsers()[i];
 				}
 			}
-			if (votestate == 1){votestats = "<a style='color:#90ad2f;'>Woot!</a>"}
-			else if (votestate == 0){votestats = "<a style='color:#646b7e;'>None</a>"}
-			else if (votestate == -1){votestats = "<a style='color:#c42e3b;'>Meh</a>"}
-			if (grabstate === true){grabstats = "| <a style='color:#aa74ff;'>Grabbed!</a>"}
-			else if (grabstate === false){grabstats = " <a style='color:#646b7e;'>| Didn't grab</a>"}
+			if (votestate == 1){votestats = "<a style='color:#90ad2f;'>Woot!</a> (1) "}
+			else if (votestate == 0){votestats = "<a style='color:#646b7e;'>None</a> (0) "}
+			else if (votestate == -1){votestats = "<a style='color:#c42e3b;'>Meh</a> (-1) "}
+			if (grabstate === true){grabstats = "| <a style='color:#aa74ff;'>Grabbed!</a> (<em>true</em>)"}
+			else if (grabstate === false){grabstats = " <a style='color:#646b7e;'>| Didn't grab</a> (<em>false</em>)"}
 
 			if (API.getDJ().username == data.username){
 				votestats = "<a style='color:#646b7e;'>Is currently DJ'ing</a>";
 				grabstats = "";
 			}
-			//** Supposed to be working but isn't **//
 
+	//BLURB
 			var blurbTrue = "<a style='color:#eaaeae;'>[None]</a>";
 			if (data.blurb != null){
 				blurbTrue = data.blurb;
 			}
+	//FRIEND
+			var isFriend = "";
+			if (userInfo.friend == true){
+				isFriend = "Yes (<em>true</em>)";
+			}else{
+				isFriend = "No (<em>false</em>)";
+			}
 
+	//PROFILE
 			var hasProfile = "<a style='color:#eaaeae;'>[No profile yet]</a>";
-			var profileColor = "#eaaeae"
+			var profileColor = "#eaaeae";
 			if (data.level > 5){
 				hasProfile = "";
-				profileColor = "#aec9ea"
+				profileColor = "#aec9ea";
 			}
 
 			if (data.username == null){
@@ -621,6 +638,8 @@ if(window.location.hostname === "plug.dj"){
 				<a style='color:#42a5dc;'>Role:</b></a> " + g + "<br><b>\
 				<a style='color:#42a5dc;'>Joined:</b></a> " + jnd + "<br><b>\
 				<a style='color:#42a5dc;'>Badge:</b></a> " + bb + "<br><b>\
+				<a style='color:#42a5dc;'>Friend:</b></a> " + isFriend + "<br><b>\
+				<a style='color:#42a5dc;'>Language:</b></a> " + userInfo.language + " (<em>inaccurate</em>)<br><b>\
 				<a style='color:#42a5dc;'>Vote:</b></a> " + votestats + grabstats,"#CCCCCC",false,false,true);
 			}
 		});
@@ -886,6 +905,16 @@ if(window.location.hostname === "plug.dj"){
 				ct('ᄅ⇂');
 				break;
 
+			case "opensans":
+				$("#chat-messages").css({"font-family":"'Open Sans', sans-serif"});
+				$("#chat-input-field").css({"font-family":"'Open Sans', sans-serif"});
+				break;
+
+			case "roboto":
+				$("#chat-messages").css({"font-family":"Roboto, sans-serif"});
+				$("#chat-input-field").css({"font-family":"Roboto, sans-serif"});
+				break;
+
 			case "emojis":
 				addChat('~=[,,_,,]:3     ||     ¬_¬     ||     ಠ_ಠ',"#ececec");
 				addChat('ლ(ಥ益ಥლ     ||     (っ◔‿◔)っ     ||     (╥﹏╥)',"#ececec");
@@ -986,7 +1015,7 @@ if(window.location.hostname === "plug.dj"){
 				break;
 
 			default:
-				addChat("Command " + command[0] + " is not a command!","#fea6a6");
+				addChat("Command <a style='color:#c4c4c4;'>" + command[0] + "</a> is not a command!","#fea6a6");
 				break;
 		};
 	});
