@@ -6,7 +6,7 @@ if(window.location.hostname === "plug.dj"){
 		addChat("<img src='https://i.imgur.com/Z7LDEp0.gif'></img><br><a style='color:#FF0000;font-size:15px;'><b>[WARNING]</b></a><a style='font-size:15px;'> You already had BetaBot activated. To update, please refresh and then click bookmark again. Reclicking doesn't work.</a>","#ff7575",true,true);
 	}else{
 
-	addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f; font-size:10px'><em>Beta v0.5.2</em></a>","#ececec",true,true);
+	addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f; font-size:10px'><em>Beta v0.5.2.2</em></a>","#ececec",true,true);
 
 	var betaWasOn = true;
 	var u = API.getUser().username;
@@ -121,7 +121,7 @@ if(window.location.hostname === "plug.dj"){
 	var timeskip = true;
 	var inlineOn = true;
 
-	$("#chat-input .chat-input-form").append("<div class='afkIsOn' style='width:-7px; height:30px; display:none; background-color:#fef8a0'></div>");
+	$("#chat-input .chat-input-form").append("<div class='afkIsOn' style='width:7px; height:30px; display:none; background-color:#fef8a0'></div>");
 
 	$('#xjoinmsg').on('click',	function(){ joinmsg = !joinmsg;	$(this).toggleClass('active');});
 	$('#xgrabmsg').on('click',	function(){ grabmsg = !grabmsg;	$(this).toggleClass('active');});
