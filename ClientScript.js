@@ -6,7 +6,7 @@ if(window.location.hostname === "plug.dj"){
 		addChat("<img src='https://i.imgur.com/Z7LDEp0.gif'></img><br><a style='color:#FF0000;font-size:15px;'><b>[WARNING]</b></a><a style='font-size:15px;'> You already had BetaBot activated. To update, please refresh and then click bookmark again. Reclicking doesn't work.</a>","#ff7575",true,true);
 	}else{
 
-	addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f; font-size:10px'><em>Beta v0.5.1</em></a>","#ececec",true,true);
+	addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f; font-size:10px'><em>Beta v0.5.2</em></a>","#ececec",true,true);
 
 	var betaWasOn = true;
 	var u = API.getUser().username;
@@ -121,6 +121,8 @@ if(window.location.hostname === "plug.dj"){
 	var timeskip = true;
 	var inlineOn = true;
 
+	$("#chat-input .chat-input-form").append("<div class='afkIsOn' style='width:-7px; height:30px; display:none; background-color:#fef8a0'></div>");
+
 	$('#xjoinmsg').on('click',	function(){ joinmsg = !joinmsg;	$(this).toggleClass('active');});
 	$('#xgrabmsg').on('click',	function(){ grabmsg = !grabmsg;	$(this).toggleClass('active');});
 	$('#xmehmsg').on('click',	function(){ mehmsg = !mehmsg;	$(this).toggleClass('active');});
@@ -134,11 +136,11 @@ if(window.location.hostname === "plug.dj"){
 	$('#xafk').on('click',		function(){
 		afkmsg = !afkmsg;
 		if (afkmsg){
+			$("#chat-input .afkIsOn").show();
 			$("#chat-input-field").css({color:'#fef8a0'});
-			$("#chat-input-field").attr({'placeholder':"AFK MESSAGE IS ON!"});
 		}else{
+			$("#chat-input .afkIsOn").hide();
 			$("#chat-input-field").css({color:'#eee'});
-			$("#chat-input-field").attr({'placeholder':"Click here to join the conversation"});
 		}
 		$(this).toggleClass('active');
 	});
@@ -238,14 +240,6 @@ if(window.location.hostname === "plug.dj"){
 			c("[AFK] @" + user + " - I'm away from keyboard");
 			coollock = true;
 			setTimeout(function(){coollock = false},60000);
-		}
-
-		if (afkmsg){
-			$("#chat-input-field").css({color:'#fef8a0'});
-			$("#chat-input-field").attr({'placeholder':"AFK MESSAGE IS ON!"});
-		}else{
-			$("#chat-input-field").css({color:'#eee'});
-			$("#chat-input-field").attr({'placeholder':"Click here to join the conversation"});
 		}
 
 			//Bootleg Inline Images//
