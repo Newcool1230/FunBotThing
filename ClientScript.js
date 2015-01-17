@@ -496,12 +496,12 @@ if(window.location.hostname === "plug.dj"){
 
 	//STATUS
 			switch (data.status){
-				case 0:	var stt = "Available (0)";break;
-				case 1:	var stt = "Away (1)";break;
-				case 2:	var stt = "Working (2)";break;
-				case 3:	var stt = "Gaming (3)";break;
-				case 4:	var stt = "Offline / Undefined (4?)";break;
-				default:var stt = "Wot.";
+				case 0:	var stt = "<a style='color:#89be6c;'>Available</a> (0)";break;
+				case 1:	var stt = "<a style='color:#ffdd6f;'>Away</a> (1)";break;
+				case 2:	var stt = "<a style='color:#f04f30;'>Working</a> (2)";break;
+				case 3:	var stt = "<a style='color:#ac76ff;'>Gaming</a> (3)";break;
+				case 4:	var stt = "<a style='color:#555d70;'>Offline / Undefined</a> (4?)";break;
+				default:var stt = "<a style='color:#ff0000;'>Wot.</a>";
 			}
 
 	//BADGE
@@ -580,9 +580,9 @@ if(window.location.hostname === "plug.dj"){
 			var jnd = mnt + " " + lk[0] + day +  " " + jin[0] + " at " + lj[0];
 
 	//ROLE
-			if (data.gRole < 3){var g = "Regular (" + data.gRole + ")";};
-			if (data.gRole == 3){var g = "Brand Ambassador (" + data.gRole + ")";};
-			if (data.gRole > 3){var g = "Admin (" + data.gRole + ")";};
+			if (data.gRole < 3){var g = "<a style='color:#777f92;'>Regular</a> (" + data.gRole + ")";};
+			if (data.gRole == 3){var g = "<a style='color:#89be6c;'>Brand Ambassador</a> (" + data.gRole + ")";};
+			if (data.gRole > 3){var g = "<a style='color:#42a5dc;'>Admin</a> (" + data.gRole + ")";};
 
 	//VOTE
 			var userInfo;
@@ -598,7 +598,7 @@ if(window.location.hostname === "plug.dj"){
 				}
 			}
 			if (votestate == 1){votestats = "<a style='color:#90ad2f;'>Woot!</a> (1) "}
-			else if (votestate == 0){votestats = "<a style='color:#646b7e;'>None</a> (0) "}
+			else if (votestate == 0){votestats = "<a style='color:#646b7e;'>Didn't vote</a> (0) "}
 			else if (votestate == -1){votestats = "<a style='color:#c42e3b;'>Meh</a> (-1) "}
 			if (grabstate === true){grabstats = "| <a style='color:#aa74ff;'>Grabbed!</a> (<em>true</em>)"}
 			else if (grabstate === false){grabstats = " <a style='color:#646b7e;'>| Didn't grab</a> (<em>false</em>)"}
@@ -619,11 +619,11 @@ if(window.location.hostname === "plug.dj"){
 	//FRIEND
 			var isFriend = "";
 			if (typeof userInfo != "undefined" && userInfo.friend == true){
-				isFriend = "Yes (<em>true</em>)";
+				isFriend = "<a style='color:#ffc4f9;'>Yes</a> (<em>true</em>)";
 			}else{
 				isFriend = "No (<em>false</em>)";
 			}
-			if (itsYou){isFriend = "<a style='color:#646b7e;'>You can't be friends with yourself</a>";}
+			if (itsYou){isFriend = "<a style='color:#646b7e;'>You can't be friends with yourself</a> (<em>" + userInfo.friend + "</em>)";}
 
 	//PROFILE
 			var hasProfile = "<a style='color:#eaaeae;'>[No profile yet]</a>";
