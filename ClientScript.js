@@ -131,7 +131,17 @@ if(window.location.hostname === "plug.dj"){
 	$('#xsongup').on('click',	function(){ songup = !songup;	$(this).toggleClass('active');});
 	$('#xline').on('click',		function(){ inlineOn = !inlineOn;$(this).toggleClass('active');});
 	$('#xmuter').on('click',	function(){ mutedood = !mutedood;$(this).toggleClass('active');});
-	$('#xafk').on('click',		function(){ afkmsg = !afkmsg;	$(this).toggleClass('active');});
+	$('#xafk').on('click',		function(){
+		afkmsg = !afkmsg;
+		if (afkmsg){
+			$("#chat-input-field").css({color:'#fef8a0'});
+			$("#chat-input-field").attr({'placeholder':"AFK MESSAGE IS ON!"});
+		}else{
+			$("#chat-input-field").css({color:'#eee'});
+			$("#chat-input-field").attr({'placeholder':"Click here to join the conversation"});
+		}
+		$(this).toggleClass('active');
+	});
 	$('#xdel').on('click',		function(){
 		var r = confirm("Delete entire chat on log?");
 		if (r === true) {
@@ -209,7 +219,7 @@ if(window.location.hostname === "plug.dj"){
 		var user = data.un;
 		var userid = data.uid;
 		var me = API.getUser().username;
-		var tst = msg.indexOf('@Beta Tester');
+		var tst = msg.indexOf('@' + me);
 		if (userid != "undefined" && me == "Beta Tester"){
 			for (var i = 0; i < tet.length; i++){
 				var zz = msg.toLowerCase().indexOf(tet[i]);
@@ -224,6 +234,18 @@ if(window.location.hostname === "plug.dj"){
 					setTimeout(function(){coollock = false},60000);
 				}
 			}
+		}else if (userid != "undefined" && tst != -1 && !coollock && afkmsg){
+			c("[AFK] @" + user + " - I'm away from keyboard");
+			coollock = true;
+			setTimeout(function(){coollock = false},60000);
+		}
+
+		if (afkmsg){
+			$("#chat-input-field").css({color:'#fef8a0'});
+			$("#chat-input-field").attr({'placeholder':"AFK MESSAGE IS ON!"});
+		}else{
+			$("#chat-input-field").css({color:'#eee'});
+			$("#chat-input-field").attr({'placeholder':"Click here to join the conversation"});
 		}
 
 			//Bootleg Inline Images//
@@ -537,7 +559,7 @@ if(window.location.hostname === "plug.dj"){
 				case "animals01":	var bb = "Wolf Badge (" + data.badge + ")";break;
 				case "animals02":	var bb = "Cat Badge (" + data.badge + ")";break;
 				case "animals03":	var bb = "Chicken Badge (" + data.badge + ")";break;
-				case "animals03":	var bb = "Boxer Badge (" + data.badge + ")";break;
+				case "animals04":	var bb = "Boxer Badge (" + data.badge + ")";break;
 				case "style01":		var bb = "Shoe Badge (" + data.badge + ")";break;
 				case "style02":		var bb = "Joystick Badge (" + data.badge + ")";break;
 				case "tiki01":		var bb = "Fat Tiki Mask (" + data.badge + ")";break;
