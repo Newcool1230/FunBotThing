@@ -25,7 +25,7 @@ if(window.location.hostname === "plug.dj"){
 		<section id="xmain">\
 			<div id="xjoinmsg" class="xbutton active">Join Message</div>\
 			<div id="xgrabmsg" class="xbutton active">Grab Message</div>\
-			<div id="xmehmsg" class="xbutton">Meh Message</div>\
+			<div id="xmehmsg" class="xbutton active">Meh Message</div>\
 			<div id="xsongup" class="xbutton active">Song Updates</div>\
 			<div id="xautowoot" class="xbutton active">AutoWoot</div>\
 			<div id="xautojoin" class="xbutton">AutoJoin</div>\
@@ -537,6 +537,7 @@ if(window.location.hostname === "plug.dj"){
 				case "animals01":	var bb = "Wolf Badge (" + data.badge + ")";break;
 				case "animals02":	var bb = "Cat Badge (" + data.badge + ")";break;
 				case "animals03":	var bb = "Chicken Badge (" + data.badge + ")";break;
+				case "animals03":	var bb = "Boxer Badge (" + data.badge + ")";break;
 				case "style01":		var bb = "Shoe Badge (" + data.badge + ")";break;
 				case "style02":		var bb = "Joystick Badge (" + data.badge + ")";break;
 				case "tiki01":		var bb = "Fat Tiki Mask (" + data.badge + ")";break;
@@ -960,7 +961,7 @@ if(window.location.hostname === "plug.dj"){
 				if (n1 == -1){API.moderateAddDJ(id1);n1 = API.getWaitList().length;}
 				if (n2 == -1){API.moderateAddDJ(id2);n2 = API.getWaitList().length;}
 				var posTime1 = setTimeout(function(){API.moderateMoveDJ(id1,n2);},500);
-				var posTime2 = setTimeout(function(){API.moderateMoveDJ(id2,n1);},750);
+				var posTime2 = setTimeout(function(){API.moderateMoveDJ(id2,n1 + 1);},750);
 				switch ("undefined"){
 					case typeof n1:case typeof n2:
 					case typeof u1:case typeof u2:
@@ -1034,15 +1035,15 @@ if(window.location.hostname === "plug.dj"){
 		}
 
 		if (isNotCenter){
-			chat.append("<div class='update betabot-update'><div class='text-margin' style='margin-left: 10px;'><span class='betabot-text' style='color: " + color + "; font-size: 12px;'>" + text + "<br></span></div></div>");
+			chat.append("<div class='update betabot-update' style='background-color:#0a0a0a;'><div class='text-margin' style='margin-left: 10px;'><span class='betabot-text' style='color: " + color + "; font-size: 12px;'>" + text + "<br></span></div></div>");
 		}else{
 			if (hasBottom){
-				chat.append("<div class='update betabot-update' style='border-left: double 6px " + color + "; border-bottom: double 6px " + color + "'><center><span class='betabot-text' style='color: " + color + "; font-size: 13px;'>" + text + "<br></span></center></div>");
+				chat.append("<div class='update betabot-update' style='background-color:#0a0a0a; border-left: double 6px " + color + "; border-bottom: double 6px " + color + "'><center><span class='betabot-text' style='color: " + color + "; font-size: 13px;'>" + text + "<br></span></center></div>");
 			}else{
 				if (state){
-					chat.append("<div class='update betabot-update' style='border-left: double 6px " + color + "; margin-top:5px;margin-bottom:5px;'><center><span class='betabot-text' style='color: " + color + "; font-size: 12px;'>" + text + "<br></span></center></div>");
+					chat.append("<div class='update betabot-update' style='background-color:#0a0a0a; border-left: double 6px " + color + "; margin-top:5px;margin-bottom:5px;'><center><span class='betabot-text' style='color: " + color + "; font-size: 12px;'>" + text + "<br></span></center></div>");
 				}else{
-					chat.append("<div class='update betabot-update' style='margin-top:5px;margin-bottom:5px;'><center><span class='betabot-text' style='color: " + color + ";'>" + text + "<br></span></center></div>");
+					chat.append("<div class='update betabot-update' style='background-color:#0a0a0a; margin-top:5px;margin-bottom:5px;'><center><span class='betabot-text' style='color: " + color + ";'>" + text + "<br></span></center></div>");
 				}
 			}
 		}
