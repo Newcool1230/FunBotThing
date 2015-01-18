@@ -1,3 +1,7 @@
+if (API.getUser().role <= 1){
+	addChat("<a style='color:#eb9595;'><b>This script only works for Bouncer+.</b></a> Sorry!","#CCCCCC");
+}else{
+
 var logged = [];
 
 API.on(API.CHAT, function(data){
@@ -80,6 +84,7 @@ function addChat(text, color, state, size) {
 		chat.children().first().remove();
 }
 
-addChat("<a style='color:#ececec;'>Beta Tester's deleteOwn script initiated!</a><br>\
+addChat("<a style='color:#ececec;'>Beta Tester's <a style='color:#42a5dc;'>deleteOwn</a> script initiated!</a><br>\
 	<a style='color:#eb9595;'>Beta v0.6</a><br>\
 	<a style='color:#ececec;'>Check commands with /cmd</a>","#CCCCCC");
+}
