@@ -136,7 +136,15 @@ if(window.location.hostname === "plug.dj"){
 	$('#xjoinmsg').on('click',	function(){ joinmsg = !joinmsg;	$(this).toggleClass('active');});
 	$('#xgrabmsg').on('click',	function(){ grabmsg = !grabmsg;	$(this).toggleClass('active');});
 	$('#xmehmsg').on('click',	function(){ mehmsg = !mehmsg;	$(this).toggleClass('active');});
-	$('#xautocap').on('click',	function(){ cap = !cap;			$(this).toggleClass('active');});
+	$('#xautocap').on('click',	function(){ 
+		cap = !cap;
+		$(this).toggleClass('active');
+		if (cap){
+			var thiscap = API.getStaff().length;
+			c('/cap ' + thiscap);
+			addChat('Cap set to ' + thiscap,"#c5b5ff");
+		}
+	});
 	$('#xautograb').on('click',	function(){ autograb = !autograb;$(this).toggleClass('active');});
 	$('#xautojoin').on('click',	function(){ autolock = !autolock;$(this).toggleClass('active');});
 	$('#xautowoot').on('click',	function(){ autowoot = !autowoot;$(this).toggleClass('active');});
@@ -345,7 +353,7 @@ if(window.location.hostname === "plug.dj"){
 		if (s < 10){s = "0" + s;}
 		if (user.level > 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined <br><a style='color:#dddddd;font-size:11px;'>[" + h + ":" + m + ":" + s + "]</a>",c);};
 		if (user.level == 1 && joinmsg){addChat(f + user.username + " (ID " + user.id + ") joined (Lvl 1) <br><a style='color:#dddddd;font-size:11px;'>[" + h + ":" + m + ":" + s + "]</a>","#fef8a0");};
-		JoinLeave(user);
+		JoinLeave(person);
 	};
 
 	function uleft(user){
@@ -364,17 +372,19 @@ if(window.location.hostname === "plug.dj"){
 		if (m < 10){m = "0" + m;}
 		if (s < 10){s = "0" + s;}
 		if (joinmsg){addChat(f + user.username + " (ID " + user.id + ") left <br><a style='color:#dddddd;font-size:11px;'>[" + h + ":" + m + ":" + s + "]</a>",c);};
-		JoinLeave(user);
+		JoinLeave(person);
 	};
+
+	API.on(API.USER_JOIN, JoinLeave);
+	API.on(API.USER_LEAVE, JoinLeave);
 
 	c('/cap 10');
 	function JoinLeave(user){
 		if (cap){
-			if (user.role > 0);{
+			if (user.role != 0);{
 				var thiscap = API.getStaff().length;
-				c('/cap ' + thiscap)
-					addChat('Cap set to ' + thiscap,"#c5b5ff");
-				}
+				c('/cap ' + thiscap);
+				addChat('Cap set to ' + thiscap,"#c5b5ff");
 			}
 		}
 	}
@@ -854,8 +864,14 @@ if(window.location.hostname === "plug.dj"){
 			case "capset":
 			case "setcap":
 				cap = !cap;
-				if (cap){addChat('AutoCap on',"#ececec");}
-				else if (!cap){addChat('AutoCap off',"#ececec");}
+				if (cap){
+					addChat('AutoCap on',"#ececec");
+					var thiscap = API.getStaff().length;
+					c('/cap ' + thiscap);
+					addChat('Cap set to ' + thiscap,"#c5b5ff");
+				}else if (!cap){
+					addChat('AutoCap off',"#ececec");
+				}
 				break;
 
 			case "woot":
@@ -1100,6 +1116,7 @@ if(window.location.hostname === "plug.dj"){
 		if (chat.children().length >= 512){
 			chat.children().first().remove();
 		}
+	}
 	}
 
 }else{
