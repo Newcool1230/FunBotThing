@@ -1101,7 +1101,7 @@ if(window.location.hostname === "plug.dj"){
 			chat.children().first().remove();
 		}
 	}
-	}
+
 }else{
 	alert("This bot only functions at http://plug.dj/");
 };
