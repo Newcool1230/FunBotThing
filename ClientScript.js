@@ -15,6 +15,14 @@ if(window.location.hostname === "plug.dj"){
 	if (API.getUser().role == 0){off = 1;on = 0;}
 	else{off = 0;on = 1;};
 
+	var itsMe = false;
+	var me = [3951373,4820534];
+	for (var i = 0; i < me.length; i++){
+		if (API.getUser().id == me[i]){
+			itsMe = true;
+		};
+	}
+
 	var messages = [];
 	var logcheck = [];
 
@@ -38,6 +46,7 @@ if(window.location.hostname === "plug.dj"){
 			<div id="xtimeskip" class="xbutton active">8min warning</div>\
 			<div id="xdel" class="xbutton">Delete All Chat</div>\
 			<div id="xmuter" class="xbutton">Alt Muter</div>\
+			<div id="xlockdown" class="xbutton">Lockdown</div>\
 		</section>\
 	';
 
@@ -120,6 +129,7 @@ if(window.location.hostname === "plug.dj"){
 	var afkmsg = false;
 	var timeskip = true;
 	var inlineOn = true;
+	var lockdown = false;
 
 	$("#chat-input .chat-input-form").append("<div class='afkIsOn' style='width:7px; height:30px; display:none; background-color:#fef8a0'></div>");
 
@@ -153,6 +163,20 @@ if(window.location.hostname === "plug.dj"){
 		};
 	});
 	$('#xtimeskip').on('click',	function(){ timeskip = !timeskip;$(this).toggleClass('active');});
+	$('#xlockdown').on('click',	function(){ 
+		if (itsMe || API.getUser().gRole != 0){
+			lockdown = !lockdown;
+			if (lockdown){
+				var ll = "enabled. Only staff may chat.";
+			}else{
+				var ll = "disabled";
+			}
+			addChat("<b>Lockdown is now " + ll + "</b>","#FF3333");
+			$(this).toggleClass('active');
+		}else{
+			addChat("<b>Sorry, but you are not cool enough for this command.</b>","#FF3333");
+		}
+	});
 
 	$("#chat-messages").click(displayid);
 	$("#dj-canvas").mousemove(displayid);
@@ -257,10 +281,7 @@ if(window.location.hostname === "plug.dj"){
 				var picLink = hts.slice(ht,jp);
 				$("#chat-messages > .cm[data-cid='" + msgID + "']").append("<center><img style='margin:10px; max-width:335px' src='" + picLink + "'></img></center>");
 			}
-			var chat = $('#chat-messages');
-			if (chat.scrollTop() > chat[0].scrollHeight - chat.height() - 50){
-				chat.scrollTop(chat[0].scrollHeight);
-			}
+			setTimeout(function(){chat.scrollTop(5000000000)},2000);
 		}
 		}
 	});
@@ -392,36 +413,31 @@ if(window.location.hostname === "plug.dj"){
 	});
 
 	function deleteAll(){
-		var user = API.getUser();
 		var msgs = document.getElementsByClassName('message');
 		var emotes = document.getElementsByClassName('emote');
 		var mentions = document.getElementsByClassName('mention');
-		if (user.username == "Beta Tester"){
-			for (var i = 0; i < msgs.length; i++) {
-				for (var j = 0; j < msgs[i].classList.length; j++) {
-					if (msgs[i].classList[j].indexOf('message') == 0) {
-						$.ajax({type: 'DELETE', url: '/_/chat/' + msgs[i].getAttribute('data-cid')});
-					}
+		for (var i = 0; i < msgs.length; i++) {
+			for (var j = 0; j < msgs[i].classList.length; j++) {
+				if (msgs[i].classList[j].indexOf('message') == 0) {
+					$.ajax({type: 'DELETE', url: '/_/chat/' + msgs[i].getAttribute('data-cid')});
 				}
 			}
-			for (var i = 0; i < emotes.length; i++) {
-				for (var j = 0; j < emotes[i].classList.length; j++) {
-					if (emotes[i].classList[j].indexOf('emote') == 0) {
-						$.ajax({type: 'DELETE', url: '/_/chat/' + emotes[i].getAttribute('data-cid')});
-					}
-				}
-			}
-			for (var i = 0; i < mentions.length; i++) {
-				for (var j = 0; j < mentions[i].classList.length; j++) {
-					if (mentions[i].classList[j].indexOf('mention') == 0) {
-						$.ajax({type: 'DELETE', url: '/_/chat/' + mentions[i].getAttribute('data-cid')});
-					}
-				}
-			}
-			return l("[Chat cleared]",true);
-		}else{
-			l("[You are not Beta Tester. Access denied]",true)
 		}
+		for (var i = 0; i < emotes.length; i++) {
+			for (var j = 0; j < emotes[i].classList.length; j++) {
+				if (emotes[i].classList[j].indexOf('emote') == 0) {
+					$.ajax({type: 'DELETE', url: '/_/chat/' + emotes[i].getAttribute('data-cid')});
+				}
+			}
+		}
+		for (var i = 0; i < mentions.length; i++) {
+			for (var j = 0; j < mentions[i].classList.length; j++) {
+				if (mentions[i].classList[j].indexOf('mention') == 0) {
+					$.ajax({type: 'DELETE', url: '/_/chat/' + mentions[i].getAttribute('data-cid')});
+				}
+			}
+		}
+		return l("[Chat cleared]",true);
 	}
 
 	var logged = [];
@@ -478,6 +494,18 @@ if(window.location.hostname === "plug.dj"){
 						break;
 				}
 			};
+		}
+		if (lockdown == true){
+			for (var i = 0; i < API.getUsers().length; i++){
+				if (API.getUsers()[i].username == user){
+					if (API.getUsers()[i].role == 0 || API.getUsers()[i].gRole == 0){
+						$.ajax({
+							type: 'DELETE',
+							url: '/_/chat/' + msgid
+						});
+					}
+				}
+			}
 		}
 	});
 
@@ -1000,6 +1028,20 @@ if(window.location.hostname === "plug.dj"){
 					}).done(function(msg) {
 							console.log(msg);
 				});
+				break;
+
+			case "lockdown":
+				if (itsMe || API.getUser().gRole != 0){
+					lockdown = !lockdown;
+					if (lockdown){
+						var ll = "enabled. Only staff may chat.";
+					}else{
+						var ll = "disabled";
+					}
+					addChat("<b>Lockdown is now " + ll + "</b>","#FF3333");
+				}else{
+					addChat("<b>Sorry, but you are not cool enough for this command.</b>","#FF3333");
+				}
 				break;
 
 			//p3
