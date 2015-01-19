@@ -368,21 +368,12 @@ if(window.location.hostname === "plug.dj"){
 	};
 
 	c('/cap 10');
-
 	function JoinLeave(user){
 		if (cap){
 			if (user.role > 0);{
-				var thiscap = 0;
-				for (var i = 0; i < API.getUsers().length; i++){
-					if (API.getUsers()[i].role > 0){
-						thiscap++;
-					}
-				}
-				if (thiscap != currentcap){
-					if (thiscap <= 10){currentcap = thiscap;}
-					else{thiscap = 10;currentcap = thiscap;}
-					c('/cap ' + parseInt(currentcap));
-					addChat('Cap set to ' + currentcap,"#c5b5ff");
+				var thiscap = API.getStaff().length;
+				c('/cap ' + thiscap)
+					addChat('Cap set to ' + thiscap,"#c5b5ff");
 				}
 			}
 		}
@@ -863,11 +854,8 @@ if(window.location.hostname === "plug.dj"){
 			case "capset":
 			case "setcap":
 				cap = !cap;
-				if (cap){
-					addChat('AutoCap on',"#ececec");
-				}else if (!cap){
-					addChat('AutoCap off',"#ececec");
-				}
+				if (cap){addChat('AutoCap on',"#ececec");}
+				else if (!cap){addChat('AutoCap off',"#ececec");}
 				break;
 
 			case "woot":
