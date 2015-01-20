@@ -241,9 +241,13 @@ if(window.location.hostname === "plug.dj"){
 		$("#xline .icon").toggleClass('active');
 	});
 	$('#xmuter').on('click',	function(){
-		mutedood = !mutedood;
-		$(this).toggleClass('active');
-		$("#xmuter .icon").toggleClass('active');
+		if (API.getUser().role > 1 || API.getUser().gRole > 0){
+			mutedood = !mutedood;
+			$(this).toggleClass('active');
+			$("#xmuter .icon").toggleClass('active');
+		}else{
+			addChat("<b>Sorry, but you are not cool enough for this command.</b>","#FF3333");
+		}
 	});
 	$('#xafk').on('click',		function(){
 		afkmsg = !afkmsg;
@@ -513,31 +517,35 @@ if(window.location.hostname === "plug.dj"){
 	});
 
 	function deleteAll(){
-		var msgs = document.getElementsByClassName('message');
-		var emotes = document.getElementsByClassName('emote');
-		var mentions = document.getElementsByClassName('mention');
-		for (var i = 0; i < msgs.length; i++) {
-			for (var j = 0; j < msgs[i].classList.length; j++) {
-				if (msgs[i].classList[j].indexOf('message') == 0) {
-					$.ajax({type: 'DELETE', url: '/_/chat/' + msgs[i].getAttribute('data-cid')});
+		if (API.getUser().role >= 2){
+			var msgs = document.getElementsByClassName('message');
+			var emotes = document.getElementsByClassName('emote');
+			var mentions = document.getElementsByClassName('mention');
+			for (var i = 0; i < msgs.length; i++) {
+				for (var j = 0; j < msgs[i].classList.length; j++) {
+					if (msgs[i].classList[j].indexOf('message') == 0) {
+						$.ajax({type: 'DELETE', url: '/_/chat/' + msgs[i].getAttribute('data-cid')});
+					}
 				}
 			}
-		}
-		for (var i = 0; i < emotes.length; i++) {
-			for (var j = 0; j < emotes[i].classList.length; j++) {
-				if (emotes[i].classList[j].indexOf('emote') == 0) {
-					$.ajax({type: 'DELETE', url: '/_/chat/' + emotes[i].getAttribute('data-cid')});
+			for (var i = 0; i < emotes.length; i++) {
+				for (var j = 0; j < emotes[i].classList.length; j++) {
+					if (emotes[i].classList[j].indexOf('emote') == 0) {
+						$.ajax({type: 'DELETE', url: '/_/chat/' + emotes[i].getAttribute('data-cid')});
+					}
 				}
 			}
-		}
-		for (var i = 0; i < mentions.length; i++) {
-			for (var j = 0; j < mentions[i].classList.length; j++) {
-				if (mentions[i].classList[j].indexOf('mention') == 0) {
-					$.ajax({type: 'DELETE', url: '/_/chat/' + mentions[i].getAttribute('data-cid')});
+			for (var i = 0; i < mentions.length; i++) {
+				for (var j = 0; j < mentions[i].classList.length; j++) {
+					if (mentions[i].classList[j].indexOf('mention') == 0) {
+						$.ajax({type: 'DELETE', url: '/_/chat/' + mentions[i].getAttribute('data-cid')});
+					}
 				}
 			}
+			return l("[Chat cleared]",true);
+		}else{
+			addChat("<b>Sorry, but you are not cool enough for this command.</b>","#FF3333");
 		}
-		return l("[Chat cleared]",true);
 	}
 
 	API.on(API.CHAT, function(data){
@@ -827,7 +835,11 @@ if(window.location.hostname === "plug.dj"){
 				break;
 
 			case "mutedood":
-				mutedood = !mutedood;
+				if (API.getUser().role > 1 || API.getUser().gRole > 0){
+					mutedood = !mutedood;
+				}else{
+					addChat("<b>Sorry, but you are not cool enough for this command.</b>","#FF3333");
+				}
 				break;
 
 			case "unmutedood":
