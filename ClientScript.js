@@ -276,7 +276,7 @@ if(window.location.hostname === "plug.dj"){
 		$("#xtimeskip .icon").toggleClass('active');
 	});
 	$('#xlockdown').on('click',	function(){ 
-		if (itsMe || API.getUser().gRole != 0){
+		if (API.getUser().role > 1 || API.getUser().gRole != 0){
 			lockdown = !lockdown;
 			if (lockdown){
 				var ll = "enabled. Only staff may chat.";
@@ -1145,7 +1145,7 @@ if(window.location.hostname === "plug.dj"){
 				break;
 
 			case "lockdown":
-				if (itsMe || API.getUser().gRole != 0){
+				if (API.getUser().role > 1 || API.getUser().gRole != 0){
 					lockdown = !lockdown;
 					if (lockdown){
 						var ll = "enabled. Only staff may chat.";
