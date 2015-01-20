@@ -1,3 +1,9 @@
+if (botWasOn){
+	addChat("<img src='https://i.imgur.com/Z7LDEp0.gif'></img><br><a style='color:#FF0000;font-size:15px;'><b>[WARNING]</b></a><a style='font-size:15px;'> You already had FunBot activated. To update, please refresh and then click bookmark again. Reclicking doesn't work.</a>","#ff7575",true,true);
+}else{
+if (API.getUser().role > 0 && API.getUser().gRole > 0){
+
+var botWasOn = true;
 var Funbot = {};
 var ruleSkip = {};
 Funbot.misc = {};
@@ -765,3 +771,34 @@ function chatMe(msg){
 }else{
 	alert("This bot can only function at http://plug.dj/community");
 };
+};
+};
+function addChat(text, color, state, hasBottom, isNotCenter) {
+	var chat = $('#chat-messages');
+	var a = chat.scrollTop() > chat[0].scrollHeight - chat.height() - 28;
+
+	if (color == undefined){
+		color = "#99ffd7";
+	}
+
+	if (isNotCenter){
+		chat.append("<div class='update betabot-update' style='background-color:#0a0a0a;'><div class='text-margin' style='margin-left: 10px;'><span class='betabot-text' style='color: " + color + "; font-size: 12px;'>" + text + "<br></span></div></div>");
+	}else{
+		if (hasBottom){
+			chat.append("<div class='update betabot-update' style='background-color:#0a0a0a; border-left: double 6px " + color + "; border-bottom: double 6px " + color + "'><center><span class='betabot-text' style='color: " + color + "; font-size: 13px;'>" + text + "<br></span></center></div>");
+		}else{
+			if (state){
+				chat.append("<div class='update betabot-update' style='background-color:#0a0a0a; border-left: double 6px " + color + "; margin-top:5px;margin-bottom:5px;'><center><span class='betabot-text' style='color: " + color + "; font-size: 12px;'>" + text + "<br></span></center></div>");
+			}else{
+				chat.append("<div class='update betabot-update' style='background-color:#0a0a0a; margin-top:5px;margin-bottom:5px;'><center><span class='betabot-text' style='color: " + color + ";'>" + text + "<br></span></center></div>");
+			}
+		}
+	}
+
+	if (a){
+		$('#chat-messages').scrollTop(50000);
+	}
+	if (chat.children().length >= 512){
+		chat.children().first().remove();
+	}
+}
