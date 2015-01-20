@@ -6,7 +6,7 @@ if(window.location.hostname === "plug.dj"){
 		addChat("<img src='https://i.imgur.com/Z7LDEp0.gif'></img><br><a style='color:#FF0000;font-size:15px;'><b>[WARNING]</b></a><a style='font-size:15px;'> You already had BetaBot activated. To update, please refresh and then click bookmark again. Reclicking doesn't work.</a>","#ff7575",true,true);
 	}else{
 
-	addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f; font-size:10px'><em>Beta v0.5.2.8</em></a>","#ececec",true,true);
+	addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f; font-size:10px'><em>Beta v0.5.2.9</em></a>","#ececec",true,true);
 
 	var betaWasOn = true;
 	var u = API.getUser().username;
@@ -25,6 +25,7 @@ if(window.location.hostname === "plug.dj"){
 
 	var messages = [];
 	var logcheck = [];
+	var logged = [];
 
 	var menu = '\
 		<section id="xprequel">\
@@ -276,21 +277,21 @@ if(window.location.hostname === "plug.dj"){
 
 			//Bootleg Inline Images//
 		if (inlineOn){
-		var pn = ['.png','.gif','.jpg','.jpeg']
-		for (var i = 0; i < pn.length; i++){
-			var ht = msg.indexOf('http');
-			var jp = msg.indexOf(pn[i]);
-			if (ht != -1 && jp != -1){
-				var hts = msg.replace("http","https");
-				if (hts.indexOf("httpss") != -1){
-					hts = hts.replace("httpss","https");
+			var pn = ['.png','.gif','.jpg','.jpeg']
+			for (var i = 0; i < pn.length; i++){
+				var ht = msg.indexOf('http');
+				var jp = msg.indexOf(pn[i]);
+				if (ht != -1 && jp != -1){
+					var hts = msg.replace("http","https");
+					if (hts.indexOf("httpss") != -1){
+						hts = hts.replace("httpss","https");
+					}
+					jp = jp + 5;
+					var picLink = hts.slice(ht,jp);
+					$("#chat-messages > .cm[data-cid='" + msgID + "']").append("<center><img style='margin:10px; max-width:335px' src='" + picLink + "'></img></center>");
 				}
-				jp = jp + 5;
-				var picLink = hts.slice(ht,jp);
-				$("#chat-messages > .cm[data-cid='" + msgID + "']").append("<center><img style='margin:10px; max-width:335px' src='" + picLink + "'></img></center>");
+				setTimeout(function(){$("#chat-messages").scrollTop(5000000000)},2000);
 			}
-			setTimeout(function(){chat.scrollTop(5000000000)},2000);
-		}
 		}
 	});
 
@@ -402,7 +403,7 @@ if(window.location.hostname === "plug.dj"){
 
 	API.on(API.ADVANCE, function(obj){
 		if (songup){
-			//l(":green_heart: " + obj.lastPlay.score.positive + "&nbsp;&nbsp;|&nbsp;&nbsp;:purple_heart: " + obj.lastPlay.score.grabs + "&nbsp;&nbsp;|&nbsp;&nbsp;:broken_heart: " + obj.lastPlay.score.negative,false);
+			l("",false);
 			addChat("<br><img src='https://i.imgur.com/fhagHZg.png'></img><br>\
 					<b><a style='color:#90ad2f;'>" + obj.lastPlay.score.positive + "</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style='color:#aa74ff;'>" + obj.lastPlay.score.grabs + "</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style='color:#c42e3b;'>" + obj.lastPlay.score.negative + "</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style='color:#646b7e;'>" + API.getUsers().length + "</a></b><br>\
 					<a style='color:#e6ff99;'><b>Now playing:</b></a> " + obj.media.title + "<br>\
@@ -439,20 +440,19 @@ if(window.location.hostname === "plug.dj"){
 		return l("[Chat cleared]",true);
 	}
 
-	var logged = [];
 	API.on(API.CHAT, function(data){
 		var msg = data.message;
 		var msgid = data.cid;
 		var user = data.un;
 		var userid = data.uid;
 		var d = new Date();
-		var h = d.getUTCHours();
-		var m = d.getUTCMinutes();
-		var s = d.getUTCSeconds();
+		var h = d.getHours();
+		var m = d.getMinutes();
+		var s = d.getSeconds();
 		if (h < 10){h = "0" + h;}
 		if (m < 10){m = "0" + m;}
 		if (s < 10){s = "0" + s;}
-		var argument = "[UTC - " + h + ":" + m + ":" + s + "] [" + msgid + "] [" + userid + "] [" + user + "] - " + msg + "   |";
+		var argument = "[" + h + ":" + m + ":" + s + "] [" + msgid + "] [" + userid + "] [" + user + "]		- " + msg;
 		if (typeof user != "undefined"){
 			logcheck.push(argument);
 			messages.push(msgid.toString());
