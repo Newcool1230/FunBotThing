@@ -6,7 +6,7 @@ if(window.location.hostname === "plug.dj"){
 		addChat("<img src='https://i.imgur.com/Z7LDEp0.gif'></img><br><a style='color:#FF0000;font-size:15px;'><b>[WARNING]</b></a><a style='font-size:15px;'> You already had BetaBot activated. To update, please refresh and then click bookmark again. Reclicking doesn't work.</a>","#ff7575",true,true);
 	}else{
 
-	addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f; font-size:10px'><em>Beta v0.5.2.10</em></a>","#ececec",true,true);
+	addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f; font-size:10px'><em>Beta v0.6</em></a>","#ececec",true,true);
 
 	var betaWasOn = true;
 	var u = API.getUser().username;
@@ -32,27 +32,62 @@ if(window.location.hostname === "plug.dj"){
 			<div id="xtitle" class="xtxt">&nbsp;</div>\
 		</section>\
 		<section id="xmain">\
-			<div id="xjoinmsg" class="xbutton active">Join Message</div>\
-			<div id="xgrabmsg" class="xbutton active">Grab Message</div>\
-			<div id="xmehmsg" class="xbutton active">Meh Message</div>\
-			<div id="xsongup" class="xbutton active">Song Updates</div>\
-			<div id="xautowoot" class="xbutton active">AutoWoot</div>\
-			<div id="xautojoin" class="xbutton">AutoJoin</div>\
-			<div id="xautograb" class="xbutton">AutoGrab</div>\
-			<div id="xautocap" class="xbutton">AutoCap</div>\
-			<div id="xafk" class="xbutton">AFK</div>\
-			<div id="xline" class="xbutton active">Bootleg Inline Imgs</div>\
+			<div id="xjoinmsg" class="xbutton active">\
+				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+				<span style="margin-left:25px;">Join Message</span></div>\
+			<div id="xgrabmsg" class="xbutton active">\
+				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+				<span style="margin-left:25px;">Grab Message</span></div>\
+			<div id="xmehmsg" class="xbutton active">\
+				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+				<span style="margin-left:25px;">Meh Message</span></div>\
+			<div id="xsongup" class="xbutton active">\
+				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+				<span style="margin-left:25px;">Song Updates</span></div>\
+			<div id="xautowoot" class="xbutton active">\
+				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+				<span style="margin-left:25px;">AutoWoot</span></div>\
+			<div id="xautojoin" class="xbutton">\
+				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
+				<span style="margin-left:25px;">AutoJoin</span></div>\
+			<div id="xautograb" class="xbutton">\
+				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
+				<span style="margin-left:25px;">AutoGrab</span></div>\
+			<div id="xautocap" class="xbutton">\
+				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
+				<span style="margin-left:25px;">AutoCap</span></div>\
+			<div id="xafk" class="xbutton">\
+				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
+				<span style="margin-left:25px;">AFK</span></div>\
+			<div id="xline" class="xbutton active">\
+				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+				<span style="margin-left:25px;">Bootleg Inline</span></div>\
 		</section>\
 		<section id="xmod">\
-			<div id="xtimeskip" class="xbutton active">8min warning</div>\
-			<div id="xdel" class="xbutton">Delete All Chat</div>\
-			<div id="xmuter" class="xbutton">Alt Muter</div>\
-			<div id="xlockdown" class="xbutton">Lockdown</div>\
+			<div id="xtimeskip" class="xbutton active">\
+				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+				<span style="margin-left:25px;">8min warning</span>\
+			</div>\
+			\
+			<div id="xdel" class="xbutton">\
+				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
+				<span style="margin-left:25px;">Delete All Chat</span>\
+			</div>\
+			\
+			<div id="xmuter" class="xbutton">\
+				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
+				<span style="margin-left:25px;">Alt Muter</span>\
+			</div>\
+			\
+			<div id="xlockdown" class="xbutton">\
+				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
+				<span style="margin-left:25px;">Lockdown</span>\
+			</div>\
+			\
 		</section>\
 	';
 
-	var style = '\
-		<style>\
+	var style = '<style>\
 			#xprequel {\
 				position: absolute;\
 				top: 53px;\
@@ -64,7 +99,6 @@ if(window.location.hostname === "plug.dj"){
 				font-family: "Open Sans", sans-serif;\
 				background-image:url(https://i.imgur.com/ung12ij.png)\
 			}\
-			#xprequel .active {color: #42A5DC;}\
 			#xmain {\
 				position: absolute;\
 				top: 95px;\
@@ -74,6 +108,12 @@ if(window.location.hostname === "plug.dj"){
 				outline: #FFFFFF double;\
 				z-index: 10;\
 				font-family: "Open Sans", sans-serif;\
+			}\
+			#xmain .icon {\
+				display:none;\
+			}\
+			#xmod .icon {\
+				display:none;\
 			}\
 			#xmod {\
 				position: absolute;\
@@ -85,14 +125,30 @@ if(window.location.hostname === "plug.dj"){
 				z-index: 10;\
 				font-family: "Open Sans", sans-serif;\
 			}\
-			#xmain .active {color: #42A5DC;}\
-			#xmod .active {color: #42A5DC;}\
-			.xtxt: {color: #3366FF; padding: 2px 15px;}\
-			.xtxt:hover, #xprequel .active:hover {color: #DCDCDC;}\
-			.xbutton: {color: #D1D1D1; padding: 2px 15px;}\
-			.xbutton:hover, #xmain .active:hover {cursor: pointer; color: #89be6c;}\
-		</style>\
-	';
+			#xmain .active {\
+				color: #42A5DC;\
+				display:block;\
+			}\
+			#xmod .active {\
+				color: #42A5DC;\
+				display:block;\
+			}\
+			.xtxt: {\
+				color: #3366FF;\
+				padding: 2px 15px;\
+			}\
+			.xtxt:hover, #xprequel .active:hover {\
+				color: #DCDCDC;\
+			}\
+			.xbutton: {\
+				color: #D1D1D1;\
+				padding: 2px 15px;\
+			}\
+			.xbutton:hover, #xmain .active:hover {\
+				cursor: pointer;\
+				color: #89be6c;\
+			}\
+		</style>';
 
 	$('#room').append(menu);
 	$('body').prepend(style);
@@ -134,24 +190,61 @@ if(window.location.hostname === "plug.dj"){
 
 	$("#chat-input .chat-input-form").append("<div class='afkIsOn' style='width:7px; height:30px; display:none; background-color:#fef8a0'></div>");
 
-	$('#xjoinmsg').on('click',	function(){ joinmsg = !joinmsg;	$(this).toggleClass('active');});
-	$('#xgrabmsg').on('click',	function(){ grabmsg = !grabmsg;	$(this).toggleClass('active');});
-	$('#xmehmsg').on('click',	function(){ mehmsg = !mehmsg;	$(this).toggleClass('active');});
+	$('#xjoinmsg').on('click',	function(){
+		joinmsg = !joinmsg;
+		$(this).toggleClass('active');
+		$("#xjoinmsg .icon").toggleClass('active');
+	});
+	$('#xgrabmsg').on('click',	function(){
+		grabmsg = !grabmsg;
+		$(this).toggleClass('active');
+		$("#xgrabmsg .icon").toggleClass('active');
+	});
+	$('#xmehmsg').on('click',	function(){
+		mehmsg = !mehmsg;
+		$(this).toggleClass('active');
+		$("#xmehmsg .icon").toggleClass('active');
+	});
 	$('#xautocap').on('click',	function(){ 
 		cap = !cap;
 		$(this).toggleClass('active');
+		$("#xautocap .icon").toggleClass('active');
 		if (cap){
 			var thiscap = API.getStaff().length;
 			c('/cap ' + thiscap);
 			addChat('Cap set to ' + thiscap,"#c5b5ff");
 		}
 	});
-	$('#xautograb').on('click',	function(){ autograb = !autograb;$(this).toggleClass('active');});
-	$('#xautojoin').on('click',	function(){ autolock = !autolock;$(this).toggleClass('active');});
-	$('#xautowoot').on('click',	function(){ autowoot = !autowoot;$(this).toggleClass('active');});
-	$('#xsongup').on('click',	function(){ songup = !songup;	$(this).toggleClass('active');});
-	$('#xline').on('click',		function(){ inlineOn = !inlineOn;$(this).toggleClass('active');});
-	$('#xmuter').on('click',	function(){ mutedood = !mutedood;$(this).toggleClass('active');});
+	$('#xautograb').on('click',	function(){
+		autograb = !autograb;
+		$(this).toggleClass('active');
+		$("#xautograb .icon").toggleClass('active');
+	});
+	$('#xautojoin').on('click',	function(){
+		autolock = !autolock;
+		$(this).toggleClass('active');
+		$("#xautojoin .icon").toggleClass('active');
+	});
+	$('#xautowoot').on('click',	function(){
+		autowoot = !autowoot;
+		$(this).toggleClass('active');
+		$("#xautowoot .icon").toggleClass('active');
+	});
+	$('#xsongup').on('click',	function(){
+		songup = !songup;
+		$(this).toggleClass('active');
+		$("#xsongup .icon").toggleClass('active');
+	});
+	$('#xline').on('click',		function(){
+		inlineOn = !inlineOn;
+		$(this).toggleClass('active');
+		$("#xline .icon").toggleClass('active');
+	});
+	$('#xmuter').on('click',	function(){
+		mutedood = !mutedood;
+		$(this).toggleClass('active');
+		$("#xmuter .icon").toggleClass('active');
+	});
 	$('#xafk').on('click',		function(){
 		afkmsg = !afkmsg;
 		if (afkmsg){
@@ -162,6 +255,7 @@ if(window.location.hostname === "plug.dj"){
 			$("#chat-input-field").css({color:'#eee'});
 		}
 		$(this).toggleClass('active');
+		$("#xafk .icon").toggleClass('active');
 	});
 	$('#xdel').on('click',		function(){
 		var r = confirm("Delete entire chat on log?");
@@ -170,8 +264,13 @@ if(window.location.hostname === "plug.dj"){
 		}else{
 			l("[Command DELETEALL denied]",true);
 		};
+		$("#xdel .icon").toggleClass('active');
 	});
-	$('#xtimeskip').on('click',	function(){ timeskip = !timeskip;$(this).toggleClass('active');});
+	$('#xtimeskip').on('click',	function(){
+		timeskip = !timeskip;
+		$(this).toggleClass('active');
+		$("#xtimeskip .icon").toggleClass('active');
+	});
 	$('#xlockdown').on('click',	function(){ 
 		if (itsMe || API.getUser().gRole != 0){
 			lockdown = !lockdown;
@@ -182,6 +281,7 @@ if(window.location.hostname === "plug.dj"){
 			}
 			addChat("<b>Lockdown is now " + ll + "</b>","#FF3333");
 			$(this).toggleClass('active');
+			$("#xlockdown .icon").toggleClass('active');
 		}else{
 			addChat("<b>Sorry, but you are not cool enough for this command.</b>","#FF3333");
 		}
