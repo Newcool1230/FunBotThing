@@ -27,75 +27,130 @@ var logcheck = [];
 var logged = [];
 
 var menu = '\
-		<section id="xprequel">\
-			<div id="xtitle" class="xtxt">&nbsp;</div>\
-		</section>\
-		<section id="xmain">\
-			<div id="xjoinmsg" class="xbutton active">\
-				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-				<span class="xclickable" style="margin-left:25px;">Join Message</span>\
-			</div>\
-			<div id="xgrabmsg" class="xbutton active">\
-				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-				<span class="xclickable" style="margin-left:25px;">Grab Message</span>\
-			</div>\
-			<div id="xmehmsg" class="xbutton active">\
-				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-				<span class="xclickable" style="margin-left:25px;">Meh Message</span>\
-			</div>\
-			<div id="xsongup" class="xbutton active">\
-				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-				<span class="xclickable" style="margin-left:25px;">Song Updates</span>\
-			</div>\
-			<div id="xautowoot" class="xbutton active">\
-				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-				<span class="xclickable" style="margin-left:25px;">AutoWoot</span>\
-			</div>\
-			<div id="xautojoin" class="xbutton">\
-				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-				<span class="xclickable" style="margin-left:25px;">AutoJoin</span>\
-			</div>\
-			<div id="xautograb" class="xbutton">\
-				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-				<span class="xclickable" style="margin-left:25px;">AutoGrab</span>\
-			</div>\
-			<div id="xautocap" class="xbutton">\
-				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-				<span class="xclickable" style="margin-left:25px;">AutoCap</span>\
-			</div>\
-			<div id="xafk" class="xbutton">\
-				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-				<span class="xclickable" style="margin-left:25px;">AFK</span>\
-			</div>\
-			<div id="xline" class="xbutton active">\
-				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-				<span class="xclickable" style="margin-left:25px;">Bootleg Inline</span>\
-			</div>\
-		</section>\
-		<section id="xmod">\
-			<div id="xtimeskip" class="xbutton active">\
-				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-				<span class="xclickable" style="margin-left:25px;">8min warning</span>\
-			</div>\
-			\
-			<div id="xdel" class="xbutton">\
-				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-				<span class="xclickable" style="margin-left:25px;">Delete All Chat</span>\
-			</div>\
-			\
-			<div id="xmuter" class="xbutton">\
-				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-				<span class="xclickable" style="margin-left:25px;">Alt Muter</span>\
-			</div>\
-			\
-			<div id="xlockdown" class="xbutton">\
-				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-				<span class="xclickable" style="margin-left:25px;">Lockdown</span>\
-			</div>\
-			\
-		</section>';
+	<div id="xtheone">\
+		<div id="xclick">\
+		<div class="xbox"></div>\
+		<div id="xall" class="">\
+			<section id="xprequel">\
+				<div id="xtitle" class="xtxt">&zwnj;</div>\
+			</section>\
+			<section id="xmain">\
+				<div id="xjoinmsg" class="xbutton active">\
+					<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">Join Message</span>\
+				</div>\
+				<div id="xgrabmsg" class="xbutton active">\
+					<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">Grab Message</span>\
+				</div>\
+				<div id="xmehmsg" class="xbutton active">\
+					<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">Meh Message</span>\
+				</div>\
+				<div id="xsongup" class="xbutton active">\
+					<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">Song Updates</span>\
+				</div>\
+				<div id="xautowoot" class="xbutton active">\
+					<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">AutoWoot</span>\
+				</div>\
+				<div id="xautojoin" class="xbutton">\
+					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">AutoJoin</span>\
+				</div>\
+				<div id="xautograb" class="xbutton">\
+					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">AutoGrab</span>\
+				</div>\
+				<div id="xautocap" class="xbutton">\
+					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">AutoCap</span>\
+				</div>\
+				<div id="xafk" class="xbutton">\
+					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">AFK</span>\
+				</div>\
+				<div id="xline" class="xbutton active">\
+					<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">Bootleg Inline</span>\
+				</div>\
+			</section>\
+			<section id="xmod">\
+				<div id="xtimeskip" class="xbutton active">\
+					<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">8min warning</span>\
+				</div>\
+				\
+				<div id="xdel" class="xbutton">\
+					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">Delete All Chat</span>\
+				</div>\
+				\
+				<div id="xmuter" class="xbutton">\
+					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">Alt Muter</span>\
+				</div>\
+				\
+				<div id="xlockdown" class="xbutton">\
+					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">Lockdown</span>\
+				</div>\
+				\
+			</section>\
+		</div>\
+		</div>\
+	</div>';
 
 var style = '<style>\
+		#xtheone {\
+			display: block;\
+		}\
+		#xtheone .active{\
+			display: block;\
+		}\
+		@-webkit-keyframes xanim1 {\
+			from {top: 53px;}\
+			to {top: 420px;}\
+		}\
+		@-webkit-keyframes xanim2 {\
+			from {top: 420px;}\
+			to {top: 53px;}\
+		}\
+		#xclick {\
+			display: block;\
+			top: 53px;\
+			-webkit-animation: xanim2 0.5s;\
+		}\
+		#xclick .active {\
+			display: block;\
+			top: 420px;\
+			-webkit-animation: xanim1 0.5s;\
+		}\
+		.xbox {\
+			position: absolute;\
+			width: 53px;\
+			height: 53px;\
+			display: block;\
+			z-index: 10;\
+			outline: #000000 solid 1px;\
+			background-color: #272B34;\
+			background-image: url("https://i.imgur.com/osBR8Jj.png");\
+			font-family: "Open Sans", sans-serif;\
+			top: 53px;\
+			left: 0px;\
+			-webkit-animation: xanim2 0.5s;\
+		}\
+		.xbox .active {\
+			-webkit-animation: xanim1 0.5s;\
+			top: 420px;\
+		}\
+		#xall {\
+			display:none;\
+		}\
+		#xall .active {\
+			display:block;\
+		}\
 		#xprequel {\
 			position: absolute;\
 			top: 53px;\
@@ -105,7 +160,7 @@ var style = '<style>\
 			outline: #FFFFFF double;\
 			z-index: 10;\
 			font-family: "Open Sans", sans-serif;\
-			background-image:url(https://i.imgur.com/ung12ij.png)\
+			background-image:url(https://i.imgur.com/ung12ij.png);\
 		}\
 		#xmain {\
 			position: absolute;\
@@ -116,10 +171,15 @@ var style = '<style>\
 			outline: #FFFFFF double;\
 			z-index: 10;\
 			font-family: "Open Sans", sans-serif;\
-			color:#808691\
+			color: #808691\
 		}\
 		#xmain .icon {\
 			display:none;\
+		}\
+		#xmain .active {\
+			color: #00bee8;\
+			display:block;\
+			top:auto;\
 		}\
 		#xmod .icon {\
 			display:none;\
@@ -133,11 +193,7 @@ var style = '<style>\
 			outline: #FFFFFF double;\
 			z-index: 10;\
 			font-family: "Open Sans", sans-serif;\
-			color:#808691\
-		}\
-		#xmain .active {\
-			color: #00bee8;\
-			display:block;\
+			color: #808691;\
 		}\
 		#xmod .active {\
 			color: #00bee8;\
@@ -150,7 +206,7 @@ var style = '<style>\
 		.xbutton: {\
 			padding: 2px 15px;\
 		}\
-		.xbutton:hover, #xmain .active:hover {\
+		.xbutton:hover, #xmain .active:hover, #xclick:hover {\
 			cursor: pointer;\
 		}\
 	</style>';
@@ -195,6 +251,10 @@ var lockdown = false;
 
 $("#chat-input .chat-input-form").append("<div class='afkIsOn' style='width:7px; height:30px; display:none; background-color:#fef8a0'></div>");
 
+$('#xclick .xbox').on('click',	function(){
+	$('#xclick .xbox').toggleClass('active');
+	$("#xall").toggleClass('active');
+});
 $('#xjoinmsg').on('click',	function(){
 	joinmsg = !joinmsg;
 	$(this).toggleClass('active');
@@ -760,12 +820,19 @@ function lookfor(id){
 		else if (grabstate === false){grabstats = " <a style='color:#646b7e;'>| Didn't grab</a> (<em>false</em>)"}
 
 		if (API.getDJ().username == data.username){
-			votestats = "<a style='color:#646b7e;'>(is currently DJ'ing)</a>";
+			votestats = "<a style='color:#646b7e;'>Is currently DJ'ing</a>";
 			grabstats = "";
 		}
 
 		var itsYou = false;
 		if (typeof userInfo != "undefined" && userInfo.username == API.getUser().username){itsYou = true;};
+
+//WAITLIST
+		var posstats = "<a style='color:#646b7e;'>Not in the WaitList</a>";
+		var wlpos = API.getWaitListPosition(data.id);
+		if (wlpos != -1){
+			posstats = wlpos + 1;
+		}
 
 //BLURB
 		var blurbTrue = "<a style='color:#eaaeae;'>[None]</a>";
@@ -800,7 +867,8 @@ function lookfor(id){
 		<a style='color:#42a5dc;'>Joined:</b></a> " + jnd + "<br><b>\
 		<a style='color:#42a5dc;'>Badge:</b></a> " + bb + "<br><b>\
 		<a style='color:#42a5dc;'>Friend:</b></a> " + isFriend + "<br><b>\
-		<a style='color:#42a5dc;'>Vote:</b></a> " + votestats + grabstats,"#CCCCCC",false,false,true);
+		<a style='color:#42a5dc;'>Vote:</b></a> " + votestats + grabstats + "<br><b>\
+		<a style='color:#42a5dc;'>WaitList Position:</b></a> " + posstats,"#CCCCCC",false,false,true);
 		}
 	});
 }
