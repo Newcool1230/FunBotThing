@@ -27,7 +27,7 @@ var logcheck = [];
 var logged = [];
 
 var menu = '\
-	<div id="xtheone">\
+	<div id="xtheone" style="cursor:default;">\
 		<div id="xclick">\
 		<div class="xbox"></div>\
 		<div id="xall" class="">\
@@ -96,7 +96,6 @@ var menu = '\
 					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
 					<span class="xclickable" style="margin-left:25px;">Lockdown</span>\
 				</div>\
-				\
 			</section>\
 		</div>\
 		</div>\
@@ -118,10 +117,6 @@ var style = '<style>\
 			to {left: 0px;}\
 		}\
 		@-webkit-keyframes xanim3 {\
-			from {display:none;}\
-			to {display:block;}\
-		}\
-		@-webkit-keyframes xanim4 {\
 			from {left:-53px;}\
 			to {left:10px;}\
 		}\
@@ -140,17 +135,17 @@ var style = '<style>\
 			width: 53px;\
 			height: 53px;\
 			display: block;\
-			z-index: 10;\
+			z-index: 9;\
 			outline: #000000 solid 1px;\
 			background-color: #272B34;\
-			background-image: url("https://i.imgur.com/osBR8Jj.png");\
+			background-image: url(https://i.imgur.com/gr9ABja.png);\
 			font-family: "Open Sans", sans-serif;\
 			top: 53px;\
 			left: 0px;\
 			-webkit-animation: xanim2 0.5s;\
 		}\
 		.xbox .active {\
-			-webkit-animation: xanim4 0.5s;\
+			-webkit-animation: xanim3 0.5s;\
 			left: 153px;\
 		}\
 		#xall {\
@@ -158,22 +153,23 @@ var style = '<style>\
 		}\
 		#xall .active {\
 			display:block;\
-			-webkit-animation: xanim4 0.5s;\
+			-webkit-animation: xanim3 0.5s;\
 		}\
 		#xprequel {\
 			position: absolute;\
 			top: 53px;\
+			height: 53px;\
 			padding: 10px;\
 			width: 130px;\
 			background-color: #272B34;\
 			outline: #FFFFFF double;\
 			z-index: 10;\
 			font-family: "Open Sans", sans-serif;\
-			background-image:url(https://i.imgur.com/ung12ij.png);\
+			background-image:url(https://i.imgur.com/gr9ABja.png);\
 		}\
 		#xmain {\
 			position: absolute;\
-			top: 95px;\
+			top: 135px;\
 			padding: 10px;\
 			width: 130px;\
 			background-color: #111317;\
@@ -190,14 +186,14 @@ var style = '<style>\
 			top:auto;\
 			left:auto;\
 			display:block;\
-			-webkit-animation: xanim4 0.5s;\
+			-webkit-animation: xanim3 0.5s;\
 		}\
 		#xmod .icon {\
 			display:none;\
 		}\
 		#xmod {\
 			position: absolute;\
-			top: 320px;\
+			top: 360px;\
 			padding: 10px;\
 			width: 130px;\
 			background-color: #111317;\
@@ -219,7 +215,7 @@ var style = '<style>\
 		.xbutton: {\
 			padding: 2px 15px;\
 		}\
-		.xbutton:hover, #xmain .active:hover, #xclick:hover {\
+		.xbutton:hover, .xbox:hover {\
 			cursor: pointer;\
 		}\
 	</style>';
