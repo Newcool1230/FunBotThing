@@ -138,7 +138,7 @@ var style = '<style>\
 			z-index: 9;\
 			outline: #000000 solid 1px;\
 			background-color: #272B34;\
-			background-image: url(https://i.imgur.com/gr9ABja.png);\
+			background-image: url(https://i.imgur.com/zi3zUtD.png);\
 			font-family: "Open Sans", sans-serif;\
 			top: 53px;\
 			left: 0px;\
@@ -147,6 +147,7 @@ var style = '<style>\
 		.xbox .active {\
 			-webkit-animation: xanim3 0.5s;\
 			left: 153px;\
+			background-image: url(https://i.imgur.com/k3pe7i8.png);\
 		}\
 		#xall {\
 			display:none;\
@@ -165,7 +166,7 @@ var style = '<style>\
 			outline: #FFFFFF double;\
 			z-index: 10;\
 			font-family: "Open Sans", sans-serif;\
-			background-image:url(https://i.imgur.com/gr9ABja.png);\
+			background-image:url(https://i.imgur.com/zi3zUtD.png);\
 		}\
 		#xmain {\
 			position: absolute;\
@@ -260,9 +261,16 @@ var lockdown = false;
 
 $("#chat-input .chat-input-form").append("<div class='afkIsOn' style='width:7px; height:30px; display:none; background-color:#fef8a0'></div>");
 
+var hasArrow = false;
 $('#xclick .xbox').on('click',	function(){
+	hasArrow  = !hasArrow;
 	$('#xclick .xbox').toggleClass('active');
 	$("#xall").toggleClass('active');
+	if (hasArrow){
+		$('#xclick .xbox').css({"background-image":"url(https://i.imgur.com/k3pe7i8.png)"});
+	}else{
+		$('#xclick .xbox').css({"background-image":"url(https://i.imgur.com/zi3zUtD.png)"});
+	}
 });
 $('#xjoinmsg').on('click',	function(){
 	joinmsg = !joinmsg;
