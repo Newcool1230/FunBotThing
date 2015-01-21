@@ -110,21 +110,29 @@ var style = '<style>\
 			display: block;\
 		}\
 		@-webkit-keyframes xanim1 {\
-			from {top: 53px;}\
-			to {top: 420px;}\
+			from {left: 0px;}\
+			to {left: 153px;}\
 		}\
 		@-webkit-keyframes xanim2 {\
-			from {top: 420px;}\
-			to {top: 53px;}\
+			from {left: 153px;}\
+			to {left: 0px;}\
+		}\
+		@-webkit-keyframes xanim3 {\
+			from {display:none;}\
+			to {display:block;}\
+		}\
+		@-webkit-keyframes xanim4 {\
+			from {left:-53px;}\
+			to {left:10px;}\
 		}\
 		#xclick {\
 			display: block;\
-			top: 53px;\
+			left: 153px;\
 			-webkit-animation: xanim2 0.5s;\
 		}\
 		#xclick .active {\
 			display: block;\
-			top: 420px;\
+			left: 153px;\
 			-webkit-animation: xanim1 0.5s;\
 		}\
 		.xbox {\
@@ -142,14 +150,15 @@ var style = '<style>\
 			-webkit-animation: xanim2 0.5s;\
 		}\
 		.xbox .active {\
-			-webkit-animation: xanim1 0.5s;\
-			top: 420px;\
+			-webkit-animation: xanim4 0.5s;\
+			left: 153px;\
 		}\
 		#xall {\
 			display:none;\
 		}\
 		#xall .active {\
 			display:block;\
+			-webkit-animation: xanim4 0.5s;\
 		}\
 		#xprequel {\
 			position: absolute;\
@@ -178,8 +187,10 @@ var style = '<style>\
 		}\
 		#xmain .active {\
 			color: #00bee8;\
-			display:block;\
 			top:auto;\
+			left:auto;\
+			display:block;\
+			-webkit-animation: xanim4 0.5s;\
 		}\
 		#xmod .icon {\
 			display:none;\
@@ -197,6 +208,8 @@ var style = '<style>\
 		}\
 		#xmod .active {\
 			color: #00bee8;\
+			top:auto;\
+			left:auto;\
 			display:block;\
 		}\
 		.xtxt: {\
