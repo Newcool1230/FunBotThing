@@ -1,11 +1,40 @@
 //This script was made by Beta Tester (https://plug.dj/@/beta-tester)
 //Initial CSS help from Marciano
 //Stole AddChat from Igor <3 Thanks a ton
+function addChat(text, color, state, hasBottom, isNotCenter) {
+	var chat = $('#chat-messages');
+	var a = chat.scrollTop() > chat[0].scrollHeight - chat.height() - 28;
+
+	if (color == undefined){
+		color = "#99ffd7";
+	}
+
+	if (isNotCenter){
+		chat.append("<div class='update betabot-update' style='background-color:#0a0a0a;'><div class='text-margin' style='margin-left: 10px;'><span class='betabot-text' style='color: " + color + "; font-size: 12px;'>" + text + "<br></span></div></div>");
+	}else{
+		if (hasBottom){
+			chat.append("<div class='update betabot-update' style='background-color:#0a0a0a; border-left: double 6px " + color + "; border-bottom: double 6px " + color + "'><center><span class='betabot-text' style='color: " + color + "; font-size: 13px;'>" + text + "<br></span></center></div>");
+		}else{
+			if (state){
+				chat.append("<div class='update betabot-update' style='background-color:#0a0a0a; border-left: double 6px " + color + "; margin-top:5px;margin-bottom:5px;'><center><span class='betabot-text' style='color: " + color + "; font-size: 12px;'>" + text + "<br></span></center></div>");
+			}else{
+				chat.append("<div class='update betabot-update' style='background-color:#0a0a0a; margin-top:5px;margin-bottom:5px;'><center><span class='betabot-text' style='color: " + color + ";'>" + text + "<br></span></center></div>");
+			}
+		}
+	}
+
+	if (a){
+		$('#chat-messages').scrollTop(50000);
+	}
+	if (chat.children().length >= 512){
+		chat.children().first().remove();
+	}
+}
 if (betaWasOn){
 	addChat("<img src='https://i.imgur.com/Z7LDEp0.gif'></img><br><a style='color:#FF0000;font-size:15px;'><b>[WARNING]</b></a><a style='font-size:15px;'> You already had BetaBot activated. To update, please refresh and then click bookmark again. Reclicking doesn't work.</a>","#ff7575",true,true);
 }else{
 
-addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f; font-size:10px'><em>Beta v0.6.7</em></a>","#ececec",true,true);
+addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f; font-size:10px'><em>Beta v0.7</em></a>","#ececec",true,true);
 
 var betaWasOn = true;
 var u = API.getUser().username;
@@ -128,7 +157,6 @@ var style = '<style>\
 		#xclick .active {\
 			display: block;\
 			left: 153px;\
-			-webkit-animation: xanim1 0.5s;\
 		}\
 		.xbox {\
 			position: absolute;\
@@ -142,19 +170,13 @@ var style = '<style>\
 			font-family: "Open Sans", sans-serif;\
 			top: 53px;\
 			left: 0px;\
-			-webkit-animation: xanim2 0.5s;\
 		}\
 		.xbox .active {\
-			-webkit-animation: xanim3 0.5s;\
 			left: 153px;\
 			background-image: url(https://i.imgur.com/k3pe7i8.png);\
 		}\
-		#xall {\
-			display:none;\
-		}\
 		#xall .active {\
 			display:block;\
-			-webkit-animation: xanim3 0.5s;\
 		}\
 		#xprequel {\
 			position: absolute;\
@@ -187,7 +209,6 @@ var style = '<style>\
 			top:auto;\
 			left:auto;\
 			display:block;\
-			-webkit-animation: xanim3 0.5s;\
 		}\
 		#xmod .icon {\
 			display:none;\
@@ -267,11 +288,20 @@ $('#xclick .xbox').on('click',	function(){
 	$('#xclick .xbox').toggleClass('active');
 	$("#xall").toggleClass('active');
 	if (hasArrow){
-		$('#xclick .xbox').css({"background-image":"url(https://i.imgur.com/k3pe7i8.png)"});
+		$("#xclick .xbox").css({"background-image":"url(https://i.imgur.com/k3pe7i8.png)"});
+		$("#xclick .xbox").animate({left:'153px'});
+		$("#xprequel").animate({left:'0px'});
+		$("#xmain").animate({left:'0px'});
+		$("#xmod").animate({left:'0px'});
 	}else{
 		$('#xclick .xbox').css({"background-image":"url(https://i.imgur.com/zi3zUtD.png)"});
+		$("#xclick .xbox").animate({left:'0px'});
+		$("#xprequel").animate({left:'-155px'});
+		$("#xmain").animate({left:'-155px'});
+		$("#xmod").animate({left:'-155px'});
 	}
 });
+$("#xclick .xbox").click();
 $('#xjoinmsg').on('click',	function(){
 	joinmsg = !joinmsg;
 	$(this).toggleClass('active');
@@ -372,10 +402,6 @@ $('#xlockdown').on('click',	function(){
 	}
 });
 
-$("#chat-messages").click(displayid);
-$("#dj-canvas").mousemove(displayid);
-$("#audience-canvas").mousemove(displayid);
-
 function displayid(){
 	$("#Id_display").remove();
 	var e = $("#user-rollover .username").text();
@@ -391,6 +417,10 @@ function displayid(){
 	$('#user-rollover .meta .joined').css({top:"64px"});
 	$("#user-rollover .info").append('<div id="Id_display" style="position:absolute; top:-21px; left:108px; color:#808691; font-size: 11px; font-family: ' + a + ', sans-serif;">ID: ' + t + "     </div>");
 }
+
+$("#chat-messages").click(displayid);
+$("#dj-canvas").mousemove(displayid);
+$("#audience-canvas").mousemove(displayid);
 
 //Percentage on progress bar :D
 function displayLvl(){
@@ -509,7 +539,6 @@ API.on(API.ADVANCE, function(){
 });
 
 var save;
-
 API.on(API.USER_JOIN, function(user){
 	if (mutedood){
 		if (user.level == 1){
@@ -518,9 +547,6 @@ API.on(API.USER_JOIN, function(user){
 		}
 	}
 });
-
-API.on(API.USER_JOIN, ujoined);
-API.on(API.USER_LEAVE, uleft);
 
 function ujoined(user) {
 	if (user.friend){
@@ -558,9 +584,8 @@ function uleft(user){
 	if (s < 10){s = "0" + s;}
 	if (joinmsg){addChat(f + user.username + " (ID " + user.id + ") left <br><a style='color:#dddddd;font-size:11px;'>[" + h + ":" + m + ":" + s + "]</a>",c);};
 };
-
-API.on(API.USER_JOIN, JoinLeave);
-API.on(API.USER_LEAVE, JoinLeave);
+API.on(API.USER_JOIN, ujoined);
+API.on(API.USER_LEAVE, uleft);
 
 c('/cap 10');
 function JoinLeave(user){
@@ -572,8 +597,9 @@ function JoinLeave(user){
 		}
 	}
 }
+API.on(API.USER_JOIN, JoinLeave);
+API.on(API.USER_LEAVE, JoinLeave);
 
-API.on(API.ADVANCE, autojoin);
 function autojoin() {
 	if (autolock){
 		var dj = API.getDJ();
@@ -585,6 +611,7 @@ function autojoin() {
 	}
 }
 autojoin();
+API.on(API.ADVANCE, autojoin);
 
 API.on(API.ADVANCE, function(obj){
 	if (songup){
@@ -1285,35 +1312,4 @@ API.on(API.CHAT_COMMAND, function(data){
 			break;
 	};
 });
-
-//Stolen from Igor's script <3//
-function addChat(text, color, state, hasBottom, isNotCenter) {
-	var chat = $('#chat-messages');
-	var a = chat.scrollTop() > chat[0].scrollHeight - chat.height() - 28;
-
-	if (color == undefined){
-		color = "#99ffd7";
-	}
-
-	if (isNotCenter){
-		chat.append("<div class='update betabot-update' style='background-color:#0a0a0a;'><div class='text-margin' style='margin-left: 10px;'><span class='betabot-text' style='color: " + color + "; font-size: 12px;'>" + text + "<br></span></div></div>");
-	}else{
-		if (hasBottom){
-			chat.append("<div class='update betabot-update' style='background-color:#0a0a0a; border-left: double 6px " + color + "; border-bottom: double 6px " + color + "'><center><span class='betabot-text' style='color: " + color + "; font-size: 13px;'>" + text + "<br></span></center></div>");
-		}else{
-			if (state){
-				chat.append("<div class='update betabot-update' style='background-color:#0a0a0a; border-left: double 6px " + color + "; margin-top:5px;margin-bottom:5px;'><center><span class='betabot-text' style='color: " + color + "; font-size: 12px;'>" + text + "<br></span></center></div>");
-			}else{
-				chat.append("<div class='update betabot-update' style='background-color:#0a0a0a; margin-top:5px;margin-bottom:5px;'><center><span class='betabot-text' style='color: " + color + ";'>" + text + "<br></span></center></div>");
-			}
-		}
-	}
-
-	if (a){
-		$('#chat-messages').scrollTop(50000);
-	}
-	if (chat.children().length >= 512){
-		chat.children().first().remove();
-	}
-}
 }
