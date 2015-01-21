@@ -5,7 +5,7 @@ if (betaWasOn){
 	addChat("<img src='https://i.imgur.com/Z7LDEp0.gif'></img><br><a style='color:#FF0000;font-size:15px;'><b>[WARNING]</b></a><a style='font-size:15px;'> You already had BetaBot activated. To update, please refresh and then click bookmark again. Reclicking doesn't work.</a>","#ff7575",true,true);
 }else{
 
-addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f; font-size:10px'><em>Beta v0.6.5</em></a>","#ececec",true,true);
+addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f; font-size:10px'><em>Beta v0.6.7</em></a>","#ececec",true,true);
 
 var betaWasOn = true;
 var u = API.getUser().username;
@@ -33,54 +33,64 @@ var menu = '\
 		<section id="xmain">\
 			<div id="xjoinmsg" class="xbutton active">\
 				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-				<span style="margin-left:25px;">Join Message</span></div>\
+				<span class="xclickable" style="margin-left:25px;">Join Message</span>\
+			</div>\
 			<div id="xgrabmsg" class="xbutton active">\
 				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-				<span style="margin-left:25px;">Grab Message</span></div>\
+				<span class="xclickable" style="margin-left:25px;">Grab Message</span>\
+			</div>\
 			<div id="xmehmsg" class="xbutton active">\
 				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-				<span style="margin-left:25px;">Meh Message</span></div>\
+				<span class="xclickable" style="margin-left:25px;">Meh Message</span>\
+			</div>\
 			<div id="xsongup" class="xbutton active">\
 				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-				<span style="margin-left:25px;">Song Updates</span></div>\
+				<span class="xclickable" style="margin-left:25px;">Song Updates</span>\
+			</div>\
 			<div id="xautowoot" class="xbutton active">\
 				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-				<span style="margin-left:25px;">AutoWoot</span></div>\
+				<span class="xclickable" style="margin-left:25px;">AutoWoot</span>\
+			</div>\
 			<div id="xautojoin" class="xbutton">\
 				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-				<span style="margin-left:25px;">AutoJoin</span></div>\
+				<span class="xclickable" style="margin-left:25px;">AutoJoin</span>\
+			</div>\
 			<div id="xautograb" class="xbutton">\
 				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-				<span style="margin-left:25px;">AutoGrab</span></div>\
+				<span class="xclickable" style="margin-left:25px;">AutoGrab</span>\
+			</div>\
 			<div id="xautocap" class="xbutton">\
 				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-				<span style="margin-left:25px;">AutoCap</span></div>\
+				<span class="xclickable" style="margin-left:25px;">AutoCap</span>\
+			</div>\
 			<div id="xafk" class="xbutton">\
 				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-				<span style="margin-left:25px;">AFK</span></div>\
+				<span class="xclickable" style="margin-left:25px;">AFK</span>\
+			</div>\
 			<div id="xline" class="xbutton active">\
 				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-				<span style="margin-left:25px;">Bootleg Inline</span></div>\
+				<span class="xclickable" style="margin-left:25px;">Bootleg Inline</span>\
+			</div>\
 		</section>\
 		<section id="xmod">\
 			<div id="xtimeskip" class="xbutton active">\
 				<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-				<span style="margin-left:25px;">8min warning</span>\
+				<span class="xclickable" style="margin-left:25px;">8min warning</span>\
 			</div>\
 			\
 			<div id="xdel" class="xbutton">\
 				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-				<span style="margin-left:25px;">Delete All Chat</span>\
+				<span class="xclickable" style="margin-left:25px;">Delete All Chat</span>\
 			</div>\
 			\
 			<div id="xmuter" class="xbutton">\
 				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-				<span style="margin-left:25px;">Alt Muter</span>\
+				<span class="xclickable" style="margin-left:25px;">Alt Muter</span>\
 			</div>\
 			\
 			<div id="xlockdown" class="xbutton">\
 				<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-				<span style="margin-left:25px;">Lockdown</span>\
+				<span class="xclickable" style="margin-left:25px;">Lockdown</span>\
 			</div>\
 			\
 		</section>';
@@ -106,6 +116,7 @@ var style = '<style>\
 			outline: #FFFFFF double;\
 			z-index: 10;\
 			font-family: "Open Sans", sans-serif;\
+			color:#808691\
 		}\
 		#xmain .icon {\
 			display:none;\
@@ -122,29 +133,25 @@ var style = '<style>\
 			outline: #FFFFFF double;\
 			z-index: 10;\
 			font-family: "Open Sans", sans-serif;\
+			color:#808691\
 		}\
 		#xmain .active {\
-			color: #42A5DC;\
+			color: #00bee8;\
 			display:block;\
 		}\
 		#xmod .active {\
-			color: #42A5DC;\
+			color: #00bee8;\
 			display:block;\
 		}\
 		.xtxt: {\
 			color: #3366FF;\
 			padding: 2px 15px;\
 		}\
-		.xtxt:hover, #xprequel .active:hover {\
-			color: #DCDCDC;\
-		}\
 		.xbutton: {\
-			color: #D1D1D1;\
 			padding: 2px 15px;\
 		}\
 		.xbutton:hover, #xmain .active:hover {\
 			cursor: pointer;\
-			color: #89be6c;\
 		}\
 	</style>';
 
