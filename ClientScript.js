@@ -1,7 +1,7 @@
 //99% of this script was made by Beta Tester (https://plug.dj/@/beta-tester)
 //Initial CSS help from Marciano
 //Stole AddChat from Igor <3 Thanks a ton
-var betaV = "<a style='color:#ccc; font-size:10px'><em>Beta v0.7.2</em></a>";//ffdd6f
+var betaV = "<a style='color:#ccc; font-size:10px'><em>Beta v0.7.5</em></a>";//ffdd6f
 
 function addChat(text, color, state, hasBottom, isNotCenter) {
 	var chat = $('#chat-messages');
@@ -67,6 +67,9 @@ var menu = '\
 				<div id="xtitle" class="xtxt">' + betaV + '</div>\
 			</section>\
 			<section id="xmain">\
+				<div id="xmoddescrip" class="xtxt">\
+					<span class="xtxt" style="color:#ac76ff; font-size:16px; margin:-5px;"><b><em>User Stuff</em></b></span><br>\
+				</div>\
 				<div id="xjoinmsg" class="xbutton active">\
 					<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
 					<span class="xclickable" style="margin-left:25px;">Join Message</span>\
@@ -117,24 +120,24 @@ var menu = '\
 				</div>\
 			</section>\
 			<section id="xmod">\
-				<div id="xdescrip" class="xtxt">\
-					<span class="xtxt" style="color:#ac76ff; font-size:16px; margin:-5px;"><b><em>Mod Commands</em></b></span><br>\
+				<div id="xmoddescrip" class="xtxt">\
+					<span class="xtxt" style="color:#ac76ff; font-size:16px; margin:-5px;"><b><em>Mod Stuff</em></b></span><br>\
 				</div>\
 				<div id="xtimeskip" class="xbutton active">\
 					<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
-					<span class="xclickable" style="margin-left:25px;">8min warning</span>\
+					<span class="xclickable" style="margin-left:25px;" title="Warns if a song is over 8min">8min warning</span>\
 				</div>\
 				<div id="xdel" class="xbutton">\
 					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-					<span class="xclickable" style="margin-left:25px;">Delete All Chat</span>\
+					<span class="xclickable" style="margin-left:25px;" title="Well duh">Delete All Chat</span>\
 				</div>\
 				<div id="xmuter" class="xbutton">\
 					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-					<span class="xclickable" style="margin-left:25px;">Alt Muter</span>\
+					<span class="xclickable" style="margin-left:25px;" title="Mutes anyone level 1 that enters the room">Alt Muter</span>\
 				</div>\
 				<div id="xlockdown" class="xbutton">\
 					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
-					<span class="xclickable" style="margin-left:25px;">Lockdown</span>\
+					<span class="xclickable" style="margin-left:25px;" title="Deletes any chat from non-staff">Lockdown</span>\
 				</div>\
 			</section>\
 		</div>\
