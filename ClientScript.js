@@ -717,11 +717,13 @@ API.on(API.CHAT, function(data){
 	if (lockdown == true){
 		for (var i = 0; i < API.getUsers().length; i++){
 			if (API.getUsers()[i].username == user){
-				if (API.getUsers()[i].role == 0 || API.getUsers()[i].gRole == 0){
-					$.ajax({
-						type: 'DELETE',
-						url: '/_/chat/' + msgid
-					});
+				if (API.getUsers()[i].role == 0){
+					if (API.getUsers()[i].gRole == 0){
+						$.ajax({
+							type: 'DELETE',
+							url: '/_/chat/' + msgid
+						});
+					}
 				}
 			}
 		}
@@ -940,6 +942,7 @@ API.on(API.CHAT_COMMAND, function(data){
 			/*
 				Lockdown
 				Chat shrinking ability
+				Inline on first line bug
 			*/
 			break;
 
