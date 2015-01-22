@@ -378,8 +378,12 @@ $('#xbig').on('click',		function(){
 	$("#xbig .icon").toggleClass('active');
 	if (bigchat){
 		$("#room .app-right").animate({width:"399"});
+		$('#chat-input-field').animate({width:"360"});
+		$("#chat-input").animate({width:"380"});
 	}else if (!bigchat){
 		$("#room .app-right").animate({width:"345"});
+		$('#chat-input-field').animate({width:"305"});
+		$("#chat-input").animate({width:"326"});
 	}
 });
 $('#xvotes').on('click',		function(){
@@ -990,8 +994,8 @@ API.on(API.CHAT_COMMAND, function(data){
 	switch(command[0].toLowerCase()){
 		case "todo":
 			/*
-				Lockdown
-				Chat shrinking ability
+				Lockdown (should work)
+				Chat shrinking ability (should work)
 				Inline on first line bug
 			*/
 			break;
