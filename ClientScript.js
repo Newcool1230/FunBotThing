@@ -117,21 +117,21 @@ var menu = '\
 				</div>\
 			</section>\
 			<section id="xmod">\
+				<div id="xdescrip" class="xtxt">\
+					<span class="xtxt" style="color:#ac76ff; font-size:16px; margin:-5px;"><b><em>Mod Commands</em></b></span><br>\
+				</div>\
 				<div id="xtimeskip" class="xbutton active">\
 					<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
 					<span class="xclickable" style="margin-left:25px;">8min warning</span>\
 				</div>\
-				\
 				<div id="xdel" class="xbutton">\
 					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
 					<span class="xclickable" style="margin-left:25px;">Delete All Chat</span>\
 				</div>\
-				\
 				<div id="xmuter" class="xbutton">\
 					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
 					<span class="xclickable" style="margin-left:25px;">Alt Muter</span>\
 				</div>\
-				\
 				<div id="xlockdown" class="xbutton">\
 					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
 					<span class="xclickable" style="margin-left:25px;">Lockdown</span>\
