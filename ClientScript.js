@@ -1349,7 +1349,7 @@ API.on(API.CHAT_COMMAND, function(data){
 		
 		case "cmds":
 		case "cmd":
-			addChat("<br><a style='color:#7174ff;'><b>------=[ Beta's Beta Script v0.5 ]=------</b></a><br><br>\
+			addChat("<br><a style='color:#7174ff;'><b>------=[ Mod Commands ]=------</b></a><br><br>\
 					<a style='color:#ffffff;'><b>/id @</b><em>NAME</em></a><br>\
 					<a style='color:#CCCCCC;'>Returns the ID of that user</a><br><br>\
 					<a style='color:#ffffff;'><b>/lookup </b><em>ID</em></a><br>\
@@ -1368,7 +1368,7 @@ API.on(API.CHAT_COMMAND, function(data){
 					<a style='color:#e6ff99;'>Swaps two people in the WaitList<br>BUGGED</a><br><br>\
 					<a style='color:#ffaaaa;'><b>/ban </b><em>ID</em></a><br>\
 					<a style='color:#CCCCCC;'>Permabans an user by its ID</a><br><br>\
-					<a style='color:#7174ff;'><b>------=[ Beta's Beta Script v0.5 ]=------</b></a><br>","#CCCCCC");
+					<a style='color:#7174ff;'><b>------=[ Mod Commands ]=------</b></a><br>","#CCCCCC");
 			break;
 
 		default:
