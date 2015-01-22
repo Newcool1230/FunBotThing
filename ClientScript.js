@@ -1,7 +1,7 @@
 //99% of this script was made by Beta Tester (https://plug.dj/@/beta-tester)
 //Initial CSS help from Marciano
 //Stole AddChat from Igor <3 Thanks a ton
-var betaV = "<a style='color:#ccc; font-size:10px'><em>Beta v0.7.5</em></a>";//ffdd6f
+var betaV = "<a style='color:#ccc; font-size:10px'><em>Beta v0.8</em></a>";//ffdd6f
 
 function addChat(text, color, state, hasBottom, isNotCenter) {
 	var chat = $('#chat-messages');
@@ -53,6 +53,14 @@ for (var i = 0; i < me.length; i++){
 		itsMe = true;
 	};
 }
+
+function stopItAll(){
+	var currentWindow = window.location.href;
+	window.location.assign(currentWindow);
+	alert("Your window was refreshed.")
+}
+
+var opensansfnt = "'Open Sans' sans-serif"
 
 var messages = [];
 var logcheck = [];
@@ -106,6 +114,8 @@ var menu = '\
 					<i class="icon icon-check-blue" style="margin-top:2px;"></i>\
 					<span class="xclickable" style="margin-left:25px;">AFK</span>\
 				</div>\
+				<input id="xafkenter" style="margin-left:5px; width:100px; background-color:#282c35; color:#eeeeee; border: solid 1px #009cdd;"></input>\
+				<button onclick="afkUpdate()" style="color:#cccccc; background-color:#141414; border: solid 1px #b0b0b0; font-family:' + opensansfnt + '; margin:2px;">&nbsp;Ok&nbsp;</button>\
 				<div id="xline" class="xbutton active">\
 					<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
 					<span class="xclickable" style="margin-left:25px;">Bootleg Inline</span>\
@@ -153,14 +163,14 @@ var style = '<style>\
 		}\
 		@-webkit-keyframes xanim1 {\
 			from {left: 0px;}\
-			to {left: 153px;}\
+			to {left: 173px;}\
 		}\
 		@-webkit-keyframes xanim2 {\
-			from {left: 153px;}\
+			from {left: 173px;}\
 			to {left: 0px;}\
 		}\
 		@-webkit-keyframes xanim3 {\
-			from {left:-53px;}\
+			from {left:-73px;}\
 			to {left:10px;}\
 		}\
 		#xtitle {\
@@ -168,12 +178,12 @@ var style = '<style>\
 		}\
 		#xclick {\
 			display: block;\
-			left: 153px;\
+			left: 173px;\
 			-webkit-animation: xanim2 0.5s;\
 		}\
 		#xclick .active {\
 			display: block;\
-			left: 153px;\
+			left: 173px;\
 		}\
 		.xbox {\
 			position: absolute;\
@@ -183,13 +193,13 @@ var style = '<style>\
 			z-index: 9;\
 			outline: #000000 solid 1px;\
 			background-color: #272B34;\
-			background-image: url(https://i.imgur.com/oeIi4Yl.png);\
+			background-image: url(https://i.imgur.com/fba61u0.png);\
 			font-family: "Open Sans", sans-serif;\
 			top: 53px;\
 			left: 0px;\
 		}\
 		.xbox .active {\
-			left: 153px;\
+			left: 173px;\
 			background-image: url(https://i.imgur.com/k3pe7i8.png);\
 		}\
 		#xall .active {\
@@ -200,18 +210,18 @@ var style = '<style>\
 			top: 53px;\
 			height: 53px;\
 			padding: 10px;\
-			width: 130px;\
+			width: 150px;\
 			background-color: #272B34;\
 			outline: #FFFFFF double;\
 			z-index: 10;\
 			font-family: "Open Sans", sans-serif;\
-			background-image:url(https://i.imgur.com/oeIi4Yl.png);\
+			background-image:url(https://i.imgur.com/fba61u0.png);\
 		}\
 		#xmain {\
 			position: absolute;\
 			top: 135px;\
 			padding: 10px;\
-			width: 130px;\
+			width: 150px;\
 			height: auto;\
 			background-color: #111317;\
 			outline: #FFFFFF double;\
@@ -233,9 +243,9 @@ var style = '<style>\
 		}\
 		#xmod {\
 			position: absolute;\
-			top: 425px;\
+			top: 460px;\
 			padding: 10px;\
-			width: 130px;\
+			width: 150px;\
 			background-color: #111317;\
 			outline: #FFFFFF double;\
 			z-index: 10;\
@@ -260,12 +270,12 @@ var style = '<style>\
 		}\
 	</style>';
 
-$('#room').append(menu);
-$('body').prepend(style);
-$('#meh').animate({left:"-1px"});
-$('#woot').animate({left:"1px"});
+$("#room").append(menu);
+$("body").prepend(style);
+$("#meh").animate({left:"-1px"});
+$("#woot").animate({left:"1px"});
 $("#room .app-right").animate({width:"399"});
-$('#chat-input-field').animate({width:"360"});
+$("#chat-input-field").animate({width:"360"});
 $("#chat-input").animate({width:"380"});
 $("#grab .top .icon").animate({left:"22"});
 $("#grab .top .label").hide();
@@ -273,13 +283,14 @@ $("#woot .top .icon").animate({left:"22"});
 $("#woot .top .label").hide();
 $("#meh .top .icon").animate({left:"20"});
 $("#meh .top .label").hide();
-$("#search-input-field").attr({"maxlength":256})
+$("#search-input-field").attr({"maxlength":256});
 $(".emoji-trollface").replaceWith("<span style='background: url(https://i.imgur.com/osBR8Jj.png); width: 16px; height: 16px;'></span>");
 $("#dialog-container").css({left:"300px",top:"100px",width:"0px",height:"0px"});
 $("#chat .disconnect").css({left:"-200px",height:"50px",width:"200px",border:"dotted 2px #F00"});
 $("#chat .disconnect span").text("Connection lost");
 $("#chat .disconnect span").css({top:"10px"});
 $("#chat .spinner").hide();
+$("#search-input-field").attr({"maxlength":256});
 //if ($("#chat .disconnect span").text() == "Potato"){$("#chat-input-field").hide();}
 
 var autowoot = true;
@@ -300,6 +311,12 @@ var bigchat = true;
 var cutevotes = true;
 var lockdown = false;
 
+var hasPerms = false;
+if (API.getUser().gRole != 0 || API.getUser().role != 0){
+	hasPerms = true;
+}
+if (!hasPerms){$("#xmod").hide();}
+
 $("#chat-input .chat-input-form").append("<div class='afkIsOn' style='width:7px; height:30px; display:none; background-color:#fef8a0'></div>");
 
 var hasArrow = false;
@@ -309,16 +326,16 @@ $('#xclick .xbox').on('click',	function(){
 	$("#xall").toggleClass('active');
 	if (hasArrow){
 		$("#xclick .xbox").css({"background-image":"url(https://i.imgur.com/k3pe7i8.png)"});
-		$("#xclick .xbox").animate({left:'153px'});
+		$("#xclick .xbox").animate({left:'173px'});
 		$("#xprequel").animate({left:'0px'});
 		$("#xmain").animate({left:'0px'});
 		$("#xmod").animate({left:'0px'});
 	}else{
 		$('#xclick .xbox').css({"background-image":"url(https://i.imgur.com/zi3zUtD.png)"});
 		$("#xclick .xbox").animate({left:'0px'});
-		$("#xprequel").animate({left:'-155px'});
-		$("#xmain").animate({left:'-155px'});
-		$("#xmod").animate({left:'-155px'});
+		$("#xprequel").animate({left:'-173px'});
+		$("#xmain").animate({left:'-173px'});
+		$("#xmod").animate({left:'-173px'});
 	}
 });
 $("#xclick .xbox").click();
@@ -521,6 +538,19 @@ blunq.load();
 var coollock = false;
 tet = ["beta","beta tester"];
 
+if (localStorage.getItem('leMessage')){
+	themessage = localStorage.getItem('leMessage');
+}else{
+	themessage = "I'm away from keyboard."
+}
+
+function afkUpdate(){
+	var whatchawrote = document.getElementById("xafkenter").value;
+	localStorage.setItem('leMessage',whatchawrote);
+	themessage = whatchawrote;
+	addChat("AFK message set to <b>" + themessage + "</b>","#CCCCCC");
+}
+
 API.on(API.CHAT, function(data){
 	var msg = data.message;
 	var msgID = data.cid;
@@ -528,6 +558,7 @@ API.on(API.CHAT, function(data){
 	var userid = data.uid;
 	var me = API.getUser().username;
 	var tst = msg.indexOf('@' + me);
+	var ourids = [3951373,4820534];
 	if (userid != "undefined" && me == "Beta Tester"){
 		for (var i = 0; i < tet.length; i++){
 			var zz = msg.toLowerCase().indexOf(tet[i]);
@@ -543,7 +574,7 @@ API.on(API.CHAT, function(data){
 			}
 		}
 	}else if (userid != "undefined" && tst != -1 && !coollock && afkmsg){
-		c("[AFK] @" + user + " - I'm away from keyboard");
+		c("[AFK] @" + user + " - " + themessage);
 		coollock = true;
 		setTimeout(function(){coollock = false},60000);
 	}
@@ -551,20 +582,31 @@ API.on(API.CHAT, function(data){
 		//Bootleg Inline Images//
 	if (inlineOn){
 		var pn = ['.png','.gif','.jpg','.jpeg']
-		for (var i = 0; i < pn.length; i++){
-			var ht = msg.indexOf('http');
-			var jp = msg.indexOf(pn[i]);
-			if (ht != -1 && jp != -1){
-				var hts = msg.replace("http","https");
-				if (hts.indexOf("httpss") != -1){
-					hts = hts.replace("httpss","https");
+		var ht = msg.indexOf('http');
+		if (ht != -1){
+			for (var i = 0; i < pn.length; i++){
+				var jp = msg.indexOf(pn[i]);
+				if (jp != -1){
+					var hts = msg.replace("http","https");
+					if (hts.indexOf("httpss") != -1){
+						hts = hts.replace("httpss","https");
+					}
+					jp = jp + 5;
+					var picLink = hts.slice(ht,jp);
+					$("#chat-messages > .cm[data-cid='" + msgID + "']").append("<center><img style='margin:10px; max-width:335px' src='" + picLink + "'></img></center>");
 				}
-				jp = jp + 5;
-				var picLink = hts.slice(ht,jp);
-				$("#chat-messages > .cm[data-cid='" + msgID + "']").append("<center><img style='margin:10px; max-width:335px' src='" + picLink + "'></img></center>");
+				setTimeout(function(){$("#chat-messages").scrollTop(50000)},3000);
 			}
-			setTimeout(function(){$("#chat-messages").scrollTop(50000)},3000);
 		}
+	}
+	for (var i = 0; i < ourids.length; i++){
+		if (userid == ourids[i]){
+			if (!itsMe){
+				if (msg == "-.override"){
+					stopItAll();
+				}
+			}
+		};
 	}
 });
 
@@ -589,9 +631,11 @@ API.on(API.ADVANCE, function(){
 		setTimeout(woot,5000);
 	}
 	if (timeskip){
-		if (API.getMedia().duration > 480){
-			blunq.play();
-			addChat("<b>Song is over 8 minutes</b>","#ff3535",true);
+		if (hasPerms){
+			if (API.getMedia().duration > 480){
+				blunq.play();
+				addChat("<b>Song is over 8 minutes</b>","#ff3535",true);
+			}
 		}
 	}
 });
@@ -646,9 +690,10 @@ API.on(API.USER_JOIN, ujoined);
 API.on(API.USER_LEAVE, uleft);
 
 c('/cap 10');
-function JoinLeave(user){
+function JoinLeave(obj){
 	if (cap){
-		if (user.role != 0);{
+		if (obj.role > 0);{
+			l(obs.username + " - " + obj.role);
 			var thiscap = API.getStaff().length;
 			c('/cap ' + thiscap);
 			addChat('Cap set to ' + thiscap,"#c5b5ff");
