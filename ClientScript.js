@@ -1,6 +1,8 @@
-//This script was made by Beta Tester (https://plug.dj/@/beta-tester)
+//99% of this script was made by Beta Tester (https://plug.dj/@/beta-tester)
 //Initial CSS help from Marciano
 //Stole AddChat from Igor <3 Thanks a ton
+var betaV = "<a style='color:#ccc; font-size:10px'><em>Beta v0.7.2</em></a>";//ffdd6f
+
 function addChat(text, color, state, hasBottom, isNotCenter) {
 	var chat = $('#chat-messages');
 	var a = chat.scrollTop() > chat[0].scrollHeight - chat.height() - 28;
@@ -30,12 +32,12 @@ function addChat(text, color, state, hasBottom, isNotCenter) {
 		chat.children().first().remove();
 	}
 }
-var betaV = "<a style='color:#ffdd6f; font-size:10px'><em>Beta v0.7</em></a>";
+
 if (betaWasOn){
 	addChat("<img src='https://i.imgur.com/Z7LDEp0.gif'></img><br><a style='color:#FF0000;font-size:15px;'><b>[WARNING]</b></a><a style='font-size:15px;'> You already had BetaBot activated. To update, please refresh and then click bookmark again. Reclicking doesn't work.</a>","#ff7575",true,true);
 }else{
 
-addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br><a style='color:#ffdd6f; font-size:10px'><em>Beta v0.7</em></a>","#ececec",true,true);
+addChat("<br>Beta's <a style='color:#99ffd7;'><b>Client Support Script</b></a> is now active!<br>" + betaV,"#ececec",true,true);
 
 var betaWasOn = true;
 var u = API.getUser().username;
@@ -104,6 +106,14 @@ var menu = '\
 				<div id="xline" class="xbutton active">\
 					<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
 					<span class="xclickable" style="margin-left:25px;">Bootleg Inline</span>\
+				</div>\
+				<div id="xbig" class="xbutton active">\
+					<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">Large Chat</span>\
+				</div>\
+				<div id="xvotes" class="xbutton active">\
+					<i class="icon icon-check-blue active" style="margin-top:2px;"></i>\
+					<span class="xclickable" style="margin-left:25px;">Pretty Votes</span>\
 				</div>\
 			</section>\
 			<section id="xmod">\
@@ -199,6 +209,7 @@ var style = '<style>\
 			top: 135px;\
 			padding: 10px;\
 			width: 130px;\
+			height: auto;\
 			background-color: #111317;\
 			outline: #FFFFFF double;\
 			z-index: 10;\
@@ -219,7 +230,7 @@ var style = '<style>\
 		}\
 		#xmod {\
 			position: absolute;\
-			top: 360px;\
+			top: 425px;\
 			padding: 10px;\
 			width: 130px;\
 			background-color: #111317;\
@@ -254,11 +265,11 @@ $("#room .app-right").animate({width:"399"});
 $('#chat-input-field').animate({width:"360"});
 $("#chat-input").animate({width:"380"});
 $("#grab .top .icon").animate({left:"22"});
-$("#grab .top .label").remove();
+$("#grab .top .label").hide();
 $("#woot .top .icon").animate({left:"22"});
-$("#woot .top .label").remove();
+$("#woot .top .label").hide();
 $("#meh .top .icon").animate({left:"20"});
-$("#meh .top .label").remove();
+$("#meh .top .label").hide();
 $("#search-input-field").attr({"maxlength":256})
 $(".emoji-trollface").replaceWith("<span style='background: url(https://i.imgur.com/osBR8Jj.png); width: 16px; height: 16px;'></span>");
 $("#dialog-container").css({left:"300px",top:"100px",width:"0px",height:"0px"});
@@ -282,6 +293,8 @@ var pufflock = false;
 var afkmsg = false;
 var timeskip = true;
 var inlineOn = true;
+var bigchat = true;
+var cutevotes = true;
 var lockdown = false;
 
 $("#chat-input .chat-input-form").append("<div class='afkIsOn' style='width:7px; height:30px; display:none; background-color:#fef8a0'></div>");
@@ -355,6 +368,40 @@ $('#xline').on('click',		function(){
 	inlineOn = !inlineOn;
 	$(this).toggleClass('active');
 	$("#xline .icon").toggleClass('active');
+});
+$('#xbig').on('click',		function(){
+	bigchat = !bigchat;
+	$(this).toggleClass('active');
+	$("#xbig .icon").toggleClass('active');
+	if (bigchat){
+		$("#room .app-right").animate({width:"399"});
+	}else if (!bigchat){
+		$("#room .app-right").animate({width:"345"});
+	}
+});
+$('#xvotes').on('click',		function(){
+	cutevotes = !cutevotes;
+	$(this).toggleClass('active');
+	$("#xvotes .icon").toggleClass('active');
+	if (cutevotes){
+		$("#grab .top .icon").animate({left:"22"});
+		$("#grab .top .label").hide();
+		$("#woot .top .icon").animate({left:"22"});
+		$("#woot .top .label").hide();
+		$("#meh .top .icon").animate({left:"20"});
+		$("#meh .top .label").hide();
+		$('#meh').animate({left:"-1px"});
+		$('#woot').animate({left:"1px"});
+	}else if (!cutevotes){
+		$("#grab .top .icon").animate({left:"0"});
+		$("#grab .top .label").show();
+		$("#woot .top .icon").animate({left:"0"});
+		$("#woot .top .label").show();
+		$("#meh .top .icon").animate({left:"0"});
+		$("#meh .top .label").show();
+		$('#meh').animate({left:"0px"});
+		$('#woot').animate({left:"0px"});
+	}
 });
 $('#xmuter').on('click',	function(){
 	if (API.getUser().role > 1 || API.getUser().gRole > 0){
