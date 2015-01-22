@@ -30,6 +30,7 @@ function addChat(text, color, state, hasBottom, isNotCenter) {
 		chat.children().first().remove();
 	}
 }
+var betaV = "<a style='color:#ffdd6f; font-size:10px'><em>Beta v0.7</em></a>";
 if (betaWasOn){
 	addChat("<img src='https://i.imgur.com/Z7LDEp0.gif'></img><br><a style='color:#FF0000;font-size:15px;'><b>[WARNING]</b></a><a style='font-size:15px;'> You already had BetaBot activated. To update, please refresh and then click bookmark again. Reclicking doesn't work.</a>","#ff7575",true,true);
 }else{
@@ -61,7 +62,7 @@ var menu = '\
 		<div class="xbox"></div>\
 		<div id="xall" class="">\
 			<section id="xprequel">\
-				<div id="xtitle" class="xtxt">&zwnj;</div>\
+				<div id="xtitle" class="xtxt">' + betaV + '</div>\
 			</section>\
 			<section id="xmain">\
 				<div id="xjoinmsg" class="xbutton active">\
@@ -149,6 +150,9 @@ var style = '<style>\
 			from {left:-53px;}\
 			to {left:10px;}\
 		}\
+		#xtitle {\
+			margin-top: 40px;\
+		}\
 		#xclick {\
 			display: block;\
 			left: 153px;\
@@ -166,7 +170,7 @@ var style = '<style>\
 			z-index: 9;\
 			outline: #000000 solid 1px;\
 			background-color: #272B34;\
-			background-image: url(https://i.imgur.com/zi3zUtD.png);\
+			background-image: url(https://i.imgur.com/oeIi4Yl.png);\
 			font-family: "Open Sans", sans-serif;\
 			top: 53px;\
 			left: 0px;\
@@ -188,7 +192,7 @@ var style = '<style>\
 			outline: #FFFFFF double;\
 			z-index: 10;\
 			font-family: "Open Sans", sans-serif;\
-			background-image:url(https://i.imgur.com/zi3zUtD.png);\
+			background-image:url(https://i.imgur.com/oeIi4Yl.png);\
 		}\
 		#xmain {\
 			position: absolute;\
@@ -932,6 +936,13 @@ API.on(API.CHAT_COMMAND, function(data){
 	console.log("[COMMAND] " + command[0] + " || [ARGUMENT] " + command[1]);
 
 	switch(command[0].toLowerCase()){
+		case "todo":
+			/*
+				Lockdown
+				Chat shrinking ability
+			*/
+			break;
+
 		case "timeout":
 			ct("You must wait 10 minutes before you can post links on chat after you join a room. This is done to prevent spam.");
 			break;
