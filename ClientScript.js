@@ -625,7 +625,7 @@ API.on(API.ADVANCE, function(obj){
 });
 
 function deleteAll(){
-	if (API.getUser().role >= 2){
+	if (API.getUser().role >= 2 || API.getUser().gRole != 0){
 		var msgs = document.getElementsByClassName('message');
 		var emotes = document.getElementsByClassName('emote');
 		var mentions = document.getElementsByClassName('mention');
